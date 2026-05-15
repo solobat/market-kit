@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/tomasyang/market-kit/identity"
+	"github.com/solobat/market-kit/identity"
 )
 
 func main() {

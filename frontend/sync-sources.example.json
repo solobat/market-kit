@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "id": "veridex-prod",
+      "label": "Veridex 线上样本",
+      "project": "veridex",
+      "url": "https://api.example.com/veridex-api/api/v1/identity-cases",
+      "headers": {
+        "X-Veridex-Admin-Code": "replace-me"
+      }
+    },
+    {
+      "id": "tradfi-prod",
+      "label": "Tradfi 线上样本",
+      "project": "tradfi-monitor",
+      "url": "https://api.example.com/tradfi-monitor-api/api/v1/identity-cases",
+      "headers": {}
+    }
+  ]
+}

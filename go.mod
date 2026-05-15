@@ -1,3 +1,3 @@
-module github.com/tomasyang/market-kit
+module github.com/solobat/market-kit
 
 go 1.18

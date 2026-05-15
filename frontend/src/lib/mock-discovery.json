@@ -1,0 +1,78 @@
+{
+  "source": "slipstream",
+  "generatedAt": "2026-05-15T08:00:00Z",
+  "items": [
+    {
+      "sourceId": "slipstream",
+      "platformId": "okx",
+      "platform": "OKX",
+      "venueType": "cex",
+      "marketType": "perp",
+      "symbol": "DRAM-USDT-SWAP",
+      "baseAsset": "DRAM",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://www.okx.com"
+    },
+    {
+      "sourceId": "slipstream",
+      "platformId": "bitget",
+      "platform": "Bitget",
+      "venueType": "cex",
+      "marketType": "perp",
+      "symbol": "DRAMUSDT",
+      "baseAsset": "DRAM",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://www.bitget.com"
+    },
+    {
+      "sourceId": "slipstream",
+      "platformId": "hyperliquid",
+      "platform": "Hyperliquid",
+      "venueType": "dex",
+      "marketType": "perp",
+      "symbol": "DRAM",
+      "baseAsset": "DRAM",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://app.hyperliquid.xyz"
+    },
+    {
+      "sourceId": "slipstream",
+      "platformId": "okx",
+      "platform": "OKX",
+      "venueType": "cex",
+      "marketType": "spot",
+      "symbol": "AAPL-USDT",
+      "baseAsset": "AAPL",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://www.okx.com"
+    },
+    {
+      "sourceId": "slipstream",
+      "platformId": "gate",
+      "platform": "Gate",
+      "venueType": "cex",
+      "marketType": "spot",
+      "symbol": "AAPL_USDT",
+      "baseAsset": "AAPL",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://www.gate.io"
+    },
+    {
+      "sourceId": "slipstream",
+      "platformId": "binance",
+      "platform": "Binance",
+      "venueType": "cex",
+      "marketType": "spot",
+      "symbol": "BTCUSDT",
+      "baseAsset": "BTC",
+      "quoteAsset": "USDT",
+      "status": "live",
+      "externalUrl": "https://www.binance.com"
+    }
+  ]
+}
