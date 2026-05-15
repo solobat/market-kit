@@ -314,7 +314,7 @@ That path is more automated and avoids most manual CORS friction during review.
 4. commit
 5. tag
 6. push
-7. upgrade downstream repos to the new tag
+7. downstream upgrade PRs are opened automatically for configured Go consumers
 
 Verification:
 
@@ -348,6 +348,51 @@ Usually tag when one of these changed:
 - public Go module surface
 
 Usually do not create a new release tag for frontend-only polishing unless you explicitly want to version the local review console changes too.
+
+## Automatic downstream bumps
+
+This repo can automatically open downstream upgrade PRs whenever a new `v*` tag is pushed.
+
+Current configured downstream Go consumers live in:
+
+```text
+.github/downstream-go-consumers.json
+```
+
+Right now that automation targets:
+
+- `solobat/tradfi-monito`
+- `solobat/veridex` in `backend/`
+
+The workflow lives in:
+
+```text
+.github/workflows/bump-downstreams-on-tag.yml
+```
+
+It uses:
+
+```text
+scripts/bump-downstream-go-module.sh
+```
+
+Required GitHub secret:
+
+- `DOWNSTREAM_REPO_TOKEN`
+  - should have enough access to clone the downstream repos, push branches, and open pull requests
+  - for a fine-grained token, grant `contents: read/write` and `pull requests: read/write` on each downstream repo
+
+Behavior on each new tag:
+
+1. clone each configured downstream repo
+2. run `go get github.com/solobat/market-kit@<tag>`
+3. run `go mod tidy`
+4. push branch `codex/market-kit-<tag>`
+5. open or update a PR in the downstream repo
+
+If the automation is added after a tag is already published, you can also run the workflow manually with a tag input such as `v0.2.3`.
+
+This only handles downstream repos that consume `market-kit` as a Go module. HTTP consumers such as local tools or browser extensions should continue to update through their own deployment flow instead.
 
 ## Principles
 

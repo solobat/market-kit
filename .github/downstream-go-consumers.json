@@ -1,0 +1,12 @@
+[
+  {
+    "repo": "solobat/tradfi-monito",
+    "branch": "main",
+    "module_dir": "."
+  },
+  {
+    "repo": "solobat/veridex",
+    "branch": "main",
+    "module_dir": "backend"
+  }
+]

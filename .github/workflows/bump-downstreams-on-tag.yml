@@ -1,0 +1,44 @@
+name: Bump Downstream Go Modules On Tag
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "market-kit version tag to propagate, for example v0.2.3"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  bump-downstreams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout market-kit
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+
+      - name: Validate downstream token
+        env:
+          GH_TOKEN: ${{ secrets.DOWNSTREAM_REPO_TOKEN }}
+        run: |
+          if [[ -z "${GH_TOKEN}" ]]; then
+            echo "DOWNSTREAM_REPO_TOKEN is required to update downstream repositories." >&2
+            exit 1
+          fi
+
+      - name: Open downstream upgrade PRs
+        env:
+          GH_TOKEN: ${{ secrets.DOWNSTREAM_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DOWNSTREAM_REPO_TOKEN }}
+          MARKET_KIT_MODULE: github.com/solobat/market-kit
+          MARKET_KIT_TAG: ${{ inputs.tag || github.ref_name }}
+        run: bash scripts/bump-downstream-go-module.sh
