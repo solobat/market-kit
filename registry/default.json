@@ -1,0 +1,64 @@
+{
+  "exchange_aliases": {
+    "okex": "okx",
+    "tradfi-monitor": "tradi-monitor"
+  },
+  "asset_aliases": [
+    {
+      "canonical": "BTC",
+      "asset_class": "crypto",
+      "aliases": ["XBT"]
+    },
+    {
+      "canonical": "ETH",
+      "asset_class": "crypto",
+      "aliases": []
+    },
+    {
+      "canonical": "DRAM",
+      "asset_class": "rwa_stock",
+      "aliases": []
+    },
+    {
+      "canonical": "AAPL",
+      "asset_class": "rwa_stock",
+      "aliases": ["AAPLX"]
+    },
+    {
+      "canonical": "USDT",
+      "asset_class": "fiat_stable",
+      "aliases": []
+    },
+    {
+      "canonical": "USDC",
+      "asset_class": "fiat_stable",
+      "aliases": []
+    }
+  ],
+  "market_overrides": [
+    {
+      "exchange": "okx",
+      "raw_symbol": "DRAM-USDT",
+      "market_type": "spot",
+      "canonical_symbol": "DRAM/USDT"
+    },
+    {
+      "exchange": "okx",
+      "raw_symbol": "DRAM-USDT-SWAP",
+      "market_type": "perpetual",
+      "canonical_symbol": "DRAM/USDT"
+    },
+    {
+      "exchange": "hyperliquid",
+      "raw_symbol": "DRAM",
+      "market_type": "perpetual",
+      "canonical_symbol": "DRAM/USDT"
+    },
+    {
+      "exchange": "bitget",
+      "raw_symbol": "DRAMUSDT",
+      "market_type": "spot",
+      "canonical_symbol": "DRAM/USDT"
+    }
+  ]
+}
