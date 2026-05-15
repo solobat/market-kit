@@ -68,11 +68,13 @@ export function resolveIdentity(request) {
     return unresolved("symbol is required");
   }
 
-  const overrideMatches = registry.market_overrides.filter(
-    (item) =>
-      normalizeExchange(item.exchange) === exchange &&
-      String(item.raw_symbol || "").trim().toUpperCase() === symbol.toUpperCase()
-  );
+  const hintedMarketType = normalizeMarketType(request.marketTypeHint);
+  const overrideMatches = registry.market_overrides.filter((item) => {
+    if (normalizeExchange(item.exchange) !== exchange) return false;
+    if (String(item.raw_symbol || "").trim().toUpperCase() !== symbol.toUpperCase()) return false;
+    if (hintedMarketType && normalizeMarketType(item.market_type) !== hintedMarketType) return false;
+    return true;
+  });
   if (overrideMatches.length === 1) {
     return {
       status: "resolved",

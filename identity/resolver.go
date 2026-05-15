@@ -27,7 +27,7 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 		}
 	}
 
-	if candidates := r.resolveOverrides(exchange, rawSymbol); len(candidates) == 1 {
+	if candidates := r.resolveOverrides(exchange, rawSymbol, req.MarketTypeHint); len(candidates) == 1 {
 		return ResolveResult{
 			Status:     ResolveResolved,
 			Confidence: 1,
@@ -112,13 +112,18 @@ func (r *Resolver) normalizeExchange(value string) string {
 	return value
 }
 
-func (r *Resolver) resolveOverrides(exchange string, rawSymbol string) []MarketIdentity {
+func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTypeHint string) []MarketIdentity {
 	matches := make([]MarketIdentity, 0, 1)
+	hinted := normalizeMarketType(marketTypeHint)
 	for _, item := range r.registry.MarketOverrides {
 		if item.Exchange != exchange {
 			continue
 		}
 		if !strings.EqualFold(strings.TrimSpace(item.RawSymbol), strings.TrimSpace(rawSymbol)) {
+			continue
+		}
+		overrideMarketType := normalizeMarketType(item.MarketType)
+		if hinted != MarketTypeUnknown && overrideMarketType != hinted {
 			continue
 		}
 		base, quote := splitCanonicalSymbol(item.CanonicalSymbol)
@@ -128,9 +133,9 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string) []MarketI
 		}
 		matches = append(matches, MarketIdentity{
 			Exchange:        exchange,
-			MarketType:      normalizeMarketType(item.MarketType),
+			MarketType:      overrideMarketType,
 			RawSymbol:       rawSymbol,
-			VenueSymbol:     normalizeVenueSymbol(exchange, rawSymbol, normalizeMarketType(item.MarketType)),
+			VenueSymbol:     normalizeVenueSymbol(exchange, rawSymbol, overrideMarketType),
 			CanonicalSymbol: item.CanonicalSymbol,
 			BaseAsset:       baseCanonical,
 			QuoteAsset:      quote,

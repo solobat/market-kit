@@ -22,6 +22,28 @@ func TestResolveOverride(t *testing.T) {
 	}
 }
 
+func TestResolveOverridePrefersMarketTypeHint(t *testing.T) {
+	registry := Registry{
+		MarketOverrides: []MarketOverride{
+			{Exchange: "bitget", RawSymbol: "DRAMUSDT", MarketType: "spot", CanonicalSymbol: "DRAM/USDT"},
+			{Exchange: "bitget", RawSymbol: "DRAMUSDT", MarketType: "perpetual", CanonicalSymbol: "DRAM/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "bitget",
+		Symbol:         "DRAMUSDT",
+		MarketTypeHint: "perp",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected resolved override, got %+v", result)
+	}
+	if result.Market.MarketType != MarketTypePerpetual {
+		t.Fatalf("expected perpetual match, got %+v", result.Market)
+	}
+}
+
 func TestResolveOKXSpotHeuristic(t *testing.T) {
 	resolver := NewResolver(Registry{})
 	result := resolver.Resolve(ResolveRequest{
