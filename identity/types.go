@@ -63,3 +63,55 @@ type MarketOverride struct {
 	MarketType      string `json:"market_type"`
 	CanonicalSymbol string `json:"canonical_symbol"`
 }
+
+func (r Registry) Merge(other Registry) Registry {
+	r.Normalize()
+	other.Normalize()
+
+	out := Registry{
+		ExchangeAliases: make(map[string]string, len(r.ExchangeAliases)+len(other.ExchangeAliases)),
+		AssetAliases:    append([]AssetAliasRule(nil), r.AssetAliases...),
+		MarketOverrides: append([]MarketOverride(nil), r.MarketOverrides...),
+	}
+
+	for key, value := range r.ExchangeAliases {
+		out.ExchangeAliases[key] = value
+	}
+	for key, value := range other.ExchangeAliases {
+		if _, exists := out.ExchangeAliases[key]; !exists {
+			out.ExchangeAliases[key] = value
+		}
+	}
+
+	assetKeys := map[string]bool{}
+	for _, item := range out.AssetAliases {
+		assetKeys[item.Canonical] = true
+	}
+	for _, item := range other.AssetAliases {
+		if assetKeys[item.Canonical] {
+			continue
+		}
+		out.AssetAliases = append(out.AssetAliases, item)
+		assetKeys[item.Canonical] = true
+	}
+
+	overrideKeys := map[string]bool{}
+	for _, item := range out.MarketOverrides {
+		overrideKeys[marketOverrideKey(item)] = true
+	}
+	for _, item := range other.MarketOverrides {
+		key := marketOverrideKey(item)
+		if overrideKeys[key] {
+			continue
+		}
+		out.MarketOverrides = append(out.MarketOverrides, item)
+		overrideKeys[key] = true
+	}
+
+	out.Normalize()
+	return out
+}
+
+func marketOverrideKey(item MarketOverride) string {
+	return item.Exchange + "|" + item.RawSymbol + "|" + item.MarketType
+}

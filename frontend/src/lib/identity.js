@@ -1,9 +1,48 @@
-import registry from "../../../identity/default_registry.json";
+import baseRegistry from "../../../identity/default_registry.json";
+import generatedRegistry from "../../../identity/generated_registry.json";
 
 const quoteSuffixes = ["USDT", "USDC", "USD"];
+const registry = mergeRegistries(baseRegistry, generatedRegistry);
 
 export function loadRegistry() {
   return registry;
+}
+
+function mergeRegistries(left, right) {
+  const merged = {
+    exchange_aliases: { ...(left?.exchange_aliases || {}) },
+    asset_aliases: [...(left?.asset_aliases || [])],
+    market_overrides: [...(left?.market_overrides || [])]
+  };
+
+  for (const [key, value] of Object.entries(right?.exchange_aliases || {})) {
+    if (!(key in merged.exchange_aliases)) {
+      merged.exchange_aliases[key] = value;
+    }
+  }
+
+  const assetKeys = new Set(merged.asset_aliases.map((item) => String(item.canonical || "").trim().toUpperCase()));
+  for (const item of right?.asset_aliases || []) {
+    const key = String(item.canonical || "").trim().toUpperCase();
+    if (!key || assetKeys.has(key)) continue;
+    merged.asset_aliases.push(item);
+    assetKeys.add(key);
+  }
+
+  const overrideKeys = new Set(
+    merged.market_overrides.map(
+      (item) =>
+        `${normalizeExchange(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item.market_type || item.marketType)}`
+    )
+  );
+  for (const item of right?.market_overrides || []) {
+    const key = `${normalizeExchange(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item.market_type || item.marketType)}`;
+    if (!key || overrideKeys.has(key)) continue;
+    merged.market_overrides.push(item);
+    overrideKeys.add(key);
+  }
+
+  return merged;
 }
 
 export function normalizeExchange(value) {

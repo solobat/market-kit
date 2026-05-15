@@ -320,6 +320,49 @@ Usually do not create a new release tag for frontend-only polishing unless you e
 
 `market-kit` should be the shared identity layer, not a business-logic layer.
 
+## Generated registry layer
+
+`market-kit` now supports two registry layers:
+
+- `identity/default_registry.json`
+  - hand-curated seed rules
+  - explicit aliases for sensitive assets such as RWA / stock-like / commodity-like instruments
+- `identity/generated_registry.json`
+  - auto-curated high-confidence rules derived from `slipstream` market discovery export
+  - intended to collapse the long tail of venue-specific stable-quote CEX symbols into explicit `market_overrides`
+
+At runtime the Go resolver and local frontend audit console merge these two layers, with the hand-curated default registry taking precedence when keys overlap.
+
+## Curating from slipstream
+
+After pulling the latest `slipstream` discovery export locally, regenerate the auto-curated layer with:
+
+```bash
+cd /Users/tomasyang/github/market-kit
+go run ./cmd/market-kit-curate-slipstream \
+  --input /path/to/slipstream-discovery.json \
+  --output identity/generated_registry.json
+```
+
+This command currently:
+
+- keeps only CEX markets
+- focuses on stable quotes such as `USDT / USDC / USD / FDUSD`
+- generates explicit `market_overrides`
+- generates `asset_aliases` with inferred classes:
+  - `fiat_stable`
+  - `rwa_stock`
+  - `rwa_commodity`
+  - default `crypto`
+
+Recommended local verification after regeneration:
+
+```bash
+go test ./...
+cd frontend
+pnpm build
+```
+
 It should answer:
 
 - What exchange is this?
