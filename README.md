@@ -178,6 +178,20 @@ cp frontend/sync-sources.example.json frontend/sync-sources.local.json
 
 Then edit `frontend/sync-sources.local.json` with your real ECS exporter URLs and headers.
 
+For `slipstream`, the recommended source is:
+
+```json
+{
+  "id": "slipstream-prod",
+  "label": "Slipstream 市场发现",
+  "project": "slipstream",
+  "url": "https://api.example.com/slipstream/api/discovery/markets?limit=5000",
+  "headers": {
+    "X-Slipstream-Admin-Code": "replace-me"
+  }
+}
+```
+
 When the console is running with `pnpm dev`, it exposes a local sync proxy so you can pull remote unresolved / ambiguous samples with one click, without retyping URLs every time and without depending on browser CORS against the remote exporter.
 
 ## Deployable server

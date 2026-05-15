@@ -1,6 +1,15 @@
 {
   "sources": [
     {
+      "id": "slipstream-prod",
+      "label": "Slipstream 市场发现",
+      "project": "slipstream",
+      "url": "https://api.example.com/slipstream/api/discovery/markets?limit=5000",
+      "headers": {
+        "X-Slipstream-Admin-Code": "replace-me"
+      }
+    },
+    {
       "id": "veridex-prod",
       "label": "Veridex 线上样本",
       "project": "veridex",
