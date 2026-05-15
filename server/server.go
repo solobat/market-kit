@@ -24,6 +24,11 @@ type App struct {
 	sources []SyncSource
 }
 
+type discoveryScoredGroup struct {
+	group discovery.AssetCandidateGroup
+	score int
+}
+
 func New(config Config) (*App, error) {
 	sources, err := loadSyncSources(config)
 	if err != nil {
@@ -121,7 +126,7 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 
 	aggregator := discovery.NewAggregator(registry)
 	groups := aggregator.BuildAssetGroups(envelope.Items)
-	matches := filterDiscoveryGroups(groups, query)
+	matches := filterDiscoveryGroups(groups, query, registry)
 
 	writeJSON(w, http.StatusOK, map[string]any{
 		"query":  query,
@@ -310,18 +315,15 @@ func discoverySourcePayload(source SyncSource) map[string]any {
 	}
 }
 
-func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string) []discovery.AssetCandidateGroup {
-	type scored struct {
-		group discovery.AssetCandidateGroup
-		score int
-	}
-	out := make([]scored, 0)
+func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string, registry identity.Registry) []discovery.AssetCandidateGroup {
+	aliasIndex := registryAssetAliasIndex(registry)
+	out := make([]discoveryScoredGroup, 0)
 	for _, group := range groups {
-		score := discoveryGroupScore(group, query)
+		score := discoveryGroupScore(group, query, aliasIndex)
 		if score <= 0 {
 			continue
 		}
-		out = append(out, scored{group: group, score: score})
+		out = append(out, discoveryScoredGroup{group: group, score: score})
 	}
 
 	sort.SliceStable(out, func(i, j int) bool {
@@ -331,6 +333,16 @@ func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string)
 		return out[i].score > out[j].score
 	})
 
+	if hasHighConfidenceDiscoveryScore(out) {
+		filtered := out[:0]
+		for _, item := range out {
+			if item.score >= 95 {
+				filtered = append(filtered, item)
+			}
+		}
+		out = filtered
+	}
+
 	matches := make([]discovery.AssetCandidateGroup, 0, len(out))
 	for _, item := range out {
 		matches = append(matches, item.group)
@@ -338,7 +350,7 @@ func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string)
 	return matches
 }
 
-func discoveryGroupScore(group discovery.AssetCandidateGroup, query string) int {
+func discoveryGroupScore(group discovery.AssetCandidateGroup, query string, aliasIndex map[string][]string) int {
 	query = strings.ToUpper(strings.TrimSpace(query))
 	if query == "" {
 		return 0
@@ -354,6 +366,15 @@ func discoveryGroupScore(group discovery.AssetCandidateGroup, query string) int 
 		best = 70
 	case strings.Contains(strings.ToUpper(group.GroupKey), query):
 		best = 65
+	}
+
+	for _, alias := range aliasIndex[strings.ToUpper(strings.TrimSpace(group.CanonicalAsset))] {
+		switch {
+		case alias == query:
+			best = max(best, 105)
+		case strings.Contains(alias, query):
+			best = max(best, 62)
+		}
 	}
 
 	for _, market := range group.Markets {
@@ -374,12 +395,49 @@ func discoveryGroupScore(group discovery.AssetCandidateGroup, query string) int 
 	return best
 }
 
+func registryAssetAliasIndex(registry identity.Registry) map[string][]string {
+	index := make(map[string][]string, len(registry.AssetAliases))
+	for _, item := range registry.AssetAliases {
+		canonical := strings.ToUpper(strings.TrimSpace(item.Canonical))
+		if canonical == "" {
+			continue
+		}
+		seen := map[string]bool{}
+		for _, alias := range item.Aliases {
+			alias = strings.ToUpper(strings.TrimSpace(alias))
+			if alias == "" || alias == canonical || seen[alias] {
+				continue
+			}
+			index[canonical] = append(index[canonical], alias)
+			seen[alias] = true
+		}
+		for _, alias := range item.UnitAliases {
+			value := strings.ToUpper(strings.TrimSpace(alias.Alias))
+			if value == "" || value == canonical || seen[value] {
+				continue
+			}
+			index[canonical] = append(index[canonical], value)
+			seen[value] = true
+		}
+	}
+	return index
+}
+
 func totalDiscoveryMarkets(groups []discovery.AssetCandidateGroup) int {
 	total := 0
 	for _, group := range groups {
 		total += len(group.Markets)
 	}
 	return total
+}
+
+func hasHighConfidenceDiscoveryScore(items []discoveryScoredGroup) bool {
+	for _, item := range items {
+		if item.score >= 95 {
+			return true
+		}
+	}
+	return false
 }
 
 func max(left, right int) int {

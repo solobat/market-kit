@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"context"
+	"encoding/json"
 	"io"
 	"net/http"
 	"strings"
@@ -23,7 +24,26 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES": `{"data":[{"symbol":"NGUSDT","baseCoin":"NG","quoteCoin":"USDT","symbolStatus":"normal"}]}`,
 				"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                            `[{"id":"XRP_USDT","base":"XRP","quote":"USDT","trade_status":"tradable"},{"id":"BTC3L_USDT","base":"BTC3L","quote":"USDT","trade_status":"tradable"}]`,
 				"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                         `[{"name":"NATGAS_USDT","quanto_base":"NATGAS","settle":"USDT","in_delisting":false}]`,
-				"POST https://api.hyperliquid.xyz/info":                                           `{"universe":[{"name":"HYPE"}]}`,
+			}
+			if key == "POST https://api.hyperliquid.xyz/info" {
+				body, _ := io.ReadAll(req.Body)
+				var payload map[string]any
+				if err := json.Unmarshal(body, &payload); err != nil {
+					t.Fatalf("decode hyperliquid payload: %v", err)
+				}
+				switch payload["type"] {
+				case "meta":
+					return jsonResponse(`{"universe":[{"name":"HYPE"}]}`), nil
+				case "perpDexs":
+					return jsonResponse(`[{"name":"km"}]`), nil
+				case "metaAndAssetCtxs":
+					if payload["dex"] != "km" {
+						t.Fatalf("unexpected hyperliquid dex payload: %s", string(body))
+					}
+					return jsonResponse(`[{"universe":[{"name":"USOIL"}]},[]]`), nil
+				default:
+					t.Fatalf("unexpected hyperliquid payload: %s", string(body))
+				}
 			}
 			body, ok := payloads[key]
 			if !ok {
@@ -41,7 +61,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	if envelope.Source != "market-kit-bootstrap" {
 		t.Fatalf("unexpected source: %s", envelope.Source)
 	}
-	if len(envelope.Items) != 11 {
+	if len(envelope.Items) != 12 {
 		t.Fatalf("unexpected item count: %d", len(envelope.Items))
 	}
 
@@ -61,6 +81,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		"bitget:NGUSDT:perp",
 		"gate:NATGAS_USDT:perp",
 		"hyperliquid:HYPE:perp",
+		"hyperliquid:km:USOIL:perp",
 	} {
 		if !found[key] {
 			t.Fatalf("missing expected market %s", key)
@@ -77,7 +98,20 @@ func TestFetchSubset(t *testing.T) {
 			if req.URL.Host != "api.hyperliquid.xyz" {
 				t.Fatalf("unexpected host: %s", req.URL.Host)
 			}
-			return jsonResponse(`{"universe":[{"name":"PURR"}]}`), nil
+			body, _ := io.ReadAll(req.Body)
+			var payload map[string]any
+			if err := json.Unmarshal(body, &payload); err != nil {
+				t.Fatalf("decode hyperliquid payload: %v", err)
+			}
+			switch payload["type"] {
+			case "meta":
+				return jsonResponse(`{"universe":[{"name":"PURR"}]}`), nil
+			case "perpDexs":
+				return jsonResponse(`[]`), nil
+			default:
+				t.Fatalf("unexpected hyperliquid payload: %s", string(body))
+				return nil, nil
+			}
 		}),
 	}
 

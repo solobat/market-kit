@@ -27,12 +27,26 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 					"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES": `{"data":[]}`,
 					"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                            `[]`,
 					"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                         `[]`,
-					"POST https://api.hyperliquid.xyz/info":                                           `{"universe":[]}`,
 				}
 				key := req.Method + " " + req.URL.String()
 				body, ok := payloads[key]
 				if !ok {
-					t.Fatalf("unexpected request: %s", key)
+					if key != "POST https://api.hyperliquid.xyz/info" {
+						t.Fatalf("unexpected request: %s", key)
+					}
+					requestBody, err := io.ReadAll(req.Body)
+					if err != nil {
+						t.Fatalf("read request body: %v", err)
+					}
+					bodyText := string(requestBody)
+					switch {
+					case strings.Contains(bodyText, `"type":"meta"`):
+						body = `{"universe":[]}`
+					case strings.Contains(bodyText, `"type":"perpDexs"`):
+						body = `[]`
+					default:
+						t.Fatalf("unexpected hyperliquid request body: %s", bodyText)
+					}
 				}
 				return jsonResponse(body), nil
 			}),
@@ -174,6 +188,177 @@ func TestHandleDiscoveryLookupReturnsMatchedGroups(t *testing.T) {
 	}
 	if len(payload.Groups[0].Exchanges) != 2 {
 		t.Fatalf("expected 2 exchanges, got %+v", payload.Groups[0].Exchanges)
+	}
+}
+
+func TestHandleDiscoveryLookupMatchesCanonicalAliasForHyperliquidTicker(t *testing.T) {
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				if req.URL.String() != "https://example.com/discovery.json" {
+					t.Fatalf("unexpected request: %s %s", req.Method, req.URL.String())
+				}
+				return jsonResponse(`{
+				  "source":"slipstream",
+				  "generatedAt":"2026-05-16T00:00:00Z",
+				  "items":[
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"CL-USDT-SWAP","baseAsset":"CL","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:CL","baseAsset":"xyz:CL","quoteAsset":"USDC","status":"live"}
+				  ]
+				}`), nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/lookup?source=slipstream-test&symbol=WTI", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoveryLookup(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Query   string `json:"query"`
+		Summary struct {
+			GroupCount  int `json:"groupCount"`
+			MarketCount int `json:"marketCount"`
+		} `json:"summary"`
+		Groups []struct {
+			GroupKey string `json:"groupKey"`
+			Markets  []struct {
+				Exchange  string `json:"exchange"`
+				RawSymbol string `json:"rawSymbol"`
+			} `json:"markets"`
+		} `json:"groups"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload.Query != "WTI" {
+		t.Fatalf("unexpected query: %s", payload.Query)
+	}
+	if payload.Summary.GroupCount != 1 || payload.Summary.MarketCount != 2 {
+		t.Fatalf("unexpected summary: %+v", payload.Summary)
+	}
+	if len(payload.Groups) != 1 || payload.Groups[0].GroupKey != "CL/USDT" {
+		t.Fatalf("unexpected groups: %+v", payload.Groups)
+	}
+	foundHL := false
+	for _, market := range payload.Groups[0].Markets {
+		if market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:CL" {
+			foundHL = true
+			break
+		}
+	}
+	if !foundHL {
+		t.Fatalf("expected WTI lookup to surface hyperliquid ticker, got %+v", payload.Groups[0].Markets)
+	}
+}
+
+func TestHandleDiscoveryLookupMatchesCommodityAliasesForHyperliquidTickers(t *testing.T) {
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				if req.URL.String() != "https://example.com/discovery.json" {
+					t.Fatalf("unexpected request: %s %s", req.Method, req.URL.String())
+				}
+				return jsonResponse(`{
+				  "source":"slipstream",
+				  "generatedAt":"2026-05-16T00:00:00Z",
+				  "items":[
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"BZ-USDT-SWAP","baseAsset":"BZ","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:BRENTOIL","baseAsset":"xyz:BRENTOIL","quoteAsset":"USDC","status":"live"},
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"XAU-USDT-SWAP","baseAsset":"XAU","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:GOLD","baseAsset":"xyz:GOLD","quoteAsset":"USDC","status":"live"},
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"XAG-USDT-SWAP","baseAsset":"XAG","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:SILVER","baseAsset":"xyz:SILVER","quoteAsset":"USDC","status":"live"},
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"XPD-USDT-SWAP","baseAsset":"XPD","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:PALLADIUM","baseAsset":"xyz:PALLADIUM","quoteAsset":"USDC","status":"live"},
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"XPT-USDT-SWAP","baseAsset":"XPT","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"slipstream","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:PLATINUM","baseAsset":"xyz:PLATINUM","quoteAsset":"USDC","status":"live"}
+				  ]
+				}`), nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+	}
+
+	for _, tc := range []struct {
+		query       string
+		groupKey    string
+		hlRawSymbol string
+	}{
+		{query: "BRENT", groupKey: "BZ/USDT", hlRawSymbol: "xyz:BRENTOIL"},
+		{query: "GOLD", groupKey: "XAU/USDT", hlRawSymbol: "xyz:GOLD"},
+		{query: "SILVER", groupKey: "XAG/USDT", hlRawSymbol: "xyz:SILVER"},
+		{query: "PALLADIUM", groupKey: "XPD/USDT", hlRawSymbol: "xyz:PALLADIUM"},
+		{query: "PLATINUM", groupKey: "XPT/USDT", hlRawSymbol: "xyz:PLATINUM"},
+	} {
+		t.Run(tc.query, func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodGet, "/api/discovery/lookup?source=slipstream-test&symbol="+tc.query, nil)
+			rec := httptest.NewRecorder()
+			app.handleDiscoveryLookup(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+			}
+
+			var payload struct {
+				Query   string `json:"query"`
+				Summary struct {
+					GroupCount  int `json:"groupCount"`
+					MarketCount int `json:"marketCount"`
+				} `json:"summary"`
+				Groups []struct {
+					GroupKey string `json:"groupKey"`
+					Markets  []struct {
+						Exchange  string `json:"exchange"`
+						RawSymbol string `json:"rawSymbol"`
+					} `json:"markets"`
+				} `json:"groups"`
+			}
+			if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+				t.Fatalf("decode response: %v", err)
+			}
+			if payload.Query != tc.query {
+				t.Fatalf("unexpected query: %s", payload.Query)
+			}
+			if payload.Summary.GroupCount != 1 || payload.Summary.MarketCount != 2 {
+				t.Fatalf("unexpected summary for %s: %+v", tc.query, payload.Summary)
+			}
+			if len(payload.Groups) != 1 || payload.Groups[0].GroupKey != tc.groupKey {
+				t.Fatalf("unexpected groups for %s: %+v", tc.query, payload.Groups)
+			}
+			foundHL := false
+			for _, market := range payload.Groups[0].Markets {
+				if market.Exchange == "hyperliquid" && market.RawSymbol == tc.hlRawSymbol {
+					foundHL = true
+					break
+				}
+			}
+			if !foundHL {
+				t.Fatalf("expected %s lookup to surface %s, got %+v", tc.query, tc.hlRawSymbol, payload.Groups[0].Markets)
+			}
+		})
 	}
 }
 

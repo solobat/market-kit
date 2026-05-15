@@ -135,6 +135,17 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		MarketTypeHint: string(marketType),
 	}); resolved.Market != nil {
 		venueSymbol = resolved.Market.VenueSymbol
+		if resolved.Confidence >= 1 {
+			base = resolved.Market.BaseAsset
+			quote = resolved.Market.QuoteAsset
+			if resolved.Market.MarketType != identity.MarketTypeUnknown {
+				marketType = resolved.Market.MarketType
+			}
+			if strings.TrimSpace(resolved.Market.AssetClass) != "" {
+				assetClass = resolved.Market.AssetClass
+			}
+			evidence = append(evidence, resolved.Reason)
+		}
 		if base == "" {
 			base = resolved.Market.BaseAsset
 		}

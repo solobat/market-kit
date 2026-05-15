@@ -290,6 +290,9 @@ func normalizeVenueSymbol(exchange string, rawSymbol string, marketType MarketTy
 		if marketType == MarketTypeSpot && strings.Contains(raw, "/") {
 			return raw
 		}
+		if strings.Contains(raw, ":") || strings.HasPrefix(raw, "@") {
+			return raw
+		}
 		return rawSymbolBase(raw)
 	default:
 		return raw

@@ -404,6 +404,9 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 	type response struct {
 		Universe []market `json:"universe"`
 	}
+	type dexEntry struct {
+		Name string `json:"name"`
+	}
 
 	var payload response
 	if err := fetchJSON(ctx, client, http.MethodPost, "https://api.hyperliquid.xyz/info", map[string]any{"type": "meta"}, &payload); err != nil {
@@ -412,22 +415,80 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 
 	seenAt := time.Now().UTC()
 	out := make([]discovery.ImportedMarket, 0, len(payload.Universe))
+	seen := map[string]bool{}
 	for _, item := range payload.Universe {
+		symbol := strings.TrimSpace(item.Name)
+		if symbol == "" || seen[symbol] {
+			continue
+		}
+		seen[symbol] = true
 		out = append(out, discovery.ImportedMarket{
 			SourceID:    BuiltInSourceID,
 			PlatformID:  "hyperliquid",
 			Platform:    "Hyperliquid",
 			VenueType:   "dex",
 			MarketType:  "perp",
-			Symbol:      strings.TrimSpace(item.Name),
-			BaseAsset:   strings.TrimSpace(item.Name),
+			Symbol:      symbol,
+			BaseAsset:   symbol,
 			QuoteAsset:  "USDC",
 			Chain:       "Hyperliquid L1",
 			Status:      "live",
-			ExternalURL: "https://app.hyperliquid.xyz/trade/" + strings.TrimSpace(item.Name),
+			ExternalURL: "https://app.hyperliquid.xyz/trade/" + symbol,
 			FirstSeenAt: seenAt,
 			LastSeenAt:  seenAt,
 		})
+	}
+
+	var dexes []dexEntry
+	if err := fetchJSON(ctx, client, http.MethodPost, "https://api.hyperliquid.xyz/info", map[string]any{"type": "perpDexs"}, &dexes); err != nil {
+		return nil, err
+	}
+	for _, dex := range dexes {
+		dexName := strings.TrimSpace(dex.Name)
+		if dexName == "" {
+			continue
+		}
+		var payload []json.RawMessage
+		if err := fetchJSON(ctx, client, http.MethodPost, "https://api.hyperliquid.xyz/info", map[string]any{"type": "metaAndAssetCtxs", "dex": dexName}, &payload); err != nil {
+			return nil, err
+		}
+		if len(payload) == 0 {
+			continue
+		}
+
+		var meta response
+		if err := json.Unmarshal(payload[0], &meta); err != nil {
+			continue
+		}
+		for _, item := range meta.Universe {
+			base := strings.TrimSpace(item.Name)
+			if base == "" {
+				continue
+			}
+			symbol := dexName + ":" + base
+			if strings.Contains(base, ":") {
+				symbol = base
+			}
+			if seen[symbol] {
+				continue
+			}
+			seen[symbol] = true
+			out = append(out, discovery.ImportedMarket{
+				SourceID:    BuiltInSourceID,
+				PlatformID:  "hyperliquid",
+				Platform:    "Hyperliquid",
+				VenueType:   "dex",
+				MarketType:  "perp",
+				Symbol:      symbol,
+				BaseAsset:   base,
+				QuoteAsset:  "USDC",
+				Chain:       "Hyperliquid L1",
+				Status:      "live",
+				ExternalURL: "https://app.hyperliquid.xyz/trade/" + symbol,
+				FirstSeenAt: seenAt,
+				LastSeenAt:  seenAt,
+			})
+		}
 	}
 	return out, nil
 }

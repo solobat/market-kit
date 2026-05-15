@@ -84,6 +84,126 @@ func TestResolveUnitAliasToCanonicalBase(t *testing.T) {
 	}
 }
 
+func TestResolveHyperliquidKMOverride(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "USO", AssetClass: "rwa_stock", Aliases: []string{"USOIL"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "km:USOIL", MarketType: "perpetual", CanonicalSymbol: "USO/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "USOIL/USDH", MarketType: "spot", CanonicalSymbol: "USO/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "USOIL/USDH",
+		MarketTypeHint: "spot",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected resolved km override, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "USO/USDT" || result.Market.BaseAsset != "USO" {
+		t.Fatalf("expected canonical USO market, got %+v", result.Market)
+	}
+	if result.Market.VenueSymbol != "USOIL/USDH" {
+		t.Fatalf("expected km venue symbol to be preserved, got %+v", result.Market)
+	}
+}
+
+func TestResolveHyperliquidWTIOverrides(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "CL", AssetClass: "rwa_commodity", Aliases: []string{"WTI", "WTIOIL"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:CL", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "cash:WTI", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "WTIOIL/USDH", MarketType: "spot", CanonicalSymbol: "CL/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	for _, tc := range []struct {
+		name           string
+		symbol         string
+		marketTypeHint string
+		venueSymbol    string
+	}{
+		{name: "xyz perp", symbol: "xyz:CL", venueSymbol: "XYZ:CL"},
+		{name: "cash perp", symbol: "cash:WTI", venueSymbol: "CASH:WTI"},
+		{name: "spot pair", symbol: "WTIOIL/USDH", marketTypeHint: "spot", venueSymbol: "WTIOIL/USDH"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			result := resolver.Resolve(ResolveRequest{
+				Exchange:       "hyperliquid",
+				Symbol:         tc.symbol,
+				MarketTypeHint: tc.marketTypeHint,
+			})
+			if result.Status != ResolveResolved || result.Market == nil {
+				t.Fatalf("expected resolved WTI override, got %+v", result)
+			}
+			if result.Market.CanonicalSymbol != "CL/USDT" || result.Market.BaseAsset != "CL" {
+				t.Fatalf("expected canonical CL market, got %+v", result.Market)
+			}
+			if result.Market.VenueSymbol != tc.venueSymbol {
+				t.Fatalf("expected preserved venue symbol %q, got %+v", tc.venueSymbol, result.Market)
+			}
+		})
+	}
+}
+
+func TestResolveHyperliquidCommodityAliasOverrides(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "BZ", AssetClass: "rwa_commodity", Aliases: []string{"BRENT", "BRENTOIL"}},
+			{Canonical: "XAU", AssetClass: "rwa_commodity", Aliases: []string{"GOLD"}},
+			{Canonical: "XAG", AssetClass: "rwa_commodity", Aliases: []string{"SILVER"}},
+			{Canonical: "XPD", AssetClass: "rwa_commodity", Aliases: []string{"PALLADIUM"}},
+			{Canonical: "XPT", AssetClass: "rwa_commodity", Aliases: []string{"PLATINUM"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:BRENTOIL", MarketType: "perpetual", CanonicalSymbol: "BZ/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:GOLD", MarketType: "perpetual", CanonicalSymbol: "XAU/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SILVER", MarketType: "perpetual", CanonicalSymbol: "XAG/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:PALLADIUM", MarketType: "perpetual", CanonicalSymbol: "XPD/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:PLATINUM", MarketType: "perpetual", CanonicalSymbol: "XPT/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	for _, tc := range []struct {
+		name           string
+		symbol         string
+		expectedBase   string
+		expectedSymbol string
+		expectedVenue  string
+	}{
+		{name: "brent", symbol: "xyz:BRENTOIL", expectedBase: "BZ", expectedSymbol: "BZ/USDT", expectedVenue: "XYZ:BRENTOIL"},
+		{name: "gold", symbol: "xyz:GOLD", expectedBase: "XAU", expectedSymbol: "XAU/USDT", expectedVenue: "XYZ:GOLD"},
+		{name: "silver", symbol: "xyz:SILVER", expectedBase: "XAG", expectedSymbol: "XAG/USDT", expectedVenue: "XYZ:SILVER"},
+		{name: "palladium", symbol: "xyz:PALLADIUM", expectedBase: "XPD", expectedSymbol: "XPD/USDT", expectedVenue: "XYZ:PALLADIUM"},
+		{name: "platinum", symbol: "xyz:PLATINUM", expectedBase: "XPT", expectedSymbol: "XPT/USDT", expectedVenue: "XYZ:PLATINUM"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			result := resolver.Resolve(ResolveRequest{
+				Exchange: "hyperliquid",
+				Symbol:   tc.symbol,
+			})
+			if result.Status != ResolveResolved || result.Market == nil {
+				t.Fatalf("expected resolved commodity override, got %+v", result)
+			}
+			if result.Market.BaseAsset != tc.expectedBase || result.Market.CanonicalSymbol != tc.expectedSymbol {
+				t.Fatalf("expected %s -> %s, got %+v", tc.expectedBase, tc.expectedSymbol, result.Market)
+			}
+			if result.Market.VenueSymbol != tc.expectedVenue {
+				t.Fatalf("expected preserved venue symbol %q, got %+v", tc.expectedVenue, result.Market)
+			}
+		})
+	}
+}
+
 func TestResolveUnresolvedWithoutSymbol(t *testing.T) {
 	resolver := NewResolver(Registry{})
 	result := resolver.Resolve(ResolveRequest{Exchange: "okx"})
