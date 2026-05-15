@@ -4,6 +4,7 @@
       "id": "slipstream-prod",
       "label": "Slipstream 市场发现",
       "project": "slipstream",
+      "kind": "discovery",
       "url": "https://api.example.com/slipstream/api/discovery/markets?limit=5000",
       "headers": {
         "X-Slipstream-Admin-Code": "replace-me"
@@ -13,6 +14,7 @@
       "id": "veridex-prod",
       "label": "Veridex 线上样本",
       "project": "veridex",
+      "kind": "sample",
       "url": "https://api.example.com/veridex-api/api/v1/identity-cases",
       "headers": {
         "X-Veridex-Admin-Code": "replace-me"
@@ -22,6 +24,7 @@
       "id": "tradfi-prod",
       "label": "Tradfi 线上样本",
       "project": "tradfi-monitor",
+      "kind": "sample",
       "url": "https://api.example.com/tradfi-monitor-api/api/v1/identity-cases",
       "headers": {}
     }

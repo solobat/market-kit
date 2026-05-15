@@ -10,6 +10,7 @@ type SourceKind string
 
 const (
 	SourceKindSlipstream SourceKind = "slipstream"
+	SourceKindBootstrap  SourceKind = "market-kit-bootstrap"
 )
 
 type ImportEnvelope struct {
@@ -19,19 +20,24 @@ type ImportEnvelope struct {
 }
 
 type ImportedMarket struct {
-	SourceID    string    `json:"sourceId"`
-	PlatformID  string    `json:"platformId"`
-	Platform    string    `json:"platform"`
-	VenueType   string    `json:"venueType"`
-	MarketType  string    `json:"marketType"`
-	Symbol      string    `json:"symbol"`
-	BaseAsset   string    `json:"baseAsset"`
-	QuoteAsset  string    `json:"quoteAsset"`
-	Chain       string    `json:"chain"`
-	Status      string    `json:"status"`
-	ExternalURL string    `json:"externalUrl"`
-	FirstSeenAt time.Time `json:"firstSeenAt"`
-	LastSeenAt  time.Time `json:"lastSeenAt"`
+	SourceID           string    `json:"sourceId"`
+	PlatformID         string    `json:"platformId"`
+	Platform           string    `json:"platform"`
+	VenueType          string    `json:"venueType"`
+	MarketType         string    `json:"marketType"`
+	Symbol             string    `json:"symbol"`
+	BaseAsset          string    `json:"baseAsset"`
+	QuoteAsset         string    `json:"quoteAsset"`
+	AssetClass         string    `json:"assetClass"`
+	AssetClassHint     string    `json:"assetClassHint"`
+	Category           string    `json:"category"`
+	UnderlyingCategory string    `json:"underlyingCategory"`
+	Tags               []string  `json:"tags"`
+	Chain              string    `json:"chain"`
+	Status             string    `json:"status"`
+	ExternalURL        string    `json:"externalUrl"`
+	FirstSeenAt        time.Time `json:"firstSeenAt"`
+	LastSeenAt         time.Time `json:"lastSeenAt"`
 }
 
 type CandidateMarket struct {

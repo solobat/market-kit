@@ -25,7 +25,10 @@ func (a *Aggregator) NormalizeImportedMarkets(items []ImportedMarket) []Candidat
 	out := make([]CandidateMarket, 0, len(items))
 	for _, item := range items {
 		candidate := a.normalizeImportedMarket(item)
-		out = append(out, candidate)
+		if candidate == nil {
+			continue
+		}
+		out = append(out, *candidate)
 	}
 	sort.SliceStable(out, func(i, j int) bool {
 		if out[i].CanonicalSymbol == out[j].CanonicalSymbol {
@@ -59,7 +62,11 @@ func (a *Aggregator) BuildAssetGroups(items []ImportedMarket) []AssetCandidateGr
 	return out
 }
 
-func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) CandidateMarket {
+func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMarket {
+	if ShouldIgnoreImportedMarket(item) {
+		return nil
+	}
+
 	exchange := normalizeExchange(a.registry, firstNonEmpty(item.PlatformID, item.Platform))
 	rawSymbol := strings.TrimSpace(item.Symbol)
 	marketType := normalizeMarketType(item.MarketType)
@@ -72,11 +79,23 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) CandidateMarke
 	}
 
 	confidence := 0.7
-	assetClass := "unknown"
+	assetClass := normalizeImportedAssetClassHints(
+		item.AssetClass,
+		item.AssetClassHint,
+		item.Category,
+		item.UnderlyingCategory,
+		item.Tags,
+	)
+	if assetClass != "" {
+		confidence = 0.95
+		evidence = append(evidence, "used exchange-provided asset classification")
+	} else {
+		assetClass = "unknown"
+	}
 	canonicalBase, baseClass, aliasMatched := resolveAssetAlias(a.registry, base)
 	if aliasMatched {
 		base = canonicalBase
-		if baseClass != "" {
+		if assetClass == "unknown" && baseClass != "" {
 			assetClass = baseClass
 		}
 		confidence = 0.9
@@ -135,7 +154,7 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) CandidateMarke
 		canonicalSymbol = base + "/" + quote
 	}
 
-	return CandidateMarket{
+	candidate := CandidateMarket{
 		SourceID:        firstNonEmpty(item.SourceID, string(SourceKindSlipstream)),
 		PlatformID:      strings.TrimSpace(item.PlatformID),
 		Platform:        strings.TrimSpace(item.Platform),
@@ -156,6 +175,7 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) CandidateMarke
 		FirstSeenAt:     item.FirstSeenAt,
 		LastSeenAt:      item.LastSeenAt,
 	}
+	return &candidate
 }
 
 func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
@@ -251,13 +271,86 @@ func resolveAssetAlias(reg identity.Registry, value string) (canonical string, a
 		if rule.Canonical == needle {
 			return rule.Canonical, firstNonEmpty(rule.AssetClass, "unknown"), true
 		}
+		matched := false
 		for _, alias := range rule.Aliases {
 			if strings.EqualFold(alias, needle) {
-				return rule.Canonical, firstNonEmpty(rule.AssetClass, "unknown"), true
+				matched = true
+				break
 			}
+		}
+		if matched {
+			return rule.Canonical, firstNonEmpty(rule.AssetClass, "unknown"), true
+		}
+		for _, alias := range rule.UnitAliases {
+			if strings.EqualFold(alias.Alias, needle) {
+				matched = true
+				break
+			}
+		}
+		if matched {
+			return rule.Canonical, firstNonEmpty(rule.AssetClass, "unknown"), true
 		}
 	}
 	return "", "", false
+}
+
+func normalizeImportedAssetClassHints(hints ...any) string {
+	for _, hint := range hints {
+		switch value := hint.(type) {
+		case string:
+			if assetClass := normalizeImportedAssetClassHint(value); assetClass != "" {
+				return assetClass
+			}
+		case []string:
+			for _, item := range value {
+				if assetClass := normalizeImportedAssetClassHint(item); assetClass != "" {
+					return assetClass
+				}
+			}
+		}
+	}
+	return ""
+}
+
+func normalizeImportedAssetClassHint(value string) string {
+	raw := strings.ToLower(strings.TrimSpace(value))
+	raw = strings.ReplaceAll(raw, "_", " ")
+	raw = strings.ReplaceAll(raw, "-", " ")
+	raw = strings.Join(strings.Fields(raw), " ")
+
+	switch {
+	case raw == "":
+		return ""
+	case strings.Contains(raw, "stable"):
+		return "fiat_stable"
+	case strings.Contains(raw, "stock"),
+		strings.Contains(raw, "equity"),
+		strings.Contains(raw, "share"),
+		strings.Contains(raw, "security"),
+		strings.Contains(raw, "etf"),
+		strings.Contains(raw, "index"):
+		return "rwa_stock"
+	case strings.Contains(raw, "commodity"),
+		strings.Contains(raw, "metal"),
+		strings.Contains(raw, "gold"),
+		strings.Contains(raw, "silver"),
+		strings.Contains(raw, "oil"),
+		strings.Contains(raw, "crude"),
+		strings.Contains(raw, "gas"),
+		strings.Contains(raw, "energy"):
+		return "rwa_commodity"
+	case strings.Contains(raw, "crypto"),
+		strings.Contains(raw, "blockchain"),
+		strings.Contains(raw, "defi"),
+		strings.Contains(raw, "meme"),
+		strings.Contains(raw, "layer 1"),
+		strings.Contains(raw, "layer1"),
+		strings.Contains(raw, "token"),
+		strings.Contains(raw, "coin"):
+		return "crypto"
+	default:
+		return ""
+	}
 }
 
 func sortedStringKeys(values map[string]bool) []string {

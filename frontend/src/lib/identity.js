@@ -2,7 +2,7 @@ import baseRegistry from "../../../identity/default_registry.json";
 import generatedRegistry from "../../../identity/generated_registry.json";
 
 const quoteSuffixes = ["USDT", "USDC", "USD"];
-const registry = mergeRegistries(baseRegistry, generatedRegistry);
+const registry = normalizeRegistry(mergeRegistries(baseRegistry, generatedRegistry));
 
 export function loadRegistry() {
   return registry;
@@ -13,6 +13,19 @@ function mergeRegistries(left, right) {
     exchange_aliases: { ...(left?.exchange_aliases || {}) },
     asset_aliases: [...(left?.asset_aliases || [])],
     market_overrides: [...(left?.market_overrides || [])]
+  };
+
+  const normalizeExchangeValue = (value) => {
+    const raw = String(value || "").trim().toLowerCase();
+    return merged.exchange_aliases?.[raw] || raw;
+  };
+
+  const normalizeMarketTypeValue = (value) => {
+    const raw = String(value || "").trim().toLowerCase();
+    if (raw === "spot") return "spot";
+    if (["perpetual", "perp", "swap", "linear"].includes(raw)) return "perpetual";
+    if (["future", "futures", "delivery"].includes(raw)) return "future";
+    return "";
   };
 
   for (const [key, value] of Object.entries(right?.exchange_aliases || {})) {
@@ -32,17 +45,203 @@ function mergeRegistries(left, right) {
   const overrideKeys = new Set(
     merged.market_overrides.map(
       (item) =>
-        `${normalizeExchange(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item.market_type || item.marketType)}`
+        `${normalizeExchangeValue(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketTypeValue(item.market_type || item.marketType)}`
     )
   );
   for (const item of right?.market_overrides || []) {
-    const key = `${normalizeExchange(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item.market_type || item.marketType)}`;
+    const key = `${normalizeExchangeValue(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketTypeValue(item.market_type || item.marketType)}`;
     if (!key || overrideKeys.has(key)) continue;
     merged.market_overrides.push(item);
     overrideKeys.add(key);
   }
 
   return merged;
+}
+
+function normalizeRegistry(input) {
+  const exchange_aliases = {};
+  for (const [source, target] of Object.entries(input?.exchange_aliases || {})) {
+    const normalizedSource = String(source || "").trim().toLowerCase();
+    const normalizedTarget = String(target || "").trim().toLowerCase();
+    if (!normalizedSource || !normalizedTarget) continue;
+    exchange_aliases[normalizedSource] = normalizedTarget;
+  }
+
+  const [asset_aliases, scaledAliases] = normalizeAssetAliases(input?.asset_aliases || []);
+  const market_overrides = normalizeMarketOverrides(input?.market_overrides || [], scaledAliases);
+  return { exchange_aliases, asset_aliases, market_overrides };
+}
+
+function normalizeAssetAliases(items) {
+  const merged = new Map();
+  for (const item of items || []) {
+    const canonical = String(item?.canonical || "").trim().toUpperCase();
+    if (!canonical) continue;
+    const normalized = {
+      canonical,
+      asset_class: String(item?.asset_class || "").trim(),
+      aliases: (item?.aliases || []).map((alias) => String(alias || "").trim().toUpperCase()),
+      unit_aliases: (item?.unit_aliases || []).map((alias) => ({
+        alias: String(alias?.alias || "").trim().toUpperCase(),
+        multiplier: Number(alias?.multiplier || 0)
+      }))
+    };
+    merged.set(canonical, mergeAssetAliasEntry(merged.get(canonical), normalized));
+  }
+
+  const canonicalSet = new Set(merged.keys());
+  const scaledAliases = new Map();
+  for (const canonical of Array.from(merged.keys())) {
+    const current = merged.get(canonical);
+    if (!current) continue;
+    const scaled = inferScaledUnitAlias(canonical, canonicalSet);
+    if (!scaled || !merged.has(scaled.base)) continue;
+
+    const baseRule = merged.get(scaled.base);
+    const incoming = {
+      canonical: scaled.base,
+      asset_class: current.asset_class,
+      aliases: [],
+      unit_aliases: [
+        { alias: canonical, multiplier: scaled.multiplier },
+        ...(current.aliases || []).map((alias) => ({ alias, multiplier: scaled.multiplier })),
+        ...(current.unit_aliases || []).map((alias) => ({
+          alias: alias.alias,
+          multiplier: Number(alias.multiplier || scaled.multiplier) || scaled.multiplier
+        }))
+      ]
+    };
+
+    merged.set(scaled.base, mergeAssetAliasEntry(baseRule, incoming));
+    merged.delete(canonical);
+    canonicalSet.delete(canonical);
+    scaledAliases.set(canonical, scaled.base);
+  }
+
+  const normalized = Array.from(merged.values())
+    .map((item) => ({
+      canonical: item.canonical,
+      asset_class: item.asset_class,
+      aliases: normalizeAliasList(item.canonical, item.aliases),
+      unit_aliases: normalizeUnitAliasList(item.canonical, item.unit_aliases)
+    }))
+    .sort((left, right) => String(left.canonical || "").localeCompare(String(right.canonical || "")));
+
+  return [normalized, scaledAliases];
+}
+
+function normalizeMarketOverrides(items, scaledAliases) {
+  const seen = new Set();
+  const normalized = [];
+  for (const item of items || []) {
+    const exchange = String(item?.exchange || "").trim().toLowerCase();
+    const raw_symbol = String(item?.raw_symbol || item?.rawSymbol || "").trim();
+    const market_type = normalizeMarketType(item?.market_type || item?.marketType);
+    let canonical_symbol = String(item?.canonical_symbol || item?.canonicalSymbol || "").trim().toUpperCase();
+    const [base, quote] = splitCanonical(canonical_symbol);
+    if (base && quote && scaledAliases.has(base)) {
+      canonical_symbol = `${scaledAliases.get(base)}/${quote}`;
+    }
+
+    const key = `${exchange}|${raw_symbol}|${market_type}`;
+    if (!exchange || !raw_symbol || !market_type || !canonical_symbol || seen.has(key)) continue;
+    seen.add(key);
+    normalized.push({ exchange, raw_symbol, market_type, canonical_symbol });
+  }
+  return normalized;
+}
+
+function mergeAssetAliasEntry(left, right) {
+  const current = left || { canonical: right?.canonical || "", asset_class: "", aliases: [], unit_aliases: [] };
+  const merged = {
+    canonical: current.canonical || right?.canonical || "",
+    asset_class: current.asset_class || String(right?.asset_class || "").trim(),
+    aliases: [...(current.aliases || [])],
+    unit_aliases: [...(current.unit_aliases || [])]
+  };
+
+  const aliasSet = new Set(merged.aliases.filter((alias) => alias && alias !== merged.canonical));
+  for (const alias of right?.aliases || []) {
+    if (!alias || alias === merged.canonical || aliasSet.has(alias)) continue;
+    merged.aliases.push(alias);
+    aliasSet.add(alias);
+  }
+
+  const unitAliasIndex = new Map();
+  for (const [index, alias] of (merged.unit_aliases || []).entries()) {
+    if (!alias?.alias || alias.alias === merged.canonical) continue;
+    unitAliasIndex.set(alias.alias, index);
+  }
+  for (const alias of right?.unit_aliases || []) {
+    if (!alias?.alias || alias.alias === merged.canonical) continue;
+    if (unitAliasIndex.has(alias.alias)) {
+      const existing = merged.unit_aliases[unitAliasIndex.get(alias.alias)];
+      if (!Number(existing.multiplier) && Number(alias.multiplier) > 0) {
+        existing.multiplier = Number(alias.multiplier);
+      }
+      continue;
+    }
+    merged.unit_aliases.push({ alias: alias.alias, multiplier: Number(alias.multiplier || 0) });
+    unitAliasIndex.set(alias.alias, merged.unit_aliases.length - 1);
+  }
+
+  return merged;
+}
+
+function normalizeAliasList(canonical, aliases) {
+  return Array.from(
+    new Set(
+      (aliases || [])
+        .map((alias) => String(alias || "").trim().toUpperCase())
+        .filter((alias) => alias && alias !== canonical)
+    )
+  ).sort((left, right) => left.localeCompare(right));
+}
+
+function normalizeUnitAliasList(canonical, aliases) {
+  const map = new Map();
+  for (const item of aliases || []) {
+    const alias = String(item?.alias || "").trim().toUpperCase();
+    const multiplier = Number(item?.multiplier || 0);
+    if (!alias || alias === canonical || multiplier <= 0 || map.has(alias)) continue;
+    map.set(alias, { alias, multiplier });
+  }
+  return Array.from(map.values()).sort((left, right) => {
+    if (left.multiplier === right.multiplier) return left.alias.localeCompare(right.alias);
+    return left.multiplier - right.multiplier;
+  });
+}
+
+function inferScaledUnitAlias(value, canonicalSet) {
+  const normalized = String(value || "").trim().toUpperCase();
+  if (!normalized) return null;
+
+  const prefixes = [
+    { token: "1000000", multiplier: 1000000 },
+    { token: "10000", multiplier: 10000 },
+    { token: "1000", multiplier: 1000 },
+    { token: "1M", multiplier: 1000000 }
+  ];
+
+  for (const prefix of prefixes) {
+    if (normalized.startsWith(prefix.token) && normalized.length > prefix.token.length) {
+      const base = normalized.slice(prefix.token.length);
+      if (isValidScaledBase(base) && canonicalSet.has(base)) {
+        return { base, multiplier: prefix.multiplier };
+      }
+    }
+    if (normalized.endsWith(prefix.token) && normalized.length > prefix.token.length) {
+      const base = normalized.slice(0, normalized.length - prefix.token.length);
+      if (isValidScaledBase(base) && canonicalSet.has(base)) {
+        return { base, multiplier: prefix.multiplier };
+      }
+    }
+  }
+  return null;
+}
+
+function isValidScaledBase(value) {
+  return /^[A-Z0-9]{2,}$/.test(String(value || "").trim().toUpperCase());
 }
 
 export function normalizeExchange(value) {
@@ -162,7 +361,8 @@ function resolveAssetAlias(base) {
   const normalized = String(base || "").trim().toUpperCase();
   const matches = registry.asset_aliases.filter((item) => {
     if (String(item.canonical || "").trim().toUpperCase() === normalized) return true;
-    return (item.aliases || []).some((alias) => String(alias || "").trim().toUpperCase() === normalized);
+    if ((item.aliases || []).some((alias) => String(alias || "").trim().toUpperCase() === normalized)) return true;
+    return (item.unit_aliases || []).some((alias) => String(alias?.alias || "").trim().toUpperCase() === normalized);
   });
   if (matches.length === 1) {
     return {

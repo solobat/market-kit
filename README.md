@@ -178,6 +178,15 @@ cp frontend/sync-sources.example.json frontend/sync-sources.local.json
 
 Then edit `frontend/sync-sources.local.json` with your real ECS exporter URLs and headers.
 
+Each source can optionally declare a `kind`:
+
+- `discovery`
+  - market inventory feeds such as `slipstream`
+- `sample`
+  - unresolved / ambiguous identity cases from downstream services
+
+If omitted, `market-kit` infers `slipstream`-like projects as discovery sources and everything else as sample sources.
+
 For `slipstream`, the recommended source is:
 
 ```json
@@ -185,12 +194,19 @@ For `slipstream`, the recommended source is:
   "id": "slipstream-prod",
   "label": "Slipstream 市场发现",
   "project": "slipstream",
+  "kind": "discovery",
   "url": "https://api.example.com/slipstream/api/discovery/markets?limit=5000",
   "headers": {
     "X-Slipstream-Admin-Code": "replace-me"
   }
 }
 ```
+
+Even without any remote config, the server now exposes a built-in discovery source:
+
+- id: `market-kit-bootstrap`
+- kind: `discovery`
+- behavior: fetches bootstrap market inventory directly from exchange public REST endpoints such as Binance, Bybit, OKX, Bitget, Gate, and Hyperliquid
 
 When the console is running with `pnpm dev`, it exposes a local sync proxy so you can pull remote unresolved / ambiguous samples with one click, without retyping URLs every time and without depending on browser CORS against the remote exporter.
 
@@ -211,9 +227,26 @@ provides:
 - `GET /api/registry`
 - `GET /api/discovery/sources`
 - `GET /api/discovery/sync?source=<id>`
+- `GET /api/discovery/lookup?symbol=<symbol>[&source=<id>]`
 - static hosting for the built `frontend/dist` app
 
 That means online deployment no longer depends on the Vite dev proxy.
+
+`GET /api/discovery/sync?source=market-kit-bootstrap` will trigger a fresh bootstrap pull from the built-in exchange REST collectors.
+
+`GET /api/discovery/lookup` adds a lightweight presence query layer on top of discovery imports, so you can ask questions such as:
+
+```bash
+curl 'http://127.0.0.1:18120/api/discovery/lookup?symbol=TSM'
+curl 'http://127.0.0.1:18120/api/discovery/lookup?symbol=DRAM&source=slipstream-prod'
+```
+
+The response includes:
+
+- matched canonical asset groups
+- exchanges where the asset appears
+- market types seen on those exchanges
+- raw venue symbols for each matched market
 
 ### Production build flow
 
@@ -332,6 +365,25 @@ Usually do not create a new release tag for frontend-only polishing unless you e
   - intended to collapse the long tail of venue-specific stable-quote CEX symbols into explicit `market_overrides`
 
 At runtime the Go resolver and local frontend audit console merge these two layers, with the hand-curated default registry taking precedence when keys overlap.
+
+## Bootstrap discovery export
+
+If you want `market-kit` to generate its own initial discovery payload without waiting for `slipstream`, you can pull directly from the built-in exchange REST collectors:
+
+```bash
+cd /Users/tomasyang/github/market-kit
+go run ./cmd/market-kit-bootstrap-discovery \
+  --output /tmp/market-kit-bootstrap-discovery.json
+```
+
+Optional flags:
+
+- `--sources binance,bybit,okx`
+  - fetch only selected exchanges
+- `--timeout 30s`
+  - override upstream request timeout
+
+The output shape matches `discovery.ImportEnvelope`, so it can be fed back into the frontend review flow or any downstream importer that already accepts `slipstream`-style discovery exports.
 
 ## Curating from slipstream
 

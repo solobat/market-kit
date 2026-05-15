@@ -58,6 +58,32 @@ func TestResolveOKXSpotHeuristic(t *testing.T) {
 	}
 }
 
+func TestResolveUnitAliasToCanonicalBase(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{
+				Canonical:  "PEPE",
+				AssetClass: "crypto",
+				UnitAliases: []AssetUnitAlias{
+					{Alias: "1000PEPE", Multiplier: 1000},
+				},
+			},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange: "binance",
+		Symbol:   "1000PEPEUSDT",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected unit alias to resolve, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "PEPE/USDT" || result.Market.BaseAsset != "PEPE" {
+		t.Fatalf("expected canonical PEPE market, got %+v", result.Market)
+	}
+}
+
 func TestResolveUnresolvedWithoutSymbol(t *testing.T) {
 	resolver := NewResolver(Registry{})
 	result := resolver.Resolve(ResolveRequest{Exchange: "okx"})

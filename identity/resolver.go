@@ -157,8 +157,19 @@ func (r *Resolver) resolveBaseAlias(base string) (canonical string, assetClass s
 			matches = append(matches, item)
 			continue
 		}
+		matched := false
 		for _, alias := range item.Aliases {
 			if alias == base {
+				matches = append(matches, item)
+				matched = true
+				break
+			}
+		}
+		if matched {
+			continue
+		}
+		for _, alias := range item.UnitAliases {
+			if alias.Alias == base {
 				matches = append(matches, item)
 				break
 			}

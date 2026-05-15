@@ -12,6 +12,7 @@
 
   let theme = "dark";
   let assetQuery = "";
+  let assetClassFilter = "all";
   let overrideQuery = "";
   let groupQuery = "";
   let syncQuery = "";
@@ -33,6 +34,7 @@
   let syncedCases = [];
   let syncState = "idle";
   let syncMessage = "";
+  let selectedAssetCanonical = "";
   let proxyAvailable = false;
   let remoteSources = [];
   let selectedSourceId = "";
@@ -40,16 +42,42 @@
   let discoveryState = "idle";
   let discoveryMessage = "";
   let selectedDiscoverySourceId = "";
+  let groupStatusFilter = "all";
+  let groupAssetClassFilter = "all";
+  let groupMarketTypeFilter = "all";
+  let groupExchangeFilter = "all";
+  let expandedGroups = {};
+  $: discoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
+  $: sampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
 
-  $: assetRows = (registry.asset_aliases || []).filter((item) => {
-    const query = assetQuery.trim().toUpperCase();
-    if (!query) return true;
-    return (
-      String(item.canonical || "").toUpperCase().includes(query) ||
-      String(item.asset_class || "").toUpperCase().includes(query) ||
-      (item.aliases || []).some((alias) => String(alias || "").toUpperCase().includes(query))
-    );
-  });
+  $: assetClassOptions = Array.from(new Set((registry.asset_aliases || []).map((item) => item.asset_class).filter(Boolean))).sort();
+  $: assetRows = (registry.asset_aliases || [])
+    .filter((item) => {
+      const query = assetQuery.trim().toUpperCase();
+      const matchesQuery = !query || (
+        String(item.canonical || "").toUpperCase().includes(query) ||
+        String(item.asset_class || "").toUpperCase().includes(query) ||
+        (item.aliases || []).some((alias) => String(alias || "").toUpperCase().includes(query)) ||
+        (item.unit_aliases || []).some((alias) => String(alias?.alias || "").toUpperCase().includes(query))
+      );
+      const matchesClass = assetClassFilter === "all" || item.asset_class === assetClassFilter;
+      return matchesQuery && matchesClass;
+    })
+    .sort((left, right) => {
+      const classCompare = String(left.asset_class || "").localeCompare(String(right.asset_class || ""));
+      if (classCompare !== 0) return classCompare;
+      const aliasCompare = totalAssetAliasCount(right) - totalAssetAliasCount(left);
+      if (aliasCompare !== 0) return aliasCompare;
+      return String(left.canonical || "").localeCompare(String(right.canonical || ""));
+    });
+  $: visibleAliasCount = assetRows.reduce((sum, item) => sum + totalAssetAliasCount(item), 0);
+  $: registryAssetRows = registry.asset_aliases || [];
+  $: effectiveSelectedAssetCanonical =
+    selectedAssetCanonical ||
+    assetRows[0]?.canonical ||
+    registryAssetRows[0]?.canonical ||
+    "";
+  $: selectedAsset = registryAssetRows.find((item) => item.canonical === effectiveSelectedAssetCanonical) || null;
 
   $: overrideRows = (registry.market_overrides || []).filter((item) => {
     const query = overrideQuery.trim().toUpperCase();
@@ -61,10 +89,17 @@
       String(item.market_type || "").toUpperCase().includes(query)
     );
   });
-  $: candidateGroups = buildCandidateGroups(discoveryEnvelope).filter((group) => {
+  $: allCandidateGroups = buildCandidateGroups(discoveryEnvelope);
+  $: groupAssetClassOptions = Array.from(new Set(allCandidateGroups.map((group) => group.assetClass).filter(Boolean))).sort();
+  $: groupMarketTypeOptions = Array.from(
+    new Set(allCandidateGroups.flatMap((group) => group.marketTypes || []).filter(Boolean))
+  ).sort();
+  $: groupExchangeOptions = Array.from(
+    new Set(allCandidateGroups.flatMap((group) => group.exchanges || []).filter(Boolean))
+  ).sort();
+  $: candidateGroups = allCandidateGroups.filter((group) => {
     const query = groupQuery.trim().toUpperCase();
-    if (!query) return true;
-    return (
+    const matchesQuery = !query || (
       String(group.groupKey || "").toUpperCase().includes(query) ||
       String(group.assetClass || "").toUpperCase().includes(query) ||
       (group.exchanges || []).some((value) => String(value || "").toUpperCase().includes(query)) ||
@@ -73,6 +108,16 @@
           .some((value) => String(value || "").toUpperCase().includes(query))
       )
     );
+    const matchesStatus =
+      groupStatusFilter === "all" ||
+      (groupStatusFilter === "review" && group.needsReview) ||
+      (groupStatusFilter === "ready" && !group.needsReview);
+    const matchesAssetClass = groupAssetClassFilter === "all" || group.assetClass === groupAssetClassFilter;
+    const matchesMarketType =
+      groupMarketTypeFilter === "all" || (group.marketTypes || []).includes(groupMarketTypeFilter);
+    const matchesExchange =
+      groupExchangeFilter === "all" || (group.exchanges || []).includes(groupExchangeFilter);
+    return matchesQuery && matchesStatus && matchesAssetClass && matchesMarketType && matchesExchange;
   });
 
   $: resolution = resolveIdentity(request);
@@ -93,6 +138,30 @@
   $: ambiguousCount = syncedCases.filter((item) => item.status === "ambiguous").length;
   $: discoveryMarketCount = Array.isArray(discoveryEnvelope?.items) ? discoveryEnvelope.items.length : 0;
   $: reviewGroupCount = candidateGroups.filter((group) => group.needsReview).length;
+  $: readyGroupCount = candidateGroups.filter((group) => !group.needsReview).length;
+  $: selectedAssetOverrideRows = selectedAsset
+    ? (registry.market_overrides || [])
+      .filter((item) => String(item.canonical_symbol || "").toUpperCase().startsWith(`${selectedAsset.canonical}/`))
+      .sort((left, right) => {
+        if (left.exchange === right.exchange) {
+          if (left.market_type === right.market_type) {
+            return String(left.raw_symbol || "").localeCompare(String(right.raw_symbol || ""));
+          }
+          return String(left.market_type || "").localeCompare(String(right.market_type || ""));
+        }
+        return String(left.exchange || "").localeCompare(String(right.exchange || ""));
+      })
+    : [];
+  $: selectedAssetGroups = selectedAsset
+    ? allCandidateGroups
+      .filter((group) => group.canonicalAsset === selectedAsset.canonical)
+      .sort((left, right) => String(left.quoteAsset || "").localeCompare(String(right.quoteAsset || "")))
+    : [];
+  $: selectedAssetMarkets = selectedAssetGroups.flatMap((group) => group.markets || []);
+  $: selectedAssetQuotes = Array.from(new Set(selectedAssetOverrideRows.map((item) => String(item.canonical_symbol || "").split("/")[1]).filter(Boolean))).sort();
+  $: selectedAssetOverrideExchanges = Array.from(new Set(selectedAssetOverrideRows.map((item) => item.exchange).filter(Boolean))).sort();
+  $: selectedAssetDiscoveryExchanges = Array.from(new Set(selectedAssetMarkets.map((item) => item.exchange).filter(Boolean))).sort();
+  $: selectedAssetDiscoveryMarketTypes = Array.from(new Set(selectedAssetMarkets.map((item) => item.marketType).filter(Boolean))).sort();
 
   function applyTheme(next) {
     theme = next;
@@ -109,12 +178,68 @@
     return "未解析";
   }
 
+  function assetClassLabel(value) {
+    if (value === "crypto") return "Crypto";
+    if (value === "rwa_stock") return "RWA Stock";
+    if (value === "fiat_stable") return "Stablecoin";
+    return value || "Unknown";
+  }
+
+  function totalAssetAliasCount(asset) {
+    return (asset?.aliases?.length || 0) + (asset?.unit_aliases?.length || 0);
+  }
+
+  function formatUnitMultiplier(value) {
+    const numeric = Number(value || 0);
+    if (!Number.isFinite(numeric) || numeric <= 0) return "";
+    return Number.isInteger(numeric) ? numeric.toLocaleString("en-US") : numeric.toLocaleString("en-US", { maximumFractionDigits: 6 });
+  }
+
+  function selectAsset(canonical) {
+    selectedAssetCanonical = String(canonical || "").trim().toUpperCase();
+  }
+
+  function handleAssetCardKeydown(event, canonical) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      selectAsset(canonical);
+    }
+  }
+
+  function openSelectedAssetGroups() {
+    if (!selectedAsset?.canonical) return;
+    page = "groups";
+    groupQuery = selectedAsset.canonical;
+  }
+
   function pageLabel(value) {
     if (value === "groups") return "候选分组";
     if (value === "samples") return "待补样本";
     if (value === "playground") return "解析试验台";
     if (value === "rules") return "规则检视";
     return "Registry";
+  }
+
+  function sourceKind(source) {
+    const explicit = String(source?.kind || "").trim().toLowerCase();
+    if (explicit) return explicit;
+
+    const project = String(source?.project || source?.id || "").trim().toLowerCase();
+    if (project.includes("slipstream") || project.includes("bootstrap") || project.includes("discovery")) {
+      return "discovery";
+    }
+    return "sample";
+  }
+
+  function sourceBadge(source) {
+    return source?.project || source?.kind || source?.id || "source";
+  }
+
+  function preferredDiscoverySourceId(sources) {
+    const rows = Array.isArray(sources) ? sources : [];
+    const builtIn = rows.find((item) => String(item.id || "").trim() === "market-kit-bootstrap");
+    if (builtIn?.id) return builtIn.id;
+    return rows[0]?.id || "";
   }
 
   function formatTime(value) {
@@ -129,6 +254,26 @@
     if (value === "unresolved") return "未解析";
     if (value === "resolved") return "已解析";
     return "待处理";
+  }
+
+  function toggleGroupExpanded(groupKey) {
+    expandedGroups = { ...expandedGroups, [groupKey]: !expandedGroups[groupKey] };
+  }
+
+  function collapseAllGroups() {
+    expandedGroups = {};
+  }
+
+  function expandVisibleGroups() {
+    expandedGroups = Object.fromEntries(candidateGroups.map((group) => [group.groupKey, true]));
+  }
+
+  function resetGroupFilters() {
+    groupQuery = "";
+    groupStatusFilter = "all";
+    groupAssetClassFilter = "all";
+    groupMarketTypeFilter = "all";
+    groupExchangeFilter = "all";
   }
 
   function persistSyncState() {
@@ -207,19 +352,31 @@
     }
   }
 
-  async function loadRemoteSources() {
+  async function loadRemoteSources(options = {}) {
+    const { shouldAutoBootstrap = false } = options;
     try {
       const payload = await fetchFromEndpoints(["/api/discovery/sources", "/__market-kit/sources"]);
       remoteSources = Array.isArray(payload.sources) ? payload.sources : [];
       proxyAvailable = true;
-      if (!selectedSourceId && remoteSources.length) {
-        selectedSourceId = remoteSources[0].id;
+      const nextSampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
+      const nextDiscoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
+      if (!selectedSourceId && nextSampleSources.length) {
+        selectedSourceId = nextSampleSources[0].id;
       }
-      const discoverySources = remoteSources.filter((item) =>
-        String(item.project || item.id || "").toLowerCase().includes("slipstream")
-      );
-      if (!selectedDiscoverySourceId && discoverySources.length) {
-        selectedDiscoverySourceId = discoverySources[0].id;
+      const preferredDiscoveryId = preferredDiscoverySourceId(nextDiscoverySources);
+      if (!selectedDiscoverySourceId && preferredDiscoveryId) {
+        selectedDiscoverySourceId = preferredDiscoveryId;
+      }
+      if (shouldAutoBootstrap && preferredDiscoveryId) {
+        const isUsingDefaultMock =
+          discoveryEnvelope === defaultDiscoveryEnvelope ||
+          JSON.stringify(discoveryEnvelope) === JSON.stringify(defaultDiscoveryEnvelope);
+        if (isUsingDefaultMock) {
+          await syncDiscoverySource(preferredDiscoveryId, {
+            loadingMessage: "正在加载默认发现市场…",
+            fallbackErrorMessage: "自动加载默认发现源失败。"
+          });
+        }
       }
     } catch {
       proxyAvailable = false;
@@ -227,29 +384,33 @@
     }
   }
 
-  async function syncDiscoverySource(sourceId = selectedDiscoverySourceId) {
+  async function syncDiscoverySource(sourceId = selectedDiscoverySourceId, options = {}) {
+    const {
+      loadingMessage = "正在同步发现市场清单…",
+      fallbackErrorMessage = "同步发现源失败。"
+    } = options;
     if (!sourceId) {
       discoveryState = "error";
-      discoveryMessage = "请先选择一个 slipstream 导出源。";
+      discoveryMessage = "请先选择一个发现源。";
       return;
     }
 
     discoveryState = "loading";
-    discoveryMessage = "正在同步 slipstream 市场清单…";
+    discoveryMessage = loadingMessage;
 
     try {
       const payload = await fetchFromEndpoints([
         `/api/discovery/sync?source=${encodeURIComponent(sourceId)}`,
         `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
       ]);
-      const project = payload.source?.project || payload.source?.id || "slipstream";
+      const project = payload.source?.project || payload.source?.id || "market-discovery";
       discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
       discoveryState = "success";
       discoveryMessage = `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场。`;
       persistDiscoveryState();
     } catch (error) {
       discoveryState = "error";
-      discoveryMessage = error instanceof Error ? `同步失败：${error.message}` : "同步 slipstream 导出失败。";
+      discoveryMessage = error instanceof Error ? `同步失败：${error.message}` : fallbackErrorMessage;
     }
   }
 
@@ -290,18 +451,18 @@
   }
 
   async function syncAllPresetSources() {
-    if (!remoteSources.length) {
+    if (!sampleSources.length) {
       syncState = "error";
       syncMessage = "当前没有可用的远端同步源。";
       return;
     }
 
     syncState = "loading";
-    syncMessage = `正在顺序同步 ${remoteSources.length} 个远端源…`;
+    syncMessage = `正在顺序同步 ${sampleSources.length} 个远端源…`;
 
     let total = 0;
     try {
-      for (const source of remoteSources) {
+      for (const source of sampleSources) {
         const payload = await fetchFromEndpoints([
           `/api/discovery/sync?source=${encodeURIComponent(source.id)}`,
           `/__market-kit/sync?source=${encodeURIComponent(source.id)}`
@@ -314,7 +475,7 @@
         mergeCases(imported);
       }
       syncState = "success";
-      syncMessage = `已同步 ${remoteSources.length} 个远端源，共 ${total} 条样本。`;
+      syncMessage = `已同步 ${sampleSources.length} 个远端源，共 ${total} 条样本。`;
       persistSyncState();
     } catch (error) {
       syncState = "error";
@@ -326,6 +487,7 @@
     const savedConfig = window.localStorage.getItem(syncConfigKey);
     const savedCases = window.localStorage.getItem(syncCasesKey);
     const savedDiscovery = window.localStorage.getItem(discoveryStorageKey);
+    let hasSavedDiscovery = false;
     if (savedConfig) {
       try {
         syncConfig = { ...syncConfig, ...JSON.parse(savedConfig) };
@@ -339,9 +501,10 @@
     if (savedDiscovery) {
       try {
         discoveryEnvelope = JSON.parse(savedDiscovery);
+        hasSavedDiscovery = true;
       } catch {}
     }
-    loadRemoteSources();
+    loadRemoteSources({ shouldAutoBootstrap: !hasSavedDiscovery });
   });
 
   applyTheme(theme);
@@ -442,46 +605,283 @@
               <div class="eyebrow">Asset Registry</div>
               <h3>资产别名表</h3>
             </div>
-            <input bind:value={assetQuery} placeholder="搜索 canonical / alias / class" />
+            <div class="group-toolbar__stats group-toolbar__stats--head">
+              <strong>{assetRows.length}</strong>
+              <span>当前资产</span>
+            </div>
+          </div>
+          <div class="asset-toolbar">
+            <div class="asset-filter-grid">
+              <label>
+                <span>检索</span>
+                <input bind:value={assetQuery} placeholder="搜索 canonical / alias / class" />
+              </label>
+              <label>
+                <span>资产类别</span>
+                <select bind:value={assetClassFilter}>
+                  <option value="all">全部</option>
+                  {#each assetClassOptions as assetClass}
+                    <option value={assetClass}>{assetClassLabel(assetClass)}</option>
+                  {/each}
+                </select>
+              </label>
+            </div>
+            <div class="asset-toolbar__summary">
+              <span class="asset-summary-chip">显示 {assetRows.length} 个资产</span>
+              <span class="asset-summary-chip">共 {visibleAliasCount} 个别名</span>
+              {#if assetClassFilter !== "all"}
+                <span class="asset-summary-chip asset-summary-chip--active">{assetClassLabel(assetClassFilter)}</span>
+              {/if}
+            </div>
           </div>
           <div class="asset-list">
-            {#each assetRows as asset}
-              <div class="asset-card">
-                <div class="asset-card__head">
-                  <strong>{asset.canonical}</strong>
-                  <span>{asset.asset_class}</span>
+            {#if assetRows.length}
+              {#each assetRows as asset}
+                <div
+                  class="asset-card"
+                  data-asset-class={asset.asset_class}
+                  data-selected={selectedAsset?.canonical === asset.canonical}
+                  role="button"
+                  tabindex="0"
+                  aria-pressed={selectedAsset?.canonical === asset.canonical}
+                  on:click={() => selectAsset(asset.canonical)}
+                  on:keydown={(event) => handleAssetCardKeydown(event, asset.canonical)}
+                >
+                  <div class="asset-card__top">
+                    <div class="asset-card__identity">
+                      <div class="asset-card__eyebrow">Canonical Asset</div>
+                      <div class="asset-card__title-row">
+                        <strong>{asset.canonical}</strong>
+                        <span class="asset-class-badge">{assetClassLabel(asset.asset_class)}</span>
+                      </div>
+                    </div>
+                    <div class="asset-card__meta">
+                      <span class="asset-meta-pill asset-meta-pill--action">{selectedAsset?.canonical === asset.canonical ? "详情中" : "查看详情"}</span>
+                      <span class="asset-meta-pill">aliases {totalAssetAliasCount(asset)}</span>
+                      {#if asset.unit_aliases?.length}
+                        <span class="asset-meta-pill asset-meta-pill--unit">unit aliases {asset.unit_aliases.length}</span>
+                      {/if}
+                      <span class="asset-meta-pill asset-meta-pill--soft">registry</span>
+                    </div>
+                  </div>
+
+                  <div class="asset-card__aliases">
+                    {#if asset.aliases?.length}
+                      {#each asset.aliases as alias}
+                        <span class="asset-alias-pill">{alias}</span>
+                      {/each}
+                    {/if}
+
+                    {#if asset.unit_aliases?.length}
+                      {#each asset.unit_aliases as unitAlias}
+                        <span class="asset-alias-pill asset-alias-pill--unit">
+                          <strong>{unitAlias.alias}</strong>
+                          <span class="asset-alias-pill__divider">=</span>
+                          <span>{formatUnitMultiplier(unitAlias.multiplier)} {asset.canonical}</span>
+                        </span>
+                      {/each}
+                    {/if}
+
+                    {#if !asset.aliases?.length && !asset.unit_aliases?.length}
+                      <span class="asset-alias-pill asset-alias-pill--muted">No extra alias</span>
+                    {/if}
+                  </div>
+
+                  <div class="asset-card__hint">
+                    <span>{selectedAsset?.canonical === asset.canonical ? "当前正在查看这个标的详情" : "点击卡片，在右侧查看标的详情"}</span>
+                  </div>
                 </div>
-                <div class="asset-card__aliases">
-                  {#if asset.aliases?.length}
-                    {#each asset.aliases as alias}
-                      <span>{alias}</span>
-                    {/each}
-                  {:else}
-                    <span class="muted">无额外 alias</span>
-                  {/if}
-                </div>
+              {/each}
+            {:else}
+              <div class="empty-state">
+                <strong>当前筛选下没有资产。</strong>
+                <p>试试放宽关键词，或者切回“全部”资产类别。</p>
               </div>
-            {/each}
+            {/if}
           </div>
         </article>
 
-        <article class="panel">
-          <div class="panel__head">
-            <div>
-              <div class="eyebrow">Exchange Aliases</div>
-              <h3>交易所别名</h3>
-            </div>
-          </div>
-          <div class="alias-table">
-            {#each Object.entries(registry.exchange_aliases || {}) as [source, target]}
-              <div class="alias-row">
-                <code>{source}</code>
-                <span>→</span>
-                <strong>{target}</strong>
+        <div class="panel-stack">
+          <article class="panel">
+            <div class="panel__head">
+              <div>
+                <div class="eyebrow">Asset Detail</div>
+                <h3>标的详情</h3>
               </div>
-            {/each}
-          </div>
-        </article>
+              {#if selectedAsset}
+                <button class="detail-link-button" on:click={openSelectedAssetGroups}>查看候选分组</button>
+              {/if}
+            </div>
+
+            {#if selectedAsset}
+              <div class="detail-stack">
+                <div class="detail-hero" data-asset-class={selectedAsset.asset_class}>
+                  <div class="detail-hero__identity">
+                    <span class="detail-kicker">Canonical Asset</span>
+                    <strong>{selectedAsset.canonical}</strong>
+                    <div class="detail-chip-row">
+                      <span class="asset-class-badge">{assetClassLabel(selectedAsset.asset_class)}</span>
+                      <span class="asset-meta-pill">plain aliases {selectedAsset.aliases?.length || 0}</span>
+                      <span class="asset-meta-pill asset-meta-pill--unit">unit aliases {selectedAsset.unit_aliases?.length || 0}</span>
+                    </div>
+                  </div>
+                  <p class="detail-copy">
+                    当前详情会把这个标的在 registry 里的 alias、单位换算、显式 override，以及已导入 discovery 市场中的平台分布放到一起看。
+                  </p>
+                </div>
+
+                <div class="detail-stat-grid">
+                  <div class="detail-stat">
+                    <span>Registry Overrides</span>
+                    <strong>{selectedAssetOverrideRows.length}</strong>
+                  </div>
+                  <div class="detail-stat">
+                    <span>Override Exchanges</span>
+                    <strong>{selectedAssetOverrideExchanges.length}</strong>
+                  </div>
+                  <div class="detail-stat">
+                    <span>Discovery Markets</span>
+                    <strong>{selectedAssetMarkets.length}</strong>
+                  </div>
+                  <div class="detail-stat">
+                    <span>Discovery Exchanges</span>
+                    <strong>{selectedAssetDiscoveryExchanges.length}</strong>
+                  </div>
+                </div>
+
+                <section class="detail-section">
+                  <div class="detail-section__head">
+                    <strong>别名与换算</strong>
+                    <span>同一个 underlying 的不同记法与单位</span>
+                  </div>
+                  <div class="detail-chip-row">
+                    {#if selectedAsset.aliases?.length}
+                      {#each selectedAsset.aliases as alias}
+                        <span class="asset-alias-pill">{alias}</span>
+                      {/each}
+                    {/if}
+                    {#if selectedAsset.unit_aliases?.length}
+                      {#each selectedAsset.unit_aliases as unitAlias}
+                        <span class="asset-alias-pill asset-alias-pill--unit">
+                          <strong>{unitAlias.alias}</strong>
+                          <span class="asset-alias-pill__divider">=</span>
+                          <span>{formatUnitMultiplier(unitAlias.multiplier)} {selectedAsset.canonical}</span>
+                        </span>
+                      {/each}
+                    {/if}
+                    {#if !selectedAsset.aliases?.length && !selectedAsset.unit_aliases?.length}
+                      <span class="asset-alias-pill asset-alias-pill--muted">Only canonical name is registered</span>
+                    {/if}
+                  </div>
+                </section>
+
+                <section class="detail-section">
+                  <div class="detail-section__head">
+                    <strong>Registry Overrides</strong>
+                    <span>显式映射到这个标的的交易对规则</span>
+                  </div>
+                  {#if selectedAssetOverrideRows.length}
+                    <div class="detail-chip-row">
+                      {#each selectedAssetQuotes as quote}
+                        <span class="asset-summary-chip">{quote}</span>
+                      {/each}
+                    </div>
+                    <div class="detail-market-list">
+                      {#each selectedAssetOverrideRows.slice(0, 12) as item}
+                        <div class="detail-market-row">
+                          <div>
+                            <div class="override-row__title">{item.exchange} · {item.market_type}</div>
+                            <div class="detail-market-row__symbol">{item.raw_symbol}</div>
+                          </div>
+                          <div class="detail-market-row__target">{item.canonical_symbol}</div>
+                        </div>
+                      {/each}
+                    </div>
+                    {#if selectedAssetOverrideRows.length > 12}
+                      <p class="detail-note">这里只先展示前 12 条 override，更多规则可以去“规则检视”页按 {selectedAsset.canonical} 搜索。</p>
+                    {/if}
+                  {:else}
+                    <div class="detail-empty">
+                      <strong>当前没有显式 override。</strong>
+                      <p>这个标的目前主要依赖 alias + 解析规则收敛。</p>
+                    </div>
+                  {/if}
+                </section>
+
+                <section class="detail-section">
+                  <div class="detail-section__head">
+                    <strong>Discovery Presence</strong>
+                    <span>当前导入市场里，这个标的出现在哪些平台</span>
+                  </div>
+                  {#if selectedAssetMarkets.length}
+                    <div class="detail-chip-row">
+                      {#each selectedAssetDiscoveryExchanges as exchange}
+                        <span class="asset-summary-chip">{exchange}</span>
+                      {/each}
+                      {#each selectedAssetDiscoveryMarketTypes as marketType}
+                        <span class="asset-summary-chip asset-summary-chip--active">{marketType}</span>
+                      {/each}
+                    </div>
+                    <div class="detail-market-list">
+                      {#each selectedAssetMarkets.slice(0, 12) as market}
+                        <div class="detail-market-row">
+                          <div>
+                            <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"}</div>
+                            <div class="detail-market-row__symbol">{market.rawSymbol}</div>
+                          </div>
+                          <div class="detail-market-row__target">{market.canonicalSymbol}</div>
+                        </div>
+                      {/each}
+                    </div>
+                    {#if selectedAssetMarkets.length > 12}
+                      <p class="detail-note">已导入市场超过 12 条，点“查看候选分组”可以继续展开审查。</p>
+                    {/if}
+                  {:else}
+                    <div class="detail-empty">
+                      <strong>当前 discovery 里还没看到这个标的。</strong>
+                      <p>
+                        {#if proxyAvailable}
+                          先去“候选分组”页同步发现市场，详情面板就会自动带出它的平台分布。
+                        {:else}
+                          当前还是本地 mock discovery，接上发现源后这里会更完整。
+                        {/if}
+                      </p>
+                    </div>
+                  {/if}
+                </section>
+              </div>
+            {:else}
+              <div class="detail-empty">
+                <strong>还没有可查看的标的。</strong>
+                <p>左侧出现资产后，点任意卡片就能在这里看详情。</p>
+              </div>
+            {/if}
+          </article>
+
+          <article class="panel">
+            <div class="panel__head">
+              <div>
+                <div class="eyebrow">Exchange Aliases</div>
+                <h3>交易所别名</h3>
+              </div>
+            </div>
+            <div class="alias-table">
+              {#each Object.entries(registry.exchange_aliases || {}) as [source, target]}
+                <div class="alias-row">
+                  <div class="alias-row__side">
+                    <span class="alias-label">input</span>
+                    <code>{source}</code>
+                  </div>
+                  <div class="override-row__arrow">→</div>
+                  <div class="alias-row__side alias-row__side--target">
+                    <span class="alias-label">canonical</span>
+                    <strong>{target}</strong>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </article>
+        </div>
       </section>
     {/if}
 
@@ -517,18 +917,21 @@
               <div class="eyebrow">Discovery Groups</div>
               <h3>候选资产分组</h3>
             </div>
-            <input bind:value={groupQuery} placeholder="搜索 group / exchange / symbol / class" />
+            <div class="group-toolbar__stats group-toolbar__stats--head">
+              <strong>{candidateGroups.length}</strong>
+              <span>当前结果</span>
+            </div>
           </div>
 
           <div class="sync-stack">
             <div class="sync-proxy-banner">
               <div>
-                <strong>{proxyAvailable ? "已发现 slipstream 同步源" : "当前使用本地示例市场"}</strong>
+                <strong>{proxyAvailable ? "已发现可同步的发现源" : "当前使用本地示例市场"}</strong>
                 <p>
                   {#if proxyAvailable}
-                    候选分组页可以直接通过本地代理拉取 slipstream 的市场清单，再自动聚成待审核的 asset family。
+                    候选分组页可以直接通过本地代理拉取市场发现清单。首次进入时会优先自动加载 market-kit 内建的交易所直连启动数据；后续你也可以切换到 slipstream。
                   {:else}
-                    当前还没有连接 slipstream 导出，所以先展示仓库内置的 mock discovery 数据。
+                    当前还没有连接发现源，所以先展示仓库内置的 mock discovery 数据。
                   {/if}
                 </p>
               </div>
@@ -537,13 +940,13 @@
             {#if proxyAvailable}
               <div class="sync-grid">
                 <label>
-                  <span>Slipstream 导出源</span>
+                  <span>发现源</span>
                   <select bind:value={selectedDiscoverySourceId}>
-                    {#if remoteSources.filter((item) => String(item.project || item.id || "").toLowerCase().includes("slipstream")).length === 0}
-                      <option value="">暂无 slipstream 源</option>
+                    {#if discoverySources.length === 0}
+                      <option value="">暂无发现源</option>
                     {/if}
-                    {#each remoteSources.filter((item) => String(item.project || item.id || "").toLowerCase().includes("slipstream")) as source}
-                      <option value={source.id}>{source.label} ({source.project || source.id})</option>
+                    {#each discoverySources as source}
+                      <option value={source.id}>{source.label} ({sourceBadge(source)})</option>
                     {/each}
                   </select>
                 </label>
@@ -556,7 +959,7 @@
               <div class="sync-actions">
                 <div class="button-row">
                   <button class="sync-button" on:click={() => syncDiscoverySource()} disabled={discoveryState === "loading" || !selectedDiscoverySourceId}>
-                    {discoveryState === "loading" ? "同步中…" : "同步 slipstream 市场"}
+                    {discoveryState === "loading" ? "同步中…" : "同步发现市场"}
                   </button>
                   <button class="sync-button sync-button--secondary" on:click={resetDiscoveryToMock}>
                     切回本地示例
@@ -574,67 +977,163 @@
                       尚未导入
                     {/if}
                   </strong>
-                  <p>{discoveryMessage || "将 slipstream 的市场发现结果拉回本地，再自动聚成候选资产分组。"} </p>
+                  <p>{discoveryMessage || "将发现源返回的市场清单拉回本地，再自动聚成候选资产分组。"} </p>
                 </div>
               </div>
             {/if}
           </div>
 
-          <div class="group-list">
-            {#each candidateGroups as group}
-              <div class="group-card">
-                <div class="group-card__head">
-                  <div>
-                    <div class="group-card__meta">{group.exchanges.join(" · ")}</div>
-                    <strong>{group.groupKey}</strong>
-                  </div>
-                  <span class={`status status--${group.needsReview ? "ambiguous" : "resolved"}`}>
-                    {group.needsReview ? "待复核" : "已成组"}
-                  </span>
-                </div>
-
-                <div class="group-card__grid">
-                  <div>
-                    <span>资产类别</span>
-                    <strong>{group.assetClass}</strong>
-                  </div>
-                  <div>
-                    <span>市场数</span>
-                    <strong>{group.markets.length}</strong>
-                  </div>
-                  <div>
-                    <span>市场类型</span>
-                    <strong>{group.marketTypes.join(" / ") || "未识别"}</strong>
-                  </div>
-                  <div>
-                    <span>最低置信度</span>
-                    <strong>{Math.round((group.primaryConfidence || 0) * 100)}%</strong>
-                  </div>
-                </div>
-
-                <div class="group-chip-row">
-                  {#each group.venueTypes as venueType}
-                    <span class="group-chip">{venueType}</span>
+          <div class="group-toolbar">
+            <div class="group-filter-grid">
+              <label>
+                <span>检索</span>
+                <input bind:value={groupQuery} placeholder="按资产、交易所、symbol 搜索" />
+              </label>
+              <label>
+                <span>状态</span>
+                <select bind:value={groupStatusFilter}>
+                  <option value="all">全部</option>
+                  <option value="review">只看待复核</option>
+                  <option value="ready">只看已成组</option>
+                </select>
+              </label>
+              <label>
+                <span>资产类别</span>
+                <select bind:value={groupAssetClassFilter}>
+                  <option value="all">全部</option>
+                  {#each groupAssetClassOptions as assetClass}
+                    <option value={assetClass}>{assetClass}</option>
                   {/each}
-                  {#each group.evidence.slice(0, 3) as evidence}
-                    <span class="group-chip group-chip--muted">{evidence}</span>
+                </select>
+              </label>
+              <label>
+                <span>市场类型</span>
+                <select bind:value={groupMarketTypeFilter}>
+                  <option value="all">全部</option>
+                  {#each groupMarketTypeOptions as marketType}
+                    <option value={marketType}>{marketType}</option>
                   {/each}
-                </div>
+                </select>
+              </label>
+              <label>
+                <span>交易所</span>
+                <select bind:value={groupExchangeFilter}>
+                  <option value="all">全部</option>
+                  {#each groupExchangeOptions as exchange}
+                    <option value={exchange}>{exchange}</option>
+                  {/each}
+                </select>
+              </label>
+            </div>
 
-                <div class="group-market-table">
-                  {#each group.markets as market}
-                    <div class="group-market-row">
-                      <div>
-                        <div class="group-market-row__title">{market.platform} · {market.marketType || "unknown"}</div>
-                        <div class="group-market-row__symbol">{market.rawSymbol}</div>
-                      </div>
-                      <div class="group-market-row__arrow">→</div>
-                      <div class="group-market-row__target">{market.canonicalSymbol || "未形成 canonical"}</div>
-                    </div>
-                  {/each}
-                </div>
+            <div class="group-toolbar__footer">
+              <div class="group-toolbar__stats">
+                <strong>{candidateGroups.length}</strong>
+                <span>当前结果</span>
+                <span>待复核 {reviewGroupCount}</span>
+                <span>已成组 {readyGroupCount}</span>
               </div>
-            {/each}
+              <div class="button-row">
+                <button class="sync-button sync-button--ghost" on:click={resetGroupFilters}>
+                  清空筛选
+                </button>
+                <button class="sync-button sync-button--ghost" on:click={collapseAllGroups}>
+                  全部收起
+                </button>
+                <button class="sync-button sync-button--secondary" on:click={expandVisibleGroups}>
+                  展开当前结果
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-list">
+            {#if candidateGroups.length}
+              {#each candidateGroups as group}
+                <div class={`group-card ${expandedGroups[group.groupKey] ? "group-card--expanded" : ""}`}>
+                  <div class="group-card__summary">
+                    <button class="group-card__main" on:click={() => toggleGroupExpanded(group.groupKey)}>
+                      <div class="group-card__headline">
+                        <div class="group-card__identity">
+                          <div class="group-card__meta">{group.exchanges.join(" · ")}</div>
+                          <strong>{group.groupKey}</strong>
+                        </div>
+                        <span class={`status status--${group.needsReview ? "ambiguous" : "resolved"}`}>
+                          {group.needsReview ? "待复核" : "已成组"}
+                        </span>
+                      </div>
+
+                      <div class="group-card__metrics">
+                        <div>
+                          <span>类别</span>
+                          <strong>{group.assetClass}</strong>
+                        </div>
+                        <div>
+                          <span>市场</span>
+                          <strong>{group.markets.length}</strong>
+                        </div>
+                        <div>
+                          <span>类型</span>
+                          <strong>{group.marketTypes.join(" / ") || "未识别"}</strong>
+                        </div>
+                        <div>
+                          <span>置信度</span>
+                          <strong>{Math.round((group.primaryConfidence || 0) * 100)}%</strong>
+                        </div>
+                      </div>
+
+                      <div class="group-card__preview">
+                        <div class="group-chip-row">
+                          {#each group.venueTypes as venueType}
+                            <span class="group-chip">{venueType}</span>
+                          {/each}
+                        </div>
+                        <div class="group-card__symbols">
+                          {#each group.markets.slice(0, 3) as market}
+                            <span>{market.platform}: {market.rawSymbol}</span>
+                          {/each}
+                          {#if group.markets.length > 3}
+                            <span>+{group.markets.length - 3} more</span>
+                          {/if}
+                        </div>
+                      </div>
+                    </button>
+
+                    <button class="group-card__toggle" on:click={() => toggleGroupExpanded(group.groupKey)}>
+                      {expandedGroups[group.groupKey] ? "收起" : "展开"}
+                    </button>
+                  </div>
+
+                  {#if expandedGroups[group.groupKey]}
+                    <div class="group-card__details">
+                      <div class="group-chip-row">
+                        {#each group.evidence.slice(0, 3) as evidence}
+                          <span class="group-chip group-chip--muted">{evidence}</span>
+                        {/each}
+                      </div>
+
+                      <div class="group-market-table">
+                        {#each group.markets as market}
+                          <div class="group-market-row">
+                            <div>
+                              <div class="group-market-row__title">{market.platform} · {market.marketType || "unknown"}</div>
+                              <div class="group-market-row__symbol">{market.rawSymbol}</div>
+                            </div>
+                            <div class="group-market-row__arrow">→</div>
+                            <div class="group-market-row__target">{market.canonicalSymbol || "未形成 canonical"}</div>
+                          </div>
+                        {/each}
+                      </div>
+                    </div>
+                  {/if}
+                </div>
+              {/each}
+            {:else}
+              <div class="empty-state">
+                <strong>当前筛选下没有候选组。</strong>
+                <p>试试清空筛选，或者先同步一份新的发现市场清单。</p>
+              </div>
+            {/if}
           </div>
         </article>
 
@@ -648,8 +1147,8 @@
 
           <div class="sample-list">
             <div class="sync-note">
-              <strong>发现层来自 slipstream</strong>
-              <p>这里看的不是最终规则，而是从 slipstream 导入的市场清单，先按 base/quote family 聚成候选组。</p>
+              <strong>发现层可以来自多个源</strong>
+              <p>这里看的不是最终规则，而是从 slipstream 或 market-kit 自举发现源导入的市场清单，先按 base/quote family 聚成候选组。</p>
             </div>
             <div class="sync-note">
               <strong>为什么要候选组</strong>
@@ -693,17 +1192,17 @@
                 <label>
                   <span>预设同步源</span>
                   <select bind:value={selectedSourceId}>
-                    {#if remoteSources.length === 0}
+                    {#if sampleSources.length === 0}
                       <option value="">暂无可用源</option>
                     {/if}
-                    {#each remoteSources as source}
-                      <option value={source.id}>{source.label} ({source.project || source.id})</option>
+                    {#each sampleSources as source}
+                      <option value={source.id}>{source.label} ({sourceBadge(source)})</option>
                     {/each}
                   </select>
                 </label>
                 <label>
                   <span>远端地址</span>
-                  <input value={remoteSources.find((item) => item.id === selectedSourceId)?.url || "未配置"} disabled />
+                  <input value={sampleSources.find((item) => item.id === selectedSourceId)?.url || "未配置"} disabled />
                 </label>
               </div>
 
@@ -712,7 +1211,7 @@
                   <button class="sync-button" on:click={() => syncPresetSource()} disabled={syncState === "loading" || !selectedSourceId}>
                     {syncState === "loading" ? "同步中…" : "同步当前源"}
                   </button>
-                  <button class="sync-button sync-button--secondary" on:click={syncAllPresetSources} disabled={syncState === "loading" || remoteSources.length === 0}>
+                  <button class="sync-button sync-button--secondary" on:click={syncAllPresetSources} disabled={syncState === "loading" || sampleSources.length === 0}>
                     同步全部预设源
                   </button>
                   <button class="sync-button sync-button--ghost" on:click={loadRemoteSources}>

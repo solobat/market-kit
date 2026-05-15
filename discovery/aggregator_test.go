@@ -80,3 +80,41 @@ func TestNormalizeImportedMarketsUsesResolverFallback(t *testing.T) {
 		t.Fatalf("expected venue symbol to be normalized")
 	}
 }
+
+func TestNormalizeImportedMarketsSkipsGateLeveragedTokens(t *testing.T) {
+	registry, err := identity.LoadDefaultRegistry()
+	if err != nil {
+		t.Fatalf("load default registry: %v", err)
+	}
+
+	aggregator := NewAggregator(registry)
+	markets := aggregator.NormalizeImportedMarkets([]ImportedMarket{
+		{
+			SourceID:   "bootstrap",
+			PlatformID: "gate",
+			Platform:   "Gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "BTC3L_USDT",
+			BaseAsset:  "BTC3L",
+			QuoteAsset: "USDT",
+		},
+		{
+			SourceID:   "bootstrap",
+			PlatformID: "gate",
+			Platform:   "Gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "BTC_USDT",
+			BaseAsset:  "BTC",
+			QuoteAsset: "USDT",
+		},
+	})
+
+	if len(markets) != 1 {
+		t.Fatalf("expected only plain gate market to remain, got %d", len(markets))
+	}
+	if markets[0].RawSymbol != "BTC_USDT" {
+		t.Fatalf("unexpected remaining market: %+v", markets[0])
+	}
+}

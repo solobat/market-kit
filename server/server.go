@@ -9,8 +9,13 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
+
+	"github.com/solobat/market-kit/bootstrap"
+	"github.com/solobat/market-kit/discovery"
+	"github.com/solobat/market-kit/identity"
 )
 
 type App struct {
@@ -38,6 +43,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/healthz", a.handleHealthz)
 	mux.HandleFunc("/api/discovery/sources", a.handleDiscoverySources)
 	mux.HandleFunc("/api/discovery/sync", a.handleDiscoverySync)
+	mux.HandleFunc("/api/discovery/lookup", a.handleDiscoveryLookup)
 	mux.HandleFunc("/api/registry", a.handleRegistry)
 	mux.Handle("/", a.frontendHandler())
 	return mux
@@ -58,6 +64,7 @@ func (a *App) handleDiscoverySources(w http.ResponseWriter, _ *http.Request) {
 			"id":         source.ID,
 			"label":      source.Label,
 			"project":    source.Project,
+			"kind":       source.Kind,
 			"url":        source.URL,
 			"hasHeaders": len(source.Headers) > 0,
 		})
@@ -72,65 +79,58 @@ func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var source *SyncSource
-	for i := range a.sources {
-		if a.sources[i].ID == sourceID {
-			source = &a.sources[i]
-			break
-		}
-	}
-	if source == nil {
-		writeJSON(w, http.StatusNotFound, map[string]any{"error": "sync source not found"})
-		return
-	}
-
-	req, err := http.NewRequestWithContext(r.Context(), http.MethodGet, source.URL, nil)
+	source, payload, err := a.fetchDiscoveryEnvelope(r.Context(), sourceID)
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": err.Error()})
-		return
-	}
-	for key, value := range source.Headers {
-		req.Header.Set(key, value)
-	}
-
-	resp, err := a.client.Do(req)
-	if err != nil {
-		writeJSON(w, http.StatusBadGateway, map[string]any{"error": err.Error(), "source": source.ID})
-		return
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
-	if err != nil {
-		writeJSON(w, http.StatusBadGateway, map[string]any{"error": err.Error(), "source": source.ID})
-		return
-	}
-
-	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		writeJSON(w, resp.StatusCode, map[string]any{
-			"error":  "remote responded with non-2xx status",
-			"source": source.ID,
-			"body":   string(body),
-		})
-		return
-	}
-
-	var payload any
-	if err := json.Unmarshal(body, &payload); err != nil {
-		writeJSON(w, http.StatusBadGateway, map[string]any{
-			"error":  "remote payload is not valid json",
-			"source": source.ID,
-		})
+		a.writeDiscoveryError(w, err)
 		return
 	}
 
 	writeJSON(w, http.StatusOK, map[string]any{
-		"source": map[string]any{
-			"id":      source.ID,
-			"label":   source.Label,
-			"project": source.Project,
-		},
+		"source":  discoverySourcePayload(source),
 		"payload": payload,
+	})
+}
+
+func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
+	query := strings.ToUpper(strings.TrimSpace(r.URL.Query().Get("symbol")))
+	if query == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "symbol is required"})
+		return
+	}
+
+	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
+	if sourceID == "" {
+		sourceID = a.defaultDiscoverySourceID()
+	}
+	if sourceID == "" {
+		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
+		return
+	}
+
+	source, envelope, err := a.fetchDiscoveryEnvelope(r.Context(), sourceID)
+	if err != nil {
+		a.writeDiscoveryError(w, err)
+		return
+	}
+
+	registry, err := identity.LoadDefaultRegistry()
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": err.Error()})
+		return
+	}
+
+	aggregator := discovery.NewAggregator(registry)
+	groups := aggregator.BuildAssetGroups(envelope.Items)
+	matches := filterDiscoveryGroups(groups, query)
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"query":  query,
+		"source": discoverySourcePayload(source),
+		"summary": map[string]any{
+			"groupCount":  len(matches),
+			"marketCount": totalDiscoveryMarkets(matches),
+		},
+		"groups": matches,
 	})
 }
 
@@ -167,6 +167,226 @@ func writeJSON(w http.ResponseWriter, status int, payload any) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(payload)
+}
+
+type discoveryFetchError struct {
+	Status  int
+	Source  string
+	Message string
+	Body    string
+}
+
+func (e *discoveryFetchError) Error() string {
+	if e == nil {
+		return ""
+	}
+	if e.Source == "" {
+		return e.Message
+	}
+	return e.Source + ": " + e.Message
+}
+
+func (a *App) fetchDiscoveryEnvelope(ctx context.Context, sourceID string) (SyncSource, discovery.ImportEnvelope, error) {
+	source, ok := a.lookupSource(sourceID)
+	if !ok {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  http.StatusNotFound,
+			Source:  sourceID,
+			Message: "sync source not found",
+		}
+	}
+
+	if source.URL == bootstrap.BuiltInSourceURL {
+		payload, err := bootstrap.FetchDefault(ctx, a.client)
+		if err != nil {
+			return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+				Status:  http.StatusBadGateway,
+				Source:  source.ID,
+				Message: err.Error(),
+			}
+		}
+		return source, payload, nil
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, source.URL, nil)
+	if err != nil {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  http.StatusInternalServerError,
+			Source:  source.ID,
+			Message: err.Error(),
+		}
+	}
+	for key, value := range source.Headers {
+		req.Header.Set(key, value)
+	}
+
+	resp, err := a.client.Do(req)
+	if err != nil {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  http.StatusBadGateway,
+			Source:  source.ID,
+			Message: err.Error(),
+		}
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
+	if err != nil {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  http.StatusBadGateway,
+			Source:  source.ID,
+			Message: err.Error(),
+		}
+	}
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  resp.StatusCode,
+			Source:  source.ID,
+			Message: "remote responded with non-2xx status",
+			Body:    string(body),
+		}
+	}
+
+	var payload discovery.ImportEnvelope
+	if err := json.Unmarshal(body, &payload); err != nil {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
+			Status:  http.StatusBadGateway,
+			Source:  source.ID,
+			Message: "remote payload is not valid discovery json",
+		}
+	}
+	if payload.Source == "" {
+		payload.Source = discovery.SourceKind(source.Project)
+	}
+	return source, payload, nil
+}
+
+func (a *App) lookupSource(sourceID string) (SyncSource, bool) {
+	for i := range a.sources {
+		if a.sources[i].ID == sourceID {
+			return a.sources[i], true
+		}
+	}
+	return SyncSource{}, false
+}
+
+func (a *App) defaultDiscoverySourceID() string {
+	for _, source := range a.sources {
+		if source.Kind == "discovery" && source.ID == bootstrap.BuiltInSourceID {
+			return source.ID
+		}
+	}
+	for _, source := range a.sources {
+		if source.Kind == "discovery" {
+			return source.ID
+		}
+	}
+	return ""
+}
+
+func (a *App) writeDiscoveryError(w http.ResponseWriter, err error) {
+	var fetchErr *discoveryFetchError
+	if errors.As(err, &fetchErr) {
+		payload := map[string]any{
+			"error":  fetchErr.Message,
+			"source": fetchErr.Source,
+		}
+		if fetchErr.Body != "" {
+			payload["body"] = fetchErr.Body
+		}
+		writeJSON(w, fetchErr.Status, payload)
+		return
+	}
+	writeJSON(w, http.StatusInternalServerError, map[string]any{"error": err.Error()})
+}
+
+func discoverySourcePayload(source SyncSource) map[string]any {
+	return map[string]any{
+		"id":      source.ID,
+		"label":   source.Label,
+		"project": source.Project,
+		"kind":    source.Kind,
+	}
+}
+
+func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string) []discovery.AssetCandidateGroup {
+	type scored struct {
+		group discovery.AssetCandidateGroup
+		score int
+	}
+	out := make([]scored, 0)
+	for _, group := range groups {
+		score := discoveryGroupScore(group, query)
+		if score <= 0 {
+			continue
+		}
+		out = append(out, scored{group: group, score: score})
+	}
+
+	sort.SliceStable(out, func(i, j int) bool {
+		if out[i].score == out[j].score {
+			return out[i].group.GroupKey < out[j].group.GroupKey
+		}
+		return out[i].score > out[j].score
+	})
+
+	matches := make([]discovery.AssetCandidateGroup, 0, len(out))
+	for _, item := range out {
+		matches = append(matches, item.group)
+	}
+	return matches
+}
+
+func discoveryGroupScore(group discovery.AssetCandidateGroup, query string) int {
+	query = strings.ToUpper(strings.TrimSpace(query))
+	if query == "" {
+		return 0
+	}
+
+	best := 0
+	switch {
+	case strings.EqualFold(group.CanonicalAsset, query):
+		best = 120
+	case strings.EqualFold(group.CanonicalSymbol, query), strings.EqualFold(group.GroupKey, query):
+		best = 110
+	case strings.Contains(strings.ToUpper(group.CanonicalSymbol), query):
+		best = 70
+	case strings.Contains(strings.ToUpper(group.GroupKey), query):
+		best = 65
+	}
+
+	for _, market := range group.Markets {
+		candidate := strings.ToUpper(strings.TrimSpace(market.RawSymbol))
+		venueSymbol := strings.ToUpper(strings.TrimSpace(market.VenueSymbol))
+		baseAsset := strings.ToUpper(strings.TrimSpace(market.BaseAsset))
+		switch {
+		case candidate == query, venueSymbol == query:
+			best = max(best, 100)
+		case baseAsset == query:
+			best = max(best, 95)
+		case strings.Contains(candidate, query), strings.Contains(venueSymbol, query):
+			best = max(best, 60)
+		case strings.Contains(strings.ToUpper(strings.TrimSpace(market.CanonicalSymbol)), query):
+			best = max(best, 55)
+		}
+	}
+	return best
+}
+
+func totalDiscoveryMarkets(groups []discovery.AssetCandidateGroup) int {
+	total := 0
+	for _, group := range groups {
+		total += len(group.Markets)
+	}
+	return total
+}
+
+func max(left, right int) int {
+	if left > right {
+		return left
+	}
+	return right
 }
 
 func (a *App) ListenAndServe(ctx context.Context) error {

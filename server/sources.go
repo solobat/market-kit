@@ -4,13 +4,17 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
+
+	"github.com/solobat/market-kit/bootstrap"
 )
 
 type SyncSource struct {
 	ID      string            `json:"id"`
 	Label   string            `json:"label"`
 	Project string            `json:"project"`
+	Kind    string            `json:"kind"`
 	URL     string            `json:"url"`
 	Headers map[string]string `json:"headers"`
 }
@@ -20,6 +24,7 @@ type syncSourceFile struct {
 }
 
 func loadSyncSources(config Config) ([]SyncSource, error) {
+	loaded := []SyncSource{}
 	candidates := make([]string, 0, 3)
 	if config.SyncSourcesPath != "" {
 		candidates = append(candidates, config.SyncSourcesPath)
@@ -45,6 +50,7 @@ func loadSyncSources(config Config) ([]SyncSource, error) {
 			source.ID = strings.TrimSpace(source.ID)
 			source.Label = strings.TrimSpace(source.Label)
 			source.Project = strings.TrimSpace(source.Project)
+			source.Kind = normalizeSyncSourceKind(source)
 			source.URL = strings.TrimSpace(source.URL)
 			if source.ID == "" || source.URL == "" {
 				continue
@@ -57,8 +63,63 @@ func loadSyncSources(config Config) ([]SyncSource, error) {
 			}
 			out = append(out, source)
 		}
-		return out, nil
+		loaded = out
+		break
 	}
 
-	return nil, nil
+	loaded = appendBuiltInSources(loaded)
+	return loaded, nil
+}
+
+func appendBuiltInSources(sources []SyncSource) []SyncSource {
+	seen := map[string]bool{}
+	for _, source := range sources {
+		seen[source.ID] = true
+	}
+
+	builtins := []SyncSource{
+		{
+			ID:      bootstrap.BuiltInSourceID,
+			Label:   bootstrap.BuiltInSourceLabel,
+			Project: "market-kit",
+			Kind:    "discovery",
+			URL:     bootstrap.BuiltInSourceURL,
+			Headers: map[string]string{},
+		},
+	}
+
+	for _, builtin := range builtins {
+		if seen[builtin.ID] {
+			continue
+		}
+		sources = append(sources, builtin)
+	}
+
+	sort.SliceStable(sources, func(i, j int) bool {
+		left := sources[i]
+		right := sources[j]
+		if left.Kind == right.Kind {
+			return left.ID < right.ID
+		}
+		return left.Kind == "discovery"
+	})
+	return sources
+}
+
+func normalizeSyncSourceKind(source SyncSource) string {
+	raw := strings.ToLower(strings.TrimSpace(source.Kind))
+	switch raw {
+	case "discovery", "sample":
+		return raw
+	}
+
+	project := strings.ToLower(strings.TrimSpace(firstNonEmpty(source.Project, source.ID)))
+	switch {
+	case strings.Contains(project, "slipstream"),
+		strings.Contains(project, "discovery"),
+		strings.Contains(project, "bootstrap"):
+		return "discovery"
+	default:
+		return "sample"
+	}
 }

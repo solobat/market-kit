@@ -51,10 +51,16 @@ type Registry struct {
 	MarketOverrides []MarketOverride  `json:"market_overrides"`
 }
 
+type AssetUnitAlias struct {
+	Alias      string  `json:"alias"`
+	Multiplier float64 `json:"multiplier"`
+}
+
 type AssetAliasRule struct {
-	Canonical  string   `json:"canonical"`
-	AssetClass string   `json:"asset_class"`
-	Aliases    []string `json:"aliases"`
+	Canonical   string           `json:"canonical"`
+	AssetClass  string           `json:"asset_class"`
+	Aliases     []string         `json:"aliases"`
+	UnitAliases []AssetUnitAlias `json:"unit_aliases,omitempty"`
 }
 
 type MarketOverride struct {
@@ -83,16 +89,17 @@ func (r Registry) Merge(other Registry) Registry {
 		}
 	}
 
-	assetKeys := map[string]bool{}
-	for _, item := range out.AssetAliases {
-		assetKeys[item.Canonical] = true
+	assetIndex := map[string]int{}
+	for idx, item := range out.AssetAliases {
+		assetIndex[item.Canonical] = idx
 	}
 	for _, item := range other.AssetAliases {
-		if assetKeys[item.Canonical] {
+		if existing, ok := assetIndex[item.Canonical]; ok {
+			out.AssetAliases[existing] = mergeAssetAliasRule(out.AssetAliases[existing], item)
 			continue
 		}
 		out.AssetAliases = append(out.AssetAliases, item)
-		assetKeys[item.Canonical] = true
+		assetIndex[item.Canonical] = len(out.AssetAliases) - 1
 	}
 
 	overrideKeys := map[string]bool{}
@@ -114,4 +121,51 @@ func (r Registry) Merge(other Registry) Registry {
 
 func marketOverrideKey(item MarketOverride) string {
 	return item.Exchange + "|" + item.RawSymbol + "|" + item.MarketType
+}
+
+func mergeAssetAliasRule(left AssetAliasRule, right AssetAliasRule) AssetAliasRule {
+	out := AssetAliasRule{
+		Canonical:   firstNonEmpty(left.Canonical, right.Canonical),
+		AssetClass:  firstNonEmpty(left.AssetClass, right.AssetClass),
+		Aliases:     append([]string(nil), left.Aliases...),
+		UnitAliases: append([]AssetUnitAlias(nil), left.UnitAliases...),
+	}
+
+	aliasSet := map[string]bool{}
+	for _, alias := range out.Aliases {
+		if alias == "" || alias == out.Canonical {
+			continue
+		}
+		aliasSet[alias] = true
+	}
+	for _, alias := range right.Aliases {
+		if alias == "" || alias == out.Canonical || aliasSet[alias] {
+			continue
+		}
+		out.Aliases = append(out.Aliases, alias)
+		aliasSet[alias] = true
+	}
+
+	unitAliasIndex := map[string]int{}
+	for idx, alias := range out.UnitAliases {
+		if alias.Alias == "" || alias.Alias == out.Canonical {
+			continue
+		}
+		unitAliasIndex[alias.Alias] = idx
+	}
+	for _, alias := range right.UnitAliases {
+		if alias.Alias == "" || alias.Alias == out.Canonical {
+			continue
+		}
+		if existing, ok := unitAliasIndex[alias.Alias]; ok {
+			if out.UnitAliases[existing].Multiplier == 0 && alias.Multiplier > 0 {
+				out.UnitAliases[existing].Multiplier = alias.Multiplier
+			}
+			continue
+		}
+		out.UnitAliases = append(out.UnitAliases, alias)
+		unitAliasIndex[alias.Alias] = len(out.UnitAliases) - 1
+	}
+
+	return out
 }
