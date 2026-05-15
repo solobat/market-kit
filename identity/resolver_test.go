@@ -120,7 +120,6 @@ func TestResolveHyperliquidWTIOverrides(t *testing.T) {
 		MarketOverrides: []MarketOverride{
 			{Exchange: "hyperliquid", RawSymbol: "xyz:CL", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
 			{Exchange: "hyperliquid", RawSymbol: "cash:WTI", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
-			{Exchange: "hyperliquid", RawSymbol: "WTIOIL/USDH", MarketType: "spot", CanonicalSymbol: "CL/USDT"},
 		},
 	}
 	resolver := NewResolver(registry)
@@ -133,7 +132,6 @@ func TestResolveHyperliquidWTIOverrides(t *testing.T) {
 	}{
 		{name: "xyz perp", symbol: "xyz:CL", venueSymbol: "XYZ:CL"},
 		{name: "cash perp", symbol: "cash:WTI", venueSymbol: "CASH:WTI"},
-		{name: "spot pair", symbol: "WTIOIL/USDH", marketTypeHint: "spot", venueSymbol: "WTIOIL/USDH"},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			result := resolver.Resolve(ResolveRequest{
@@ -151,6 +149,76 @@ func TestResolveHyperliquidWTIOverrides(t *testing.T) {
 				t.Fatalf("expected preserved venue symbol %q, got %+v", tc.venueSymbol, result.Market)
 			}
 		})
+	}
+}
+
+func TestResolveHyperliquidCanonicalSymbolIsAmbiguousAcrossHIP3Dexs(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "CL", AssetClass: "rwa_commodity", Aliases: []string{"WTI", "WTIOIL"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:CL", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "cash:WTI", MarketType: "perpetual", CanonicalSymbol: "CL/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "CL/USDT",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveAmbiguous {
+		t.Fatalf("expected ambiguous canonical CL market, got %+v", result)
+	}
+	if len(result.Candidates) != 2 {
+		t.Fatalf("expected two HIP-3 candidates, got %+v", result.Candidates)
+	}
+}
+
+func TestResolveHyperliquidCanonicalSymbolCanMapToUniqueHIP3Dex(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "USO", AssetClass: "rwa_stock", Aliases: []string{"USOIL"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "km:USOIL", MarketType: "perpetual", CanonicalSymbol: "USO/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "USO/USDT",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected unique HIP-3 mapping, got %+v", result)
+	}
+	if result.Market.RawSymbol != "km:USOIL" || result.Market.VenueSymbol != "KM:USOIL" {
+		t.Fatalf("expected km USOIL venue mapping, got %+v", result.Market)
+	}
+}
+
+func TestResolveHyperliquidCanonicalSymbolCanMapToUniqueKMBMNRDex(t *testing.T) {
+	registry := Registry{
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "km:BMNR", MarketType: "perpetual", CanonicalSymbol: "BMNR/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "BMNR/USDT",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected unique BMNR HIP-3 mapping, got %+v", result)
+	}
+	if result.Market.RawSymbol != "km:BMNR" || result.Market.VenueSymbol != "KM:BMNR" {
+		t.Fatalf("expected km BMNR venue mapping, got %+v", result.Market)
 	}
 }
 

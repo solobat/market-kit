@@ -91,6 +91,12 @@
     },
     {
       "exchange": "hyperliquid",
+      "raw_symbol": "km:BMNR",
+      "market_type": "perpetual",
+      "canonical_symbol": "BMNR/USDT"
+    },
+    {
+      "exchange": "hyperliquid",
       "raw_symbol": "xyz:CL",
       "market_type": "perpetual",
       "canonical_symbol": "CL/USDT"
@@ -99,12 +105,6 @@
       "exchange": "hyperliquid",
       "raw_symbol": "cash:WTI",
       "market_type": "perpetual",
-      "canonical_symbol": "CL/USDT"
-    },
-    {
-      "exchange": "hyperliquid",
-      "raw_symbol": "WTIOIL/USDH",
-      "market_type": "spot",
       "canonical_symbol": "CL/USDT"
     },
     {

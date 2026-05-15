@@ -75,13 +75,30 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 			Reason: "quote asset could not be derived",
 		}
 	}
+	canonicalSymbol := baseCanonical + "/" + quote
+
+	if candidates := r.resolveCanonicalOverrides(exchange, canonicalSymbol, marketType); len(candidates) == 1 {
+		return ResolveResult{
+			Status:     ResolveResolved,
+			Confidence: 1,
+			Reason:     "matched canonical symbol to explicit market override",
+			Market:     &candidates[0],
+		}
+	} else if len(candidates) > 1 {
+		return ResolveResult{
+			Status:     ResolveAmbiguous,
+			Confidence: 0.5,
+			Reason:     "multiple explicit market overrides share the canonical symbol",
+			Candidates: candidates,
+		}
+	}
 
 	identity := MarketIdentity{
 		Exchange:        exchange,
 		MarketType:      marketType,
 		RawSymbol:       rawSymbol,
 		VenueSymbol:     normalizeVenueSymbol(exchange, rawSymbol, marketType),
-		CanonicalSymbol: baseCanonical + "/" + quote,
+		CanonicalSymbol: canonicalSymbol,
 		BaseAsset:       baseCanonical,
 		QuoteAsset:      quote,
 		AssetClass:      assetClass,
@@ -126,23 +143,50 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTyp
 		if hinted != MarketTypeUnknown && overrideMarketType != hinted {
 			continue
 		}
-		base, quote := splitCanonicalSymbol(item.CanonicalSymbol)
-		baseCanonical, assetClass, _ := r.resolveBaseAlias(base)
-		if baseCanonical == "" {
-			baseCanonical = base
-		}
-		matches = append(matches, MarketIdentity{
-			Exchange:        exchange,
-			MarketType:      overrideMarketType,
-			RawSymbol:       rawSymbol,
-			VenueSymbol:     normalizeVenueSymbol(exchange, rawSymbol, overrideMarketType),
-			CanonicalSymbol: item.CanonicalSymbol,
-			BaseAsset:       baseCanonical,
-			QuoteAsset:      quote,
-			AssetClass:      firstNonEmpty(assetClass, "unknown"),
-		})
+		matches = append(matches, r.marketIdentityFromOverride(exchange, item.RawSymbol, item.CanonicalSymbol, overrideMarketType))
 	}
 	return matches
+}
+
+func (r *Resolver) resolveCanonicalOverrides(exchange string, canonicalSymbol string, marketType MarketType) []MarketIdentity {
+	if exchange == "" || canonicalSymbol == "" || marketType == MarketTypeUnknown {
+		return nil
+	}
+
+	matches := make([]MarketIdentity, 0, 1)
+	for _, item := range r.registry.MarketOverrides {
+		if item.Exchange != exchange {
+			continue
+		}
+		if !strings.EqualFold(strings.TrimSpace(item.CanonicalSymbol), strings.TrimSpace(canonicalSymbol)) {
+			continue
+		}
+		overrideMarketType := normalizeMarketType(item.MarketType)
+		if overrideMarketType != marketType {
+			continue
+		}
+		matches = append(matches, r.marketIdentityFromOverride(exchange, item.RawSymbol, item.CanonicalSymbol, overrideMarketType))
+	}
+	return matches
+}
+
+func (r *Resolver) marketIdentityFromOverride(exchange string, rawSymbol string, canonicalSymbol string, marketType MarketType) MarketIdentity {
+	base, quote := splitCanonicalSymbol(canonicalSymbol)
+	baseCanonical, assetClass, _ := r.resolveBaseAlias(base)
+	if baseCanonical == "" {
+		baseCanonical = base
+	}
+	rawSymbol = strings.TrimSpace(rawSymbol)
+	return MarketIdentity{
+		Exchange:        exchange,
+		MarketType:      marketType,
+		RawSymbol:       rawSymbol,
+		VenueSymbol:     normalizeVenueSymbol(exchange, rawSymbol, marketType),
+		CanonicalSymbol: canonicalSymbol,
+		BaseAsset:       baseCanonical,
+		QuoteAsset:      quote,
+		AssetClass:      firstNonEmpty(assetClass, "unknown"),
+	}
 }
 
 func (r *Resolver) resolveBaseAlias(base string) (canonical string, assetClass string, ambiguous bool) {
