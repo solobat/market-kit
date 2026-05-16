@@ -296,7 +296,11 @@ func parseBaseQuote(exchange string, rawSymbol string, marketType MarketType, ca
 		if strings.Contains(raw, sep) {
 			parts := strings.SplitN(raw, sep, 2)
 			if len(parts) == 2 && parts[0] != "" && parts[1] != "" {
-				return parts[0], parts[1], true
+				quote := parts[1]
+				if exchange == "hyperliquid" && quote == "USDH" {
+					quote = "USDT"
+				}
+				return parts[0], quote, true
 			}
 		}
 	}
@@ -367,7 +371,13 @@ func splitCanonicalSymbol(value string) (string, string) {
 
 func rawSymbolBase(raw string) string {
 	raw = strings.TrimSpace(raw)
-	for _, sep := range []string{"/", "-", "_", ":"} {
+	if strings.Contains(raw, ":") {
+		parts := strings.SplitN(raw, ":", 2)
+		if len(parts) == 2 {
+			return strings.TrimSpace(parts[1])
+		}
+	}
+	for _, sep := range []string{"/", "-", "_"} {
 		if strings.Contains(raw, sep) {
 			parts := strings.SplitN(raw, sep, 2)
 			return strings.TrimSpace(parts[0])

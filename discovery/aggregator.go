@@ -135,7 +135,7 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		MarketTypeHint: string(marketType),
 	}); resolved.Market != nil {
 		venueSymbol = resolved.Market.VenueSymbol
-		if resolved.Confidence >= 1 {
+		if resolved.Confidence >= 1 || shouldPreferResolvedMarketIdentity(exchange, rawSymbol, base, quote) {
 			base = resolved.Market.BaseAsset
 			quote = resolved.Market.QuoteAsset
 			if resolved.Market.MarketType != identity.MarketTypeUnknown {
@@ -187,6 +187,16 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		LastSeenAt:      item.LastSeenAt,
 	}
 	return &candidate
+}
+
+func shouldPreferResolvedMarketIdentity(exchange string, rawSymbol string, base string, quote string) bool {
+	if exchange != "hyperliquid" {
+		return false
+	}
+	rawSymbol = strings.TrimSpace(rawSymbol)
+	base = strings.TrimSpace(base)
+	quote = strings.ToUpper(strings.TrimSpace(quote))
+	return strings.Contains(rawSymbol, ":") || strings.Contains(base, ":") || quote == "USDH"
 }
 
 func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {

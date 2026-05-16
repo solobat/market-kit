@@ -191,6 +191,118 @@ func TestHandleDiscoveryLookupReturnsMatchedGroups(t *testing.T) {
 	}
 }
 
+func TestHandleDiscoveryLookupAggregatesAllDiscoverySources(t *testing.T) {
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				switch req.URL.String() {
+				case "https://example.com/bootstrap.json":
+					return jsonResponse(`{
+					  "source":"market-kit-bootstrap",
+					  "generatedAt":"2026-05-15T00:00:00Z",
+					  "items":[
+					    {"sourceId":"market-kit-bootstrap","platformId":"bitget","platform":"Bitget","venueType":"cex","marketType":"perp","symbol":"CBRSUSDT","baseAsset":"CBRS","quoteAsset":"USDT","status":"live"},
+					    {"sourceId":"market-kit-bootstrap","platformId":"gate","platform":"Gate","venueType":"cex","marketType":"perp","symbol":"CBRS_USDT","baseAsset":"CBRS","quoteAsset":"USDT","status":"live"}
+					  ]
+					}`), nil
+				case "https://example.com/slipstream.json":
+					return jsonResponse(`{
+					  "source":"slipstream",
+					  "generatedAt":"2026-05-16T00:00:00Z",
+					  "items":[
+					    {"sourceId":"slipstream","platformId":"aster","platform":"Aster","venueType":"dex","marketType":"perp","symbol":"CBRSUSDT","baseAsset":"CBRS","quoteAsset":"USDT","status":"live"},
+					    {"sourceId":"slipstream","platformId":"lighter","platform":"Lighter","venueType":"dex","marketType":"perp","symbol":"CBRS","baseAsset":"CBRS","quoteAsset":"USDC","status":"live"}
+					  ]
+					}`), nil
+				default:
+					t.Fatalf("unexpected request: %s %s", req.Method, req.URL.String())
+				}
+				return nil, nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "bootstrap-test",
+				Label:   "Bootstrap Test",
+				Project: "market-kit",
+				Kind:    "discovery",
+				URL:     "https://example.com/bootstrap.json",
+			},
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/slipstream.json",
+			},
+			{
+				ID:      "sample-test",
+				Label:   "Sample Test",
+				Project: "veridex",
+				Kind:    "sample",
+				URL:     "https://example.com/sample.json",
+			},
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/lookup?source=all&symbol=CBRS", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoveryLookup(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Source struct {
+			ID string `json:"id"`
+		} `json:"source"`
+		Sources []struct {
+			ID string `json:"id"`
+		} `json:"sources"`
+		Summary struct {
+			GroupCount  int `json:"groupCount"`
+			MarketCount int `json:"marketCount"`
+		} `json:"summary"`
+		Groups []struct {
+			GroupKey string `json:"groupKey"`
+			Markets  []struct {
+				Exchange  string `json:"exchange"`
+				RawSymbol string `json:"rawSymbol"`
+			} `json:"markets"`
+		} `json:"groups"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload.Source.ID != "all" {
+		t.Fatalf("expected aggregate source, got %s", payload.Source.ID)
+	}
+	if len(payload.Sources) != 2 {
+		t.Fatalf("expected 2 discovery sources, got %+v", payload.Sources)
+	}
+	if payload.Summary.GroupCount != 2 || payload.Summary.MarketCount != 4 {
+		t.Fatalf("unexpected summary: %+v", payload.Summary)
+	}
+
+	foundAster := false
+	foundLighter := false
+	for _, group := range payload.Groups {
+		for _, market := range group.Markets {
+			if group.GroupKey == "CBRS/USDT" && market.Exchange == "aster" && market.RawSymbol == "CBRSUSDT" {
+				foundAster = true
+			}
+			if group.GroupKey == "CBRS/USDC" && market.Exchange == "lighter" && market.RawSymbol == "CBRS" {
+				foundLighter = true
+			}
+		}
+	}
+	if !foundAster || !foundLighter {
+		t.Fatalf("expected aggregate lookup to include aster and lighter markets, got %+v", payload.Groups)
+	}
+}
+
 func TestHandleDiscoveryLookupMatchesCanonicalAliasForHyperliquidTicker(t *testing.T) {
 	app := &App{
 		client: &http.Client{

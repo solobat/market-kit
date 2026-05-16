@@ -222,6 +222,30 @@ func TestResolveHyperliquidCanonicalSymbolCanMapToUniqueKMBMNRDex(t *testing.T) 
 	}
 }
 
+func TestResolveHyperliquidHIP3PrefixedSymbolUsesAssetSuffix(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "CBRS", AssetClass: "crypto"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "xyz:CBRS",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected resolved xyz CBRS mapping, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "CBRS/USDT" || result.Market.BaseAsset != "CBRS" {
+		t.Fatalf("expected canonical CBRS market, got %+v", result.Market)
+	}
+	if result.Market.RawSymbol != "xyz:CBRS" || result.Market.VenueSymbol != "XYZ:CBRS" {
+		t.Fatalf("expected raw HIP-3 venue symbol to be preserved, got %+v", result.Market)
+	}
+}
+
 func TestResolveHyperliquidCommodityAliasOverrides(t *testing.T) {
 	registry := Registry{
 		AssetAliases: []AssetAliasRule{

@@ -160,6 +160,53 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidKMMarket(t *testing.T
 	}
 }
 
+func TestBuildAssetGroupsCanonicalizesGenericHyperliquidHIP3Prefix(t *testing.T) {
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "CBRS", AssetClass: "crypto"},
+		},
+	}
+	aggregator := NewAggregator(registry)
+	groups := aggregator.BuildAssetGroups([]ImportedMarket{
+		{
+			SourceID:   "market-kit-bootstrap",
+			PlatformID: "hyperliquid",
+			Platform:   "Hyperliquid",
+			VenueType:  "dex",
+			MarketType: "perp",
+			Symbol:     "xyz:CBRS",
+			BaseAsset:  "xyz:CBRS",
+			QuoteAsset: "USDC",
+			Status:     "live",
+		},
+		{
+			SourceID:   "market-kit-bootstrap",
+			PlatformID: "bitget",
+			Platform:   "Bitget",
+			VenueType:  "cex",
+			MarketType: "perp",
+			Symbol:     "CBRSUSDT",
+			BaseAsset:  "CBRS",
+			QuoteAsset: "USDT",
+			Status:     "live",
+		},
+	})
+
+	if len(groups) != 1 || groups[0].GroupKey != "CBRS/USDT" {
+		t.Fatalf("expected CBRS group, got %+v", groups)
+	}
+	foundHL := false
+	for _, market := range groups[0].Markets {
+		if market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:CBRS" && market.CanonicalSymbol == "CBRS/USDT" {
+			foundHL = true
+			break
+		}
+	}
+	if !foundHL {
+		t.Fatalf("expected generic hyperliquid HIP-3 market to join CBRS group, got %+v", groups[0].Markets)
+	}
+}
+
 func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidWTIMarkets(t *testing.T) {
 	registry, err := identity.LoadDefaultRegistry()
 	if err != nil {

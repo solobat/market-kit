@@ -104,17 +104,13 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
-	if sourceID == "" {
-		sourceID = a.defaultDiscoverySourceID()
-	}
-	if sourceID == "" {
-		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
-		return
-	}
-
-	source, envelope, err := a.fetchDiscoveryEnvelope(r.Context(), sourceID)
+	sources, envelope, err := a.fetchDiscoveryLookupEnvelope(r.Context(), sourceID)
 	if err != nil {
 		a.writeDiscoveryError(w, err)
+		return
+	}
+	if len(sources) == 0 {
+		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
 		return
 	}
 
@@ -129,14 +125,63 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	matches := filterDiscoveryGroups(groups, query, registry)
 
 	writeJSON(w, http.StatusOK, map[string]any{
-		"query":  query,
-		"source": discoverySourcePayload(source),
+		"query":   query,
+		"source":  discoveryLookupSourcePayload(sources),
+		"sources": discoverySourcePayloads(sources),
 		"summary": map[string]any{
 			"groupCount":  len(matches),
 			"marketCount": totalDiscoveryMarkets(matches),
 		},
 		"groups": matches,
 	})
+}
+
+func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string) ([]SyncSource, discovery.ImportEnvelope, error) {
+	sourceID = strings.TrimSpace(sourceID)
+	if sourceID != "" && !strings.EqualFold(sourceID, "all") {
+		source, envelope, err := a.fetchDiscoveryEnvelope(ctx, sourceID)
+		if err != nil {
+			return nil, discovery.ImportEnvelope{}, err
+		}
+		return []SyncSource{source}, envelope, nil
+	}
+
+	sources := a.discoverySources()
+	if len(sources) == 0 {
+		return nil, discovery.ImportEnvelope{}, nil
+	}
+
+	items := make([]discovery.ImportedMarket, 0)
+	seen := make(map[string]struct{})
+	var latestGeneratedAt time.Time
+	for _, source := range sources {
+		fetchedSource, envelope, err := a.fetchDiscoveryEnvelope(ctx, source.ID)
+		if err != nil {
+			return nil, discovery.ImportEnvelope{}, err
+		}
+		if envelope.GeneratedAt.After(latestGeneratedAt) {
+			latestGeneratedAt = envelope.GeneratedAt
+		}
+		for _, item := range envelope.Items {
+			key := discoveryImportedMarketKey(item)
+			if _, ok := seen[key]; ok {
+				continue
+			}
+			seen[key] = struct{}{}
+			items = append(items, item)
+		}
+		if source.ID != fetchedSource.ID {
+			source = fetchedSource
+		}
+	}
+	if latestGeneratedAt.IsZero() {
+		latestGeneratedAt = time.Now().UTC()
+	}
+	return sources, discovery.ImportEnvelope{
+		Source:      discovery.SourceKind("market-kit-all"),
+		GeneratedAt: latestGeneratedAt,
+		Items:       items,
+	}, nil
 }
 
 func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {
@@ -290,6 +335,26 @@ func (a *App) defaultDiscoverySourceID() string {
 	return ""
 }
 
+func (a *App) discoverySources() []SyncSource {
+	items := make([]SyncSource, 0)
+	for _, source := range a.sources {
+		if source.Kind != "discovery" {
+			continue
+		}
+		items = append(items, source)
+	}
+	sort.SliceStable(items, func(i, j int) bool {
+		if items[i].ID == bootstrap.BuiltInSourceID {
+			return true
+		}
+		if items[j].ID == bootstrap.BuiltInSourceID {
+			return false
+		}
+		return items[i].ID < items[j].ID
+	})
+	return items
+}
+
 func (a *App) writeDiscoveryError(w http.ResponseWriter, err error) {
 	var fetchErr *discoveryFetchError
 	if errors.As(err, &fetchErr) {
@@ -313,6 +378,37 @@ func discoverySourcePayload(source SyncSource) map[string]any {
 		"project": source.Project,
 		"kind":    source.Kind,
 	}
+}
+
+func discoverySourcePayloads(sources []SyncSource) []map[string]any {
+	items := make([]map[string]any, 0, len(sources))
+	for _, source := range sources {
+		items = append(items, discoverySourcePayload(source))
+	}
+	return items
+}
+
+func discoveryLookupSourcePayload(sources []SyncSource) map[string]any {
+	if len(sources) == 1 {
+		return discoverySourcePayload(sources[0])
+	}
+	return map[string]any{
+		"id":      "all",
+		"label":   "全部市场发现源",
+		"project": "market-kit",
+		"kind":    "discovery",
+	}
+}
+
+func discoveryImportedMarketKey(item discovery.ImportedMarket) string {
+	return strings.Join([]string{
+		strings.ToLower(strings.TrimSpace(item.PlatformID)),
+		strings.ToLower(strings.TrimSpace(item.MarketType)),
+		strings.ToUpper(strings.TrimSpace(item.Symbol)),
+		strings.ToUpper(strings.TrimSpace(item.BaseAsset)),
+		strings.ToUpper(strings.TrimSpace(item.QuoteAsset)),
+		strings.ToLower(strings.TrimSpace(item.Chain)),
+	}, "\x00")
 }
 
 func filterDiscoveryGroups(groups []discovery.AssetCandidateGroup, query string, registry identity.Registry) []discovery.AssetCandidateGroup {
