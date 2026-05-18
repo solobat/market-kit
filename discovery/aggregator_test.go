@@ -160,7 +160,7 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidKMMarket(t *testing.T
 	}
 }
 
-func TestBuildAssetGroupsCanonicalizesGenericHyperliquidHIP3Prefix(t *testing.T) {
+func TestBuildAssetGroupsKeepsGenericHyperliquidHIP3Namespaced(t *testing.T) {
 	registry := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{
 			{Canonical: "CBRS", AssetClass: "crypto"},
@@ -192,18 +192,29 @@ func TestBuildAssetGroupsCanonicalizesGenericHyperliquidHIP3Prefix(t *testing.T)
 		},
 	})
 
-	if len(groups) != 1 || groups[0].GroupKey != "CBRS/USDT" {
-		t.Fatalf("expected CBRS group, got %+v", groups)
+	if len(groups) != 2 {
+		t.Fatalf("expected namespaced HIP-3 market to stay separate, got %+v", groups)
 	}
+	foundCEX := false
 	foundHL := false
 	for _, market := range groups[0].Markets {
-		if market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:CBRS" && market.CanonicalSymbol == "CBRS/USDT" {
+		if market.Exchange == "bitget" && market.CanonicalSymbol == "CBRS/USDT" {
+			foundCEX = true
+		}
+		if market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:CBRS" && market.CanonicalSymbol == "XYZ:CBRS/USDT" {
 			foundHL = true
-			break
 		}
 	}
-	if !foundHL {
-		t.Fatalf("expected generic hyperliquid HIP-3 market to join CBRS group, got %+v", groups[0].Markets)
+	for _, market := range groups[1].Markets {
+		if market.Exchange == "bitget" && market.CanonicalSymbol == "CBRS/USDT" {
+			foundCEX = true
+		}
+		if market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:CBRS" && market.CanonicalSymbol == "XYZ:CBRS/USDT" {
+			foundHL = true
+		}
+	}
+	if !foundCEX || !foundHL {
+		t.Fatalf("expected separate CEX and namespaced HIP-3 markets, got %+v", groups)
 	}
 }
 

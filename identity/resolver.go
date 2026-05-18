@@ -289,7 +289,7 @@ func parseBaseQuote(exchange string, rawSymbol string, marketType MarketType, ca
 		raw = strings.TrimSuffix(raw, "-SWAP")
 	}
 	if exchange == "hyperliquid" && marketType == MarketTypePerpetual && !strings.Contains(raw, "/") {
-		return rawSymbolBase(raw), "USDT", true
+		return hyperliquidPerpBase(raw), "USDT", true
 	}
 
 	for _, sep := range []string{"/", "-", "_"} {
@@ -384,6 +384,14 @@ func rawSymbolBase(raw string) string {
 		}
 	}
 	return raw
+}
+
+func hyperliquidPerpBase(raw string) string {
+	raw = strings.ToUpper(strings.TrimSpace(raw))
+	if strings.Contains(raw, ":") {
+		return raw
+	}
+	return rawSymbolBase(raw)
 }
 
 func firstNonEmpty(values ...string) string {

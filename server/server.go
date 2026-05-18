@@ -19,9 +19,12 @@ import (
 )
 
 type App struct {
-	config  Config
-	client  *http.Client
-	sources []SyncSource
+	config    Config
+	client    *http.Client
+	sources   []SyncSource
+	registry  identity.Registry
+	resolver  *identity.Resolver
+	startedAt time.Time
 }
 
 type discoveryScoredGroup struct {
@@ -29,8 +32,18 @@ type discoveryScoredGroup struct {
 	score int
 }
 
+var (
+	BuildVersion = "dev"
+	BuildCommit  = ""
+	BuildTime    = ""
+)
+
 func New(config Config) (*App, error) {
 	sources, err := loadSyncSources(config)
+	if err != nil {
+		return nil, err
+	}
+	registry, err := identity.LoadDefaultRegistry()
 	if err != nil {
 		return nil, err
 	}
@@ -39,13 +52,21 @@ func New(config Config) (*App, error) {
 		client: &http.Client{
 			Timeout: config.RequestTimeout,
 		},
-		sources: sources,
+		sources:   sources,
+		registry:  registry,
+		resolver:  identity.NewResolver(registry),
+		startedAt: time.Now().UTC(),
 	}, nil
 }
 
 func (a *App) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/healthz", a.handleHealthz)
+	mux.HandleFunc("/api/v1/resolve/batch", a.handleResolveBatch)
+	mux.HandleFunc("/api/v1/resolve", a.handleResolve)
+	mux.HandleFunc("/api/v1/registry", a.handleRuntimeRegistry)
+	mux.HandleFunc("/api/v1/assets/", a.handleAsset)
+	mux.HandleFunc("/api/v1/version", a.handleVersion)
 	mux.HandleFunc("/api/discovery/sources", a.handleDiscoverySources)
 	mux.HandleFunc("/api/discovery/sync", a.handleDiscoverySync)
 	mux.HandleFunc("/api/discovery/lookup", a.handleDiscoveryLookup)
@@ -55,10 +76,146 @@ func (a *App) Handler() http.Handler {
 }
 
 func (a *App) handleHealthz(w http.ResponseWriter, _ *http.Request) {
+	registry := a.runtimeRegistry()
 	writeJSON(w, http.StatusOK, map[string]any{
-		"ok":      true,
-		"app":     "market-kit",
-		"sources": len(a.sources),
+		"ok":        true,
+		"app":       "market-kit",
+		"sources":   len(a.sources),
+		"assets":    len(registry.AssetAliases),
+		"overrides": len(registry.MarketOverrides),
+	})
+}
+
+type resolveAPIRequest struct {
+	Exchange            string `json:"exchange"`
+	Symbol              string `json:"symbol"`
+	CanonicalSymbolHint string `json:"canonicalSymbolHint,omitempty"`
+	MarketType          string `json:"marketType,omitempty"`
+	MarketTypeHint      string `json:"marketTypeHint,omitempty"`
+	InstType            string `json:"instType,omitempty"`
+	ProductType         string `json:"productType,omitempty"`
+}
+
+type resolveBatchRequest struct {
+	Items []resolveAPIRequest `json:"items"`
+}
+
+func (a *App) handleResolve(w http.ResponseWriter, r *http.Request) {
+	var req resolveAPIRequest
+	switch r.Method {
+	case http.MethodGet:
+		req = resolveAPIRequest{
+			Exchange:            r.URL.Query().Get("exchange"),
+			Symbol:              r.URL.Query().Get("symbol"),
+			CanonicalSymbolHint: firstNonEmpty(r.URL.Query().Get("canonicalSymbolHint"), r.URL.Query().Get("canonicalHint")),
+			MarketType:          r.URL.Query().Get("marketType"),
+			MarketTypeHint:      r.URL.Query().Get("marketTypeHint"),
+			InstType:            r.URL.Query().Get("instType"),
+			ProductType:         r.URL.Query().Get("productType"),
+		}
+	case http.MethodPost:
+		if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&req); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]any{"error": "invalid resolve request json"})
+			return
+		}
+	default:
+		w.Header().Set("Allow", "GET, POST")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+
+	if strings.TrimSpace(req.Exchange) == "" || strings.TrimSpace(req.Symbol) == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "exchange and symbol are required"})
+		return
+	}
+
+	writeJSON(w, http.StatusOK, a.runtimeResolver().Resolve(req.toIdentityRequest()))
+}
+
+func (a *App) handleResolveBatch(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", "POST")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+
+	var batch resolveBatchRequest
+	decoder := json.NewDecoder(http.MaxBytesReader(w, r.Body, 4<<20))
+	if err := decoder.Decode(&batch); err != nil || len(batch.Items) == 0 {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "request body must contain a non-empty items array"})
+		return
+	}
+	if len(batch.Items) > 500 {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "batch limit is 500 items"})
+		return
+	}
+
+	resolver := a.runtimeResolver()
+	results := make([]identity.ResolveResult, 0, len(batch.Items))
+	for _, item := range batch.Items {
+		results = append(results, resolver.Resolve(item.toIdentityRequest()))
+	}
+	writeJSON(w, http.StatusOK, map[string]any{
+		"summary": map[string]any{
+			"count": len(results),
+		},
+		"results": results,
+	})
+}
+
+func (req resolveAPIRequest) toIdentityRequest() identity.ResolveRequest {
+	return identity.ResolveRequest{
+		Exchange:            strings.TrimSpace(req.Exchange),
+		Symbol:              strings.TrimSpace(req.Symbol),
+		CanonicalSymbolHint: strings.TrimSpace(req.CanonicalSymbolHint),
+		MarketTypeHint:      firstNonEmpty(req.MarketTypeHint, req.MarketType),
+		InstType:            strings.TrimSpace(req.InstType),
+		ProductType:         strings.TrimSpace(req.ProductType),
+	}
+}
+
+func (a *App) handleRuntimeRegistry(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", "GET")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+	writeJSON(w, http.StatusOK, a.runtimeRegistry())
+}
+
+func (a *App) handleAsset(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", "GET")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+	symbol := strings.ToUpper(strings.Trim(strings.TrimPrefix(r.URL.Path, "/api/v1/assets/"), "/ "))
+	if symbol == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "asset symbol is required"})
+		return
+	}
+	if asset, ok := findAssetAlias(a.runtimeRegistry(), symbol); ok {
+		writeJSON(w, http.StatusOK, map[string]any{"asset": asset})
+		return
+	}
+	writeJSON(w, http.StatusNotFound, map[string]any{"error": "asset not found", "asset": symbol})
+}
+
+func (a *App) handleVersion(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", "GET")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+	registry := a.runtimeRegistry()
+	writeJSON(w, http.StatusOK, map[string]any{
+		"app":           "market-kit",
+		"version":       BuildVersion,
+		"commit":        BuildCommit,
+		"buildTime":     BuildTime,
+		"startedAt":     a.startedAt,
+		"assetCount":    len(registry.AssetAliases),
+		"overrideCount": len(registry.MarketOverrides),
 	})
 }
 
@@ -114,12 +271,7 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	registry, err := identity.LoadDefaultRegistry()
-	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": err.Error()})
-		return
-	}
-
+	registry := a.runtimeRegistry()
 	aggregator := discovery.NewAggregator(registry)
 	groups := aggregator.BuildAssetGroups(envelope.Items)
 	matches := filterDiscoveryGroups(groups, query, registry)
@@ -192,6 +344,44 @@ func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	_, _ = w.Write(registry)
+}
+
+func (a *App) runtimeRegistry() identity.Registry {
+	if a.registry.AssetAliases != nil || a.registry.MarketOverrides != nil || a.registry.ExchangeAliases != nil {
+		return a.registry
+	}
+	registry, err := identity.LoadDefaultRegistry()
+	if err != nil {
+		return identity.Registry{}
+	}
+	return registry
+}
+
+func (a *App) runtimeResolver() *identity.Resolver {
+	if a.resolver != nil {
+		return a.resolver
+	}
+	return identity.NewResolver(a.runtimeRegistry())
+}
+
+func findAssetAlias(registry identity.Registry, symbol string) (identity.AssetAliasRule, bool) {
+	symbol = strings.ToUpper(strings.TrimSpace(symbol))
+	for _, item := range registry.AssetAliases {
+		if item.Canonical == symbol {
+			return item, true
+		}
+		for _, alias := range item.Aliases {
+			if strings.EqualFold(alias, symbol) {
+				return item, true
+			}
+		}
+		for _, alias := range item.UnitAliases {
+			if strings.EqualFold(alias.Alias, symbol) {
+				return item, true
+			}
+		}
+	}
+	return identity.AssetAliasRule{}, false
 }
 
 func (a *App) frontendHandler() http.Handler {
@@ -477,18 +667,35 @@ func discoveryGroupScore(group discovery.AssetCandidateGroup, query string, alia
 		candidate := strings.ToUpper(strings.TrimSpace(market.RawSymbol))
 		venueSymbol := strings.ToUpper(strings.TrimSpace(market.VenueSymbol))
 		baseAsset := strings.ToUpper(strings.TrimSpace(market.BaseAsset))
+		canonicalSymbol := strings.ToUpper(strings.TrimSpace(market.CanonicalSymbol))
 		switch {
 		case candidate == query, venueSymbol == query:
 			best = max(best, 100)
+		case namespacedSuffix(candidate) == query, namespacedSuffix(venueSymbol) == query, namespacedSuffix(baseAsset) == query, namespacedSuffix(canonicalSymbol) == query:
+			best = max(best, 98)
 		case baseAsset == query:
 			best = max(best, 95)
 		case strings.Contains(candidate, query), strings.Contains(venueSymbol, query):
 			best = max(best, 60)
-		case strings.Contains(strings.ToUpper(strings.TrimSpace(market.CanonicalSymbol)), query):
+		case strings.Contains(canonicalSymbol, query):
 			best = max(best, 55)
 		}
 	}
 	return best
+}
+
+func namespacedSuffix(value string) string {
+	value = strings.ToUpper(strings.TrimSpace(value))
+	if value == "" {
+		return ""
+	}
+	if slash := strings.Index(value, "/"); slash >= 0 {
+		value = value[:slash]
+	}
+	if colon := strings.LastIndex(value, ":"); colon >= 0 && colon+1 < len(value) {
+		return strings.TrimSpace(value[colon+1:])
+	}
+	return ""
 }
 
 func registryAssetAliasIndex(registry identity.Registry) map[string][]string {

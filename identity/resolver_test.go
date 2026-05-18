@@ -222,7 +222,7 @@ func TestResolveHyperliquidCanonicalSymbolCanMapToUniqueKMBMNRDex(t *testing.T) 
 	}
 }
 
-func TestResolveHyperliquidHIP3PrefixedSymbolUsesAssetSuffix(t *testing.T) {
+func TestResolveHyperliquidHIP3PrefixedSymbolStaysNamespacedWithoutOverride(t *testing.T) {
 	registry := Registry{
 		AssetAliases: []AssetAliasRule{
 			{Canonical: "CBRS", AssetClass: "crypto"},
@@ -238,11 +238,62 @@ func TestResolveHyperliquidHIP3PrefixedSymbolUsesAssetSuffix(t *testing.T) {
 	if result.Status != ResolveResolved || result.Market == nil {
 		t.Fatalf("expected resolved xyz CBRS mapping, got %+v", result)
 	}
-	if result.Market.CanonicalSymbol != "CBRS/USDT" || result.Market.BaseAsset != "CBRS" {
-		t.Fatalf("expected canonical CBRS market, got %+v", result.Market)
+	if result.Market.CanonicalSymbol != "XYZ:CBRS/USDT" || result.Market.BaseAsset != "XYZ:CBRS" {
+		t.Fatalf("expected namespaced HIP-3 market, got %+v", result.Market)
+	}
+	if result.Market.AssetClass != "unknown" {
+		t.Fatalf("expected namespaced HIP-3 market not to inherit CBRS asset class, got %+v", result.Market)
 	}
 	if result.Market.RawSymbol != "xyz:CBRS" || result.Market.VenueSymbol != "XYZ:CBRS" {
 		t.Fatalf("expected raw HIP-3 venue symbol to be preserved, got %+v", result.Market)
+	}
+}
+
+func TestResolveHyperliquidHIP3OverrideCanDefineIndependentMarket(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "SPCX", AssetClass: "rwa_stock"},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SPCX", MarketType: "perpetual", CanonicalSymbol: "XYZSPCX/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "xyz:SPCX",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected explicit HIP-3 override to resolve, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "XYZSPCX/USDT" || result.Market.AssetClass != "unknown" {
+		t.Fatalf("expected explicit override to define independent canonical market, got %+v", result.Market)
+	}
+}
+
+func TestResolveHyperliquidHIP3OverrideCanMapToKnownAsset(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "SPCX", AssetClass: "rwa_stock"},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SPCX", MarketType: "perpetual", CanonicalSymbol: "SPCX/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "SPCX",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected canonical SPCX request to resolve via HIP-3 override, got %+v", result)
+	}
+	if result.Market.RawSymbol != "xyz:SPCX" || result.Market.CanonicalSymbol != "SPCX/USDT" || result.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("expected known SPCX asset mapped to HIP-3 raw symbol, got %+v", result.Market)
 	}
 }
 

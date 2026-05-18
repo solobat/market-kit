@@ -10,7 +10,156 @@ import (
 	"testing"
 
 	"github.com/solobat/market-kit/bootstrap"
+	"github.com/solobat/market-kit/identity"
 )
+
+func TestHandleResolveReturnsRuntimeIdentity(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/resolve?exchange=gate&symbol=SPCX_USDT&marketType=spot", nil)
+	rec := httptest.NewRecorder()
+	app.handleResolve(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload identity.ResolveResult
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Status != identity.ResolveResolved {
+		t.Fatalf("expected resolved status, got %+v", payload)
+	}
+	if payload.Market == nil || payload.Market.CanonicalSymbol != "SPCX/USDT" || payload.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("unexpected resolved market: %+v", payload.Market)
+	}
+}
+
+func TestHandleResolveReturnsHyperliquidHIP3RawSymbol(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/resolve?exchange=hyperliquid&symbol=SPCX&marketType=perpetual", nil)
+	rec := httptest.NewRecorder()
+	app.handleResolve(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload identity.ResolveResult
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Status != identity.ResolveResolved || payload.Market == nil {
+		t.Fatalf("expected resolved HIP-3 market, got %+v", payload)
+	}
+	if payload.Market.RawSymbol != "xyz:SPCX" || payload.Market.CanonicalSymbol != "SPCX/USDT" {
+		t.Fatalf("unexpected HIP-3 market: %+v", payload.Market)
+	}
+}
+
+func TestHandleResolveAcceptsPostJSON(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/resolve", strings.NewReader(`{
+		"exchange":"gate",
+		"symbol":"SPCX_USDT",
+		"marketType":"spot"
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleResolve(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload identity.ResolveResult
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Status != identity.ResolveResolved || payload.Market == nil || payload.Market.RawSymbol != "SPCX_USDT" {
+		t.Fatalf("unexpected resolve response: %+v", payload)
+	}
+}
+
+func TestHandleResolveBatchReturnsPerItemResults(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/resolve/batch", strings.NewReader(`{
+		"items":[
+			{"exchange":"gate","symbol":"SPCX_USDT","marketType":"spot"},
+			{"exchange":"okx","symbol":"UNKNOWN"}
+		]
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleResolveBatch(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Summary struct {
+			Count int `json:"count"`
+		} `json:"summary"`
+		Results []identity.ResolveResult `json:"results"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Summary.Count != 2 || len(payload.Results) != 2 {
+		t.Fatalf("unexpected batch response: %+v", payload)
+	}
+	if payload.Results[0].Status != identity.ResolveResolved {
+		t.Fatalf("expected first item to resolve, got %+v", payload.Results[0])
+	}
+	if payload.Results[1].Status == identity.ResolveResolved {
+		t.Fatalf("expected second item not to confidently resolve, got %+v", payload.Results[1])
+	}
+}
+
+func TestHandleRuntimeRegistryReturnsMergedRegistry(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/registry", nil)
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistry(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload identity.Registry
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if len(payload.AssetAliases) != 2 || len(payload.MarketOverrides) != 2 {
+		t.Fatalf("unexpected registry payload: %+v", payload)
+	}
+}
+
+func TestHandleAssetReturnsAliasRule(t *testing.T) {
+	app := testIdentityApp()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/assets/SPCX", nil)
+	rec := httptest.NewRecorder()
+	app.handleAsset(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Asset identity.AssetAliasRule `json:"asset"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Asset.Canonical != "SPCX" || payload.Asset.AssetClass != "rwa_stock" {
+		t.Fatalf("unexpected asset payload: %+v", payload.Asset)
+	}
+}
 
 func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 	app := &App{
@@ -303,6 +452,91 @@ func TestHandleDiscoveryLookupAggregatesAllDiscoverySources(t *testing.T) {
 	}
 }
 
+func TestHandleDiscoveryLookupRecallsNamespacedHIP3MarketBySuffix(t *testing.T) {
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "SPCX", AssetClass: "rwa_stock"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "gate", RawSymbol: "SPCX_USDT", MarketType: "spot", CanonicalSymbol: "SPCX/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SPCX", MarketType: "perpetual", CanonicalSymbol: "SPCX/USDT"},
+		},
+	}
+	registry.Normalize()
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				if req.URL.String() != "https://example.com/discovery.json" {
+					t.Fatalf("unexpected request: %s %s", req.Method, req.URL.String())
+				}
+				return jsonResponse(`{
+				  "source":"market-kit-bootstrap",
+				  "generatedAt":"2026-05-18T00:00:00Z",
+				  "items":[
+				    {"sourceId":"market-kit-bootstrap","platformId":"gate","platform":"Gate","venueType":"cex","marketType":"spot","symbol":"SPCX_USDT","baseAsset":"SPCX","quoteAsset":"USDT","status":"live"},
+				    {"sourceId":"market-kit-bootstrap","platformId":"hyperliquid","platform":"Hyperliquid","venueType":"dex","marketType":"perp","symbol":"xyz:SPCX","baseAsset":"xyz:SPCX","quoteAsset":"USDC","status":"live"}
+				  ]
+				}`), nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "bootstrap-test",
+				Label:   "Bootstrap Test",
+				Project: "market-kit",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+		registry: registry,
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/lookup?source=bootstrap-test&symbol=SPCX", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoveryLookup(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Summary struct {
+			GroupCount  int `json:"groupCount"`
+			MarketCount int `json:"marketCount"`
+		} `json:"summary"`
+		Groups []struct {
+			GroupKey string `json:"groupKey"`
+			Markets  []struct {
+				Exchange        string `json:"exchange"`
+				RawSymbol       string `json:"rawSymbol"`
+				CanonicalSymbol string `json:"canonicalSymbol"`
+			} `json:"markets"`
+		} `json:"groups"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Summary.GroupCount != 1 || payload.Summary.MarketCount != 2 {
+		t.Fatalf("expected gate and HL SPCX markets in one published group, got summary %+v groups %+v", payload.Summary, payload.Groups)
+	}
+
+	foundGate := false
+	foundHL := false
+	for _, group := range payload.Groups {
+		for _, market := range group.Markets {
+			if group.GroupKey == "SPCX/USDT" && market.Exchange == "gate" && market.RawSymbol == "SPCX_USDT" && market.CanonicalSymbol == "SPCX/USDT" {
+				foundGate = true
+			}
+			if group.GroupKey == "SPCX/USDT" && market.Exchange == "hyperliquid" && market.RawSymbol == "xyz:SPCX" && market.CanonicalSymbol == "SPCX/USDT" {
+				foundHL = true
+			}
+		}
+	}
+	if !foundGate || !foundHL {
+		t.Fatalf("expected lookup to recall gate SPCX and published HL xyz:SPCX together, got %+v", payload.Groups)
+	}
+}
+
 func TestHandleDiscoveryLookupMatchesCanonicalAliasForHyperliquidTicker(t *testing.T) {
 	app := &App{
 		client: &http.Client{
@@ -485,6 +719,24 @@ func TestDefaultDiscoverySourceIDPrefersBuiltIn(t *testing.T) {
 
 	if got := app.defaultDiscoverySourceID(); got != bootstrap.BuiltInSourceID {
 		t.Fatalf("expected built-in discovery source, got %s", got)
+	}
+}
+
+func testIdentityApp() *App {
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "SPCX", AssetClass: "rwa_stock"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "gate", RawSymbol: "SPCX_USDT", MarketType: "spot", CanonicalSymbol: "SPCX/USDT"},
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SPCX", MarketType: "perpetual", CanonicalSymbol: "SPCX/USDT"},
+		},
+	}
+	registry.Normalize()
+	return &App{
+		registry: registry,
+		resolver: identity.NewResolver(registry),
 	}
 }
 
