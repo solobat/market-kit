@@ -20,6 +20,11 @@
       "aliases": []
     },
     {
+      "canonical": "SPCX",
+      "asset_class": "rwa_stock",
+      "aliases": []
+    },
+    {
       "canonical": "AAPL",
       "asset_class": "rwa_stock",
       "aliases": ["AAPLX"]
@@ -94,6 +99,12 @@
       "raw_symbol": "km:BMNR",
       "market_type": "perpetual",
       "canonical_symbol": "BMNR/USDT"
+    },
+    {
+      "exchange": "hyperliquid",
+      "raw_symbol": "xyz:SPCX",
+      "market_type": "perpetual",
+      "canonical_symbol": "SPCX/USDT"
     },
     {
       "exchange": "hyperliquid",
