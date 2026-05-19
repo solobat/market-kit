@@ -9,7 +9,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-func TestBuildGeneratedRegistryFiltersToStableCEXMarkets(t *testing.T) {
+func TestBuildGeneratedRegistryFiltersToStableQuotedMarkets(t *testing.T) {
 	registry := buildGeneratedRegistry([]discoveryItem{
 		{
 			PlatformID: "okx",
@@ -40,16 +40,17 @@ func TestBuildGeneratedRegistryFiltersToStableCEXMarkets(t *testing.T) {
 		},
 	})
 
-	if len(registry.MarketOverrides) != 1 {
-		t.Fatalf("expected 1 generated override, got %d", len(registry.MarketOverrides))
+	if len(registry.MarketOverrides) != 2 {
+		t.Fatalf("expected 2 generated overrides, got %d", len(registry.MarketOverrides))
 	}
-	if registry.MarketOverrides[0] != (identity.MarketOverride{
-		Exchange:        "okx",
-		RawSymbol:       "DRAM-USDT-SWAP",
-		MarketType:      "perpetual",
-		CanonicalSymbol: "DRAM/USDT",
-	}) {
-		t.Fatalf("unexpected generated override: %+v", registry.MarketOverrides[0])
+	expectedOverrides := map[identity.MarketOverride]bool{
+		{Exchange: "okx", RawSymbol: "DRAM-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "DRAM/USDT"}: true,
+		{Exchange: "hyperliquid", RawSymbol: "DRAM", MarketType: "perpetual", CanonicalSymbol: "DRAM/USDT"}:   true,
+	}
+	for _, override := range registry.MarketOverrides {
+		if !expectedOverrides[override] {
+			t.Fatalf("unexpected generated override: %+v", override)
+		}
 	}
 	if len(registry.AssetAliases) != 2 {
 		t.Fatalf("expected DRAM and USDT asset aliases, got %d", len(registry.AssetAliases))

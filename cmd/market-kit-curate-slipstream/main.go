@@ -384,7 +384,8 @@ func preciseGeneratedAssetClass(asset string) string {
 }
 
 func shouldInclude(item discoveryItem) bool {
-	if !strings.EqualFold(strings.TrimSpace(item.VenueType), "cex") {
+	venueType := strings.ToLower(strings.TrimSpace(item.VenueType))
+	if venueType != "cex" && venueType != "dex" {
 		return false
 	}
 	if discovery.IsExcludedLeveragedToken(item.PlatformID, item.BaseAsset, item.Symbol) {
@@ -420,7 +421,7 @@ func buildReviewReport(existing identity.Registry, next identity.Registry, items
 	fmt.Fprintf(&b, "- Source: `%s`\n", sourceName)
 	fmt.Fprintf(&b, "- Generated at: `%s`\n", time.Now().UTC().Format(time.RFC3339))
 	fmt.Fprintf(&b, "- Discovery rows: `%d`\n", len(items))
-	fmt.Fprintf(&b, "- Included CEX stable rows: `%d`\n", stats.Included)
+	fmt.Fprintf(&b, "- Included stable-quoted rows: `%d`\n", stats.Included)
 	fmt.Fprintf(&b, "- Skipped non-CEX rows: `%d`\n", stats.SkippedNonCEX)
 	fmt.Fprintf(&b, "- Skipped non-stable quote rows: `%d`\n", stats.SkippedNonStableQuote)
 	fmt.Fprintf(&b, "- Skipped leveraged rows: `%d`\n", stats.SkippedLeveraged)

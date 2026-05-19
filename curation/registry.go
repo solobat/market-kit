@@ -153,7 +153,8 @@ func preciseGeneratedAssetClass(asset string) string {
 }
 
 func shouldInclude(item discovery.ImportedMarket) bool {
-	if !strings.EqualFold(strings.TrimSpace(item.VenueType), "cex") {
+	venueType := strings.ToLower(strings.TrimSpace(item.VenueType))
+	if venueType != "cex" && venueType != "dex" {
 		return false
 	}
 	if discovery.IsExcludedLeveragedToken(item.PlatformID, item.BaseAsset, item.Symbol) {
