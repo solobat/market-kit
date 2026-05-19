@@ -11,5 +11,5 @@ frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 frontend/sync-sources.local.json
-market-kit-server
+/market-kit-server
 pm2.market-kit-server.config.cjs
