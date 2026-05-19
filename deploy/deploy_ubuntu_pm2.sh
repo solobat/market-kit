@@ -39,6 +39,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 DIR="${DIR:-$DEFAULT_DIR}"
+NODE_UPGRADED="0"
 
 ensure_go_in_path() {
   if command -v go >/dev/null 2>&1; then
@@ -62,15 +63,48 @@ ensure_go_in_path() {
   return 1
 }
 
+node_major_version() {
+  if ! command -v node >/dev/null 2>&1; then
+    echo "0"
+    return
+  fi
+  node -p "Number(process.versions.node.split('.')[0])"
+}
+
+install_node_runtime_if_needed() {
+  local major
+  major="$(node_major_version)"
+  if [[ "$major" -ge 20 ]]; then
+    return 0
+  fi
+
+  if [[ "$major" -eq 0 ]]; then
+    echo "未检测到 Node.js，将安装 Node.js 22"
+  else
+    echo "当前 Node.js 版本过低: $(node -v)，将升级到 Node.js 22"
+  fi
+
+  curl -fsSL https://deb.nodesource.com/setup_22.x -o /tmp/nodesource_setup.sh
+  sudo -E bash /tmp/nodesource_setup.sh
+  sudo apt install -y nodejs
+  hash -r
+  NODE_UPGRADED="1"
+}
+
 echo "[1/5] 安装基础依赖"
 if [[ "$SKIP_INSTALL" != "1" ]]; then
   sudo apt update
   sudo apt install -y git curl build-essential
-  if ! command -v pm2 >/dev/null 2>&1; then
+
+  install_node_runtime_if_needed
+
+  if [[ "$NODE_UPGRADED" == "1" ]]; then
+    sudo npm i -g pm2 pnpm
+  elif ! command -v pm2 >/dev/null 2>&1; then
     command -v npm >/dev/null 2>&1 || { echo "未检测到 npm，请先安装 Node.js 20+ / npm" >&2; exit 1; }
     sudo npm i -g pm2
   fi
-  if ! command -v pnpm >/dev/null 2>&1; then
+  if [[ "$NODE_UPGRADED" != "1" ]] && ! command -v pnpm >/dev/null 2>&1; then
     command -v npm >/dev/null 2>&1 || { echo "未检测到 npm，请先安装 Node.js 20+ / npm" >&2; exit 1; }
     sudo npm i -g pnpm
   fi
