@@ -1,6 +1,9 @@
 package main
 
 import (
+	"io"
+	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/solobat/market-kit/identity"
@@ -53,14 +56,29 @@ func TestBuildGeneratedRegistryFiltersToStableCEXMarkets(t *testing.T) {
 	}
 }
 
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (fn roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {
+	return fn(req)
+}
+
+func jsonResponse(body string) *http.Response {
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Status:     "200 OK",
+		Header:     make(http.Header),
+		Body:       io.NopCloser(strings.NewReader(body)),
+	}
+}
+
 func TestInferAssetClass(t *testing.T) {
 	cases := map[string]string{
 		"USDT":   "fiat_stable",
 		"AEUR":   "fiat_stable",
 		"PYUSD":  "fiat_stable",
 		"AAPL":   "rwa_stock",
-		"AAPLON": "rwa_stock",
-		"AMZNX":  "rwa_stock",
+		"AAPLON": "",
+		"AMZNX":  "",
 		"TSM":    "rwa_stock",
 		"SOXL":   "rwa_stock",
 		"XLE":    "rwa_stock",
@@ -74,6 +92,14 @@ func TestInferAssetClass(t *testing.T) {
 	for asset, expected := range cases {
 		if actual := inferAssetClassFallback(asset); actual != expected {
 			t.Fatalf("asset %s expected %s got %s", asset, expected, actual)
+		}
+	}
+}
+
+func TestInferAssetClassDoesNotGuessWrappedStocksFromSuffix(t *testing.T) {
+	for _, asset := range []string{"DON", "HDX", "METAX", "SPYON"} {
+		if actual := inferAssetClassFallback(asset); actual != "" {
+			t.Fatalf("expected %s to require explicit classification, got %s", asset, actual)
 		}
 	}
 }
@@ -112,6 +138,29 @@ func TestBuildGeneratedRegistrySkipsUnknownAutoAliases(t *testing.T) {
 	}
 	if registry.AssetAliases[0].Canonical != "USDT" || registry.AssetAliases[0].AssetClass != "fiat_stable" {
 		t.Fatalf("unexpected generated alias: %+v", registry.AssetAliases[0])
+	}
+}
+
+func TestBuildGeneratedRegistryDoesNotClassifySuffixLookalikes(t *testing.T) {
+	registry := buildGeneratedRegistry([]discoveryItem{
+		{
+			PlatformID: "gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "DON_USDT",
+			BaseAsset:  "DON",
+			QuoteAsset: "USDT",
+			Status:     "live",
+		},
+	})
+
+	if len(registry.MarketOverrides) != 1 {
+		t.Fatalf("expected DON market override to be retained, got %d", len(registry.MarketOverrides))
+	}
+	for _, item := range registry.AssetAliases {
+		if item.Canonical == "DON" {
+			t.Fatalf("expected DON not to get a formal asset class alias, got %+v", item)
+		}
 	}
 }
 
@@ -190,5 +239,134 @@ func TestBuildGeneratedRegistrySkipsGateLeveragedTokens(t *testing.T) {
 	}
 	if registry.MarketOverrides[0].RawSymbol != "BTC_USDT" {
 		t.Fatalf("unexpected override retained: %+v", registry.MarketOverrides[0])
+	}
+}
+
+func TestDecodeDiscoveryEnvelopeAcceptsServerSyncWrapper(t *testing.T) {
+	envelope, err := decodeDiscoveryEnvelope([]byte(`{
+		"source":{"id":"slipstream-prod"},
+		"payload":{
+			"source":"slipstream",
+			"items":[
+				{"platformId":"gate","venueType":"cex","marketType":"spot","symbol":"SPCX_USDT","baseAsset":"SPCX","quoteAsset":"USDT"}
+			]
+		}
+	}`))
+	if err != nil {
+		t.Fatalf("decode wrapped envelope: %v", err)
+	}
+	if len(envelope.Items) != 1 || envelope.Items[0].Symbol != "SPCX_USDT" {
+		t.Fatalf("unexpected wrapped envelope: %+v", envelope)
+	}
+}
+
+func TestLoadDiscoveryPayloadRejectsMultipleSources(t *testing.T) {
+	_, err := loadDiscoveryPayload(discoveryLoadOptions{
+		InputPath:    "input.json",
+		UseBootstrap: true,
+	})
+	if err == nil || !strings.Contains(err.Error(), "only one discovery source") {
+		t.Fatalf("expected multiple source error, got %v", err)
+	}
+}
+
+func TestLoadDiscoveryPayloadFetchesBootstrapCollectors(t *testing.T) {
+	restore := http.DefaultTransport
+	http.DefaultTransport = roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		payloads := map[string]string{
+			"GET https://api.gateio.ws/api/v4/spot/currency_pairs":    `[{"id":"SPCX_USDT","base":"SPCX","quote":"USDT","trade_status":"tradable"}]`,
+			"GET https://api.gateio.ws/api/v4/futures/usdt/contracts": `[]`,
+		}
+		key := req.Method + " " + req.URL.String()
+		body, ok := payloads[key]
+		if !ok {
+			t.Fatalf("unexpected bootstrap request: %s", key)
+		}
+		return jsonResponse(body), nil
+	})
+	defer func() { http.DefaultTransport = restore }()
+
+	payload, err := loadDiscoveryPayload(discoveryLoadOptions{
+		UseBootstrap:     true,
+		BootstrapSources: []string{"gate"},
+	})
+	if err != nil {
+		t.Fatalf("load bootstrap discovery: %v", err)
+	}
+
+	envelope, err := decodeDiscoveryEnvelope(payload)
+	if err != nil {
+		t.Fatalf("decode bootstrap payload: %v", err)
+	}
+	if envelope.Source != "market-kit-bootstrap" {
+		t.Fatalf("unexpected source: %s", envelope.Source)
+	}
+	if len(envelope.Items) != 1 || envelope.Items[0].Symbol != "SPCX_USDT" {
+		t.Fatalf("unexpected bootstrap items: %+v", envelope.Items)
+	}
+}
+
+func TestBuildReviewReportHighlightsRWANewAssets(t *testing.T) {
+	items := []discoveryItem{
+		{
+			PlatformID: "gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "SPCX_USDT",
+			BaseAsset:  "SPCX",
+			QuoteAsset: "USDT",
+			Status:     "live",
+		},
+	}
+	next := buildGeneratedRegistry(items)
+	report := buildReviewReport(identity.Registry{}, next, items, "test-source", 20)
+
+	if !strings.Contains(report, "New RWA / Commodity Overrides") {
+		t.Fatalf("expected RWA review section, got:\n%s", report)
+	}
+	if !strings.Contains(report, "`SPCX_USDT`") || !strings.Contains(report, "`SPCX/USDT`") {
+		t.Fatalf("expected SPCX override in review report, got:\n%s", report)
+	}
+}
+
+func TestSanitizeExistingGeneratedRegistryDropsUnsupportedRWAClassifications(t *testing.T) {
+	existing := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "SPCX", AssetClass: "rwa_stock"},
+			{Canonical: "DON", AssetClass: "rwa_stock"},
+			{Canonical: "BTC", AssetClass: "crypto"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "gate", RawSymbol: "DON_USDT", MarketType: "spot", CanonicalSymbol: "DON/USDT"},
+		},
+	}
+	current := buildGeneratedRegistry([]discoveryItem{
+		{
+			PlatformID: "gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "SPCX_USDT",
+			BaseAsset:  "SPCX",
+			QuoteAsset: "USDT",
+			Status:     "live",
+		},
+	})
+
+	sanitized := sanitizeExistingGeneratedRegistry(existing, current)
+	assets := map[string]string{}
+	for _, item := range sanitized.AssetAliases {
+		assets[item.Canonical] = item.AssetClass
+	}
+	if assets["SPCX"] != "rwa_stock" {
+		t.Fatalf("expected explicitly supported SPCX to remain, got %+v", assets)
+	}
+	if _, ok := assets["DON"]; ok {
+		t.Fatalf("expected unsupported DON RWA alias to be removed, got %+v", assets)
+	}
+	if assets["BTC"] != "crypto" {
+		t.Fatalf("expected crypto alias to remain, got %+v", assets)
+	}
+	if len(sanitized.MarketOverrides) != 1 {
+		t.Fatalf("expected market overrides to be preserved, got %+v", sanitized.MarketOverrides)
 	}
 }

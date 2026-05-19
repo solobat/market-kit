@@ -224,6 +224,12 @@ server/
 provides:
 
 - `GET /api/healthz`
+- `GET /api/v1/version`
+- `GET /api/v1/registry`
+- `GET /api/v1/assets/{asset}`
+- `GET /api/v1/resolve?exchange=<exchange>&symbol=<symbol>[&marketType=<type>]`
+- `POST /api/v1/resolve`
+- `POST /api/v1/resolve/batch`
 - `GET /api/registry`
 - `GET /api/discovery/sources`
 - `GET /api/discovery/sync?source=<id>`
@@ -231,6 +237,54 @@ provides:
 - static hosting for the built `frontend/dist` app
 
 That means online deployment no longer depends on the Vite dev proxy.
+
+### Production identity API
+
+Downstream projects should use the `/api/v1/*` endpoints as the stable service boundary. These endpoints use the runtime merged registry already embedded in the server binary and do not fetch remote discovery sources during request handling.
+
+Single resolve:
+
+```bash
+curl 'http://127.0.0.1:18120/api/v1/resolve?exchange=gate&symbol=SPCX_USDT&marketType=spot'
+```
+
+Response shape:
+
+```json
+{
+  "status": "resolved",
+  "confidence": 1,
+  "reason": "matched explicit market override",
+  "market": {
+    "exchange": "gate",
+    "marketType": "spot",
+    "rawSymbol": "SPCX_USDT",
+    "venueSymbol": "SPCX_USDT",
+    "canonicalSymbol": "SPCX/USDT",
+    "baseAsset": "SPCX",
+    "quoteAsset": "USDT",
+    "assetClass": "rwa_stock"
+  }
+}
+```
+
+Batch resolve:
+
+```bash
+curl -X POST 'http://127.0.0.1:18120/api/v1/resolve/batch' \
+  -H 'Content-Type: application/json' \
+  -d '{"items":[{"exchange":"gate","symbol":"SPCX_USDT","marketType":"spot"}]}'
+```
+
+Registry and metadata:
+
+```bash
+curl 'http://127.0.0.1:18120/api/v1/version'
+curl 'http://127.0.0.1:18120/api/v1/registry'
+curl 'http://127.0.0.1:18120/api/v1/assets/SPCX'
+```
+
+The older `/api/discovery/*` endpoints are operational review tools. They are useful for discovery sync, candidate grouping, and audit workflows, but production consumers should not depend on them for hot-path identity resolution.
 
 `GET /api/discovery/sync?source=market-kit-bootstrap` will trigger a fresh bootstrap pull from the built-in exchange REST collectors.
 
@@ -440,6 +494,46 @@ go run ./cmd/market-kit-curate-slipstream \
   --input /path/to/slipstream-discovery.json \
   --output identity/generated_registry.json
 ```
+
+For the production automation path, let `market-kit` fetch platform market inventories directly and write a compact review report:
+
+```bash
+go run ./cmd/market-kit-curate-slipstream \
+  --bootstrap \
+  --source-name market-kit-bootstrap \
+  --output identity/generated_registry.json \
+  --review-output identity/generated_registry.review.md
+```
+
+You can limit direct collectors while testing:
+
+```bash
+go run ./cmd/market-kit-curate-slipstream \
+  --bootstrap \
+  --sources binance,bybit,okx,bitget,gate,hyperliquid \
+  --output identity/generated_registry.json
+```
+
+If you still want to curate from an external discovery export such as `slipstream`, the remote URL mode remains available:
+
+```bash
+go run ./cmd/market-kit-curate-slipstream \
+  --url "https://api.example.com/slipstream/api/discovery/markets?limit=5000" \
+  --header "X-Slipstream-Admin-Code: $SLIPSTREAM_ADMIN_CODE" \
+  --output identity/generated_registry.json \
+  --review-output identity/generated_registry.review.md
+```
+
+The scheduled GitHub workflow in `.github/workflows/auto-curate-registry.yml` runs the direct bootstrap path every six hours. It does not require `slipstream` or any other discovery exporter.
+
+When the generated registry changes, the workflow opens or updates a PR. Humans only need to review `identity/generated_registry.review.md`, with special attention to:
+
+- new RWA / commodity overrides
+- removed overrides
+
+Unknown-class crypto-like overrides are promoted only as exchange-explicit base/quote mappings; they do not create asset aliases or asset classes. Anything that would affect official asset classification must be backed by explicit metadata or a precise allowlist entry.
+
+By default the command is append-safe for automation: it merges new generated rules into the existing `identity/generated_registry.json` and does not delete rules that are missing from the latest discovery response. Use `--prune` only for an intentional full rebuild from a trusted complete export.
 
 This command currently:
 

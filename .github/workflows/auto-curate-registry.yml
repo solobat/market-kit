@@ -1,0 +1,62 @@
+name: Auto-curate generated registry
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-curate:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Regenerate generated registry
+        run: |
+          set -euo pipefail
+          go run ./cmd/market-kit-curate-slipstream \
+            --bootstrap \
+            --source-name market-kit-bootstrap \
+            --output identity/generated_registry.json \
+            --review-output identity/generated_registry.review.md
+
+      - name: Test
+        run: go test ./...
+
+      - name: Open pull request when registry changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- identity/generated_registry.json identity/generated_registry.review.md; then
+            echo "No generated registry changes."
+            exit 0
+          fi
+
+          branch="codex/auto-curate-generated-registry"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "${branch}"
+          git add identity/generated_registry.json identity/generated_registry.review.md
+          git commit -m "registry: auto-curate generated rules"
+          git push --force-with-lease origin "${branch}"
+
+          if gh pr view "${branch}" >/dev/null 2>&1; then
+            gh pr edit "${branch}" \
+              --title "registry: auto-curate generated rules" \
+              --body-file identity/generated_registry.review.md
+          else
+            gh pr create \
+              --base "${GITHUB_REF_NAME}" \
+              --head "${branch}" \
+              --title "registry: auto-curate generated rules" \
+              --body-file identity/generated_registry.review.md
+          fi
