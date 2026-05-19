@@ -320,6 +320,30 @@ go build ./cmd/market-kit-server
 ./market-kit-server
 ```
 
+### PM2 deployment
+
+For a simple ECS host deployment, copy `.env.production.example` to `.env`, adjust the
+port or source config path if needed, then start the service with PM2:
+
+```bash
+cp .env.production.example .env
+chmod +x ./pm2-*.sh ./deploy/deploy_ubuntu_pm2.sh
+./pm2-start.sh
+./pm2-status.sh
+./pm2-logs.sh lines 100
+```
+
+On Ubuntu ECS hosts, the helper script installs the lightweight runtime dependencies,
+builds the frontend and Go server, starts or restarts PM2, and checks `/api/healthz`:
+
+```bash
+./deploy/deploy_ubuntu_pm2.sh --backend-port 18120
+```
+
+The PM2 process is named `market-kit` and reads `ecosystem.config.cjs`. Run
+`./pm2-save.sh` after the service is healthy if you want PM2 to persist the process list
+for reboot recovery.
+
 ### Server environment variables
 
 - `MARKET_KIT_HTTP_ADDR`
@@ -524,7 +548,7 @@ go run ./cmd/market-kit-curate-slipstream \
   --review-output identity/generated_registry.review.md
 ```
 
-The scheduled GitHub workflow in `.github/workflows/auto-curate-registry.yml` runs the direct bootstrap path every six hours. It does not require `slipstream` or any other discovery exporter.
+The GitHub workflow in `.github/workflows/auto-curate-registry.yml` is manual-only. It can run the direct bootstrap path on demand, but it no longer runs on a schedule.
 
 When the generated registry changes, the workflow opens or updates a PR. Humans only need to review `identity/generated_registry.review.md`, with special attention to:
 
