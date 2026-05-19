@@ -136,11 +136,11 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTyp
 		if item.Exchange != exchange {
 			continue
 		}
-		if !strings.EqualFold(strings.TrimSpace(item.RawSymbol), strings.TrimSpace(rawSymbol)) {
-			continue
-		}
 		overrideMarketType := normalizeMarketType(item.MarketType)
 		if hinted != MarketTypeUnknown && overrideMarketType != hinted {
+			continue
+		}
+		if !overrideRawSymbolMatches(exchange, item.RawSymbol, rawSymbol, overrideMarketType) {
 			continue
 		}
 		matches = append(matches, r.marketIdentityFromOverride(exchange, item.RawSymbol, item.CanonicalSymbol, overrideMarketType))
@@ -345,6 +345,34 @@ func normalizeVenueSymbol(exchange string, rawSymbol string, marketType MarketTy
 	default:
 		return raw
 	}
+}
+
+func overrideRawSymbolMatches(exchange string, overrideRaw string, requestRaw string, marketType MarketType) bool {
+	overrideRaw = strings.TrimSpace(overrideRaw)
+	requestRaw = strings.TrimSpace(requestRaw)
+	if strings.EqualFold(overrideRaw, requestRaw) {
+		return true
+	}
+
+	switch exchange {
+	case "binance", "bybit", "bitget", "aster":
+		return compactDerivativeSymbol(overrideRaw, marketType) == compactDerivativeSymbol(requestRaw, marketType)
+	default:
+		return false
+	}
+}
+
+func compactDerivativeSymbol(raw string, marketType MarketType) string {
+	raw = strings.ToUpper(strings.TrimSpace(raw))
+	raw = strings.ReplaceAll(raw, "/", "")
+	raw = strings.ReplaceAll(raw, "-", "")
+	raw = strings.ReplaceAll(raw, "_", "")
+	if marketType == MarketTypePerpetual {
+		for _, suffix := range []string{"PERPETUAL", "PERP", "SWAP"} {
+			raw = strings.TrimSuffix(raw, suffix)
+		}
+	}
+	return raw
 }
 
 func normalizeMarketType(value string) MarketType {

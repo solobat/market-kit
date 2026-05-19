@@ -44,6 +44,33 @@ func TestResolveOverridePrefersMarketTypeHint(t *testing.T) {
 	}
 }
 
+func TestResolveOverrideMatchesAsterPerpDisplaySymbol(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "ZK", AssetClass: "crypto"},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "aster", RawSymbol: "ZKUSDT", MarketType: "perpetual", CanonicalSymbol: "ZK/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "aster",
+		Symbol:         "ZK_USDT_Perp",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected resolved override, got %+v", result)
+	}
+	if result.Confidence != 1 || result.Reason != "matched explicit market override" {
+		t.Fatalf("expected explicit override match, got %+v", result)
+	}
+	if result.Market.RawSymbol != "ZKUSDT" || result.Market.CanonicalSymbol != "ZK/USDT" || result.Market.QuoteAsset != "USDT" {
+		t.Fatalf("unexpected resolved market: %+v", result.Market)
+	}
+}
+
 func TestResolveOKXSpotHeuristic(t *testing.T) {
 	resolver := NewResolver(Registry{})
 	result := resolver.Resolve(ResolveRequest{
