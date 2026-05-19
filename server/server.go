@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/solobat/market-kit/bootstrap"
@@ -19,12 +20,16 @@ import (
 )
 
 type App struct {
-	config    Config
-	client    *http.Client
-	sources   []SyncSource
-	registry  identity.Registry
-	resolver  *identity.Resolver
-	startedAt time.Time
+	config            Config
+	client            *http.Client
+	sources           []SyncSource
+	mu                sync.RWMutex
+	baseRegistry      identity.Registry
+	generatedRegistry identity.Registry
+	registry          identity.Registry
+	resolver          *identity.Resolver
+	autoSyncStatus    AutoSyncStatus
+	startedAt         time.Time
 }
 
 type discoveryScoredGroup struct {
@@ -47,14 +52,27 @@ func New(config Config) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
+	generated, err := loadRuntimeRegistry(config.RuntimeRegistryPath)
+	if err != nil {
+		return nil, err
+	}
+	runtimeRegistry := registry.Merge(generated)
 	return &App{
 		config: config,
 		client: &http.Client{
 			Timeout: config.RequestTimeout,
 		},
-		sources:   sources,
-		registry:  registry,
-		resolver:  identity.NewResolver(registry),
+		sources:           sources,
+		baseRegistry:      registry,
+		generatedRegistry: generated,
+		registry:          runtimeRegistry,
+		resolver:          identity.NewResolver(runtimeRegistry),
+		autoSyncStatus: AutoSyncStatus{
+			Enabled:            config.AutoSyncEnabled,
+			Interval:           config.AutoSyncInterval.String(),
+			RuntimePath:        config.RuntimeRegistryPath,
+			ConfiguredSourceID: config.AutoSyncSourceID,
+		},
 		startedAt: time.Now().UTC(),
 	}, nil
 }
@@ -67,6 +85,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/v1/registry", a.handleRuntimeRegistry)
 	mux.HandleFunc("/api/v1/assets/", a.handleAsset)
 	mux.HandleFunc("/api/v1/version", a.handleVersion)
+	mux.HandleFunc("/api/v1/auto-sync", a.handleAutoSync)
 	mux.HandleFunc("/api/discovery/sources", a.handleDiscoverySources)
 	mux.HandleFunc("/api/discovery/sync", a.handleDiscoverySync)
 	mux.HandleFunc("/api/discovery/lookup", a.handleDiscoveryLookup)
@@ -77,12 +96,14 @@ func (a *App) Handler() http.Handler {
 
 func (a *App) handleHealthz(w http.ResponseWriter, _ *http.Request) {
 	registry := a.runtimeRegistry()
+	autoSync := a.currentAutoSyncStatus()
 	writeJSON(w, http.StatusOK, map[string]any{
 		"ok":        true,
 		"app":       "market-kit",
 		"sources":   len(a.sources),
 		"assets":    len(registry.AssetAliases),
 		"overrides": len(registry.MarketOverrides),
+		"autoSync":  autoSync,
 	})
 }
 
@@ -347,9 +368,13 @@ func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {
 }
 
 func (a *App) runtimeRegistry() identity.Registry {
+	a.mu.RLock()
 	if a.registry.AssetAliases != nil || a.registry.MarketOverrides != nil || a.registry.ExchangeAliases != nil {
-		return a.registry
+		registry := a.registry
+		a.mu.RUnlock()
+		return registry
 	}
+	a.mu.RUnlock()
 	registry, err := identity.LoadDefaultRegistry()
 	if err != nil {
 		return identity.Registry{}
@@ -358,9 +383,13 @@ func (a *App) runtimeRegistry() identity.Registry {
 }
 
 func (a *App) runtimeResolver() *identity.Resolver {
+	a.mu.RLock()
 	if a.resolver != nil {
-		return a.resolver
+		resolver := a.resolver
+		a.mu.RUnlock()
+		return resolver
 	}
+	a.mu.RUnlock()
 	return identity.NewResolver(a.runtimeRegistry())
 }
 
@@ -755,6 +784,7 @@ func (a *App) ListenAndServe(ctx context.Context) error {
 		Addr:    a.config.HTTPAddr,
 		Handler: a.Handler(),
 	}
+	go a.runAutoSyncLoop(ctx)
 
 	errCh := make(chan error, 1)
 	go func() {

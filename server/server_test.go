@@ -6,8 +6,10 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/solobat/market-kit/bootstrap"
 	"github.com/solobat/market-kit/identity"
@@ -136,6 +138,77 @@ func TestHandleRuntimeRegistryReturnsMergedRegistry(t *testing.T) {
 	}
 	if len(payload.AssetAliases) != 2 || len(payload.MarketOverrides) != 2 {
 		t.Fatalf("unexpected registry payload: %+v", payload)
+	}
+}
+
+func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			AutoSyncEnabled:     true,
+			AutoSyncInterval:    time.Minute,
+			AutoSyncSourceID:    "slipstream-test",
+			RuntimeRegistryPath: runtimePath,
+		},
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				if req.URL.String() != "https://example.com/slipstream.json" {
+					t.Fatalf("unexpected request: %s", req.URL.String())
+				}
+				return jsonResponse(`{
+				  "source":"slipstream",
+				  "generatedAt":"2026-05-19T00:00:00Z",
+				  "items":[
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"NEW-USDT-SWAP","baseAsset":"NEW","quoteAsset":"USDT","assetClassHint":"stock","status":"live"}
+				  ]
+				}`), nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/slipstream.json",
+			},
+		},
+		baseRegistry: base,
+		registry:     base,
+		resolver:     identity.NewResolver(base),
+		autoSyncStatus: AutoSyncStatus{
+			Enabled: true,
+		},
+	}
+
+	if err := app.runAutoSyncOnce(context.Background()); err != nil {
+		t.Fatalf("run auto-sync: %v", err)
+	}
+
+	result := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange:       "okx",
+		Symbol:         "NEW-USDT-SWAP",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != identity.ResolveResolved || result.Market == nil {
+		t.Fatalf("expected auto-synced market to resolve, got %+v", result)
+	}
+	if result.Market.AssetClass != "rwa_stock" || result.Market.CanonicalSymbol != "NEW/USDT" {
+		t.Fatalf("unexpected auto-synced market: %+v", result.Market)
+	}
+
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted runtime registry: %v", err)
+	}
+	if len(persisted.AssetAliases) != 2 || len(persisted.MarketOverrides) != 1 {
+		t.Fatalf("unexpected persisted registry: %+v", persisted)
 	}
 }
 

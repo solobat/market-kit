@@ -202,6 +202,17 @@ For `slipstream`, the recommended source is:
 }
 ```
 
+In production, the server can also be configured directly through environment variables:
+
+```bash
+MARKET_KIT_SLIPSTREAM_DISCOVERY_URL=https://api.example.com/slipstream/api/discovery/markets?limit=5000
+MARKET_KIT_SLIPSTREAM_ADMIN_CODE=replace-me
+MARKET_KIT_AUTOSYNC_ENABLED=true
+MARKET_KIT_AUTOSYNC_INTERVAL=1m
+```
+
+With auto-sync enabled, `market-kit` periodically pulls the configured slipstream discovery export, generates a dynamic registry layer, hot-swaps the runtime resolver, and writes that dynamic layer to `MARKET_KIT_RUNTIME_REGISTRY_PATH`.
+
 Even without any remote config, the server now exposes a built-in discovery source:
 
 - id: `market-kit-bootstrap`
@@ -351,6 +362,18 @@ for reboot recovery.
   - default: `:18120`
 - `MARKET_KIT_SYNC_SOURCES_PATH`
   - optional path to your real sync source config file
+- `MARKET_KIT_SLIPSTREAM_DISCOVERY_URL`
+  - preferred production shortcut for the slipstream discovery export
+- `MARKET_KIT_SLIPSTREAM_ADMIN_CODE`
+  - optional admin code sent as `X-Slipstream-Admin-Code`
+- `MARKET_KIT_AUTOSYNC_ENABLED`
+  - default: `true`
+- `MARKET_KIT_AUTOSYNC_INTERVAL`
+  - default: `1m`
+- `MARKET_KIT_AUTOSYNC_SOURCE`
+  - optional explicit discovery source id; by default the first non-bootstrap discovery source is used
+- `MARKET_KIT_RUNTIME_REGISTRY_PATH`
+  - default: `data/runtime_generated_registry.json`
 - `MARKET_KIT_REQUEST_TIMEOUT`
   - default: `12s`
 - `MARKET_KIT_FRONTEND_DIST`
@@ -360,6 +383,8 @@ If `MARKET_KIT_SYNC_SOURCES_PATH` is not set, the server falls back to:
 
 1. `frontend/sync-sources.local.json`
 2. `frontend/sync-sources.example.json`
+
+Auto-sync intentionally ignores the built-in `market-kit-bootstrap` source unless you explicitly set `MARKET_KIT_AUTOSYNC_SOURCE=market-kit-bootstrap`. This keeps slipstream as the single recurring market collector in production.
 
 ## Repo boundaries
 

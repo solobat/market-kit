@@ -67,8 +67,35 @@ func loadSyncSources(config Config) ([]SyncSource, error) {
 		break
 	}
 
+	loaded = upsertEnvSyncSources(loaded, config)
 	loaded = appendBuiltInSources(loaded)
 	return loaded, nil
+}
+
+func upsertEnvSyncSources(sources []SyncSource, config Config) []SyncSource {
+	if strings.TrimSpace(config.SlipstreamDiscoveryURL) == "" {
+		return sources
+	}
+
+	source := SyncSource{
+		ID:      "slipstream-prod",
+		Label:   "Slipstream 市场发现",
+		Project: "slipstream",
+		Kind:    "discovery",
+		URL:     strings.TrimSpace(config.SlipstreamDiscoveryURL),
+		Headers: map[string]string{},
+	}
+	if strings.TrimSpace(config.SlipstreamAdminCode) != "" {
+		source.Headers["X-Slipstream-Admin-Code"] = strings.TrimSpace(config.SlipstreamAdminCode)
+	}
+
+	for idx := range sources {
+		if sources[idx].ID == source.ID {
+			sources[idx] = source
+			return sources
+		}
+	}
+	return append(sources, source)
 }
 
 func appendBuiltInSources(sources []SyncSource) []SyncSource {
