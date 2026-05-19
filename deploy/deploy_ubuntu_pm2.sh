@@ -84,6 +84,10 @@ install_node_runtime_if_needed() {
     echo "当前 Node.js 版本过低: $(node -v)，将升级到 Node.js 22"
   fi
 
+  echo "移除 Ubuntu apt 源中的旧 Node.js 包，避免 libnode-dev 文件冲突"
+  sudo apt remove -y nodejs npm libnode-dev libnode72 || true
+  sudo apt autoremove -y || true
+
   curl -fsSL https://deb.nodesource.com/setup_22.x -o /tmp/nodesource_setup.sh
   sudo -E bash /tmp/nodesource_setup.sh
   sudo apt install -y nodejs
