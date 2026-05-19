@@ -103,34 +103,20 @@ if [[ "$SKIP_INSTALL" != "1" ]]; then
   install_node_runtime_if_needed
 
   if [[ "$NODE_UPGRADED" == "1" ]]; then
-    sudo npm i -g pm2 pnpm
+    sudo npm i -g pm2
   elif ! command -v pm2 >/dev/null 2>&1; then
     command -v npm >/dev/null 2>&1 || { echo "未检测到 npm，请先安装 Node.js 20+ / npm" >&2; exit 1; }
     sudo npm i -g pm2
-  fi
-  if [[ "$NODE_UPGRADED" != "1" ]] && ! command -v pnpm >/dev/null 2>&1; then
-    command -v npm >/dev/null 2>&1 || { echo "未检测到 npm，请先安装 Node.js 20+ / npm" >&2; exit 1; }
-    sudo npm i -g pnpm
   fi
 else
   echo "已跳过系统依赖安装"
 fi
 
-echo "[2/5] 检查 Go / pnpm / PM2"
+echo "[2/5] 检查 Go / PM2"
 if ! ensure_go_in_path; then
   echo "未检测到 go。请先安装 Go。" >&2
   exit 1
 fi
-if ! command -v node >/dev/null 2>&1; then
-  echo "未检测到 node。请先安装 Node.js 20+。" >&2
-  exit 1
-fi
-NODE_MAJOR="$(node -p "Number(process.versions.node.split('.')[0])")"
-if [[ "$NODE_MAJOR" -lt 20 ]]; then
-  echo "当前 Node.js 版本过低: $(node -v)。请先安装 Node.js 20+。" >&2
-  exit 1
-fi
-command -v pnpm >/dev/null 2>&1 || { echo "未检测到 pnpm" >&2; exit 1; }
 command -v pm2 >/dev/null 2>&1 || { echo "未检测到 pm2" >&2; exit 1; }
 
 echo "[3/5] 进入项目目录 $DIR"

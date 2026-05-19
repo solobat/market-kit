@@ -39,20 +39,6 @@ ensure_go_in_path() {
   return 1
 }
 
-ensure_node_runtime() {
-  if ! command -v node >/dev/null 2>&1; then
-    echo "未检测到 node，请先安装 Node.js 20+"
-    exit 1
-  fi
-
-  local major
-  major="$(node -p "Number(process.versions.node.split('.')[0])")"
-  if [ "$major" -lt 20 ]; then
-    echo "当前 Node.js 版本过低: $(node -v)，请安装 Node.js 20+"
-    exit 1
-  fi
-}
-
 echo "启动 market-kit..."
 echo ""
 
@@ -66,24 +52,9 @@ if ! ensure_go_in_path; then
   exit 1
 fi
 
-ensure_node_runtime
-
-if ! command -v pnpm >/dev/null 2>&1; then
-  echo "未检测到 pnpm，请先安装 pnpm 或启用 corepack"
-  exit 1
-fi
-
 load_env_file_if_present "$SCRIPT_DIR/.env"
 
 mkdir -p bin logs
-
-echo "构建前端..."
-(
-  cd "$SCRIPT_DIR/frontend"
-  pnpm install --frozen-lockfile
-  pnpm build
-)
-echo "前端构建完成"
 
 BUILD_VERSION="${MARKET_KIT_BUILD_VERSION:-local}"
 BUILD_COMMIT="${MARKET_KIT_BUILD_COMMIT:-$(git rev-parse --short HEAD 2>/dev/null || echo unknown)}"

@@ -334,7 +334,8 @@ chmod +x ./pm2-*.sh ./deploy/deploy_ubuntu_pm2.sh
 ```
 
 On Ubuntu ECS hosts, the helper script installs the lightweight runtime dependencies,
-builds the frontend and Go server, starts or restarts PM2, and checks `/api/healthz`:
+builds the Go API server, starts or restarts PM2, and checks `/api/healthz`. It does
+not build the Svelte frontend; deploy the frontend separately, for example on Vercel:
 
 ```bash
 ./deploy/deploy_ubuntu_pm2.sh --backend-port 18120
