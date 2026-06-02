@@ -21,16 +21,20 @@ import (
 )
 
 type App struct {
-	config            Config
-	client            *http.Client
-	sources           []SyncSource
-	mu                sync.RWMutex
-	baseRegistry      identity.Registry
-	generatedRegistry identity.Registry
-	registry          identity.Registry
-	resolver          *identity.Resolver
-	autoSyncStatus    AutoSyncStatus
-	startedAt         time.Time
+	config                Config
+	client                *http.Client
+	sources               []SyncSource
+	mu                    sync.RWMutex
+	baseRegistry          identity.Registry
+	generatedRegistry     identity.Registry
+	registry              identity.Registry
+	resolver              *identity.Resolver
+	autoSyncStatus        AutoSyncStatus
+	discoveryCache        discovery.ImportEnvelope
+	discoveryCacheSources []SyncSource
+	discoveryCachedAt     time.Time
+	discoveryCacheErr     string
+	startedAt             time.Time
 }
 
 type discoveryScoredGroup struct {
@@ -88,6 +92,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/v1/version", a.handleVersion)
 	mux.HandleFunc("/api/v1/auto-sync", a.handleAutoSync)
 	mux.HandleFunc("/api/discovery/sources", a.handleDiscoverySources)
+	mux.HandleFunc("/api/discovery/current", a.handleDiscoveryCurrent)
 	mux.HandleFunc("/api/discovery/sync", a.handleDiscoverySync)
 	mux.HandleFunc("/api/discovery/lookup", a.handleDiscoveryLookup)
 	mux.HandleFunc("/api/registry", a.handleRegistry)
@@ -256,6 +261,35 @@ func (a *App) handleDiscoverySources(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"sources": items})
 }
 
+func (a *App) handleDiscoveryCurrent(w http.ResponseWriter, r *http.Request) {
+	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
+	if sourceID == "" {
+		sourceID = "all"
+	}
+
+	payload, sources, cachedAt, errText := a.discoveryCacheSnapshot()
+	if len(payload.Items) == 0 || strings.TrimSpace(string(payload.Source)) == "" || (sourceID != "" && !strings.EqualFold(sourceID, string(payload.Source)) && !strings.EqualFold(sourceID, "all")) {
+		if err := a.refreshDiscoveryCache(r.Context(), sourceID); err != nil {
+			a.writeDiscoveryError(w, err)
+			return
+		}
+		payload, sources, cachedAt, errText = a.discoveryCacheSnapshot()
+	}
+	if len(sources) == 0 {
+		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"source":      discoveryLookupSourcePayload(sources),
+		"sources":     discoverySourcePayloads(sources),
+		"payload":     payload,
+		"cachedAt":    cachedAt,
+		"cacheError":  errText,
+		"serverCache": true,
+	})
+}
+
 func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
 	if sourceID == "" {
@@ -407,6 +441,33 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 		GeneratedAt: latestGeneratedAt,
 		Items:       items,
 	}, nil
+}
+
+func (a *App) refreshDiscoveryCache(ctx context.Context, sourceID string) error {
+	sourceID = strings.TrimSpace(sourceID)
+	if sourceID == "" {
+		sourceID = "all"
+	}
+	sources, envelope, err := a.fetchDiscoveryLookupEnvelope(ctx, sourceID)
+	now := time.Now().UTC()
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	if err != nil {
+		a.discoveryCacheErr = err.Error()
+		return err
+	}
+	a.discoveryCacheSources = sources
+	a.discoveryCache = envelope
+	a.discoveryCachedAt = now
+	a.discoveryCacheErr = ""
+	return nil
+}
+
+func (a *App) discoveryCacheSnapshot() (discovery.ImportEnvelope, []SyncSource, time.Time, string) {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	sources := append([]SyncSource(nil), a.discoveryCacheSources...)
+	return a.discoveryCache, sources, a.discoveryCachedAt, a.discoveryCacheErr
 }
 
 func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {

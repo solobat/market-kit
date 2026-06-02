@@ -184,6 +184,9 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		return err
 	}
 	a.applyGeneratedRegistry(next)
+	if err := a.refreshDiscoveryCache(ctx, "all"); err != nil {
+		log.Printf("market-kit discovery cache refresh failed: %v", err)
+	}
 
 	finishedAt := time.Now().UTC()
 	a.updateAutoSyncStatus(func(status *AutoSyncStatus) {

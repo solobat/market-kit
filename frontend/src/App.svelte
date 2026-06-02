@@ -6,10 +6,6 @@
   const registry = loadRegistry();
   const stats = registryStats();
   const allDiscoverySourceId = "all";
-  const discoveryStorageKey = "market-kit.discovery-envelope";
-  const discoveryDBName = "market-kit-cache";
-  const discoveryDBStore = "kv";
-  const discoveryStorageMaxChars = 2_000_000;
   const defaultDiscoveryEnvelope = loadDiscoveryEnvelope();
   const syncConfigKey = "market-kit.sync-config";
   const syncCasesKey = "market-kit.sync-cases";
@@ -580,77 +576,6 @@
     window.localStorage.setItem(syncCasesKey, JSON.stringify(syncedCases));
   }
 
-  function openDiscoveryDB() {
-    return new Promise((resolve, reject) => {
-      if (typeof indexedDB === "undefined") {
-        reject(new Error("IndexedDB is not available"));
-        return;
-      }
-      const request = indexedDB.open(discoveryDBName, 1);
-      request.onupgradeneeded = () => {
-        const db = request.result;
-        if (!db.objectStoreNames.contains(discoveryDBStore)) {
-          db.createObjectStore(discoveryDBStore);
-        }
-      };
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error || new Error("open IndexedDB failed"));
-    });
-  }
-
-  async function readDiscoveryCache() {
-    if (typeof window === "undefined") return null;
-    try {
-      const db = await openDiscoveryDB();
-      const cached = await new Promise((resolve, reject) => {
-        const tx = db.transaction(discoveryDBStore, "readonly");
-        const request = tx.objectStore(discoveryDBStore).get(discoveryStorageKey);
-        request.onsuccess = () => resolve(request.result || null);
-        request.onerror = () => reject(request.error || new Error("read IndexedDB failed"));
-      });
-      db.close();
-      if (cached) return cached;
-    } catch {}
-
-    const legacy = window.localStorage.getItem(discoveryStorageKey);
-    if (!legacy) return null;
-    try {
-      return JSON.parse(legacy);
-    } catch {
-      window.localStorage.removeItem(discoveryStorageKey);
-      return null;
-    }
-  }
-
-  async function persistDiscoveryState() {
-    if (typeof window === "undefined") return "none";
-    try {
-      const db = await openDiscoveryDB();
-      await new Promise((resolve, reject) => {
-        const tx = db.transaction(discoveryDBStore, "readwrite");
-        const request = tx.objectStore(discoveryDBStore).put(discoveryEnvelope, discoveryStorageKey);
-        request.onsuccess = () => resolve();
-        request.onerror = () => reject(request.error || new Error("write IndexedDB failed"));
-      });
-      db.close();
-      window.localStorage.removeItem(discoveryStorageKey);
-      return "indexeddb";
-    } catch {}
-
-    const serialized = JSON.stringify(discoveryEnvelope);
-    if (serialized.length > discoveryStorageMaxChars) {
-      window.localStorage.removeItem(discoveryStorageKey);
-      return "none";
-    }
-    try {
-      window.localStorage.setItem(discoveryStorageKey, serialized);
-      return "localStorage";
-    } catch {
-      window.localStorage.removeItem(discoveryStorageKey);
-      return "none";
-    }
-  }
-
   async function fetchFromEndpoints(endpoints) {
     let lastError = null;
     for (const endpoint of endpoints) {
@@ -732,14 +657,38 @@
         selectedDiscoverySourceId = preferredDiscoveryId;
       }
       if (preferredDiscoveryId && (shouldAutoBootstrap || shouldRefreshDiscoveryEnvelope(preferredDiscoveryId))) {
-        await syncDiscoverySource(preferredDiscoveryId, {
-          loadingMessage: preferredDiscoveryId === allDiscoverySourceId ? "正在加载全部发现市场…" : "正在加载默认发现市场…",
-          fallbackErrorMessage: "自动加载默认发现源失败。"
+        await loadCurrentDiscovery({
+          loadingMessage: "正在读取后端发现市场快照…",
+          fallbackErrorMessage: "读取后端发现市场快照失败。"
         });
       }
     } catch {
       proxyAvailable = false;
       remoteSources = [];
+    }
+  }
+
+  async function loadCurrentDiscovery(options = {}) {
+    const {
+      loadingMessage = "正在读取后端发现市场快照…",
+      fallbackErrorMessage = "读取后端发现市场快照失败。"
+    } = options;
+
+    discoveryState = "loading";
+    discoveryMessage = loadingMessage;
+
+    try {
+      const payload = await fetchFromEndpoints([
+        `/api/discovery/current?source=${encodeURIComponent(allDiscoverySourceId)}`,
+        `/api/discovery/sync?source=${encodeURIComponent(allDiscoverySourceId)}`
+      ]);
+      const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
+      discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
+      discoveryState = "success";
+      discoveryMessage = `已读取后端发现市场快照，共 ${discoveryEnvelope.items.length} 个市场。`;
+    } catch (error) {
+      discoveryState = "error";
+      discoveryMessage = error instanceof Error ? `读取失败：${error.message}` : fallbackErrorMessage;
     }
   }
 
@@ -765,21 +714,17 @@
       const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
       discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
       discoveryState = "success";
-      const cached = await persistDiscoveryState();
-      discoveryMessage = cached !== "none"
-        ? `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场。`
-        : `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场；浏览器缓存不可用，刷新后需要重新同步。`;
+      discoveryMessage = `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场。`;
     } catch (error) {
       discoveryState = "error";
       discoveryMessage = error instanceof Error ? `同步失败：${error.message}` : fallbackErrorMessage;
     }
   }
 
-  async function resetDiscoveryToMock() {
+  function resetDiscoveryToMock() {
     discoveryEnvelope = defaultDiscoveryEnvelope;
     discoveryState = "success";
     discoveryMessage = "已切回仓库内置的本地示例市场清单。";
-    await persistDiscoveryState();
   }
 
   async function syncPresetSource(sourceId = selectedSourceId) {
@@ -845,27 +790,19 @@
   }
 
   onMount(() => {
-    void (async () => {
-      const savedConfig = window.localStorage.getItem(syncConfigKey);
-      const savedCases = window.localStorage.getItem(syncCasesKey);
-      let hasSavedDiscovery = false;
-      if (savedConfig) {
-        try {
-          syncConfig = { ...syncConfig, ...JSON.parse(savedConfig) };
-        } catch {}
-      }
-      if (savedCases) {
-        try {
-          syncedCases = JSON.parse(savedCases);
-        } catch {}
-      }
-      const savedDiscovery = await readDiscoveryCache();
-      if (savedDiscovery) {
-        discoveryEnvelope = savedDiscovery;
-        hasSavedDiscovery = true;
-      }
-      loadRemoteSources({ shouldAutoBootstrap: !hasSavedDiscovery });
-    })();
+    const savedConfig = window.localStorage.getItem(syncConfigKey);
+    const savedCases = window.localStorage.getItem(syncCasesKey);
+    if (savedConfig) {
+      try {
+        syncConfig = { ...syncConfig, ...JSON.parse(savedConfig) };
+      } catch {}
+    }
+    if (savedCases) {
+      try {
+        syncedCases = JSON.parse(savedCases);
+      } catch {}
+    }
+    loadRemoteSources({ shouldAutoBootstrap: true });
   });
 
   applyTheme(theme);

@@ -612,6 +612,68 @@ func TestHandleDiscoverySyncAllSourcesReturnsMergedPayload(t *testing.T) {
 	}
 }
 
+func TestHandleDiscoveryCurrentBuildsServerCachedSnapshot(t *testing.T) {
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				switch req.URL.String() {
+				case "https://example.com/bootstrap.json":
+					return jsonResponse(`{
+					  "source":"market-kit-bootstrap",
+					  "generatedAt":"2026-05-16T00:00:00Z",
+					  "items":[
+					    {"sourceId":"market-kit-bootstrap","platformId":"binance-web3","platform":"Binance Web3","venueType":"web3","marketType":"spot","symbol":"MRVLon","baseAsset":"MRVL","quoteAsset":"USD","assetClassHint":"stock","status":"live"}
+					  ]
+					}`), nil
+				case "https://example.com/slipstream.json":
+					return jsonResponse(`{
+					  "source":"slipstream",
+					  "generatedAt":"2026-05-17T00:00:00Z",
+					  "items":[
+					    {"sourceId":"slipstream","platformId":"binance","platform":"Binance","venueType":"cex","marketType":"perp","symbol":"MRVLUSDT","baseAsset":"MRVL","quoteAsset":"USDT","assetClassHint":"stock","status":"live"}
+					  ]
+					}`), nil
+				default:
+					t.Fatalf("unexpected request: %s %s", req.Method, req.URL.String())
+				}
+				return nil, nil
+			}),
+		},
+		sources: []SyncSource{
+			{ID: "bootstrap-test", Label: "Bootstrap Test", Project: "market-kit", Kind: "discovery", URL: "https://example.com/bootstrap.json"},
+			{ID: "slipstream-test", Label: "Slipstream Test", Project: "slipstream", Kind: "discovery", URL: "https://example.com/slipstream.json"},
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/current", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoveryCurrent(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		ServerCache bool `json:"serverCache"`
+		Payload     struct {
+			Source string `json:"source"`
+			Items  []struct {
+				PlatformID string `json:"platformId"`
+				Symbol     string `json:"symbol"`
+			} `json:"items"`
+		} `json:"payload"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if !payload.ServerCache {
+		t.Fatalf("expected server cache marker")
+	}
+	if payload.Payload.Source != "market-kit-all" || len(payload.Payload.Items) != 2 {
+		t.Fatalf("unexpected current payload: %+v", payload.Payload)
+	}
+}
+
 func TestHandleDiscoveryLookupRecallsNamespacedHIP3MarketBySuffix(t *testing.T) {
 	registry := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{
