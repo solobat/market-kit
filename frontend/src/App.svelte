@@ -5,6 +5,7 @@
 
   const registry = loadRegistry();
   const stats = registryStats();
+  const allDiscoverySourceId = "all";
   const discoveryStorageKey = "market-kit.discovery-envelope";
   const defaultDiscoveryEnvelope = loadDiscoveryEnvelope();
   const syncConfigKey = "market-kit.sync-config";
@@ -318,9 +319,18 @@
 
   function preferredDiscoverySourceId(sources) {
     const rows = Array.isArray(sources) ? sources : [];
+    if (rows.length > 1) return allDiscoverySourceId;
     const builtIn = rows.find((item) => String(item.id || "").trim() === "market-kit-bootstrap");
     if (builtIn?.id) return builtIn.id;
     return rows[0]?.id || "";
+  }
+
+  function shouldRefreshDiscoveryEnvelope(preferredDiscoveryId) {
+    if (!preferredDiscoveryId) return false;
+    const currentSource = String(discoveryEnvelope?.source || "").trim();
+    if (discoveryEnvelope === defaultDiscoveryEnvelope) return true;
+    if (preferredDiscoveryId === allDiscoverySourceId && currentSource !== "market-kit-all") return true;
+    return false;
   }
 
   function formatTime(value) {
@@ -652,16 +662,11 @@
       if (!selectedDiscoverySourceId && preferredDiscoveryId) {
         selectedDiscoverySourceId = preferredDiscoveryId;
       }
-      if (shouldAutoBootstrap && preferredDiscoveryId) {
-        const isUsingDefaultMock =
-          discoveryEnvelope === defaultDiscoveryEnvelope ||
-          JSON.stringify(discoveryEnvelope) === JSON.stringify(defaultDiscoveryEnvelope);
-        if (isUsingDefaultMock) {
-          await syncDiscoverySource(preferredDiscoveryId, {
-            loadingMessage: "正在加载默认发现市场…",
-            fallbackErrorMessage: "自动加载默认发现源失败。"
-          });
-        }
+      if (preferredDiscoveryId && (shouldAutoBootstrap || shouldRefreshDiscoveryEnvelope(preferredDiscoveryId))) {
+        await syncDiscoverySource(preferredDiscoveryId, {
+          loadingMessage: preferredDiscoveryId === allDiscoverySourceId ? "正在加载全部发现市场…" : "正在加载默认发现市场…",
+          fallbackErrorMessage: "自动加载默认发现源失败。"
+        });
       }
     } catch {
       proxyAvailable = false;
@@ -688,7 +693,7 @@
         `/api/discovery/sync?source=${encodeURIComponent(sourceId)}`,
         `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
       ]);
-      const project = payload.source?.project || payload.source?.id || "market-discovery";
+      const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
       discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
       discoveryState = "success";
       discoveryMessage = `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场。`;
@@ -1250,6 +1255,9 @@
                   <select bind:value={selectedDiscoverySourceId}>
                     {#if discoverySources.length === 0}
                       <option value="">暂无发现源</option>
+                    {/if}
+                    {#if discoverySources.length > 1}
+                      <option value={allDiscoverySourceId}>全部发现源（合并）</option>
                     {/if}
                     {#each discoverySources as source}
                       <option value={source.id}>{source.label} ({sourceBadge(source)})</option>

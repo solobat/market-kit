@@ -262,6 +262,24 @@ func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if strings.EqualFold(sourceID, "all") {
+		sources, payload, err := a.fetchDiscoveryLookupEnvelope(r.Context(), sourceID)
+		if err != nil {
+			a.writeDiscoveryError(w, err)
+			return
+		}
+		if len(sources) == 0 {
+			writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{
+			"source":  discoveryLookupSourcePayload(sources),
+			"sources": discoverySourcePayloads(sources),
+			"payload": payload,
+		})
+		return
+	}
+
 	source, payload, err := a.fetchDiscoveryEnvelope(r.Context(), sourceID)
 	if err != nil {
 		a.writeDiscoveryError(w, err)
@@ -327,15 +345,40 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 	items := make([]discovery.ImportedMarket, 0)
 	seen := make(map[string]struct{})
 	var latestGeneratedAt time.Time
-	for _, source := range sources {
-		fetchedSource, envelope, err := a.fetchDiscoveryEnvelope(ctx, source.ID)
-		if err != nil {
-			return nil, discovery.ImportEnvelope{}, err
+
+	type fetchResult struct {
+		index   int
+		source  SyncSource
+		payload discovery.ImportEnvelope
+		err     error
+	}
+	results := make(chan fetchResult, len(sources))
+	for index, source := range sources {
+		go func(index int, source SyncSource) {
+			fetchedSource, envelope, err := a.fetchDiscoveryEnvelope(ctx, source.ID)
+			if err != nil {
+				results <- fetchResult{index: index, err: err}
+				return
+			}
+			results <- fetchResult{index: index, source: fetchedSource, payload: envelope}
+		}(index, source)
+	}
+
+	fetched := make([]fetchResult, len(sources))
+	for range sources {
+		result := <-results
+		if result.err != nil {
+			return nil, discovery.ImportEnvelope{}, result.err
 		}
-		if envelope.GeneratedAt.After(latestGeneratedAt) {
-			latestGeneratedAt = envelope.GeneratedAt
+		fetched[result.index] = result
+	}
+
+	for index, source := range sources {
+		result := fetched[index]
+		if result.payload.GeneratedAt.After(latestGeneratedAt) {
+			latestGeneratedAt = result.payload.GeneratedAt
 		}
-		for _, item := range envelope.Items {
+		for _, item := range result.payload.Items {
 			key := discoveryImportedMarketKey(item)
 			if _, ok := seen[key]; ok {
 				continue
@@ -343,9 +386,10 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 			seen[key] = struct{}{}
 			items = append(items, item)
 		}
-		if source.ID != fetchedSource.ID {
-			source = fetchedSource
+		if source.ID != result.source.ID {
+			source = result.source
 		}
+		sources[index] = source
 	}
 	if latestGeneratedAt.IsZero() {
 		latestGeneratedAt = time.Now().UTC()

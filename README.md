@@ -243,8 +243,8 @@ provides:
 - `POST /api/v1/resolve/batch`
 - `GET /api/registry`
 - `GET /api/discovery/sources`
-- `GET /api/discovery/sync?source=<id>`
-- `GET /api/discovery/lookup?symbol=<symbol>[&source=<id>]`
+- `GET /api/discovery/sync?source=<id|all>`
+- `GET /api/discovery/lookup?symbol=<symbol>[&source=<id|all>]`
 - static hosting for the built `frontend/dist` app
 
 That means online deployment no longer depends on the Vite dev proxy.
@@ -297,13 +297,14 @@ curl 'http://127.0.0.1:18120/api/v1/assets/SPCX'
 
 The older `/api/discovery/*` endpoints are operational review tools. They are useful for discovery sync, candidate grouping, and audit workflows, but production consumers should not depend on them for hot-path identity resolution.
 
-`GET /api/discovery/sync?source=market-kit-bootstrap` will trigger a fresh bootstrap pull from the built-in exchange REST collectors.
+`GET /api/discovery/sync?source=market-kit-bootstrap` will trigger a fresh bootstrap pull from the built-in exchange REST collectors. Use `source=all` to merge every configured discovery source, including `market-kit-bootstrap` and `slipstream-prod`.
 
 `GET /api/discovery/lookup` adds a lightweight presence query layer on top of discovery imports, so you can ask questions such as:
 
 ```bash
 curl 'http://127.0.0.1:18120/api/discovery/lookup?symbol=TSM'
 curl 'http://127.0.0.1:18120/api/discovery/lookup?symbol=DRAM&source=slipstream-prod'
+curl 'http://127.0.0.1:18120/api/discovery/lookup?symbol=MRVL&source=all'
 ```
 
 The response includes:
