@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { buildCandidateGroups, loadDiscoveryEnvelope, normalizeDiscoveryEnvelope } from "./lib/discovery.js";
-  import { loadRegistry, normalizeImportedCases, registryStats, resolveIdentity } from "./lib/identity.js";
+  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity } from "./lib/identity.js";
 
   const registry = loadRegistry();
   const stats = registryStats();
@@ -47,6 +47,19 @@
   let groupMarketTypeFilter = "all";
   let groupExchangeFilter = "all";
   let expandedGroups = {};
+  let symbolQuery = "";
+  let symbolPlatformFilter = ["binance"];
+  let symbolMarketTypeFilter = ["perpetual"];
+  let symbolAssetClassFilter = ["rwa_stock"];
+  let symbolLayerFilter = ["registry", "discovery"];
+  let symbolPresenceEnabled = true;
+  let symbolPresencePlatformFilter = ["binance-web3"];
+  let symbolPresenceMarketTypeFilter = ["spot"];
+  let symbolPresenceAssetClassFilter = ["rwa_stock"];
+  let symbolOutputField = "rawSymbol";
+  let symbolOutputFormat = "quotedCsv";
+  let selectedSymbolIds = new Set();
+  let symbolCopyMessage = "";
   $: discoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
   $: sampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
 
@@ -162,6 +175,63 @@
   $: selectedAssetOverrideExchanges = Array.from(new Set(selectedAssetOverrideRows.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetDiscoveryExchanges = Array.from(new Set(selectedAssetMarkets.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetDiscoveryMarketTypes = Array.from(new Set(selectedAssetMarkets.map((item) => item.marketType).filter(Boolean))).sort();
+  $: symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
+  $: symbolPlatformOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.platform));
+  $: symbolMarketTypeOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.marketType));
+  $: symbolAssetClassOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.assetClass));
+  $: symbolLayerOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.layer));
+  $: symbolPresenceRows = symbolRowsAll.filter((item) =>
+    matchesSymbolFilters(item, {
+      platforms: symbolPresencePlatformFilter,
+      marketTypes: symbolPresenceMarketTypeFilter,
+      assetClasses: symbolPresenceAssetClassFilter,
+      layers: []
+    })
+  );
+  $: symbolPresenceBases = new Set(symbolPresenceRows.map((item) => item.baseAsset).filter(Boolean));
+  $: symbolRows = symbolRowsAll
+    .filter((item) =>
+      matchesSymbolFilters(item, {
+        platforms: symbolPlatformFilter,
+        marketTypes: symbolMarketTypeFilter,
+        assetClasses: symbolAssetClassFilter,
+        layers: symbolLayerFilter
+      })
+    )
+    .filter((item) => !symbolPresenceEnabled || symbolPresenceBases.has(item.baseAsset))
+    .filter((item) => {
+      const query = symbolQuery.trim().toUpperCase();
+      if (!query) return true;
+      return [
+        item.rawSymbol,
+        item.canonicalSymbol,
+        item.baseAsset,
+        item.quoteAsset,
+        item.platform,
+        item.marketType,
+        item.assetClass,
+        item.layer
+      ].some((value) => String(value || "").toUpperCase().includes(query));
+    })
+    .sort((left, right) => {
+      const baseCompare = String(left.baseAsset || "").localeCompare(String(right.baseAsset || ""));
+      if (baseCompare !== 0) return baseCompare;
+      const platformCompare = String(left.platform || "").localeCompare(String(right.platform || ""));
+      if (platformCompare !== 0) return platformCompare;
+      return String(left.rawSymbol || "").localeCompare(String(right.rawSymbol || ""));
+    });
+  $: {
+    const visibleIds = new Set(symbolRows.map((item) => item.id));
+    const nextSelected = Array.from(selectedSymbolIds).filter((id) => visibleIds.has(id));
+    if (nextSelected.length !== selectedSymbolIds.size) {
+      selectedSymbolIds = new Set(nextSelected);
+    }
+  }
+  $: selectedSymbolRows = symbolRows.filter((item) => selectedSymbolIds.has(item.id));
+  $: generatedSymbolText = buildGeneratedSymbolText(selectedSymbolRows, symbolOutputField, symbolOutputFormat);
+  $: symbolSelectedCount = selectedSymbolIds.size;
+  $: symbolBaseCount = new Set(symbolRows.map((item) => item.baseAsset).filter(Boolean)).size;
+  $: symbolPresenceBaseCount = symbolPresenceBases.size;
 
   function applyTheme(next) {
     theme = next;
@@ -199,11 +269,20 @@
     selectedAssetCanonical = String(canonical || "").trim().toUpperCase();
   }
 
+  function openAssetDetail(canonical) {
+    selectAsset(canonical);
+    page = "asset-detail";
+  }
+
   function handleAssetCardKeydown(event, canonical) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      selectAsset(canonical);
+      openAssetDetail(canonical);
     }
+  }
+
+  function backToRegistry() {
+    page = "registry";
   }
 
   function openSelectedAssetGroups() {
@@ -213,7 +292,9 @@
   }
 
   function pageLabel(value) {
+    if (value === "asset-detail") return selectedAsset?.canonical ? `${selectedAsset.canonical} 详情` : "标的详情";
     if (value === "groups") return "候选分组";
+    if (value === "symbols") return "Symbol 生成器";
     if (value === "samples") return "待补样本";
     if (value === "playground") return "解析试验台";
     if (value === "rules") return "规则检视";
@@ -274,6 +355,210 @@
     groupAssetClassFilter = "all";
     groupMarketTypeFilter = "all";
     groupExchangeFilter = "all";
+  }
+
+  function buildSymbolRows(registryInput, groups) {
+    const assetClassIndex = new Map(
+      (registryInput.asset_aliases || []).map((item) => [
+        String(item.canonical || "").trim().toUpperCase(),
+        String(item.asset_class || "unknown").trim() || "unknown"
+      ])
+    );
+    const rows = [];
+    const seen = new Set();
+
+    for (const item of registryInput.market_overrides || []) {
+      const canonicalSymbol = String(item.canonical_symbol || "").trim().toUpperCase();
+      const [baseAsset = "", quoteAsset = ""] = canonicalSymbol.split("/");
+      const row = {
+        id: `registry:${item.exchange}:${item.market_type}:${item.raw_symbol}`,
+        layer: "registry",
+        platform: normalizeExchange(item.exchange),
+        platformLabel: platformLabel(normalizeExchange(item.exchange)),
+        venueType: "registry",
+        marketType: normalizeMarketType(item.market_type) || String(item.market_type || "").trim().toLowerCase(),
+        rawSymbol: String(item.raw_symbol || "").trim(),
+        canonicalSymbol,
+        baseAsset,
+        quoteAsset,
+        assetClass: assetClassIndex.get(baseAsset) || "unknown",
+        chain: "",
+        status: "",
+        sourceId: "registry"
+      };
+      appendUniqueSymbolRow(rows, seen, row);
+    }
+
+    for (const group of groups || []) {
+      for (const market of group.markets || []) {
+        const baseAsset = String(market.baseAsset || group.canonicalAsset || "").trim().toUpperCase();
+        const quoteAsset = String(market.quoteAsset || group.quoteAsset || "").trim().toUpperCase();
+        const platform = normalizeExchange(market.exchange || market.platform);
+        const row = {
+          id: `discovery:${platform}:${market.marketType}:${market.rawSymbol}:${baseAsset}:${quoteAsset}:${market.chain || ""}`,
+          layer: "discovery",
+          platform,
+          platformLabel: platformLabel(platform),
+          venueType: String(market.venueType || "").trim().toLowerCase(),
+          marketType: normalizeMarketType(market.marketType) || String(market.marketType || "").trim().toLowerCase(),
+          rawSymbol: String(market.rawSymbol || "").trim(),
+          canonicalSymbol: String(market.canonicalSymbol || (baseAsset && quoteAsset ? `${baseAsset}/${quoteAsset}` : "")).trim().toUpperCase(),
+          baseAsset,
+          quoteAsset,
+          assetClass: String(market.assetClass || group.assetClass || assetClassIndex.get(baseAsset) || "unknown").trim(),
+          chain: String(market.chain || "").trim(),
+          status: String(market.status || "").trim().toLowerCase(),
+          sourceId: String(market.sourceId || "").trim()
+        };
+        appendUniqueSymbolRow(rows, seen, row);
+      }
+    }
+
+    return rows;
+  }
+
+  function appendUniqueSymbolRow(rows, seen, row) {
+    if (!row.rawSymbol || !row.baseAsset) return;
+    const key = [
+      row.layer,
+      row.platform,
+      row.marketType,
+      row.rawSymbol.toUpperCase(),
+      row.baseAsset,
+      row.quoteAsset,
+      row.chain
+    ].join("|");
+    if (seen.has(key)) return;
+    seen.add(key);
+    rows.push({ ...row, id: key });
+  }
+
+  function uniqueSymbolOptions(values) {
+    return Array.from(new Set(values.map((value) => String(value || "").trim()).filter(Boolean))).sort();
+  }
+
+  function matchesSymbolFilters(item, filters) {
+    return (
+      matchesFilterValue(item.platform, filters.platforms) &&
+      matchesFilterValue(item.marketType, filters.marketTypes) &&
+      matchesFilterValue(item.assetClass, filters.assetClasses) &&
+      matchesFilterValue(item.layer, filters.layers)
+    );
+  }
+
+  function matchesFilterValue(value, selected) {
+    if (!selected?.length) return true;
+    return selected.includes(String(value || "").trim());
+  }
+
+  function toggleArrayValue(values, value) {
+    const normalized = String(value || "").trim();
+    if (!normalized) return values;
+    return values.includes(normalized)
+      ? values.filter((item) => item !== normalized)
+      : [...values, normalized];
+  }
+
+  function platformLabel(value) {
+    if (value === "binance") return "Binance";
+    if (value === "binance-web3") return "Binance Web3 / Ondo";
+    if (value === "hyperliquid") return "Hyperliquid";
+    if (value === "bitget") return "Bitget";
+    if (value === "bybit") return "Bybit";
+    if (value === "okx") return "OKX";
+    if (value === "gate") return "Gate";
+    return value || "unknown";
+  }
+
+  function layerLabel(value) {
+    if (value === "registry") return "Registry";
+    if (value === "discovery") return "Discovery";
+    return value || "Unknown";
+  }
+
+  function toggleSymbolRow(id) {
+    const next = new Set(selectedSymbolIds);
+    if (next.has(id)) {
+      next.delete(id);
+    } else {
+      next.add(id);
+    }
+    selectedSymbolIds = next;
+  }
+
+  function selectAllSymbolRows() {
+    selectedSymbolIds = new Set(symbolRows.map((item) => item.id));
+  }
+
+  function deselectAllSymbolRows() {
+    selectedSymbolIds = new Set();
+  }
+
+  function invertSymbolSelection() {
+    const next = new Set();
+    for (const item of symbolRows) {
+      if (!selectedSymbolIds.has(item.id)) {
+        next.add(item.id);
+      }
+    }
+    selectedSymbolIds = next;
+  }
+
+  function applyStockPerpOndoPreset() {
+    symbolQuery = "";
+    symbolPlatformFilter = ["binance"];
+    symbolMarketTypeFilter = ["perpetual"];
+    symbolAssetClassFilter = ["rwa_stock"];
+    symbolLayerFilter = ["registry", "discovery"];
+    symbolPresenceEnabled = true;
+    symbolPresencePlatformFilter = ["binance-web3"];
+    symbolPresenceMarketTypeFilter = ["spot"];
+    symbolPresenceAssetClassFilter = ["rwa_stock"];
+    symbolOutputField = "rawSymbol";
+    symbolOutputFormat = "quotedCsv";
+    selectedSymbolIds = new Set();
+    symbolCopyMessage = "";
+  }
+
+  function resetSymbolFilters() {
+    symbolQuery = "";
+    symbolPlatformFilter = [];
+    symbolMarketTypeFilter = [];
+    symbolAssetClassFilter = [];
+    symbolLayerFilter = ["registry", "discovery"];
+    symbolPresenceEnabled = false;
+    symbolPresencePlatformFilter = [];
+    symbolPresenceMarketTypeFilter = [];
+    symbolPresenceAssetClassFilter = [];
+    selectedSymbolIds = new Set();
+    symbolCopyMessage = "";
+  }
+
+  function symbolOutputValue(row, field) {
+    if (field === "baseAsset") return row.baseAsset;
+    if (field === "canonicalSymbol") return row.canonicalSymbol;
+    return row.rawSymbol;
+  }
+
+  function buildGeneratedSymbolText(rows, field, format) {
+    const values = Array.from(new Set(rows.map((row) => symbolOutputValue(row, field)).filter(Boolean))).sort();
+    if (format === "json") return JSON.stringify(values, null, 2);
+    if (format === "lines") return values.join("\n");
+    if (format === "csv") return values.join(",");
+    return values.map((value) => `"${value}"`).join(",");
+  }
+
+  async function copyGeneratedSymbolText() {
+    if (!generatedSymbolText) {
+      symbolCopyMessage = "先选择至少一个 symbol。";
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(generatedSymbolText);
+      symbolCopyMessage = `已复制 ${selectedSymbolRows.length} 项。`;
+    } catch {
+      symbolCopyMessage = "复制失败，请手动选中文本。";
+    }
   }
 
   function persistSyncState() {
@@ -529,9 +814,10 @@
     </div>
 
     <nav class="rail__nav">
-      <button class:active={page === "registry"} on:click={() => (page = "registry")}>Registry</button>
+      <button class:active={page === "registry" || page === "asset-detail"} on:click={() => (page = "registry")}>Registry</button>
       <button class:active={page === "rules"} on:click={() => (page = "rules")}>规则检视</button>
       <button class:active={page === "groups"} on:click={() => (page = "groups")}>候选分组</button>
+      <button class:active={page === "symbols"} on:click={() => (page = "symbols")}>Symbol 生成器</button>
       <button class:active={page === "samples"} on:click={() => (page = "samples")}>待补样本</button>
       <button class:active={page === "playground"} on:click={() => (page = "playground")}>解析试验台</button>
     </nav>
@@ -566,6 +852,10 @@
         <strong>{discoveryMarketCount}</strong>
       </div>
       <div class="mini-stat">
+        <span>Symbols</span>
+        <strong>{symbolRows.length}</strong>
+      </div>
+      <div class="mini-stat">
         <span>待复核组</span>
         <strong>{reviewGroupCount}</strong>
       </div>
@@ -598,7 +888,7 @@
     </section>
 
     {#if page === "registry"}
-      <section class="grid">
+      <section class="grid grid--registry">
         <article class="panel">
           <div class="panel__head">
             <div>
@@ -644,7 +934,7 @@
                   role="button"
                   tabindex="0"
                   aria-pressed={selectedAsset?.canonical === asset.canonical}
-                  on:click={() => selectAsset(asset.canonical)}
+                  on:click={() => openAssetDetail(asset.canonical)}
                   on:keydown={(event) => handleAssetCardKeydown(event, asset.canonical)}
                 >
                   <div class="asset-card__top">
@@ -656,7 +946,7 @@
                       </div>
                     </div>
                     <div class="asset-card__meta">
-                      <span class="asset-meta-pill asset-meta-pill--action">{selectedAsset?.canonical === asset.canonical ? "详情中" : "查看详情"}</span>
+                      <span class="asset-meta-pill asset-meta-pill--action">查看详情</span>
                       <span class="asset-meta-pill">aliases {totalAssetAliasCount(asset)}</span>
                       {#if asset.unit_aliases?.length}
                         <span class="asset-meta-pill asset-meta-pill--unit">unit aliases {asset.unit_aliases.length}</span>
@@ -688,7 +978,7 @@
                   </div>
 
                   <div class="asset-card__hint">
-                    <span>{selectedAsset?.canonical === asset.canonical ? "当前正在查看这个标的详情" : "点击卡片，在右侧查看标的详情"}</span>
+                    <span>点击进入二级详情页</span>
                   </div>
                 </div>
               {/each}
@@ -705,48 +995,71 @@
           <article class="panel">
             <div class="panel__head">
               <div>
-                <div class="eyebrow">Asset Detail</div>
-                <h3>标的详情</h3>
+                <div class="eyebrow">Exchange Aliases</div>
+                <h3>交易所别名</h3>
               </div>
-              {#if selectedAsset}
-                <button class="detail-link-button" on:click={openSelectedAssetGroups}>查看候选分组</button>
-              {/if}
             </div>
+            <div class="alias-table">
+              {#each Object.entries(registry.exchange_aliases || {}) as [source, target]}
+                <div class="alias-row">
+                  <div class="alias-row__side">
+                    <span class="alias-label">input</span>
+                    <code>{source}</code>
+                  </div>
+                  <div class="override-row__arrow">→</div>
+                  <div class="alias-row__side alias-row__side--target">
+                    <span class="alias-label">canonical</span>
+                    <strong>{target}</strong>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </article>
+        </div>
+      </section>
+    {/if}
 
-            {#if selectedAsset}
+    {#if page === "asset-detail"}
+      <section class="asset-detail-page">
+        <article class="panel detail-page-header">
+          <button class="back-button" on:click={backToRegistry}>← 返回 Registry</button>
+          {#if selectedAsset}
+            <div class="detail-page-title">
+              <div class="eyebrow">Asset Detail</div>
+              <h3>{selectedAsset.canonical} 市场身份详情</h3>
+              <div class="detail-chip-row">
+                <span class="asset-class-badge">{assetClassLabel(selectedAsset.asset_class)}</span>
+                <span class="asset-meta-pill">plain aliases {selectedAsset.aliases?.length || 0}</span>
+                <span class="asset-meta-pill asset-meta-pill--unit">unit aliases {selectedAsset.unit_aliases?.length || 0}</span>
+              </div>
+            </div>
+            <div class="detail-page-actions">
+              <button class="detail-link-button" on:click={openSelectedAssetGroups}>查看候选分组</button>
+              <button class="detail-link-button detail-link-button--ghost" on:click={() => {
+                page = "rules";
+                overrideQuery = selectedAsset.canonical;
+              }}>查看规则</button>
+            </div>
+          {:else}
+            <div class="detail-page-title">
+              <div class="eyebrow">Asset Detail</div>
+              <h3>未选择标的</h3>
+            </div>
+          {/if}
+        </article>
+
+        {#if selectedAsset}
+          <div class="detail-page-grid">
+            <article class="panel detail-page-main">
               <div class="detail-stack">
-                <div class="detail-hero" data-asset-class={selectedAsset.asset_class}>
+                <div class="detail-hero detail-hero--page" data-asset-class={selectedAsset.asset_class}>
                   <div class="detail-hero__identity">
                     <span class="detail-kicker">Canonical Asset</span>
                     <strong>{selectedAsset.canonical}</strong>
-                    <div class="detail-chip-row">
-                      <span class="asset-class-badge">{assetClassLabel(selectedAsset.asset_class)}</span>
-                      <span class="asset-meta-pill">plain aliases {selectedAsset.aliases?.length || 0}</span>
-                      <span class="asset-meta-pill asset-meta-pill--unit">unit aliases {selectedAsset.unit_aliases?.length || 0}</span>
-                    </div>
                   </div>
                   <p class="detail-copy">
                     当前详情会把这个标的在 registry 里的 alias、单位换算、显式 override，以及已导入 discovery 市场中的平台分布放到一起看。
                   </p>
-                </div>
-
-                <div class="detail-stat-grid">
-                  <div class="detail-stat">
-                    <span>Registry Overrides</span>
-                    <strong>{selectedAssetOverrideRows.length}</strong>
-                  </div>
-                  <div class="detail-stat">
-                    <span>Override Exchanges</span>
-                    <strong>{selectedAssetOverrideExchanges.length}</strong>
-                  </div>
-                  <div class="detail-stat">
-                    <span>Discovery Markets</span>
-                    <strong>{selectedAssetMarkets.length}</strong>
-                  </div>
-                  <div class="detail-stat">
-                    <span>Discovery Exchanges</span>
-                    <strong>{selectedAssetDiscoveryExchanges.length}</strong>
-                  </div>
                 </div>
 
                 <section class="detail-section">
@@ -786,8 +1099,8 @@
                         <span class="asset-summary-chip">{quote}</span>
                       {/each}
                     </div>
-                    <div class="detail-market-list">
-                      {#each selectedAssetOverrideRows.slice(0, 12) as item}
+                    <div class="detail-market-list detail-market-list--page">
+                      {#each selectedAssetOverrideRows as item}
                         <div class="detail-market-row">
                           <div>
                             <div class="override-row__title">{item.exchange} · {item.market_type}</div>
@@ -797,9 +1110,6 @@
                         </div>
                       {/each}
                     </div>
-                    {#if selectedAssetOverrideRows.length > 12}
-                      <p class="detail-note">这里只先展示前 12 条 override，更多规则可以去“规则检视”页按 {selectedAsset.canonical} 搜索。</p>
-                    {/if}
                   {:else}
                     <div class="detail-empty">
                       <strong>当前没有显式 override。</strong>
@@ -807,81 +1117,77 @@
                     </div>
                   {/if}
                 </section>
+              </div>
+            </article>
 
-                <section class="detail-section">
-                  <div class="detail-section__head">
-                    <strong>Discovery Presence</strong>
-                    <span>当前导入市场里，这个标的出现在哪些平台</span>
-                  </div>
-                  {#if selectedAssetMarkets.length}
-                    <div class="detail-chip-row">
-                      {#each selectedAssetDiscoveryExchanges as exchange}
-                        <span class="asset-summary-chip">{exchange}</span>
-                      {/each}
-                      {#each selectedAssetDiscoveryMarketTypes as marketType}
-                        <span class="asset-summary-chip asset-summary-chip--active">{marketType}</span>
-                      {/each}
-                    </div>
-                    <div class="detail-market-list">
-                      {#each selectedAssetMarkets.slice(0, 12) as market}
-                        <div class="detail-market-row">
-                          <div>
-                            <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"}</div>
-                            <div class="detail-market-row__symbol">{market.rawSymbol}</div>
-                          </div>
-                          <div class="detail-market-row__target">{market.canonicalSymbol}</div>
-                        </div>
-                      {/each}
-                    </div>
-                    {#if selectedAssetMarkets.length > 12}
-                      <p class="detail-note">已导入市场超过 12 条，点“查看候选分组”可以继续展开审查。</p>
-                    {/if}
-                  {:else}
-                    <div class="detail-empty">
-                      <strong>当前 discovery 里还没看到这个标的。</strong>
-                      <p>
-                        {#if proxyAvailable}
-                          先去“候选分组”页同步发现市场，详情面板就会自动带出它的平台分布。
-                        {:else}
-                          当前还是本地 mock discovery，接上发现源后这里会更完整。
-                        {/if}
-                      </p>
-                    </div>
-                  {/if}
-                </section>
-              </div>
-            {:else}
-              <div class="detail-empty">
-                <strong>还没有可查看的标的。</strong>
-                <p>左侧出现资产后，点任意卡片就能在这里看详情。</p>
-              </div>
-            {/if}
-          </article>
-
-          <article class="panel">
-            <div class="panel__head">
-              <div>
-                <div class="eyebrow">Exchange Aliases</div>
-                <h3>交易所别名</h3>
-              </div>
-            </div>
-            <div class="alias-table">
-              {#each Object.entries(registry.exchange_aliases || {}) as [source, target]}
-                <div class="alias-row">
-                  <div class="alias-row__side">
-                    <span class="alias-label">input</span>
-                    <code>{source}</code>
-                  </div>
-                  <div class="override-row__arrow">→</div>
-                  <div class="alias-row__side alias-row__side--target">
-                    <span class="alias-label">canonical</span>
-                    <strong>{target}</strong>
-                  </div>
+            <aside class="panel detail-page-side">
+              <div class="detail-stat-grid detail-stat-grid--page">
+                <div class="detail-stat">
+                  <span>Registry Overrides</span>
+                  <strong>{selectedAssetOverrideRows.length}</strong>
                 </div>
-              {/each}
+                <div class="detail-stat">
+                  <span>Override Exchanges</span>
+                  <strong>{selectedAssetOverrideExchanges.length}</strong>
+                </div>
+                <div class="detail-stat">
+                  <span>Discovery Markets</span>
+                  <strong>{selectedAssetMarkets.length}</strong>
+                </div>
+                <div class="detail-stat">
+                  <span>Discovery Exchanges</span>
+                  <strong>{selectedAssetDiscoveryExchanges.length}</strong>
+                </div>
+              </div>
+
+              <section class="detail-section">
+                <div class="detail-section__head">
+                  <strong>Discovery Presence</strong>
+                  <span>当前导入市场里，这个标的出现在哪些平台</span>
+                </div>
+                {#if selectedAssetMarkets.length}
+                  <div class="detail-chip-row">
+                    {#each selectedAssetDiscoveryExchanges as exchange}
+                      <span class="asset-summary-chip">{exchange}</span>
+                    {/each}
+                    {#each selectedAssetDiscoveryMarketTypes as marketType}
+                      <span class="asset-summary-chip asset-summary-chip--active">{marketType}</span>
+                    {/each}
+                  </div>
+                  <div class="detail-market-list">
+                    {#each selectedAssetMarkets as market}
+                      <div class="detail-market-row detail-market-row--compact">
+                        <div>
+                          <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"}</div>
+                          <div class="detail-market-row__symbol">{market.rawSymbol}</div>
+                        </div>
+                        <div class="detail-market-row__target">{market.canonicalSymbol}</div>
+                      </div>
+                    {/each}
+                  </div>
+                {:else}
+                  <div class="detail-empty">
+                    <strong>当前 discovery 里还没看到这个标的。</strong>
+                    <p>
+                      {#if proxyAvailable}
+                        去“候选分组”或“Symbol 生成器”同步发现市场后，这里会自动带出平台分布。
+                      {:else}
+                        当前还是本地 mock discovery，接上发现源后这里会更完整。
+                      {/if}
+                    </p>
+                  </div>
+                {/if}
+              </section>
+            </aside>
+          </div>
+        {:else}
+          <article class="panel">
+            <div class="detail-empty">
+              <strong>还没有可查看的标的。</strong>
+              <p>回到 Registry，点任意资产卡片进入详情。</p>
             </div>
           </article>
-        </div>
+        {/if}
       </section>
     {/if}
 
@@ -1158,6 +1464,255 @@
               <strong>当前版本的聚合依据</strong>
               <p>第一版主要依据显式 base/quote、market type、交易所别名和 resolver 结果，不用价格做主键。价格以后只作为辅助证据。</p>
             </div>
+          </div>
+        </article>
+      </section>
+    {/if}
+
+    {#if page === "symbols"}
+      <section class="grid grid--symbols">
+        <article class="panel symbol-panel">
+          <div class="panel__head">
+            <div>
+              <div class="eyebrow">Symbol Lab</div>
+              <h3>Symbol 生成器</h3>
+            </div>
+            <div class="group-toolbar__stats group-toolbar__stats--head">
+              <strong>{symbolRows.length}</strong>
+              <span>当前结果</span>
+            </div>
+          </div>
+
+          <div class="symbol-lab-brief">
+            <div>
+              <strong>从 registry 与 discovery 组合筛 symbol</strong>
+              <p>主筛选决定输出列表，交集条件用于限定 underlying 必须也存在于另一组市场。</p>
+            </div>
+            <button class="sync-button sync-button--secondary" on:click={applyStockPerpOndoPreset}>
+              Binance Stock Perp ∩ Ondo
+            </button>
+          </div>
+
+          <div class="symbol-filter-stack">
+            <label>
+              <span>检索</span>
+              <input bind:value={symbolQuery} placeholder="AAPL / AAPLUSDT / binance-web3" />
+            </label>
+
+            <div class="symbol-filter-section">
+              <div class="symbol-filter-section__head">
+                <strong>主筛选</strong>
+                <button class="tiny-button" on:click={() => {
+                  symbolPlatformFilter = [];
+                  symbolMarketTypeFilter = [];
+                  symbolAssetClassFilter = [];
+                }}>全部</button>
+              </div>
+
+              <div class="symbol-filter-group">
+                <span>平台</span>
+                <div class="filter-chip-row">
+                  {#each symbolPlatformOptions as platform}
+                    <button
+                      class:active={symbolPlatformFilter.includes(platform)}
+                      class="filter-chip"
+                      on:click={() => (symbolPlatformFilter = toggleArrayValue(symbolPlatformFilter, platform))}
+                    >
+                      {platformLabel(platform)}
+                    </button>
+                  {/each}
+                </div>
+              </div>
+
+              <div class="symbol-filter-group">
+                <span>市场类型</span>
+                <div class="filter-chip-row">
+                  {#each symbolMarketTypeOptions as marketType}
+                    <button
+                      class:active={symbolMarketTypeFilter.includes(marketType)}
+                      class="filter-chip"
+                      on:click={() => (symbolMarketTypeFilter = toggleArrayValue(symbolMarketTypeFilter, marketType))}
+                    >
+                      {marketType}
+                    </button>
+                  {/each}
+                </div>
+              </div>
+
+              <div class="symbol-filter-group">
+                <span>资产类别</span>
+                <div class="filter-chip-row">
+                  {#each symbolAssetClassOptions as assetClass}
+                    <button
+                      class:active={symbolAssetClassFilter.includes(assetClass)}
+                      class="filter-chip"
+                      on:click={() => (symbolAssetClassFilter = toggleArrayValue(symbolAssetClassFilter, assetClass))}
+                    >
+                      {assetClassLabel(assetClass)}
+                    </button>
+                  {/each}
+                </div>
+              </div>
+
+              <div class="symbol-filter-group">
+                <span>数据层</span>
+                <div class="filter-chip-row">
+                  {#each symbolLayerOptions as layer}
+                    <button
+                      class:active={symbolLayerFilter.includes(layer)}
+                      class="filter-chip"
+                      on:click={() => (symbolLayerFilter = toggleArrayValue(symbolLayerFilter, layer))}
+                    >
+                      {layerLabel(layer)}
+                    </button>
+                  {/each}
+                </div>
+              </div>
+            </div>
+
+            <div class="symbol-filter-section symbol-filter-section--presence">
+              <div class="symbol-filter-section__head">
+                <label class="inline-toggle">
+                  <input type="checkbox" bind:checked={symbolPresenceEnabled} />
+                  <span>启用交集条件</span>
+                </label>
+                <span class="asset-summary-chip">{symbolPresenceBaseCount} 个 underlying</span>
+              </div>
+
+              <div class="symbol-filter-group">
+                <span>必须存在的平台</span>
+                <div class="filter-chip-row">
+                  {#each symbolPlatformOptions as platform}
+                    <button
+                      class:active={symbolPresencePlatformFilter.includes(platform)}
+                      class="filter-chip"
+                      on:click={() => (symbolPresencePlatformFilter = toggleArrayValue(symbolPresencePlatformFilter, platform))}
+                    >
+                      {platformLabel(platform)}
+                    </button>
+                  {/each}
+                </div>
+              </div>
+
+              <div class="symbol-filter-grid">
+                <label>
+                  <span>存在市场类型</span>
+                  <select value={symbolPresenceMarketTypeFilter[0] || ""} on:change={(event) => (symbolPresenceMarketTypeFilter = event.currentTarget.value ? [event.currentTarget.value] : [])}>
+                    <option value="">全部</option>
+                    {#each symbolMarketTypeOptions as marketType}
+                      <option value={marketType}>{marketType}</option>
+                    {/each}
+                  </select>
+                </label>
+                <label>
+                  <span>存在资产类别</span>
+                  <select value={symbolPresenceAssetClassFilter[0] || ""} on:change={(event) => (symbolPresenceAssetClassFilter = event.currentTarget.value ? [event.currentTarget.value] : [])}>
+                    <option value="">全部</option>
+                    {#each symbolAssetClassOptions as assetClass}
+                      <option value={assetClass}>{assetClassLabel(assetClass)}</option>
+                    {/each}
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="symbol-filter-grid">
+              <label>
+                <span>输出字段</span>
+                <select bind:value={symbolOutputField}>
+                  <option value="rawSymbol">Raw Symbol</option>
+                  <option value="canonicalSymbol">Canonical Symbol</option>
+                  <option value="baseAsset">Base Asset</option>
+                </select>
+              </label>
+              <label>
+                <span>输出格式</span>
+                <select bind:value={symbolOutputFormat}>
+                  <option value="quotedCsv">"A","B"</option>
+                  <option value="csv">A,B</option>
+                  <option value="lines">逐行</option>
+                  <option value="json">JSON Array</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="sync-button sync-button--ghost" on:click={resetSymbolFilters}>清空筛选</button>
+              {#if proxyAvailable}
+                <button class="sync-button sync-button--secondary" on:click={() => syncDiscoverySource()} disabled={discoveryState === "loading" || !selectedDiscoverySourceId}>
+                  {discoveryState === "loading" ? "同步中…" : "同步发现市场"}
+                </button>
+              {/if}
+            </div>
+          </div>
+        </article>
+
+        <article class="panel symbol-results-panel">
+          <div class="panel__head">
+            <div>
+              <div class="eyebrow">Generated Set</div>
+              <h3>{symbolBaseCount} 个 underlying</h3>
+            </div>
+            <div class="group-toolbar__stats group-toolbar__stats--head">
+              <strong>{symbolSelectedCount}</strong>
+              <span>已选</span>
+            </div>
+          </div>
+
+          <div class="symbol-summary-strip">
+            <span class="asset-summary-chip asset-summary-chip--active">Rows {symbolRows.length}</span>
+            <span class="asset-summary-chip">Presence {symbolPresenceEnabled ? "on" : "off"}</span>
+            <span class="asset-summary-chip">{discoveryEnvelope?.source || "mock-discovery"}</span>
+          </div>
+
+          <div class="button-row symbol-selection-actions">
+            <button class="sync-button sync-button--secondary" on:click={selectAllSymbolRows}>全选当前结果</button>
+            <button class="sync-button sync-button--ghost" on:click={invertSymbolSelection}>反选</button>
+            <button class="sync-button sync-button--ghost" on:click={deselectAllSymbolRows}>取消选择</button>
+          </div>
+
+          <div class="symbol-list">
+            {#if symbolRows.length}
+              {#each symbolRows as item}
+                <button
+                  class="symbol-row"
+                  class:selected={selectedSymbolIds.has(item.id)}
+                  on:click={() => toggleSymbolRow(item.id)}
+                >
+                  <div class="symbol-row__main">
+                    <div class="symbol-row__title">
+                      <strong>{item.rawSymbol}</strong>
+                      <span>{item.baseAsset}</span>
+                    </div>
+                    <div class="symbol-row__meta">
+                      <span>{item.platformLabel}</span>
+                      <span>{item.marketType}</span>
+                      <span>{assetClassLabel(item.assetClass)}</span>
+                      <span>{layerLabel(item.layer)}</span>
+                    </div>
+                  </div>
+                  <div class="symbol-row__target">{item.canonicalSymbol}</div>
+                </button>
+              {/each}
+            {:else}
+              <div class="empty-state">
+                <strong>没有匹配的 symbol。</strong>
+                <p>如果你在等 Binance Web3/Ondo 列表，先同步最新 discovery，或放宽交集条件看主筛选是否有结果。</p>
+              </div>
+            {/if}
+          </div>
+
+          <div class="generated-box">
+            <div class="generated-box__head">
+              <strong>生成结果</strong>
+              <div class="button-row">
+                <button class="sync-button sync-button--secondary" on:click={copyGeneratedSymbolText}>复制</button>
+              </div>
+            </div>
+            <pre>{generatedSymbolText || "选择 symbol 后生成文本"}</pre>
+            {#if symbolCopyMessage}
+              <p>{symbolCopyMessage}</p>
+            {/if}
           </div>
         </article>
       </section>

@@ -556,7 +556,7 @@ go run ./cmd/market-kit-bootstrap-discovery \
 
 Optional flags:
 
-- `--sources binance,bybit,okx`
+- `--sources binance,binance-web3,bybit,okx`
   - fetch only selected exchanges
 - `--timeout 30s`
   - override upstream request timeout
@@ -589,7 +589,7 @@ You can limit direct collectors while testing:
 ```bash
 go run ./cmd/market-kit-curate-slipstream \
   --bootstrap \
-  --sources binance,bybit,okx,bitget,gate,hyperliquid \
+  --sources binance,binance-web3,bybit,okx,bitget,gate,hyperliquid \
   --output identity/generated_registry.json
 ```
 

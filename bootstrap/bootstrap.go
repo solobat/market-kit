@@ -18,6 +18,8 @@ const (
 	BuiltInSourceID    = "market-kit-bootstrap"
 	BuiltInSourceLabel = "交易所直连启动数据"
 	BuiltInSourceURL   = "builtin:bootstrap"
+
+	binanceWeb3OndoStockURL = "https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai"
 )
 
 type collector struct {
@@ -25,6 +27,31 @@ type collector struct {
 	label   string
 	fetch   func(context.Context, *http.Client) ([]discovery.ImportedMarket, error)
 	enabled bool
+}
+
+type binanceWeb3StockToken struct {
+	Ticker             string `json:"ticker"`
+	UnderlyingSymbol   string `json:"underlyingSymbol"`
+	StockSymbol        string `json:"stockSymbol"`
+	AssetSymbol        string `json:"assetSymbol"`
+	Symbol             string `json:"symbol"`
+	TokenSymbol        string `json:"tokenSymbol"`
+	Name               string `json:"name"`
+	TokenName          string `json:"tokenName"`
+	QuoteAsset         string `json:"quoteAsset"`
+	QuoteSymbol        string `json:"quoteSymbol"`
+	ChainID            string `json:"chainId"`
+	ChainName          string `json:"chainName"`
+	ContractAddress    string `json:"contractAddress"`
+	Contract           string `json:"contract"`
+	Type               any    `json:"type"`
+	Status             string `json:"status"`
+	TradingStatus      string `json:"tradingStatus"`
+	ExternalURL        string `json:"externalUrl"`
+	URL                string `json:"url"`
+	Provider           string `json:"provider"`
+	UnderlyingCategory string `json:"underlyingCategory"`
+	Category           string `json:"category"`
 }
 
 func FetchDefault(ctx context.Context, client *http.Client) (discovery.ImportEnvelope, error) {
@@ -75,6 +102,7 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 func collectors() []collector {
 	return []collector{
 		{id: "binance", label: "Binance", fetch: fetchBinance, enabled: true},
+		{id: "binance-web3", label: "Binance Web3", fetch: fetchBinanceWeb3OndoStocks, enabled: true},
 		{id: "bybit", label: "Bybit", fetch: fetchBybit, enabled: true},
 		{id: "okx", label: "OKX", fetch: fetchOKX, enabled: true},
 		{id: "bitget", label: "Bitget", fetch: fetchBitget, enabled: true},
@@ -139,6 +167,146 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		})
 	}
 	return out, nil
+}
+
+func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
+	type response struct {
+		Data json.RawMessage `json:"data"`
+	}
+
+	var payload response
+	if err := fetchJSON(ctx, client, http.MethodGet, binanceWeb3OndoStockURL, nil, &payload); err != nil {
+		return nil, err
+	}
+
+	tokens := decodeBinanceWeb3StockTokens(payload.Data)
+	seenAt := time.Now().UTC()
+	out := make([]discovery.ImportedMarket, 0, len(tokens))
+	for _, item := range tokens {
+		if !isOndoProviderType(item.Type) {
+			continue
+		}
+
+		base := strings.ToUpper(strings.TrimSpace(firstNonEmpty(
+			item.Ticker,
+			item.UnderlyingSymbol,
+			item.StockSymbol,
+			item.AssetSymbol,
+		)))
+		symbol := strings.TrimSpace(firstNonEmpty(item.Symbol, item.TokenSymbol, base))
+		if base == "" && symbol != "" {
+			base = strings.ToUpper(symbol)
+		}
+		if base == "" || symbol == "" {
+			continue
+		}
+
+		chain := strings.TrimSpace(firstNonEmpty(item.ChainName, item.ChainID))
+		contract := strings.TrimSpace(firstNonEmpty(item.ContractAddress, item.Contract))
+		tags := []string{"binance-web3", "ondo", "tokenized-stock"}
+		if contract != "" {
+			tags = append(tags, "contract:"+contract)
+		}
+
+		out = append(out, discovery.ImportedMarket{
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "binance-web3",
+			Platform:           "Binance Web3",
+			VenueType:          "web3",
+			MarketType:         "spot",
+			Symbol:             symbol,
+			BaseAsset:          base,
+			QuoteAsset:         strings.ToUpper(strings.TrimSpace(firstNonEmpty(item.QuoteAsset, item.QuoteSymbol, "USD"))),
+			AssetClassHint:     "stock",
+			Category:           firstNonEmpty(item.Category, "tokenized_stock"),
+			UnderlyingCategory: firstNonEmpty(item.UnderlyingCategory, "stock"),
+			Tags:               tags,
+			Chain:              chain,
+			Status:             normalizeBinanceWeb3Status(firstNonEmpty(item.TradingStatus, item.Status)),
+			ExternalURL:        firstNonEmpty(item.ExternalURL, item.URL, "https://www.binance.com/en/web3"),
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
+		})
+	}
+	return out, nil
+}
+
+func decodeBinanceWeb3StockTokens(raw json.RawMessage) []binanceWeb3StockToken {
+	var direct []binanceWeb3StockToken
+	if err := json.Unmarshal(raw, &direct); err == nil && len(direct) > 0 {
+		return direct
+	}
+
+	var wrapped struct {
+		List      []binanceWeb3StockToken `json:"list"`
+		Items     []binanceWeb3StockToken `json:"items"`
+		Rows      []binanceWeb3StockToken `json:"rows"`
+		TokenList []binanceWeb3StockToken `json:"tokenList"`
+		StockList []binanceWeb3StockToken `json:"stockList"`
+	}
+	if err := json.Unmarshal(raw, &wrapped); err == nil {
+		out := make(
+			[]binanceWeb3StockToken,
+			0,
+			len(wrapped.List)+len(wrapped.Items)+len(wrapped.Rows)+len(wrapped.TokenList)+len(wrapped.StockList),
+		)
+		out = append(out, wrapped.List...)
+		out = append(out, wrapped.Items...)
+		out = append(out, wrapped.Rows...)
+		out = append(out, wrapped.TokenList...)
+		out = append(out, wrapped.StockList...)
+		if len(out) > 0 {
+			return out
+		}
+	}
+
+	var decoded any
+	if err := json.Unmarshal(raw, &decoded); err == nil {
+		var out []binanceWeb3StockToken
+		collectBinanceWeb3StockTokens(decoded, &out)
+		return out
+	}
+
+	return nil
+}
+
+func collectBinanceWeb3StockTokens(value any, out *[]binanceWeb3StockToken) {
+	switch typed := value.(type) {
+	case []any:
+		for _, item := range typed {
+			collectBinanceWeb3StockTokens(item, out)
+		}
+	case map[string]any:
+		if looksLikeBinanceWeb3StockToken(typed) {
+			payload, err := json.Marshal(typed)
+			if err == nil {
+				var token binanceWeb3StockToken
+				if json.Unmarshal(payload, &token) == nil {
+					*out = append(*out, token)
+					return
+				}
+			}
+		}
+		for _, item := range typed {
+			collectBinanceWeb3StockTokens(item, out)
+		}
+	}
+}
+
+func looksLikeBinanceWeb3StockToken(item map[string]any) bool {
+	for _, key := range []string{
+		"ticker",
+		"underlyingSymbol",
+		"stockSymbol",
+		"assetSymbol",
+		"tokenSymbol",
+		"contractAddress",
+	} {
+		if strings.TrimSpace(fmt.Sprint(item[key])) != "" && fmt.Sprint(item[key]) != "<nil>" {
+			return true
+		}
+	}
+	return false
 }
 
 func fetchBybit(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
@@ -555,6 +723,35 @@ func normalizeBinanceStatus(status string) string {
 	}
 }
 
+func normalizeBinanceWeb3Status(status string) string {
+	switch strings.ToLower(strings.TrimSpace(status)) {
+	case "", "trading", "live", "listed", "online", "enabled", "active":
+		return "live"
+	case "prelaunch", "pre_launch", "pre trading", "pre_trading", "pending":
+		return "prelaunch"
+	case "paused", "halt", "halted", "disabled", "offline", "delisted":
+		return "paused"
+	default:
+		return "unknown"
+	}
+}
+
+func isOndoProviderType(value any) bool {
+	switch typed := value.(type) {
+	case nil:
+		return true
+	case float64:
+		return typed == 1
+	case int:
+		return typed == 1
+	case string:
+		typed = strings.ToLower(strings.TrimSpace(typed))
+		return typed == "" || typed == "1" || typed == "ondo" || strings.Contains(typed, "ondo")
+	default:
+		return false
+	}
+}
+
 func normalizeBybitStatus(status string) string {
 	switch strings.ToLower(strings.TrimSpace(status)) {
 	case "trading":
@@ -566,6 +763,15 @@ func normalizeBybitStatus(status string) string {
 	default:
 		return "unknown"
 	}
+}
+
+func firstNonEmpty(values ...string) string {
+	for _, value := range values {
+		if strings.TrimSpace(value) != "" {
+			return value
+		}
+	}
+	return ""
 }
 
 func normalizeSimpleLiveState(status string) string {
