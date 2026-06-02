@@ -381,8 +381,9 @@ curl -i https://api.immortal.app/market-kit-api/api/healthz
 curl -i https://api.immortal.app/market-kit-api/api/v1/version
 ```
 
-If Vercel should keep using same-origin `/api/*` requests, add a Vercel rewrite from
-`/api/:path*` to `https://api.immortal.app/market-kit-api/api/:path*`.
+Local Vite dev and Vercel deployments are configured to keep using same-origin `/api/*`
+requests and automatically forward them to `https://api.immortal.app/market-kit-api`.
+Override the local dev target with `VITE_MARKET_KIT_API_BASE` if needed.
 
 ### Server environment variables
 
