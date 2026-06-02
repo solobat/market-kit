@@ -68,6 +68,7 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 	}
 
 	items := make([]discovery.ImportedMarket, 0, 2048)
+	var failed []string
 	for _, source := range collectors() {
 		if !source.enabled {
 			continue
@@ -77,9 +78,16 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 		}
 		fetched, err := source.fetch(ctx, client)
 		if err != nil {
-			return discovery.ImportEnvelope{}, fmt.Errorf("%s: %w", source.id, err)
+			if len(selected) > 0 {
+				return discovery.ImportEnvelope{}, fmt.Errorf("%s: %w", source.id, err)
+			}
+			failed = append(failed, fmt.Sprintf("%s: %v", source.id, err))
+			continue
 		}
 		items = append(items, fetched...)
+	}
+	if len(items) == 0 && len(failed) > 0 {
+		return discovery.ImportEnvelope{}, fmt.Errorf("all bootstrap collectors failed: %s", strings.Join(failed, "; "))
 	}
 
 	sort.SliceStable(items, func(i, j int) bool {
@@ -175,7 +183,7 @@ func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]dis
 	}
 
 	var payload response
-	if err := fetchJSON(ctx, client, http.MethodGet, binanceWeb3OndoStockURL, nil, &payload); err != nil {
+	if err := fetchJSONWithHeaders(ctx, client, http.MethodGet, binanceWeb3OndoStockURL, nil, binanceWeb3Headers(), &payload); err != nil {
 		return nil, err
 	}
 
@@ -662,6 +670,10 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 }
 
 func fetchJSON[T any](ctx context.Context, client *http.Client, method, url string, body any, target *T) error {
+	return fetchJSONWithHeaders(ctx, client, method, url, body, nil, target)
+}
+
+func fetchJSONWithHeaders[T any](ctx context.Context, client *http.Client, method, url string, body any, headers map[string]string, target *T) error {
 	var reader io.Reader
 	if body != nil {
 		payload, err := json.Marshal(body)
@@ -678,6 +690,15 @@ func fetchJSON[T any](ctx context.Context, client *http.Client, method, url stri
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
+	if req.Header.Get("Accept") == "" {
+		req.Header.Set("Accept", "application/json")
+	}
+	if req.Header.Get("User-Agent") == "" {
+		req.Header.Set("User-Agent", "market-kit/0.1")
+	}
+	for key, value := range headers {
+		req.Header.Set(key, value)
+	}
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -690,6 +711,16 @@ func fetchJSON[T any](ctx context.Context, client *http.Client, method, url stri
 		return fmt.Errorf("%s %s failed: %s - %s", method, url, resp.Status, strings.TrimSpace(string(content)))
 	}
 	return json.NewDecoder(resp.Body).Decode(target)
+}
+
+func binanceWeb3Headers() map[string]string {
+	return map[string]string{
+		"Accept":          "application/json, text/plain, */*",
+		"Accept-Language": "en-US,en;q=0.9",
+		"Origin":          "https://www.binance.com",
+		"Referer":         "https://www.binance.com/en/web3",
+		"User-Agent":      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+	}
 }
 
 func splitSymbol(symbol string) (string, string) {

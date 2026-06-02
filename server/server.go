@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -367,14 +368,18 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 	fetched := make([]fetchResult, len(sources))
 	for range sources {
 		result := <-results
-		if result.err != nil {
-			return nil, discovery.ImportEnvelope{}, result.err
-		}
 		fetched[result.index] = result
 	}
 
+	successful := 0
+	failed := make([]string, 0)
 	for index, source := range sources {
 		result := fetched[index]
+		if result.err != nil {
+			failed = append(failed, result.err.Error())
+			continue
+		}
+		successful++
 		if result.payload.GeneratedAt.After(latestGeneratedAt) {
 			latestGeneratedAt = result.payload.GeneratedAt
 		}
@@ -390,6 +395,9 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 			source = result.source
 		}
 		sources[index] = source
+	}
+	if successful == 0 && len(failed) > 0 {
+		return nil, discovery.ImportEnvelope{}, fmt.Errorf("all discovery sources failed: %s", strings.Join(failed, "; "))
 	}
 	if latestGeneratedAt.IsZero() {
 		latestGeneratedAt = time.Now().UTC()

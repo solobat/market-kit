@@ -50,6 +50,11 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 			if !ok {
 				t.Fatalf("unexpected request: %s", key)
 			}
+			if req.URL.String() == binanceWeb3OndoStockURL {
+				if req.Header.Get("Referer") == "" || !strings.Contains(req.Header.Get("User-Agent"), "Mozilla") {
+					t.Fatalf("expected browser-like headers for binance web3 request: %+v", req.Header)
+				}
+			}
 			return jsonResponse(body), nil
 		}),
 	}
