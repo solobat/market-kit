@@ -356,6 +356,34 @@ The PM2 process is named `market-kit` and reads `ecosystem.config.cjs`. Run
 `./pm2-save.sh` after the service is healthy if you want PM2 to persist the process list
 for reboot recovery.
 
+### Nginx API proxy
+
+If the frontend is deployed separately on Vercel, expose the ECS backend through Nginx
+instead of opening the Go server directly. The included snippet follows the same shared
+API-domain pattern as `tradfi-monitor` and proxies `/market-kit-api/*` to the local
+backend on `127.0.0.1:18120`:
+
+```bash
+bash scripts/setup-nginx-market-kit-api.sh
+```
+
+Then include the installed snippet inside the target HTTPS `server { ... }` block:
+
+```nginx
+include /etc/nginx/snippets/market-kit-api.conf;
+```
+
+Verify locally and through Nginx:
+
+```bash
+curl http://127.0.0.1:18120/api/healthz
+curl -i https://api.immortal.app/market-kit-api/api/healthz
+curl -i https://api.immortal.app/market-kit-api/api/v1/version
+```
+
+If Vercel should keep using same-origin `/api/*` requests, add a Vercel rewrite from
+`/api/:path*` to `https://api.immortal.app/market-kit-api/api/:path*`.
+
 ### Server environment variables
 
 - `MARKET_KIT_HTTP_ADDR`
