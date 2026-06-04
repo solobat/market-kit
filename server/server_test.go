@@ -141,6 +141,78 @@ func TestHandleRuntimeRegistryReturnsMergedRegistry(t *testing.T) {
 	}
 }
 
+func TestHandleRuntimeRegistryOverrideReassignsMarket(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "QNT", AssetClass: "crypto"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	generated := identity.Registry{
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:QNT", MarketType: "perpetual", CanonicalSymbol: "QNT/USDC"},
+		},
+	}
+	generated.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: generated,
+		registry:          base.Merge(generated),
+		resolver:          identity.NewResolver(base.Merge(generated)),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/registry/overrides", strings.NewReader(`{
+		"exchange":"hyperliquid",
+		"rawSymbol":"xyz:QNT",
+		"marketType":"perp",
+		"canonicalSymbol":"QNTX/USDT",
+		"assetClass":"crypto"
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistryOverride(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	resolved := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "xyz:QNT",
+		MarketTypeHint: "perpetual",
+	})
+	if resolved.Status != identity.ResolveResolved || resolved.Market == nil {
+		t.Fatalf("expected reassigned market to resolve, got %+v", resolved)
+	}
+	if resolved.Market.CanonicalSymbol != "QNTX/USDT" || resolved.Market.BaseAsset != "QNTX" {
+		t.Fatalf("unexpected reassigned market: %+v", resolved.Market)
+	}
+
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted registry: %v", err)
+	}
+	if !registryHasAsset(persisted, "QNTX") {
+		t.Fatalf("expected QNTX asset in persisted runtime registry: %+v", persisted.AssetAliases)
+	}
+	matches := 0
+	for _, item := range persisted.MarketOverrides {
+		if item.Exchange == "hyperliquid" && item.RawSymbol == "xyz:QNT" && item.MarketType == "perpetual" {
+			matches++
+			if item.CanonicalSymbol != "QNTX/USDT" {
+				t.Fatalf("expected persisted override to target QNTX/USDT, got %+v", item)
+			}
+		}
+	}
+	if matches != 1 {
+		t.Fatalf("expected exactly one persisted xyz:QNT override, got %d in %+v", matches, persisted.MarketOverrides)
+	}
+}
+
 func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
 	base := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{

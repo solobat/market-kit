@@ -37,6 +37,8 @@
   let syncMessage = "";
   let registryState = "embedded";
   let registryMessage = "正在使用前端内置 registry。";
+  let reassignState = "idle";
+  let reassignMessage = "";
   let selectedAssetCanonical = "";
   let proxyAvailable = false;
   let remoteSources = [];
@@ -772,6 +774,75 @@
     }
   }
 
+  async function reassignMarketIdentity(market) {
+    if (typeof window === "undefined") return;
+    const currentTarget = String(market?.canonicalSymbol || "").trim().toUpperCase();
+    const input = window.prompt(
+      `把 ${market.exchange} · ${market.marketType || "unknown"} · ${market.rawSymbol} 改到哪个 canonical symbol？`,
+      currentTarget
+    );
+    if (input === null) return;
+
+    const canonicalSymbol = normalizeCanonicalTarget(input, market);
+    if (!canonicalSymbol) {
+      reassignState = "error";
+      reassignMessage = "请输入 BASE/QUOTE，例如 QNTX/USDT。";
+      return;
+    }
+
+    reassignState = "loading";
+    reassignMessage = `正在把 ${market.rawSymbol} 改到 ${canonicalSymbol}…`;
+    try {
+      const response = await fetch("/api/v1/registry/overrides", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          exchange: market.exchange,
+          rawSymbol: market.rawSymbol,
+          marketType: market.marketType,
+          canonicalSymbol,
+          assetClass: selectedAsset?.asset_class || "crypto"
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.error || `override update failed: ${response.status}`);
+      }
+
+      registry = setRuntimeRegistry(payload.registry || payload);
+      registryState = "success";
+      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
+      request = { ...request };
+      discoveryEnvelope = { ...discoveryEnvelope };
+      reassignState = "success";
+      reassignMessage = `已将 ${market.rawSymbol} 改到 ${canonicalSymbol}。`;
+      navigate("asset-detail", { asset: canonicalSymbol.split("/")[0] });
+    } catch (error) {
+      reassignState = "error";
+      reassignMessage = error instanceof Error ? error.message : "改归属失败。";
+    }
+  }
+
+  function normalizeCanonicalTarget(input, market) {
+    const value = String(input || "").trim().toUpperCase();
+    if (!value) return "";
+    if (value.includes("/")) {
+      const [base = "", quote = ""] = value.split("/");
+      return base.trim() && quote.trim() ? `${base.trim()}/${quote.trim()}` : "";
+    }
+    return `${value}/${preferredCanonicalQuote(market)}`;
+  }
+
+  function preferredCanonicalQuote(market) {
+    const quotes = selectedAssetUnifiedMarkets
+      .map((item) => String(item.canonicalSymbol || "").split("/")[1])
+      .filter(Boolean)
+      .map((value) => value.toUpperCase());
+    if (quotes.includes("USDT")) return "USDT";
+    const currentQuote = String(market?.canonicalSymbol || "").split("/")[1];
+    return currentQuote ? currentQuote.toUpperCase() : "USDT";
+  }
+
   function mergeCases(nextRows) {
     const map = new Map();
     for (const item of [...syncedCases, ...nextRows]) {
@@ -1354,6 +1425,12 @@
                       <span class="asset-summary-chip asset-summary-chip--active">{marketType}</span>
                     {/each}
                   </div>
+                  {#if reassignMessage}
+                    <div class={`sync-state sync-state--${reassignState}`}>
+                      <strong>{reassignState === "success" ? "已更新市场身份" : reassignState === "loading" ? "正在更新市场身份" : "市场身份更新失败"}</strong>
+                      <p>{reassignMessage}</p>
+                    </div>
+                  {/if}
                   <div class="detail-market-list">
                     {#each selectedAssetUnifiedMarkets as market}
                       <div class="detail-market-row detail-market-row--compact">
@@ -1361,7 +1438,16 @@
                           <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"} · {market.layer}</div>
                           <div class="detail-market-row__symbol">{market.rawSymbol}</div>
                         </div>
-                        <div class="detail-market-row__target">{market.canonicalSymbol}</div>
+                        <div class="detail-market-row__actions">
+                          <div class="detail-market-row__target">{market.canonicalSymbol}</div>
+                          <button
+                            class="tiny-button"
+                            on:click={() => reassignMarketIdentity(market)}
+                            disabled={reassignState === "loading"}
+                          >
+                            改归属
+                          </button>
+                        </div>
                       </div>
                     {/each}
                   </div>

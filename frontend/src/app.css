@@ -810,6 +810,12 @@ input::placeholder {
   text-align: right;
 }
 
+.detail-market-row__actions {
+  display: grid;
+  justify-items: end;
+  gap: 0.42rem;
+}
+
 .detail-empty {
   display: grid;
   gap: 0.38rem;
@@ -1730,6 +1736,7 @@ label span {
   .alias-row__side--target,
   .asset-card__meta,
   .detail-page-actions,
+  .detail-market-row__actions,
   .detail-market-row__target,
   .symbol-row__target {
     justify-items: start;

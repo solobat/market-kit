@@ -88,6 +88,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/v1/resolve/batch", a.handleResolveBatch)
 	mux.HandleFunc("/api/v1/resolve", a.handleResolve)
 	mux.HandleFunc("/api/v1/registry", a.handleRuntimeRegistry)
+	mux.HandleFunc("/api/v1/registry/overrides", a.handleRuntimeRegistryOverride)
 	mux.HandleFunc("/api/v1/assets/", a.handleAsset)
 	mux.HandleFunc("/api/v1/version", a.handleVersion)
 	mux.HandleFunc("/api/v1/auto-sync", a.handleAutoSync)
@@ -125,6 +126,14 @@ type resolveAPIRequest struct {
 
 type resolveBatchRequest struct {
 	Items []resolveAPIRequest `json:"items"`
+}
+
+type registryOverrideRequest struct {
+	Exchange        string `json:"exchange"`
+	RawSymbol       string `json:"rawSymbol"`
+	MarketType      string `json:"marketType"`
+	CanonicalSymbol string `json:"canonicalSymbol"`
+	AssetClass      string `json:"assetClass,omitempty"`
 }
 
 func (a *App) handleResolve(w http.ResponseWriter, r *http.Request) {
@@ -208,6 +217,142 @@ func (a *App) handleRuntimeRegistry(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, a.runtimeRegistry())
+}
+
+func (a *App) handleRuntimeRegistryOverride(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", "POST")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+
+	var req registryOverrideRequest
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "invalid registry override json"})
+		return
+	}
+
+	override, assetBase, err := normalizeRegistryOverrideRequest(req)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": err.Error()})
+		return
+	}
+
+	nextGenerated := upsertRuntimeRegistryOverride(a.generatedRegistrySnapshot(), a.runtimeRegistry(), override, assetBase, req.AssetClass)
+	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, nextGenerated); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": "write runtime registry failed"})
+		return
+	}
+	a.applyGeneratedRegistry(nextGenerated)
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"override": override,
+		"registry": a.runtimeRegistry(),
+	})
+}
+
+func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.MarketOverride, string, error) {
+	exchange := strings.ToLower(strings.TrimSpace(req.Exchange))
+	rawSymbol := strings.TrimSpace(req.RawSymbol)
+	marketType := normalizeRegistryOverrideMarketType(req.MarketType)
+	canonicalSymbol := strings.ToUpper(strings.TrimSpace(req.CanonicalSymbol))
+
+	if exchange == "" {
+		return identity.MarketOverride{}, "", errors.New("exchange is required")
+	}
+	if rawSymbol == "" {
+		return identity.MarketOverride{}, "", errors.New("rawSymbol is required")
+	}
+	if marketType == "" {
+		return identity.MarketOverride{}, "", errors.New("marketType must be spot, perpetual, or future")
+	}
+	base, quote, ok := splitCanonicalSymbol(canonicalSymbol)
+	if !ok {
+		return identity.MarketOverride{}, "", errors.New("canonicalSymbol must be BASE/QUOTE")
+	}
+
+	return identity.MarketOverride{
+		Exchange:        exchange,
+		RawSymbol:       rawSymbol,
+		MarketType:      marketType,
+		CanonicalSymbol: base + "/" + quote,
+	}, base, nil
+}
+
+func normalizeRegistryOverrideMarketType(value string) string {
+	switch strings.ToLower(strings.TrimSpace(value)) {
+	case "spot":
+		return string(identity.MarketTypeSpot)
+	case "perp", "perps", "perpetual", "swap", "linear":
+		return string(identity.MarketTypePerpetual)
+	case "future", "futures", "delivery":
+		return string(identity.MarketTypeFuture)
+	default:
+		return ""
+	}
+}
+
+func splitCanonicalSymbol(value string) (string, string, bool) {
+	parts := strings.Split(strings.ToUpper(strings.TrimSpace(value)), "/")
+	if len(parts) != 2 {
+		return "", "", false
+	}
+	base := strings.TrimSpace(parts[0])
+	quote := strings.TrimSpace(parts[1])
+	return base, quote, base != "" && quote != ""
+}
+
+func upsertRuntimeRegistryOverride(generated identity.Registry, runtime identity.Registry, override identity.MarketOverride, assetBase string, assetClass string) identity.Registry {
+	generated.Normalize()
+	runtime.Normalize()
+	override.Exchange = strings.ToLower(strings.TrimSpace(override.Exchange))
+	override.RawSymbol = strings.TrimSpace(override.RawSymbol)
+	override.MarketType = normalizeRegistryOverrideMarketType(override.MarketType)
+	override.CanonicalSymbol = strings.ToUpper(strings.TrimSpace(override.CanonicalSymbol))
+	targetKey := registryOverrideKey(override)
+
+	nextOverrides := make([]identity.MarketOverride, 0, len(generated.MarketOverrides)+1)
+	for _, item := range generated.MarketOverrides {
+		if registryOverrideKey(item) == targetKey {
+			continue
+		}
+		nextOverrides = append(nextOverrides, item)
+	}
+	nextOverrides = append(nextOverrides, override)
+	generated.MarketOverrides = nextOverrides
+
+	assetBase = strings.ToUpper(strings.TrimSpace(assetBase))
+	if assetBase != "" && !registryHasAsset(runtime, assetBase) && !registryHasAsset(generated, assetBase) {
+		class := strings.TrimSpace(assetClass)
+		if class == "" {
+			class = "crypto"
+		}
+		generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
+			Canonical:  assetBase,
+			AssetClass: class,
+		})
+	}
+
+	generated.Normalize()
+	return generated
+}
+
+func registryOverrideKey(item identity.MarketOverride) string {
+	return strings.Join([]string{
+		strings.ToLower(strings.TrimSpace(item.Exchange)),
+		strings.TrimSpace(item.RawSymbol),
+		normalizeRegistryOverrideMarketType(item.MarketType),
+	}, "|")
+}
+
+func registryHasAsset(registry identity.Registry, canonical string) bool {
+	canonical = strings.ToUpper(strings.TrimSpace(canonical))
+	for _, item := range registry.AssetAliases {
+		if strings.EqualFold(item.Canonical, canonical) {
+			return true
+		}
+	}
+	return false
 }
 
 func (a *App) handleAsset(w http.ResponseWriter, r *http.Request) {
