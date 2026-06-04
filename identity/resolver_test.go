@@ -324,6 +324,60 @@ func TestResolveHyperliquidHIP3OverrideCanMapToKnownAsset(t *testing.T) {
 	}
 }
 
+func TestResolveHyperliquidSKHYNIXAliasMapsToXYZSKHX(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "SKHYNIX", AssetClass: "rwa_stock", Aliases: []string{"SKHX"}},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "hyperliquid", RawSymbol: "xyz:SKHX", MarketType: "perpetual", CanonicalSymbol: "SKHYNIX/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	for _, symbol := range []string{"SKHYNIX/USDT", "SKHX/USDT", "xyz:SKHX"} {
+		t.Run(symbol, func(t *testing.T) {
+			result := resolver.Resolve(ResolveRequest{
+				Exchange:       "hyperliquid",
+				Symbol:         symbol,
+				MarketTypeHint: "perpetual",
+			})
+			if result.Status != ResolveResolved || result.Market == nil {
+				t.Fatalf("expected resolved SKHYNIX mapping, got %+v", result)
+			}
+			if result.Market.RawSymbol != "xyz:SKHX" || result.Market.VenueSymbol != "XYZ:SKHX" {
+				t.Fatalf("expected Hyperliquid xyz:SKHX raw mapping, got %+v", result.Market)
+			}
+			if result.Market.CanonicalSymbol != "SKHYNIX/USDT" || result.Market.BaseAsset != "SKHYNIX" || result.Market.AssetClass != "rwa_stock" {
+				t.Fatalf("expected canonical SKHYNIX market, got %+v", result.Market)
+			}
+		})
+	}
+}
+
+func TestDefaultRegistryResolveHyperliquidSKHYNIXToXYZSKHX(t *testing.T) {
+	registry, err := LoadDefaultRegistry()
+	if err != nil {
+		t.Fatalf("load default registry: %v", err)
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange:       "hyperliquid",
+		Symbol:         "SKHYNIX/USDT",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected default registry to resolve SKHYNIX, got %+v", result)
+	}
+	if result.Market.RawSymbol != "xyz:SKHX" || result.Market.VenueSymbol != "XYZ:SKHX" {
+		t.Fatalf("expected default registry to route SKHYNIX to xyz:SKHX, got %+v", result.Market)
+	}
+	if result.Market.CanonicalSymbol != "SKHYNIX/USDT" || result.Market.BaseAsset != "SKHYNIX" {
+		t.Fatalf("expected canonical SKHYNIX identity, got %+v", result.Market)
+	}
+}
+
 func TestResolveHyperliquidCommodityAliasOverrides(t *testing.T) {
 	registry := Registry{
 		AssetAliases: []AssetAliasRule{

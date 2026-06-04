@@ -63,7 +63,7 @@ var (
 		"MSFT": true, "MSTR": true, "MU": true, "NBIS": true, "NFLX": true, "NIO": true,
 		"NVDA": true, "OKLO": true, "ORCL": true, "OXY": true, "PAYP": true, "PLTR": true,
 		"QCOM": true, "QQQ": true, "RKLB": true, "RTX": true, "SLV": true, "SNDK": true,
-		"SOXL": true, "SOXS": true, "SPACEX": true, "SPCX": true, "SPY": true, "SQQQ": true,
+		"SKHYNIX": true, "SOXL": true, "SOXS": true, "SPACEX": true, "SPCX": true, "SPY": true, "SQQQ": true,
 		"STXSTOCK": true, "TCOM": true, "TSLA": true, "TSM": true, "UBER": true,
 		"UNH": true, "USO": true, "WDC": true, "XLE": true, "XOM": true,
 	}
@@ -282,6 +282,7 @@ func splitCSV(value string) []string {
 func buildGeneratedRegistry(items []discoveryItem) identity.Registry {
 	assets := map[string]identity.AssetAliasRule{}
 	overrides := map[string]identity.MarketOverride{}
+	hyperliquidAliases := inferHyperliquidHIP3AliasTargets(items)
 
 	for _, item := range items {
 		if !shouldInclude(item) {
@@ -296,6 +297,16 @@ func buildGeneratedRegistry(items []discoveryItem) identity.Registry {
 
 		if exchange == "" || base == "" || quote == "" || symbol == "" || marketType == "" {
 			continue
+		}
+
+		venueBase := hyperliquidHIP3Base(symbol, base)
+		if exchange == "hyperliquid" && marketType == "perpetual" {
+			if target, ok := hyperliquidAliases[venueBase]; ok {
+				base = target.Base
+				quote = target.Quote
+				ensureAsset(assets, base, target.AssetClass)
+				addAssetAlias(assets, base, venueBase)
+			}
 		}
 
 		ensureAsset(assets, base, classifyGeneratedAsset(item, base))
@@ -339,6 +350,119 @@ func buildGeneratedRegistry(items []discoveryItem) identity.Registry {
 	}
 	registry.Normalize()
 	return registry
+}
+
+type hyperliquidHIP3AliasTarget struct {
+	Base       string
+	Quote      string
+	AssetClass string
+}
+
+func inferHyperliquidHIP3AliasTargets(items []discoveryItem) map[string]hyperliquidHIP3AliasTarget {
+	anchors := map[string]hyperliquidHIP3AliasTarget{}
+	for _, item := range items {
+		if !shouldInclude(item) {
+			continue
+		}
+		if strings.EqualFold(strings.TrimSpace(item.PlatformID), "hyperliquid") {
+			continue
+		}
+		if !strings.EqualFold(strings.TrimSpace(item.VenueType), "cex") {
+			continue
+		}
+		base := strings.ToUpper(strings.TrimSpace(item.BaseAsset))
+		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
+		if base == "" || quote == "" {
+			continue
+		}
+		assetClass := classifyGeneratedAsset(item, base)
+		if assetClass != "rwa_stock" && assetClass != "rwa_commodity" {
+			continue
+		}
+		if existing, ok := anchors[base]; ok && preferredStableQuote(existing.Quote, quote) != quote {
+			continue
+		}
+		anchors[base] = hyperliquidHIP3AliasTarget{Base: base, Quote: quote, AssetClass: assetClass}
+	}
+
+	out := map[string]hyperliquidHIP3AliasTarget{}
+	for _, item := range items {
+		if !shouldInclude(item) {
+			continue
+		}
+		if !strings.EqualFold(strings.TrimSpace(item.PlatformID), "hyperliquid") {
+			continue
+		}
+		if normalizeGeneratedMarketType(item.MarketType) != "perpetual" {
+			continue
+		}
+		venueBase := hyperliquidHIP3Base(item.Symbol, item.BaseAsset)
+		if venueBase == "" || !strings.Contains(strings.TrimSpace(item.Symbol), ":") {
+			continue
+		}
+		if target, ok := anchors[venueBase]; ok {
+			out[venueBase] = target
+			continue
+		}
+		if target, ok := inferWrappedStockTickerTarget(venueBase, anchors); ok {
+			out[venueBase] = target
+		}
+	}
+	return out
+}
+
+func inferWrappedStockTickerTarget(venueBase string, anchors map[string]hyperliquidHIP3AliasTarget) (hyperliquidHIP3AliasTarget, bool) {
+	venueBase = strings.ToUpper(strings.TrimSpace(venueBase))
+	if len(venueBase) < 3 || !strings.HasSuffix(venueBase, "X") {
+		return hyperliquidHIP3AliasTarget{}, false
+	}
+	prefix := strings.TrimSuffix(venueBase, "X")
+	if len(prefix) < 3 {
+		return hyperliquidHIP3AliasTarget{}, false
+	}
+
+	var match hyperliquidHIP3AliasTarget
+	count := 0
+	for base, target := range anchors {
+		if base == venueBase || target.AssetClass != "rwa_stock" || !strings.HasPrefix(base, prefix) {
+			continue
+		}
+		match = target
+		count++
+	}
+	return match, count == 1
+}
+
+func hyperliquidHIP3Base(symbol string, fallback string) string {
+	symbol = strings.TrimSpace(symbol)
+	if _, suffix, ok := strings.Cut(symbol, ":"); ok {
+		return strings.ToUpper(strings.TrimSpace(suffix))
+	}
+	return strings.ToUpper(strings.TrimSpace(fallback))
+}
+
+func preferredStableQuote(left string, right string) string {
+	left = strings.ToUpper(strings.TrimSpace(left))
+	right = strings.ToUpper(strings.TrimSpace(right))
+	if left == "" {
+		return right
+	}
+	if right == "" {
+		return left
+	}
+	order := map[string]int{"USDT": 0, "USDC": 1, "USD": 2, "FDUSD": 3}
+	leftRank, leftOK := order[left]
+	rightRank, rightOK := order[right]
+	if leftOK && rightOK {
+		if rightRank < leftRank {
+			return right
+		}
+		return left
+	}
+	if rightOK && !leftOK {
+		return right
+	}
+	return left
 }
 
 func sanitizeExistingGeneratedRegistry(existing identity.Registry, current identity.Registry) identity.Registry {
@@ -422,7 +546,7 @@ func buildReviewReport(existing identity.Registry, next identity.Registry, items
 	fmt.Fprintf(&b, "- Generated at: `%s`\n", time.Now().UTC().Format(time.RFC3339))
 	fmt.Fprintf(&b, "- Discovery rows: `%d`\n", len(items))
 	fmt.Fprintf(&b, "- Included stable-quoted rows: `%d`\n", stats.Included)
-	fmt.Fprintf(&b, "- Skipped non-CEX rows: `%d`\n", stats.SkippedNonCEX)
+	fmt.Fprintf(&b, "- Skipped unsupported venue rows: `%d`\n", stats.SkippedUnsupportedVenue)
 	fmt.Fprintf(&b, "- Skipped non-stable quote rows: `%d`\n", stats.SkippedNonStableQuote)
 	fmt.Fprintf(&b, "- Skipped leveraged rows: `%d`\n", stats.SkippedLeveraged)
 	fmt.Fprintf(&b, "- Generated assets: `%d` (`+%d`, `-%d`)\n", len(next.AssetAliases), len(addedAssets), len(removedAssets))
@@ -448,17 +572,18 @@ func buildReviewReport(existing identity.Registry, next identity.Registry, items
 }
 
 type registryReviewStats struct {
-	Included              int
-	SkippedNonCEX         int
-	SkippedNonStableQuote int
-	SkippedLeveraged      int
+	Included                int
+	SkippedUnsupportedVenue int
+	SkippedNonStableQuote   int
+	SkippedLeveraged        int
 }
 
 func discoveryStats(items []discoveryItem) registryReviewStats {
 	var stats registryReviewStats
 	for _, item := range items {
-		if !strings.EqualFold(strings.TrimSpace(item.VenueType), "cex") {
-			stats.SkippedNonCEX++
+		venueType := strings.ToLower(strings.TrimSpace(item.VenueType))
+		if venueType != "cex" && venueType != "dex" {
+			stats.SkippedUnsupportedVenue++
 			continue
 		}
 		if discovery.IsExcludedLeveragedToken(item.PlatformID, item.BaseAsset, item.Symbol) {
@@ -640,6 +765,25 @@ func ensureAsset(target map[string]identity.AssetAliasRule, canonical string, as
 		AssetClass: assetClass,
 		Aliases:    []string{},
 	}
+}
+
+func addAssetAlias(target map[string]identity.AssetAliasRule, canonical string, alias string) {
+	canonical = strings.ToUpper(strings.TrimSpace(canonical))
+	alias = strings.ToUpper(strings.TrimSpace(alias))
+	if canonical == "" || alias == "" || canonical == alias {
+		return
+	}
+	item, ok := target[canonical]
+	if !ok {
+		return
+	}
+	for _, existing := range item.Aliases {
+		if existing == alias {
+			return
+		}
+	}
+	item.Aliases = append(item.Aliases, alias)
+	target[canonical] = item
 }
 
 func classifyGeneratedAsset(item discoveryItem, asset string) string {

@@ -617,7 +617,9 @@ By default the command is append-safe for automation: it merges new generated ru
 
 This command currently:
 
-- keeps only CEX markets
+- keeps stable-quoted CEX markets as canonical anchors
+- includes stable-quoted DEX markets such as Hyperliquid HIP-3 perps
+- infers high-confidence Hyperliquid HIP-3 aliases when a namespaced venue ticker uniquely maps to a known RWA CEX base
 - focuses on stable quotes such as `USDT / USDC / USD / FDUSD`
 - generates explicit `market_overrides`
 - generates `asset_aliases` with inferred classes:

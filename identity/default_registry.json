@@ -25,6 +25,11 @@
       "aliases": []
     },
     {
+      "canonical": "SKHYNIX",
+      "asset_class": "rwa_stock",
+      "aliases": ["SKHX"]
+    },
+    {
       "canonical": "AAPL",
       "asset_class": "rwa_stock",
       "aliases": ["AAPLX"]
@@ -105,6 +110,12 @@
       "raw_symbol": "xyz:SPCX",
       "market_type": "perpetual",
       "canonical_symbol": "SPCX/USDT"
+    },
+    {
+      "exchange": "hyperliquid",
+      "raw_symbol": "xyz:SKHX",
+      "market_type": "perpetual",
+      "canonical_symbol": "SKHYNIX/USDT"
     },
     {
       "exchange": "hyperliquid",
