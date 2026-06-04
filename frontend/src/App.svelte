@@ -271,7 +271,7 @@
 
   function openAssetDetail(canonical) {
     selectAsset(canonical);
-    page = "asset-detail";
+    navigate("asset-detail", { asset: canonical });
   }
 
   function handleAssetCardKeydown(event, canonical) {
@@ -282,13 +282,72 @@
   }
 
   function backToRegistry() {
-    page = "registry";
+    navigate("registry");
   }
 
   function openSelectedAssetGroups() {
     if (!selectedAsset?.canonical) return;
-    page = "groups";
     groupQuery = selectedAsset.canonical;
+    navigate("groups");
+  }
+
+  function routeFromPath(pathname) {
+    const segments = String(pathname || "/")
+      .split("/")
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .map((part) => decodeURIComponent(part));
+    const [section, asset] = segments;
+
+    if (section === "rules") return { page: "rules" };
+    if (section === "groups") return { page: "groups" };
+    if (section === "symbols") return { page: "symbols" };
+    if (section === "samples") return { page: "samples" };
+    if (section === "playground") return { page: "playground" };
+    if (section === "registry" && asset) return { page: "asset-detail", asset };
+    return { page: "registry" };
+  }
+
+  function pathForPage(nextPage, options = {}) {
+    if (nextPage === "asset-detail") {
+      const asset = String(options.asset || selectedAsset?.canonical || selectedAssetCanonical || "").trim().toUpperCase();
+      return asset ? `/registry/${encodeURIComponent(asset)}` : "/registry";
+    }
+    if (nextPage === "rules") return "/rules";
+    if (nextPage === "groups") return "/groups";
+    if (nextPage === "symbols") return "/symbols";
+    if (nextPage === "samples") return "/samples";
+    if (nextPage === "playground") return "/playground";
+    return "/registry";
+  }
+
+  function applyRoute(route) {
+    if (route.asset) {
+      selectAsset(route.asset);
+    }
+    page = route.page || "registry";
+  }
+
+  function syncRouteFromLocation() {
+    if (typeof window === "undefined") return;
+    const route = routeFromPath(window.location.pathname);
+    applyRoute(route);
+    if (window.location.pathname === "/" || window.location.pathname === "") {
+      navigate(route.page, { asset: route.asset }, true);
+    }
+  }
+
+  function navigate(nextPage, options = {}, replace = false) {
+    if (nextPage === "asset-detail" && options.asset) {
+      selectAsset(options.asset);
+    }
+    page = nextPage || "registry";
+    if (typeof window === "undefined") return;
+
+    const nextPath = pathForPage(nextPage, options);
+    if (window.location.pathname === nextPath) return;
+    const method = replace ? "replaceState" : "pushState";
+    window.history[method]({}, "", nextPath);
   }
 
   function pageLabel(value) {
@@ -299,6 +358,16 @@
     if (value === "playground") return "解析试验台";
     if (value === "rules") return "规则检视";
     return "Registry";
+  }
+
+  function pageDescription(value) {
+    if (value === "asset-detail") return "把单个 canonical asset 的 alias、override、discovery presence 放到同一个运营视图里。";
+    if (value === "groups") return "从发现市场清单里观察跨平台候选组，找出可以自动归并和需要人工复核的资产。";
+    if (value === "symbols") return "按平台、市场类型和资产类别筛选 symbol，生成可交给下游项目的精确列表。";
+    if (value === "samples") return "同步 downstream 项目里 unresolved / ambiguous 的样本，反向补齐 market-kit 规则。";
+    if (value === "playground") return "手动输入交易所和 raw symbol，快速验证 resolver 当前会返回什么市场身份。";
+    if (value === "rules") return "查看显式 market override，确认 raw venue symbol 如何折到 canonical symbol。";
+    return "维护 shared registry、资产别名和交易所身份规则，让下游项目复用同一套解析判断。";
   }
 
   function sourceKind(source) {
@@ -790,6 +859,9 @@
   }
 
   onMount(() => {
+    syncRouteFromLocation();
+    window.addEventListener("popstate", syncRouteFromLocation);
+
     const savedConfig = window.localStorage.getItem(syncConfigKey);
     const savedCases = window.localStorage.getItem(syncCasesKey);
     if (savedConfig) {
@@ -803,6 +875,10 @@
       } catch {}
     }
     loadRemoteSources({ shouldAutoBootstrap: true });
+
+    return () => {
+      window.removeEventListener("popstate", syncRouteFromLocation);
+    };
   });
 
   applyTheme(theme);
@@ -817,23 +893,59 @@
 </svelte:head>
 
 <div class="shell">
-  <aside class="rail">
+  <aside class="rail" aria-label="market-kit navigation">
     <div class="rail__brand">
-      <div class="rail__mark">MK</div>
-      <div>
-        <div class="eyebrow">Shared Identity Layer</div>
-        <h1>market-kit</h1>
+      <div class="rail__mark" aria-hidden="true">MK</div>
+      <div class="rail__brand-copy">
+        <span>Shared Identity</span>
+        <strong>market-kit</strong>
       </div>
     </div>
 
+    <div class="rail__session">
+      <span>{proxyAvailable ? "api proxy online" : "static fallback"}</span>
+      <strong>{discoveryEnvelope?.source || "mock-discovery"}</strong>
+    </div>
+
     <nav class="rail__nav">
-      <button class:active={page === "registry" || page === "asset-detail"} on:click={() => (page = "registry")}>Registry</button>
-      <button class:active={page === "rules"} on:click={() => (page = "rules")}>规则检视</button>
-      <button class:active={page === "groups"} on:click={() => (page = "groups")}>候选分组</button>
-      <button class:active={page === "symbols"} on:click={() => (page = "symbols")}>Symbol 生成器</button>
-      <button class:active={page === "samples"} on:click={() => (page = "samples")}>待补样本</button>
-      <button class:active={page === "playground"} on:click={() => (page = "playground")}>解析试验台</button>
+      <span class="rail__section-label">Views</span>
+      <button class:active={page === "registry" || page === "asset-detail"} on:click={() => navigate("registry")}>
+        <span class="rail__icon">R</span>
+        <span>Registry</span>
+      </button>
+      <button class:active={page === "rules"} on:click={() => navigate("rules")}>
+        <span class="rail__icon">O</span>
+        <span>规则检视</span>
+      </button>
+      <button class:active={page === "groups"} on:click={() => navigate("groups")}>
+        <span class="rail__icon">G</span>
+        <span>候选分组</span>
+      </button>
+      <button class:active={page === "symbols"} on:click={() => navigate("symbols")}>
+        <span class="rail__icon">S</span>
+        <span>Symbol 生成器</span>
+      </button>
+      <button class:active={page === "samples"} on:click={() => navigate("samples")}>
+        <span class="rail__icon">C</span>
+        <span>待补样本</span>
+      </button>
+      <button class:active={page === "playground"} on:click={() => navigate("playground")}>
+        <span class="rail__icon">P</span>
+        <span>解析试验台</span>
+      </button>
     </nav>
+
+    <div class="rail__tools">
+      <span class="rail__section-label">Actions</span>
+      <button class="theme-toggle" on:click={toggleTheme}>
+        <span class="rail__icon">{theme === "dark" ? "L" : "D"}</span>
+        <span>{theme === "dark" ? "浅色主题" : "深色主题"}</span>
+      </button>
+      <button class="theme-toggle" on:click={loadRemoteSources}>
+        <span class="rail__icon">↻</span>
+        <span>刷新源</span>
+      </button>
+    </div>
 
     <div class="rail__summary">
       <div class="mini-stat">
@@ -845,44 +957,14 @@
         <strong>{stats.overrides}</strong>
       </div>
       <div class="mini-stat">
-        <span>交易所</span>
-        <strong>{stats.exchanges}</strong>
-      </div>
-      <div class="mini-stat">
-        <span>别名</span>
-        <strong>{stats.exchangeAliases}</strong>
-      </div>
-      <div class="mini-stat">
-        <span>未解析</span>
-        <strong>{unresolvedCount}</strong>
-      </div>
-      <div class="mini-stat">
-        <span>歧义</span>
-        <strong>{ambiguousCount}</strong>
-      </div>
-      <div class="mini-stat">
-        <span>发现市场</span>
+        <span>发现</span>
         <strong>{discoveryMarketCount}</strong>
       </div>
       <div class="mini-stat">
-        <span>Symbols</span>
-        <strong>{symbolRows.length}</strong>
-      </div>
-      <div class="mini-stat">
-        <span>待复核组</span>
+        <span>复核</span>
         <strong>{reviewGroupCount}</strong>
       </div>
     </div>
-
-    <div class="rail__note">
-      <div class="eyebrow">Design Note</div>
-      <p>
-        这不是行情面板，而是统一的身份层控制台。它负责收口 <code>symbol / marketType / alias</code>，
-        让多个独立仓库共享同一套判断。
-      </p>
-    </div>
-
-    <button class="theme-toggle" on:click={toggleTheme}>{theme === "dark" ? "切到浅色" : "切到深色"}</button>
   </aside>
 
   <main class="stage">
@@ -890,9 +972,7 @@
       <div>
         <div class="eyebrow">Identity Operations Console</div>
         <h2>{pageLabel(page)}</h2>
-        <p class="hero__copy">
-          参考 `tradfi-monitor / slipstream` 的控制台感，但重点展示 shared registry、override 规则和解析结果，而不是某个单一业务项目。
-        </p>
+        <p class="hero__copy">{pageDescription(page)}</p>
       </div>
       <div class="hero__status">
         <span>默认解析状态</span>
@@ -1049,8 +1129,8 @@
             <div class="detail-page-actions">
               <button class="detail-link-button" on:click={openSelectedAssetGroups}>查看候选分组</button>
               <button class="detail-link-button detail-link-button--ghost" on:click={() => {
-                page = "rules";
                 overrideQuery = selectedAsset.canonical;
+                navigate("rules");
               }}>查看规则</button>
             </div>
           {:else}
