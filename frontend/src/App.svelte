@@ -7,6 +7,7 @@
   let stats = registryStats(registry);
   const allDiscoverySourceId = "all";
   const defaultDiscoveryEnvelope = loadDiscoveryEnvelope();
+  const themeKey = "market-kit.theme";
   const syncConfigKey = "market-kit.sync-config";
   const syncCasesKey = "market-kit.sync-cases";
 
@@ -249,7 +250,20 @@
   }
 
   function toggleTheme() {
-    applyTheme(theme === "dark" ? "light" : "dark");
+    const next = theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(themeKey, next);
+    }
+  }
+
+  function loadInitialTheme() {
+    if (typeof window === "undefined") return theme;
+    const savedTheme = window.localStorage.getItem(themeKey);
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+    return window.matchMedia?.("(prefers-color-scheme: light)")?.matches ? "light" : "dark";
   }
 
   function statusLabel(status) {
@@ -955,6 +969,7 @@
   }
 
   onMount(() => {
+    applyTheme(loadInitialTheme());
     syncRouteFromLocation();
     window.addEventListener("popstate", syncRouteFromLocation);
 
