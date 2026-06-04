@@ -181,9 +181,10 @@
   $: selectedAssetMarkets = selectedAssetGroups.flatMap((group) => group.markets || []);
   $: selectedAssetQuotes = Array.from(new Set(selectedAssetOverrideRows.map((item) => String(item.canonical_symbol || "").split("/")[1]).filter(Boolean))).sort();
   $: selectedAssetOverrideExchanges = Array.from(new Set(selectedAssetOverrideRows.map((item) => item.exchange).filter(Boolean))).sort();
-  $: selectedAssetDiscoveryExchanges = Array.from(new Set(selectedAssetMarkets.map((item) => item.exchange).filter(Boolean))).sort();
-  $: selectedAssetDiscoveryMarketTypes = Array.from(new Set(selectedAssetMarkets.map((item) => item.marketType).filter(Boolean))).sort();
   $: selectedAssetDiscoveryLoading = selectedAsset && (discoveryState === "loading" || discoveryEnvelope === defaultDiscoveryEnvelope);
+  $: selectedAssetUnifiedMarkets = buildAssetDetailMarketRows(selectedAssetOverrideRows, selectedAssetMarkets);
+  $: selectedAssetUnifiedExchanges = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.exchange).filter(Boolean))).sort();
+  $: selectedAssetUnifiedMarketTypes = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.marketType).filter(Boolean))).sort();
   $: symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
   $: symbolPlatformOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.platform));
   $: symbolMarketTypeOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.marketType));
@@ -520,6 +521,55 @@
     }
 
     return rows;
+  }
+
+  function buildAssetDetailMarketRows(overrides, markets) {
+    const rows = [];
+    const index = new Map();
+    for (const item of overrides || []) {
+      const row = {
+        layer: "registry",
+        exchange: normalizeExchange(item.exchange),
+        platform: platformLabel(normalizeExchange(item.exchange)),
+        marketType: normalizeMarketType(item.market_type) || String(item.market_type || "").trim().toLowerCase(),
+        rawSymbol: String(item.raw_symbol || "").trim(),
+        canonicalSymbol: String(item.canonical_symbol || "").trim().toUpperCase(),
+        sourceLabel: "registry override"
+      };
+      appendAssetDetailMarketRow(rows, index, row);
+    }
+    for (const market of markets || []) {
+      const row = {
+        layer: "discovery",
+        exchange: normalizeExchange(market.exchange || market.platform),
+        platform: market.platform || platformLabel(normalizeExchange(market.exchange || market.platform)),
+        marketType: normalizeMarketType(market.marketType) || String(market.marketType || "").trim().toLowerCase(),
+        rawSymbol: String(market.rawSymbol || "").trim(),
+        canonicalSymbol: String(market.canonicalSymbol || "").trim().toUpperCase(),
+        sourceLabel: market.sourceId || "discovery"
+      };
+      appendAssetDetailMarketRow(rows, index, row);
+    }
+    return rows.sort((left, right) => {
+      const quoteCompare = String(left.canonicalSymbol.split("/")[1] || "").localeCompare(String(right.canonicalSymbol.split("/")[1] || ""));
+      if (quoteCompare !== 0) return quoteCompare;
+      const exchangeCompare = String(left.exchange || "").localeCompare(String(right.exchange || ""));
+      if (exchangeCompare !== 0) return exchangeCompare;
+      return String(left.rawSymbol || "").localeCompare(String(right.rawSymbol || ""));
+    });
+  }
+
+  function appendAssetDetailMarketRow(rows, index, row) {
+    if (!row.rawSymbol || !row.exchange) return;
+    const key = `${row.exchange}|${row.marketType}|${row.rawSymbol.toUpperCase()}|${row.canonicalSymbol}`;
+    const existing = index.get(key);
+    if (existing) {
+      existing.layer = existing.layer === row.layer ? existing.layer : "registry + discovery";
+      existing.sourceLabel = existing.sourceLabel === row.sourceLabel ? existing.sourceLabel : `${existing.sourceLabel} / ${row.sourceLabel}`;
+      return;
+    }
+    index.set(key, row);
+    rows.push(row);
   }
 
   function appendUniqueSymbolRow(rows, seen, row) {
@@ -1230,32 +1280,21 @@
 
                 <section class="detail-section">
                   <div class="detail-section__head">
-                    <strong>Registry Overrides</strong>
-                    <span>显式映射到这个标的的交易对规则</span>
+                    <strong>市场视图已统一</strong>
+                    <span>右侧列表会合并 registry override 与 discovery 市场</span>
                   </div>
-                  {#if selectedAssetOverrideRows.length}
-                    <div class="detail-chip-row">
+                  <div class="detail-chip-row">
+                    {#if selectedAssetQuotes.length}
                       {#each selectedAssetQuotes as quote}
                         <span class="asset-summary-chip">{quote}</span>
                       {/each}
-                    </div>
-                    <div class="detail-market-list detail-market-list--page">
-                      {#each selectedAssetOverrideRows as item}
-                        <div class="detail-market-row">
-                          <div>
-                            <div class="override-row__title">{item.exchange} · {item.market_type}</div>
-                            <div class="detail-market-row__symbol">{item.raw_symbol}</div>
-                          </div>
-                          <div class="detail-market-row__target">{item.canonical_symbol}</div>
-                        </div>
-                      {/each}
-                    </div>
-                  {:else}
-                    <div class="detail-empty">
-                      <strong>当前没有显式 override。</strong>
-                      <p>显式 override 只代表写入 registry 的静态规则；发现源里的 Binance / Bybit / Gate 等平台会在右侧 Discovery Presence 里展示。</p>
-                    </div>
-                  {/if}
+                    {:else}
+                      <span class="asset-alias-pill asset-alias-pill--muted">No registry quote yet</span>
+                    {/if}
+                  </div>
+                  <p class="detail-note">
+                    像 <code>xyz:SKHX</code> 这样的 Hyperliquid HIP-3 标的会和 Binance、Gate、Lighter 等市场一起出现在右侧，不再单独拆到左侧。
+                  </p>
                 </section>
               </div>
             </article>
@@ -1271,21 +1310,21 @@
                   <strong>{selectedAssetOverrideExchanges.length}</strong>
                 </div>
                 <div class="detail-stat">
-                  <span>Discovery Markets</span>
-                  <strong>{selectedAssetMarkets.length}</strong>
+                  <span>Market Rows</span>
+                  <strong>{selectedAssetUnifiedMarkets.length}</strong>
                 </div>
                 <div class="detail-stat">
-                  <span>Discovery Exchanges</span>
-                  <strong>{selectedAssetDiscoveryExchanges.length}</strong>
+                  <span>Market Exchanges</span>
+                  <strong>{selectedAssetUnifiedExchanges.length}</strong>
                 </div>
               </div>
 
               <section class="detail-section">
                 <div class="detail-section__head">
-                  <strong>Discovery Presence</strong>
-                  <span>当前导入市场里，这个标的出现在哪些平台</span>
+                  <strong>Market Presence</strong>
+                  <span>合并 registry override 与 discovery 后的市场列表</span>
                 </div>
-                {#if selectedAssetMarkets.length}
+                {#if selectedAssetUnifiedMarkets.length}
                   {#if selectedAssetDiscoveryLoading}
                     <div class="sync-state sync-state--loading">
                       <strong>正在补齐 discovery 数据</strong>
@@ -1293,18 +1332,18 @@
                     </div>
                   {/if}
                   <div class="detail-chip-row">
-                    {#each selectedAssetDiscoveryExchanges as exchange}
+                    {#each selectedAssetUnifiedExchanges as exchange}
                       <span class="asset-summary-chip">{exchange}</span>
                     {/each}
-                    {#each selectedAssetDiscoveryMarketTypes as marketType}
+                    {#each selectedAssetUnifiedMarketTypes as marketType}
                       <span class="asset-summary-chip asset-summary-chip--active">{marketType}</span>
                     {/each}
                   </div>
                   <div class="detail-market-list">
-                    {#each selectedAssetMarkets as market}
+                    {#each selectedAssetUnifiedMarkets as market}
                       <div class="detail-market-row detail-market-row--compact">
                         <div>
-                          <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"}</div>
+                          <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"} · {market.layer}</div>
                           <div class="detail-market-row__symbol">{market.rawSymbol}</div>
                         </div>
                         <div class="detail-market-row__target">{market.canonicalSymbol}</div>
