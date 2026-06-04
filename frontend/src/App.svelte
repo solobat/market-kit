@@ -1,10 +1,10 @@
 <script>
   import { onMount } from "svelte";
   import { buildCandidateGroups, loadDiscoveryEnvelope, normalizeDiscoveryEnvelope } from "./lib/discovery.js";
-  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity } from "./lib/identity.js";
+  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity, setRuntimeRegistry } from "./lib/identity.js";
 
-  const registry = loadRegistry();
-  const stats = registryStats();
+  let registry = loadRegistry();
+  let stats = registryStats(registry);
   const allDiscoverySourceId = "all";
   const defaultDiscoveryEnvelope = loadDiscoveryEnvelope();
   const syncConfigKey = "market-kit.sync-config";
@@ -34,6 +34,8 @@
   let syncedCases = [];
   let syncState = "idle";
   let syncMessage = "";
+  let registryState = "embedded";
+  let registryMessage = "正在使用前端内置 registry。";
   let selectedAssetCanonical = "";
   let proxyAvailable = false;
   let remoteSources = [];
@@ -60,6 +62,7 @@
   let symbolOutputFormat = "quotedCsv";
   let selectedSymbolIds = new Set();
   let symbolCopyMessage = "";
+  $: stats = registryStats(registry);
   $: discoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
   $: sampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
 
@@ -77,6 +80,11 @@
       return matchesQuery && matchesClass;
     })
     .sort((left, right) => {
+      const query = assetQuery.trim().toUpperCase();
+      if (query) {
+        const rankCompare = assetSearchRank(left, query) - assetSearchRank(right, query);
+        if (rankCompare !== 0) return rankCompare;
+      }
       const classCompare = String(left.asset_class || "").localeCompare(String(right.asset_class || ""));
       if (classCompare !== 0) return classCompare;
       const aliasCompare = totalAssetAliasCount(right) - totalAssetAliasCount(left);
@@ -175,6 +183,7 @@
   $: selectedAssetOverrideExchanges = Array.from(new Set(selectedAssetOverrideRows.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetDiscoveryExchanges = Array.from(new Set(selectedAssetMarkets.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetDiscoveryMarketTypes = Array.from(new Set(selectedAssetMarkets.map((item) => item.marketType).filter(Boolean))).sort();
+  $: selectedAssetDiscoveryLoading = selectedAsset && (discoveryState === "loading" || discoveryEnvelope === defaultDiscoveryEnvelope);
   $: symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
   $: symbolPlatformOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.platform));
   $: symbolMarketTypeOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.marketType));
@@ -257,6 +266,24 @@
 
   function totalAssetAliasCount(asset) {
     return (asset?.aliases?.length || 0) + (asset?.unit_aliases?.length || 0);
+  }
+
+  function assetSearchRank(asset, query) {
+    const canonical = String(asset?.canonical || "").trim().toUpperCase();
+    const aliases = [
+      ...(asset?.aliases || []),
+      ...(asset?.unit_aliases || []).map((alias) => alias?.alias)
+    ].map((value) => String(value || "").trim().toUpperCase()).filter(Boolean);
+    const assetClass = String(asset?.asset_class || "").trim().toUpperCase();
+
+    if (canonical === query) return 0;
+    if (aliases.some((alias) => alias === query)) return 1;
+    if (canonical.startsWith(query)) return 2;
+    if (aliases.some((alias) => alias.startsWith(query))) return 3;
+    if (canonical.includes(query)) return 4;
+    if (aliases.some((alias) => alias.includes(query))) return 5;
+    if (assetClass.includes(query)) return 6;
+    return 7;
   }
 
   function formatUnitMultiplier(value) {
@@ -662,6 +689,25 @@
     throw lastError || new Error("all endpoints failed");
   }
 
+  async function loadRuntimeRegistry() {
+    registryState = "loading";
+    registryMessage = "正在读取后端 runtime registry…";
+    try {
+      const payload = await fetchFromEndpoints(["/api/v1/registry", "/api/registry"]);
+      const nextRegistry = payload.registry || payload;
+      registry = setRuntimeRegistry(nextRegistry);
+      registryState = "success";
+      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
+      request = { ...request };
+      discoveryEnvelope = { ...discoveryEnvelope };
+    } catch (error) {
+      registryState = "embedded";
+      registryMessage = error instanceof Error
+        ? `后端 registry 读取失败，继续使用前端内置 registry：${error.message}`
+        : "后端 registry 读取失败，继续使用前端内置 registry。";
+    }
+  }
+
   function mergeCases(nextRows) {
     const map = new Map();
     for (const item of [...syncedCases, ...nextRows]) {
@@ -874,6 +920,7 @@
         syncedCases = JSON.parse(savedCases);
       } catch {}
     }
+    loadRuntimeRegistry();
     loadRemoteSources({ shouldAutoBootstrap: true });
 
     return () => {
@@ -903,8 +950,8 @@
     </div>
 
     <div class="rail__session">
-      <span>{proxyAvailable ? "api proxy online" : "static fallback"}</span>
-      <strong>{discoveryEnvelope?.source || "mock-discovery"}</strong>
+      <span>{registryState === "success" ? "runtime registry" : "embedded registry"}</span>
+      <strong>{registryState === "loading" ? "loading..." : registryMessage}</strong>
     </div>
 
     <nav class="rail__nav">
@@ -1151,7 +1198,7 @@
                     <strong>{selectedAsset.canonical}</strong>
                   </div>
                   <p class="detail-copy">
-                    当前详情会把这个标的在 registry 里的 alias、单位换算、显式 override，以及已导入 discovery 市场中的平台分布放到一起看。
+                    当前详情会先展示静态 registry 里的 alias 和显式 override；discovery 市场分布会在后端发现源同步完成后补齐。
                   </p>
                 </div>
 
@@ -1206,7 +1253,7 @@
                   {:else}
                     <div class="detail-empty">
                       <strong>当前没有显式 override。</strong>
-                      <p>这个标的目前主要依赖 alias + 解析规则收敛。</p>
+                      <p>显式 override 只代表写入 registry 的静态规则；发现源里的 Binance / Bybit / Gate 等平台会在右侧 Discovery Presence 里展示。</p>
                     </div>
                   {/if}
                 </section>
@@ -1239,6 +1286,12 @@
                   <span>当前导入市场里，这个标的出现在哪些平台</span>
                 </div>
                 {#if selectedAssetMarkets.length}
+                  {#if selectedAssetDiscoveryLoading}
+                    <div class="sync-state sync-state--loading">
+                      <strong>正在补齐 discovery 数据</strong>
+                      <p>{discoveryMessage || "页面首屏先展示静态 registry；后端发现源返回后，这里会合并 Binance、Hyperliquid 等市场分布。"}</p>
+                    </div>
+                  {/if}
                   <div class="detail-chip-row">
                     {#each selectedAssetDiscoveryExchanges as exchange}
                       <span class="asset-summary-chip">{exchange}</span>
@@ -1260,9 +1313,17 @@
                   </div>
                 {:else}
                   <div class="detail-empty">
-                    <strong>当前 discovery 里还没看到这个标的。</strong>
+                    <strong>
+                      {#if selectedAssetDiscoveryLoading}
+                        正在读取 discovery 市场。
+                      {:else}
+                        当前 discovery 里还没看到这个标的。
+                      {/if}
+                    </strong>
                     <p>
-                      {#if proxyAvailable}
+                      {#if selectedAssetDiscoveryLoading}
+                        静态 registry 会先显示 `xyz:SKHX` 这类显式规则；Binance 等平台要等 `/api/discovery/current` 或同步接口返回后才会出现在这里。
+                      {:else if proxyAvailable}
                         去“候选分组”或“Symbol 生成器”同步发现市场后，这里会自动带出平台分布。
                       {:else}
                         当前还是本地 mock discovery，接上发现源后这里会更完整。

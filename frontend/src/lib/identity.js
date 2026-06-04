@@ -2,9 +2,14 @@ import baseRegistry from "../../../identity/default_registry.json";
 import generatedRegistry from "../../../identity/generated_registry.json";
 
 const quoteSuffixes = ["USDT", "USDC", "USD"];
-const registry = normalizeRegistry(mergeRegistries(baseRegistry, generatedRegistry));
+let registry = normalizeRegistry(mergeRegistries(baseRegistry, generatedRegistry));
 
 export function loadRegistry() {
+  return registry;
+}
+
+export function setRuntimeRegistry(input) {
+  registry = normalizeRegistry(input);
   return registry;
 }
 
@@ -468,16 +473,17 @@ function splitCanonical(value) {
   return [base || "", quote || ""];
 }
 
-export function registryStats() {
+export function registryStats(input = registry) {
+  const source = input || registry;
   const exchangeSet = new Set([
-    ...Object.keys(registry.exchange_aliases || {}),
-    ...(registry.market_overrides || []).map((item) => normalizeExchange(item.exchange))
+    ...Object.keys(source.exchange_aliases || {}),
+    ...(source.market_overrides || []).map((item) => normalizeExchange(item.exchange))
   ]);
-  const assetClasses = new Set((registry.asset_aliases || []).map((item) => item.asset_class).filter(Boolean));
+  const assetClasses = new Set((source.asset_aliases || []).map((item) => item.asset_class).filter(Boolean));
   return {
-    assets: registry.asset_aliases.length,
-    overrides: registry.market_overrides.length,
-    exchangeAliases: Object.keys(registry.exchange_aliases || {}).length,
+    assets: source.asset_aliases.length,
+    overrides: source.market_overrides.length,
+    exchangeAliases: Object.keys(source.exchange_aliases || {}).length,
     exchanges: exchangeSet.size,
     assetClasses: assetClasses.size
   };
