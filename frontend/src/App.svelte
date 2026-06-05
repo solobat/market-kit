@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { buildCandidateGroups, loadDiscoveryEnvelope, normalizeDiscoveryEnvelope } from "./lib/discovery.js";
   import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity, setRuntimeRegistry } from "./lib/identity.js";
 
@@ -39,6 +39,10 @@
   let registryMessage = "正在使用前端内置 registry。";
   let reassignState = "idle";
   let reassignMessage = "";
+  let reassignDialogMarket = null;
+  let reassignDialogTarget = "";
+  let reassignDialogError = "";
+  let reassignInputElement;
   let selectedAssetCanonical = "";
   let proxyAvailable = false;
   let remoteSources = [];
@@ -790,22 +794,46 @@
     }
   }
 
+  $: reassignDialogPreview = reassignDialogMarket
+    ? normalizeCanonicalTarget(reassignDialogTarget, reassignDialogMarket)
+    : "";
+
   async function reassignMarketIdentity(market) {
     if (typeof window === "undefined") return;
     const currentTarget = String(market?.canonicalSymbol || "").trim().toUpperCase();
-    const input = window.prompt(
-      `把 ${market.exchange} · ${market.marketType || "unknown"} · ${market.rawSymbol} 改到哪个 canonical symbol？`,
-      currentTarget
-    );
-    if (input === null) return;
+    reassignDialogMarket = market;
+    reassignDialogTarget = currentTarget;
+    reassignDialogError = "";
+    reassignMessage = "";
+    await tick();
+    reassignInputElement?.focus();
+    reassignInputElement?.select();
+  }
 
-    const canonicalSymbol = normalizeCanonicalTarget(input, market);
+  function closeReassignDialog() {
+    if (reassignState === "loading") return;
+    reassignDialogMarket = null;
+    reassignDialogTarget = "";
+    reassignDialogError = "";
+  }
+
+  function handleReassignDialogKeydown(event) {
+    if (event.key === "Escape" && reassignDialogMarket) {
+      closeReassignDialog();
+    }
+  }
+
+  async function submitReassignMarketIdentity() {
+    const market = reassignDialogMarket;
+    if (!market) return;
+
+    const canonicalSymbol = normalizeCanonicalTarget(reassignDialogTarget, market);
     if (!canonicalSymbol) {
-      reassignState = "error";
-      reassignMessage = "请输入 BASE/QUOTE，例如 QNTX/USDT。";
+      reassignDialogError = "请输入 BASE/QUOTE，例如 QNTX/USDT。";
       return;
     }
 
+    reassignDialogError = "";
     reassignState = "loading";
     reassignMessage = `正在把 ${market.rawSymbol} 改到 ${canonicalSymbol}…`;
     try {
@@ -828,10 +856,12 @@
       discoveryEnvelope = { ...discoveryEnvelope };
       reassignState = "success";
       reassignMessage = `已将 ${market.rawSymbol} 改到 ${canonicalSymbol}。`;
+      closeReassignDialog();
       navigate("asset-detail", { asset: canonicalSymbol.split("/")[0] });
     } catch (error) {
       reassignState = "error";
-      reassignMessage = formatReassignError(error);
+      reassignDialogError = formatReassignError(error);
+      reassignMessage = reassignDialogError;
     }
   }
 
@@ -1090,6 +1120,8 @@
     content="Explore market-kit asset identity rules, venue symbol overrides, and market resolution heuristics."
   />
 </svelte:head>
+
+<svelte:window on:keydown={handleReassignDialogKeydown} />
 
 <div class="shell">
   <aside class="rail" aria-label="market-kit navigation">
@@ -2309,4 +2341,87 @@
       </section>
     {/if}
   </main>
+
+  {#if reassignDialogMarket}
+    <div class="modal-backdrop" role="presentation" on:click|self={closeReassignDialog}>
+      <div
+        class="modal-panel reassign-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reassign-modal-title"
+      >
+        <form class="reassign-form" on:submit|preventDefault={submitReassignMarketIdentity}>
+          <div class="modal-panel__head">
+            <div>
+              <div class="eyebrow">Market Identity</div>
+              <h3 id="reassign-modal-title">修改市场归属</h3>
+            </div>
+            <button
+              class="modal-close"
+              type="button"
+              aria-label="关闭"
+              on:click={closeReassignDialog}
+              disabled={reassignState === "loading"}
+            >
+              ×
+            </button>
+          </div>
+
+          <div class="reassign-summary" aria-label="当前市场">
+            <div>
+              <span>Exchange</span>
+              <strong>{reassignDialogMarket.exchange}</strong>
+            </div>
+            <div>
+              <span>Market Type</span>
+              <strong>{reassignDialogMarket.marketType || "unknown"}</strong>
+            </div>
+            <div>
+              <span>Raw Symbol</span>
+              <strong>{reassignDialogMarket.rawSymbol}</strong>
+            </div>
+          </div>
+
+          <label class="reassign-field">
+            <span>新的 Canonical Symbol</span>
+            <input
+              bind:this={reassignInputElement}
+              bind:value={reassignDialogTarget}
+              placeholder="QNTX/USDT"
+              autocomplete="off"
+              disabled={reassignState === "loading"}
+            />
+          </label>
+
+          <div class="reassign-preview">
+            <span>当前</span>
+            <strong>{reassignDialogMarket.canonicalSymbol || "未解析"}</strong>
+            <span>更新为</span>
+            <strong>{reassignDialogPreview || "等待输入"}</strong>
+          </div>
+
+          {#if reassignDialogError}
+            <div class="sync-state sync-state--error reassign-error">
+              <strong>无法更新市场身份</strong>
+              <p>{reassignDialogError}</p>
+            </div>
+          {/if}
+
+          <div class="modal-actions">
+            <button
+              class="sync-button sync-button--ghost"
+              type="button"
+              on:click={closeReassignDialog}
+              disabled={reassignState === "loading"}
+            >
+              取消
+            </button>
+            <button class="sync-button" type="submit" disabled={reassignState === "loading"}>
+              {reassignState === "loading" ? "正在写入" : "确认改归属"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {/if}
 </div>
