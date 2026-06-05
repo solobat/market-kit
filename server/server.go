@@ -517,7 +517,7 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
-	sources, envelope, err := a.fetchDiscoveryLookupEnvelope(r.Context(), sourceID)
+	sources, envelope, cachedAt, cacheErr, err := a.discoveryLookupEnvelopeFromCacheOrRefresh(r.Context(), sourceID)
 	if err != nil {
 		a.writeDiscoveryError(w, err)
 		return
@@ -540,8 +540,48 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 			"groupCount":  len(matches),
 			"marketCount": totalDiscoveryMarkets(matches),
 		},
-		"groups": matches,
+		"groups":      matches,
+		"cachedAt":    cachedAt,
+		"cacheError":  cacheErr,
+		"serverCache": !cachedAt.IsZero(),
 	})
+}
+
+func (a *App) discoveryLookupEnvelopeFromCacheOrRefresh(ctx context.Context, sourceID string) ([]SyncSource, discovery.ImportEnvelope, time.Time, string, error) {
+	sourceID = strings.TrimSpace(sourceID)
+	if sourceID == "" {
+		sourceID = "all"
+	}
+
+	payload, sources, cachedAt, errText := a.discoveryCacheSnapshot()
+	if discoveryCacheMatchesSource(payload, sources, sourceID) {
+		return sources, payload, cachedAt, errText, nil
+	}
+
+	if err := a.refreshDiscoveryCache(ctx, sourceID); err != nil {
+		return nil, discovery.ImportEnvelope{}, time.Time{}, "", err
+	}
+	payload, sources, cachedAt, errText = a.discoveryCacheSnapshot()
+	return sources, payload, cachedAt, errText, nil
+}
+
+func discoveryCacheMatchesSource(payload discovery.ImportEnvelope, sources []SyncSource, sourceID string) bool {
+	if len(payload.Items) == 0 || strings.TrimSpace(string(payload.Source)) == "" || len(sources) == 0 {
+		return false
+	}
+
+	sourceID = strings.TrimSpace(sourceID)
+	if sourceID == "" || strings.EqualFold(sourceID, "all") {
+		return strings.EqualFold(string(payload.Source), "market-kit-all") || len(sources) > 1
+	}
+
+	if strings.EqualFold(sourceID, string(payload.Source)) {
+		return true
+	}
+	if len(sources) == 1 && strings.EqualFold(sources[0].ID, sourceID) {
+		return true
+	}
+	return false
 }
 
 func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string) ([]SyncSource, discovery.ImportEnvelope, error) {

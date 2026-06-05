@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/solobat/market-kit/bootstrap"
+	"github.com/solobat/market-kit/discovery"
 	"github.com/solobat/market-kit/identity"
 )
 
@@ -529,6 +530,85 @@ func TestHandleDiscoveryLookupReturnsMatchedGroups(t *testing.T) {
 	}
 	if len(payload.Groups[0].Exchanges) != 2 {
 		t.Fatalf("expected 2 exchanges, got %+v", payload.Groups[0].Exchanges)
+	}
+}
+
+func TestHandleDiscoveryLookupUsesServerCache(t *testing.T) {
+	app := &App{
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				t.Fatalf("lookup should use discovery cache, got upstream request: %s", req.URL.String())
+				return nil, nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+		discoveryCacheSources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+		discoveryCache: discovery.ImportEnvelope{
+			Source:      discovery.SourceKind("slipstream"),
+			GeneratedAt: time.Date(2026, 5, 15, 0, 0, 0, 0, time.UTC),
+			Items: []discovery.ImportedMarket{
+				{
+					SourceID:   "slipstream",
+					PlatformID: "bitget",
+					Platform:   "Bitget",
+					VenueType:  "cex",
+					MarketType: string(identity.MarketTypeSpot),
+					Symbol:     "PRESPCXUSDT",
+					BaseAsset:  "SPCX",
+					QuoteAsset: "USDT",
+					Status:     "live",
+				},
+			},
+		},
+		discoveryCachedAt: time.Date(2026, 5, 15, 0, 1, 0, 0, time.UTC),
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/lookup?source=slipstream-test&symbol=SPCX", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoveryLookup(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		ServerCache bool `json:"serverCache"`
+		Summary     struct {
+			MarketCount int `json:"marketCount"`
+		} `json:"summary"`
+		Groups []struct {
+			Markets []struct {
+				RawSymbol string `json:"rawSymbol"`
+			} `json:"markets"`
+		} `json:"groups"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if !payload.ServerCache {
+		t.Fatalf("expected server cache marker")
+	}
+	if payload.Summary.MarketCount != 1 || len(payload.Groups) != 1 || len(payload.Groups[0].Markets) != 1 {
+		t.Fatalf("expected cached market result, got %+v", payload)
+	}
+	if payload.Groups[0].Markets[0].RawSymbol != "PRESPCXUSDT" {
+		t.Fatalf("unexpected market from cache: %+v", payload.Groups[0].Markets)
 	}
 }
 
