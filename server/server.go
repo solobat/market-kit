@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -98,7 +99,43 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/discovery/lookup", a.handleDiscoveryLookup)
 	mux.HandleFunc("/api/registry", a.handleRegistry)
 	mux.Handle("/", a.frontendHandler())
-	return mux
+	return a.withCORS(mux)
+}
+
+func (a *App) withCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if origin := strings.TrimSpace(r.Header.Get("Origin")); origin != "" && a.originAllowed(origin) {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+			w.Header().Set("Vary", "Origin")
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (a *App) originAllowed(origin string) bool {
+	parsed, err := url.Parse(origin)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return false
+	}
+	for _, allowed := range a.config.AllowedOrigins {
+		allowed = strings.TrimSpace(allowed)
+		if allowed == "*" || strings.EqualFold(origin, allowed) {
+			return true
+		}
+		if strings.HasPrefix(allowed, "https://*.") && parsed.Scheme == "https" {
+			suffix := strings.TrimPrefix(allowed, "https://*")
+			if strings.HasSuffix(strings.ToLower(parsed.Hostname()), strings.ToLower(suffix)) {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func (a *App) handleHealthz(w http.ResponseWriter, _ *http.Request) {

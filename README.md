@@ -181,6 +181,10 @@ When the console runs through `pnpm dev`, read-only `/api/*` requests default to
 `/api/v1/registry/overrides` endpoint is proxied to the local Go server at
 `http://127.0.0.1:18120`. Override that write target with
 `VITE_MARKET_KIT_WRITE_API_BASE` if your local server uses a different address.
+For built deployments, the frontend uses same-origin `/api/v1/registry/overrides`
+unless `VITE_MARKET_KIT_WRITE_API_BASE` is set at build time. If that value points
+at a different origin, add the console origin to `MARKET_KIT_ALLOWED_ORIGINS` on
+the Go server so browser CORS preflight can pass.
 
 For more automated remote sample review, copy:
 
@@ -420,6 +424,10 @@ Override the local dev target with `VITE_MARKET_KIT_API_BASE` if needed.
   - default: `12s`
 - `MARKET_KIT_FRONTEND_DIST`
   - default: `frontend/dist`
+- `MARKET_KIT_ALLOWED_ORIGINS`
+  - comma-separated origins allowed to call the API directly from a browser
+  - default: `http://127.0.0.1:5174,http://localhost:5174`
+  - supports exact origins and explicit HTTPS wildcards such as `https://*.example.com`
 
 If `MARKET_KIT_SYNC_SOURCES_PATH` is not set, the server falls back to:
 

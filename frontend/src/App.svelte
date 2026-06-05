@@ -10,6 +10,8 @@
   const themeKey = "market-kit.theme";
   const syncConfigKey = "market-kit.sync-config";
   const syncCasesKey = "market-kit.sync-cases";
+  const writeApiBase = String(import.meta.env?.VITE_MARKET_KIT_WRITE_API_BASE || "").trim();
+  const registryOverrideEndpoint = apiEndpoint("/api/v1/registry/overrides", writeApiBase);
 
   let theme = "dark";
   let assetQuery = "";
@@ -775,6 +777,13 @@
     throw lastError || new Error("all endpoints failed");
   }
 
+  function apiEndpoint(endpoint, base) {
+    const cleanEndpoint = String(endpoint || "");
+    const cleanBase = String(base || "").trim().replace(/\/+$/, "");
+    if (!cleanBase || /^https?:\/\//i.test(cleanEndpoint)) return cleanEndpoint;
+    return `${cleanBase}/${cleanEndpoint.replace(/^\/+/, "")}`;
+  }
+
   async function loadRuntimeRegistry() {
     registryState = "loading";
     registryMessage = "正在读取后端 runtime registry…";
@@ -837,7 +846,7 @@
     reassignState = "loading";
     reassignMessage = `正在把 ${market.rawSymbol} 改到 ${canonicalSymbol}…`;
     try {
-      const payload = await fetchJSON("/api/v1/registry/overrides", {
+      const payload = await fetchJSON(registryOverrideEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -868,7 +877,8 @@
   function formatReassignError(error) {
     const message = error instanceof Error ? error.message : "改归属失败。";
     if (message.includes("endpoint returned 404")) {
-      return `写入 runtime registry 的 API 不可用。请确认前端连接的是本地 market-kit server，或把 VITE_MARKET_KIT_WRITE_API_BASE 指向本地 Go server。原始错误：${message}`;
+      const target = writeApiBase ? `当前写入目标：${registryOverrideEndpoint}。` : "当前写入目标是同源 /api/v1/registry/overrides。";
+      return `写入 runtime registry 的 API 不可用。${target}如果这是线上 Vercel 页面，请确认远端 market-kit Go server 已部署包含写入路由的版本；如果要写本机 registry，请在构建前把 VITE_MARKET_KIT_WRITE_API_BASE 指向本地 Go server。原始错误：${message}`;
     }
     return message;
   }

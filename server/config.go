@@ -12,6 +12,7 @@ type Config struct {
 	SyncSourcesPath        string
 	RequestTimeout         time.Duration
 	FrontendDistDir        string
+	AllowedOrigins         []string
 	SlipstreamDiscoveryURL string
 	SlipstreamAdminCode    string
 	AutoSyncEnabled        bool
@@ -26,6 +27,7 @@ func LoadConfig() Config {
 		SyncSourcesPath:        strings.TrimSpace(os.Getenv("MARKET_KIT_SYNC_SOURCES_PATH")),
 		RequestTimeout:         parseDuration(firstNonEmpty(os.Getenv("MARKET_KIT_REQUEST_TIMEOUT"), "12s"), 12*time.Second),
 		FrontendDistDir:        firstNonEmpty(os.Getenv("MARKET_KIT_FRONTEND_DIST"), filepathOrDefault()),
+		AllowedOrigins:         parseCSV(firstNonEmpty(os.Getenv("MARKET_KIT_ALLOWED_ORIGINS"), "http://127.0.0.1:5174,http://localhost:5174")),
 		SlipstreamDiscoveryURL: strings.TrimSpace(os.Getenv("MARKET_KIT_SLIPSTREAM_DISCOVERY_URL")),
 		SlipstreamAdminCode:    strings.TrimSpace(os.Getenv("MARKET_KIT_SLIPSTREAM_ADMIN_CODE")),
 		AutoSyncEnabled:        parseBool(firstNonEmpty(os.Getenv("MARKET_KIT_AUTOSYNC_ENABLED"), "true"), true),
@@ -33,6 +35,17 @@ func LoadConfig() Config {
 		AutoSyncSourceID:       strings.TrimSpace(os.Getenv("MARKET_KIT_AUTOSYNC_SOURCE")),
 		RuntimeRegistryPath:    firstNonEmpty(os.Getenv("MARKET_KIT_RUNTIME_REGISTRY_PATH"), filepath.Join("data", "runtime_generated_registry.json")),
 	}
+}
+
+func parseCSV(value string) []string {
+	var items []string
+	for _, item := range strings.Split(value, ",") {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			items = append(items, item)
+		}
+	}
+	return items
 }
 
 func filepathOrDefault() string {

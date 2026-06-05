@@ -213,6 +213,52 @@ func TestHandleRuntimeRegistryOverrideReassignsMarket(t *testing.T) {
 	}
 }
 
+func TestHandlerAllowsConfiguredCORSPreflight(t *testing.T) {
+	app := &App{
+		config: Config{
+			AllowedOrigins: []string{"https://console.example.com"},
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodOptions, "/api/v1/registry/overrides", nil)
+	req.Header.Set("Origin", "https://console.example.com")
+	req.Header.Set("Access-Control-Request-Method", "POST")
+	req.Header.Set("Access-Control-Request-Headers", "Content-Type")
+	rec := httptest.NewRecorder()
+	app.Handler().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusNoContent {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+	if got := rec.Header().Get("Access-Control-Allow-Origin"); got != "https://console.example.com" {
+		t.Fatalf("unexpected allow origin header: %q", got)
+	}
+	if got := rec.Header().Get("Access-Control-Allow-Methods"); !strings.Contains(got, "POST") {
+		t.Fatalf("expected POST in allow methods, got %q", got)
+	}
+}
+
+func TestHandlerDoesNotAllowUnconfiguredCORSPreflight(t *testing.T) {
+	app := &App{
+		config: Config{
+			AllowedOrigins: []string{"https://console.example.com"},
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodOptions, "/api/v1/registry/overrides", nil)
+	req.Header.Set("Origin", "https://other.example.com")
+	req.Header.Set("Access-Control-Request-Method", "POST")
+	rec := httptest.NewRecorder()
+	app.Handler().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusMethodNotAllowed {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+	if got := rec.Header().Get("Access-Control-Allow-Origin"); got != "" {
+		t.Fatalf("unexpected allow origin header: %q", got)
+	}
+}
+
 func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
 	base := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{
