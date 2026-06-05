@@ -738,16 +738,32 @@
     window.localStorage.setItem(syncCasesKey, JSON.stringify(syncedCases));
   }
 
+  async function readJSONResponse(response) {
+    const text = await response.text();
+    if (!text.trim()) return null;
+    try {
+      return JSON.parse(text);
+    } catch {
+      const body = text.trim().replace(/\s+/g, " ").slice(0, 200);
+      const status = response.ok ? "response" : `endpoint returned ${response.status}`;
+      throw new Error(body ? `${status}: ${body}` : `${status}: invalid JSON`);
+    }
+  }
+
+  async function fetchJSON(endpoint, options) {
+    const response = await fetch(endpoint, options);
+    const payload = await readJSONResponse(response);
+    if (!response.ok) {
+      throw new Error(payload?.error || `endpoint returned ${response.status}`);
+    }
+    return payload;
+  }
+
   async function fetchFromEndpoints(endpoints) {
     let lastError = null;
     for (const endpoint of endpoints) {
       try {
-        const response = await fetch(endpoint);
-        const payload = await response.json();
-        if (!response.ok) {
-          throw new Error(payload?.error || `endpoint returned ${response.status}`);
-        }
-        return payload;
+        return await fetchJSON(endpoint);
       } catch (error) {
         lastError = error;
       }
@@ -793,7 +809,7 @@
     reassignState = "loading";
     reassignMessage = `正在把 ${market.rawSymbol} 改到 ${canonicalSymbol}…`;
     try {
-      const response = await fetch("/api/v1/registry/overrides", {
+      const payload = await fetchJSON("/api/v1/registry/overrides", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -804,10 +820,6 @@
           assetClass: selectedAsset?.asset_class || "crypto"
         })
       });
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload?.error || `override update failed: ${response.status}`);
-      }
 
       registry = setRuntimeRegistry(payload.registry || payload);
       registryState = "success";
@@ -819,8 +831,16 @@
       navigate("asset-detail", { asset: canonicalSymbol.split("/")[0] });
     } catch (error) {
       reassignState = "error";
-      reassignMessage = error instanceof Error ? error.message : "改归属失败。";
+      reassignMessage = formatReassignError(error);
     }
+  }
+
+  function formatReassignError(error) {
+    const message = error instanceof Error ? error.message : "改归属失败。";
+    if (message.includes("endpoint returned 404")) {
+      return `写入 runtime registry 的 API 不可用。请确认前端连接的是本地 market-kit server，或把 VITE_MARKET_KIT_WRITE_API_BASE 指向本地 Go server。原始错误：${message}`;
+    }
+    return message;
   }
 
   function normalizeCanonicalTarget(input, market) {
@@ -870,11 +890,7 @@
       if (syncConfig.authHeader.trim() && syncConfig.authValue.trim()) {
         headers[syncConfig.authHeader.trim()] = syncConfig.authValue.trim();
       }
-      const response = await fetch(syncConfig.url.trim(), { headers });
-      if (!response.ok) {
-        throw new Error(`remote responded ${response.status}`);
-      }
-      const payload = await response.json();
+      const payload = await fetchJSON(syncConfig.url.trim(), { headers });
       syncedCases = normalizeImportedCases(payload).map((item) => ({
         ...item,
         source: item.source === "unknown" ? syncConfig.source : item.source

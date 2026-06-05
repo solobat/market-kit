@@ -8,6 +8,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 const localSourcesPath = path.join(dirname, "sync-sources.local.json");
 const exampleSourcesPath = path.join(dirname, "sync-sources.example.json");
 const remoteApiBase = process.env.VITE_MARKET_KIT_API_BASE || "https://api.immortal.app/market-kit-api";
+const writeApiBase = process.env.VITE_MARKET_KIT_WRITE_API_BASE || "http://127.0.0.1:18120";
 
 function readSyncSources() {
   const target = fs.existsSync(localSourcesPath) ? localSourcesPath : exampleSourcesPath;
@@ -103,6 +104,11 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     proxy: {
+      "/api/v1/registry/overrides": {
+        target: writeApiBase,
+        changeOrigin: true,
+        secure: false
+      },
       "/api": {
         target: remoteApiBase,
         changeOrigin: true,

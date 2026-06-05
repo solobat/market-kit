@@ -162,13 +162,25 @@ This repo also includes a static Svelte console in `frontend/` for:
 - syncing unresolved / ambiguous samples exported from remote services such as `veridex`
 - reviewing candidate asset groups imported from `slipstream` discovery markets
 
-Run locally:
+Run the local API server:
+
+```bash
+go run ./cmd/market-kit-server
+```
+
+In another terminal, run the frontend console:
 
 ```bash
 cd frontend
 pnpm install
 pnpm dev
 ```
+
+When the console runs through `pnpm dev`, read-only `/api/*` requests default to
+`https://api.immortal.app/market-kit-api`, while the writable
+`/api/v1/registry/overrides` endpoint is proxied to the local Go server at
+`http://127.0.0.1:18120`. Override that write target with
+`VITE_MARKET_KIT_WRITE_API_BASE` if your local server uses a different address.
 
 For more automated remote sample review, copy:
 
