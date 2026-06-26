@@ -106,7 +106,7 @@ func (a *App) withCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if origin := strings.TrimSpace(r.Header.Get("Origin")); origin != "" && a.originAllowed(origin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS")
 			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 			w.Header().Set("Vary", "Origin")
 			if r.Method == http.MethodOptions {
@@ -171,6 +171,10 @@ type registryOverrideRequest struct {
 	MarketType      string `json:"marketType"`
 	CanonicalSymbol string `json:"canonicalSymbol"`
 	AssetClass      string `json:"assetClass,omitempty"`
+}
+
+type assetClassUpdateRequest struct {
+	AssetClass string `json:"assetClass"`
 }
 
 func (a *App) handleResolve(w http.ResponseWriter, r *http.Request) {
@@ -431,21 +435,84 @@ func registryHasAsset(registry identity.Registry, canonical string) bool {
 }
 
 func (a *App) handleAsset(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		w.Header().Set("Allow", "GET")
-		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
-		return
-	}
 	symbol := strings.ToUpper(strings.Trim(strings.TrimPrefix(r.URL.Path, "/api/v1/assets/"), "/ "))
 	if symbol == "" {
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "asset symbol is required"})
 		return
 	}
+	switch r.Method {
+	case http.MethodGet:
+		a.handleAssetGet(w, symbol)
+	case http.MethodPost, http.MethodPatch:
+		a.handleAssetClassUpdate(w, r, symbol)
+	default:
+		w.Header().Set("Allow", "GET, POST, PATCH")
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+	}
+}
+
+func (a *App) handleAssetGet(w http.ResponseWriter, symbol string) {
 	if asset, ok := findAssetAlias(a.runtimeRegistry(), symbol); ok {
 		writeJSON(w, http.StatusOK, map[string]any{"asset": asset})
 		return
 	}
 	writeJSON(w, http.StatusNotFound, map[string]any{"error": "asset not found", "asset": symbol})
+}
+
+func (a *App) handleAssetClassUpdate(w http.ResponseWriter, r *http.Request, symbol string) {
+	var req assetClassUpdateRequest
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "invalid asset class update json"})
+		return
+	}
+	assetClass := normalizeRegistryAssetClass(req.AssetClass)
+	if assetClass == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass must be crypto, rwa_stock, rwa_commodity, fiat_stable, or unknown"})
+		return
+	}
+	if registryHasAsset(a.baseRegistry, symbol) {
+		writeJSON(w, http.StatusConflict, map[string]any{"error": "static registry asset classes must be changed in source code"})
+		return
+	}
+	if !registryHasAsset(a.runtimeRegistry(), symbol) && !registryHasAsset(a.generatedRegistrySnapshot(), symbol) {
+		writeJSON(w, http.StatusNotFound, map[string]any{"error": "asset not found", "asset": symbol})
+		return
+	}
+
+	nextGenerated := updateRuntimeAssetClass(a.generatedRegistrySnapshot(), symbol, assetClass)
+	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, nextGenerated); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": "write runtime registry failed"})
+		return
+	}
+	a.applyGeneratedRegistry(nextGenerated)
+
+	asset, _ := findAssetAlias(a.runtimeRegistry(), symbol)
+	writeJSON(w, http.StatusOK, map[string]any{
+		"asset":    asset,
+		"registry": a.runtimeRegistry(),
+	})
+}
+
+func updateRuntimeAssetClass(generated identity.Registry, symbol string, assetClass string) identity.Registry {
+	generated.Normalize()
+	symbol = strings.ToUpper(strings.TrimSpace(symbol))
+	assetClass = strings.TrimSpace(assetClass)
+	if symbol == "" || assetClass == "" {
+		return generated
+	}
+	for idx := range generated.AssetAliases {
+		if strings.EqualFold(generated.AssetAliases[idx].Canonical, symbol) {
+			generated.AssetAliases[idx].AssetClass = assetClass
+			generated.Normalize()
+			return generated
+		}
+	}
+	generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
+		Canonical:  symbol,
+		AssetClass: assetClass,
+	})
+	generated.Normalize()
+	return generated
 }
 
 func (a *App) handleVersion(w http.ResponseWriter, r *http.Request) {

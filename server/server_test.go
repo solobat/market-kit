@@ -387,6 +387,63 @@ func TestHandleAssetReturnsAliasRule(t *testing.T) {
 	}
 }
 
+func TestHandleAssetClassUpdateCorrectsRuntimeAsset(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	generated := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "KORU", AssetClass: "crypto"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "binance", RawSymbol: "KORUUSDT", MarketType: "perpetual", CanonicalSymbol: "KORU/USDT"},
+		},
+	}
+	generated.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: generated,
+		registry:          base.Merge(generated),
+		resolver:          identity.NewResolver(base.Merge(generated)),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/assets/KORU", strings.NewReader(`{"assetClass":"rwa_stock"}`))
+	rec := httptest.NewRecorder()
+	app.handleAsset(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+	resolved := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange:       "binance",
+		Symbol:         "KORUUSDT",
+		MarketTypeHint: "perpetual",
+	})
+	if resolved.Market == nil || resolved.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("expected runtime resolver to use corrected asset class, got %+v", resolved)
+	}
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted runtime registry: %v", err)
+	}
+	for _, asset := range persisted.AssetAliases {
+		if asset.Canonical == "KORU" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected persisted KORU class to be rwa_stock, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected persisted KORU asset, got %+v", persisted.AssetAliases)
+}
+
 func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 	app := &App{
 		client: &http.Client{

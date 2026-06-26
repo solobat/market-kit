@@ -887,6 +887,35 @@ input::placeholder {
   flex-wrap: wrap;
 }
 
+.asset-class-editor {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-width: min(100%, 18rem);
+}
+
+.asset-class-editor select {
+  min-height: 2.5rem;
+  min-width: 9rem;
+}
+
+.asset-class-editor__message {
+  flex-basis: 100%;
+  color: var(--mk-muted);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.asset-class-editor__message--success {
+  color: var(--mk-good);
+}
+
+.asset-class-editor__message--error {
+  color: var(--mk-danger);
+}
+
 .detail-page-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(20rem, 0.88fr);

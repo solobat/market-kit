@@ -12,6 +12,7 @@
   const syncCasesKey = "market-kit.sync-cases";
   const writeApiBase = String(import.meta.env?.VITE_MARKET_KIT_WRITE_API_BASE || "").trim();
   const registryOverrideEndpoint = apiEndpoint("/api/v1/registry/overrides", writeApiBase);
+  const editableAssetClasses = ["crypto", "rwa_stock", "rwa_commodity", "fiat_stable", "unknown"];
 
   let theme = "dark";
   let assetQuery = "";
@@ -45,6 +46,10 @@
   let reassignDialogTarget = "";
   let reassignDialogError = "";
   let reassignInputElement;
+  let assetClassUpdateState = "idle";
+  let assetClassUpdateMessage = "";
+  let assetClassEditCanonical = "";
+  let assetClassEditValue = "";
   let selectedAssetCanonical = "";
   let proxyAvailable = false;
   let remoteSources = [];
@@ -108,6 +113,12 @@
     registryAssetRows[0]?.canonical ||
     "";
   $: selectedAsset = registryAssetRows.find((item) => item.canonical === effectiveSelectedAssetCanonical) || null;
+  $: if ((selectedAsset?.canonical || "") !== assetClassEditCanonical) {
+    assetClassEditCanonical = selectedAsset?.canonical || "";
+    assetClassEditValue = selectedAsset?.asset_class || "";
+    assetClassUpdateState = "idle";
+    assetClassUpdateMessage = "";
+  }
 
   $: overrideRows = (registry.market_overrides || []).filter((item) => {
     const query = overrideQuery.trim().toUpperCase();
@@ -874,6 +885,41 @@
     }
   }
 
+  async function updateSelectedAssetClass() {
+    if (!selectedAsset?.canonical) return;
+    const assetClass = String(assetClassEditValue || "").trim();
+    if (!assetClass) {
+      assetClassUpdateState = "error";
+      assetClassUpdateMessage = "请选择 assetClass。";
+      return;
+    }
+    if (assetClass === selectedAsset.asset_class) {
+      assetClassUpdateState = "idle";
+      assetClassUpdateMessage = "";
+      return;
+    }
+
+    assetClassUpdateState = "loading";
+    assetClassUpdateMessage = `正在把 ${selectedAsset.canonical} 改为 ${assetClassLabel(assetClass)}…`;
+    try {
+      const payload = await fetchJSON(apiEndpoint(`/api/v1/assets/${selectedAsset.canonical}`, writeApiBase), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ assetClass })
+      });
+      registry = setRuntimeRegistry(payload.registry || registry);
+      registryState = "success";
+      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
+      request = { ...request };
+      discoveryEnvelope = { ...discoveryEnvelope };
+      assetClassUpdateState = "success";
+      assetClassUpdateMessage = `已将 ${selectedAsset.canonical} 改为 ${assetClassLabel(assetClass)}。`;
+    } catch (error) {
+      assetClassUpdateState = "error";
+      assetClassUpdateMessage = formatReassignError(error);
+    }
+  }
+
   function formatReassignError(error) {
     const message = error instanceof Error ? error.message : "改归属失败。";
     if (message.includes("endpoint returned 404")) {
@@ -1368,6 +1414,25 @@
               </div>
             </div>
             <div class="detail-page-actions">
+              <div class="asset-class-editor" aria-label="修改 assetClass">
+                <select bind:value={assetClassEditValue} disabled={assetClassUpdateState === "loading"}>
+                  {#each editableAssetClasses as assetClass}
+                    <option value={assetClass}>{assetClassLabel(assetClass)}</option>
+                  {/each}
+                </select>
+                <button
+                  class="detail-link-button"
+                  on:click={updateSelectedAssetClass}
+                  disabled={assetClassUpdateState === "loading" || assetClassEditValue === selectedAsset.asset_class}
+                >
+                  {assetClassUpdateState === "loading" ? "保存中" : "保存类别"}
+                </button>
+                {#if assetClassUpdateMessage}
+                  <span class={`asset-class-editor__message asset-class-editor__message--${assetClassUpdateState}`}>
+                    {assetClassUpdateMessage}
+                  </span>
+                {/if}
+              </div>
               <button class="detail-link-button" on:click={openSelectedAssetGroups}>查看候选分组</button>
               <button class="detail-link-button detail-link-button--ghost" on:click={() => {
                 overrideQuery = selectedAsset.canonical;
