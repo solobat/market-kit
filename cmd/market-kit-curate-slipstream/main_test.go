@@ -118,6 +118,53 @@ func TestClassifyGeneratedAssetPrefersExchangeMetadata(t *testing.T) {
 	}
 }
 
+func TestClassifyGeneratedAssetTreatsTradFiEquityMetadataAsRWAStock(t *testing.T) {
+	item := discoveryItem{
+		BaseAsset:          "KORU",
+		AssetClassHint:     "equity",
+		Category:           "tradifi_perpetual",
+		UnderlyingCategory: "equity",
+	}
+
+	if actual := classifyGeneratedAsset(item, "KORU"); actual != "rwa_stock" {
+		t.Fatalf("expected KORU TradFi equity metadata to classify as rwa_stock, got %s", actual)
+	}
+}
+
+func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t *testing.T) {
+	existing := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "KORU", AssetClass: "crypto"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	current := buildGeneratedRegistry([]discoveryItem{
+		{
+			PlatformID:         "binance",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             "KORUUSDT",
+			BaseAsset:          "KORU",
+			QuoteAsset:         "USDT",
+			AssetClassHint:     "equity",
+			Category:           "tradifi_perpetual",
+			UnderlyingCategory: "equity",
+			Status:             "live",
+		},
+	})
+
+	merged := sanitizeExistingGeneratedRegistry(existing, current).Merge(current)
+	for _, asset := range merged.AssetAliases {
+		if asset.Canonical == "KORU" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected current RWA evidence to correct KORU, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected KORU asset alias, got %+v", merged.AssetAliases)
+}
+
 func TestBuildGeneratedRegistrySkipsUnknownAutoAliases(t *testing.T) {
 	registry := buildGeneratedRegistry([]discoveryItem{
 		{

@@ -15,7 +15,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 			key := req.Method + " " + req.URL.String()
 			payloads := map[string]string{
 				"GET https://api.binance.com/api/v3/exchangeInfo":                                                                `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT"}]}`,
-				"GET https://fapi.binance.com/fapi/v1/exchangeInfo":                                                              `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT"}]}`,
+				"GET https://fapi.binance.com/fapi/v1/exchangeInfo":                                                              `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT","underlyingType":"COIN","underlyingSubType":["Layer-1"],"contractType":"PERPETUAL"},{"symbol":"KORUUSDT","status":"TRADING","baseAsset":"KORU","quoteAsset":"USDT","underlyingType":"EQUITY","underlyingSubType":["TradFi"],"contractType":"TRADIFI_PERPETUAL"}]}`,
 				"GET https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai": `{"data":{"list":[{"ticker":"AAPL","symbol":"AAPLONDO","quoteAsset":"USD","chainId":"1","contractAddress":"0xabc","type":1,"status":"TRADING","externalUrl":"https://www.binance.com/en/web3"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=spot&limit=1000":                                  `{"result":{"list":[{"symbol":"ETHUSDT","status":"Trading","baseCoin":"ETH","quoteCoin":"USDT"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000":                                `{"result":{"list":[{"symbol":"AAPLUSDT","status":"Trading","baseCoin":"AAPL","quoteCoin":"USDT"}]}}`,
@@ -67,7 +67,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	if envelope.Source != "market-kit-bootstrap" {
 		t.Fatalf("unexpected source: %s", envelope.Source)
 	}
-	if len(envelope.Items) != 13 {
+	if len(envelope.Items) != 14 {
 		t.Fatalf("unexpected item count: %d", len(envelope.Items))
 	}
 
@@ -77,6 +77,11 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		if item.PlatformID == "binance-web3" && item.AssetClassHint != "stock" {
 			t.Fatalf("expected binance-web3 item to carry stock hint: %+v", item)
 		}
+		if item.PlatformID == "binance" && item.Symbol == "KORUUSDT" {
+			if item.AssetClassHint != "equity" || item.UnderlyingCategory != "equity" {
+				t.Fatalf("expected Binance TradFi perpetual to carry equity evidence: %+v", item)
+			}
+		}
 		if item.SourceID != BuiltInSourceID {
 			t.Fatalf("unexpected source id: %s", item.SourceID)
 		}
@@ -85,6 +90,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	for _, key := range []string{
 		"binance:BTCUSDT:spot",
 		"binance:BTCUSDT:perp",
+		"binance:KORUUSDT:perp",
 		"binance-web3:AAPLONDO:spot",
 		"bybit:AAPLUSDT:perp",
 		"okx:CL-USDT-SWAP:perp",

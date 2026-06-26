@@ -25,7 +25,7 @@ var (
 		"HD": true, "HEI": true, "HIMS": true, "HOOD": true, "IAG": true, "IAU": true,
 		"INDA": true, "INTC": true, "IONQ": true, "ITOT": true, "IVV": true, "IWM": true,
 		"JD": true, "KLAC": true, "KOPN": true, "KWEB": true, "LLY": true, "LWLG": true,
-		"MAS": true, "MCD": true, "META": true, "MP": true, "MPLX": true, "MRVL": true,
+		"KORU": true, "MAS": true, "MCD": true, "META": true, "MP": true, "MPLX": true, "MRVL": true,
 		"MSFT": true, "MSTR": true, "MU": true, "NBIS": true, "NFLX": true, "NIO": true,
 		"NVDA": true, "OKLO": true, "ORCL": true, "OXY": true, "PAYP": true, "PLTR": true,
 		"QCOM": true, "QQQ": true, "RKLB": true, "RTX": true, "SLV": true, "SNDK": true,
@@ -249,6 +249,11 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 		AssetAliases:    make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
 	}
 	for _, item := range existing.AssetAliases {
+		if currentClass, ok := supportedRWA[item.Canonical]; ok {
+			item.AssetClass = currentClass
+			out.AssetAliases = append(out.AssetAliases, item)
+			continue
+		}
 		switch item.AssetClass {
 		case "rwa_stock", "rwa_commodity":
 			if preciseGeneratedAssetClass(item.Canonical) == item.AssetClass || supportedRWA[item.Canonical] == item.AssetClass {
@@ -384,6 +389,7 @@ func normalizeAssetClassHint(value string) string {
 		return "fiat_stable"
 	case strings.Contains(raw, "stock"),
 		strings.Contains(raw, "equity"),
+		strings.Contains(raw, "tradfi"),
 		strings.Contains(raw, "share"),
 		strings.Contains(raw, "security"),
 		strings.Contains(raw, "etf"),

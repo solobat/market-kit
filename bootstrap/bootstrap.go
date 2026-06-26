@@ -121,10 +121,13 @@ func collectors() []collector {
 
 func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type symbol struct {
-		Symbol     string `json:"symbol"`
-		Status     string `json:"status"`
-		BaseAsset  string `json:"baseAsset"`
-		QuoteAsset string `json:"quoteAsset"`
+		Symbol            string   `json:"symbol"`
+		Status            string   `json:"status"`
+		BaseAsset         string   `json:"baseAsset"`
+		QuoteAsset        string   `json:"quoteAsset"`
+		ContractType      string   `json:"contractType"`
+		UnderlyingType    string   `json:"underlyingType"`
+		UnderlyingSubType []string `json:"underlyingSubType"`
 	}
 	type response struct {
 		Symbols []symbol `json:"symbols"`
@@ -159,22 +162,71 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		})
 	}
 	for _, item := range perp.Symbols {
+		assetClassHint, underlyingCategory, tags := binanceFuturesClassification(item.ContractType, item.UnderlyingType, item.UnderlyingSubType)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "binance",
-			Platform:    "Binance",
-			VenueType:   "cex",
-			MarketType:  "perp",
-			Symbol:      strings.TrimSpace(item.Symbol),
-			BaseAsset:   strings.TrimSpace(item.BaseAsset),
-			QuoteAsset:  strings.TrimSpace(item.QuoteAsset),
-			Status:      normalizeBinanceStatus(item.Status),
-			ExternalURL: "https://www.binance.com/en/futures/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "binance",
+			Platform:           "Binance",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             strings.TrimSpace(item.Symbol),
+			BaseAsset:          strings.TrimSpace(item.BaseAsset),
+			QuoteAsset:         strings.TrimSpace(item.QuoteAsset),
+			AssetClassHint:     assetClassHint,
+			Category:           strings.ToLower(strings.TrimSpace(item.ContractType)),
+			UnderlyingCategory: underlyingCategory,
+			Tags:               tags,
+			Status:             normalizeBinanceStatus(item.Status),
+			ExternalURL:        "https://www.binance.com/en/futures/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
 		})
 	}
 	return out, nil
+}
+
+func binanceFuturesClassification(contractType string, underlyingType string, underlyingSubTypes []string) (assetClassHint string, underlyingCategory string, tags []string) {
+	contractType = strings.ToUpper(strings.TrimSpace(contractType))
+	underlyingType = strings.ToUpper(strings.TrimSpace(underlyingType))
+	subTypes := make([]string, 0, len(underlyingSubTypes))
+	for _, item := range underlyingSubTypes {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			subTypes = append(subTypes, item)
+		}
+	}
+
+	switch {
+	case strings.Contains(contractType, "TRADIFI"), underlyingType == "EQUITY", containsFold(subTypes, "TradFi"):
+		assetClassHint = "equity"
+		underlyingCategory = "equity"
+	case underlyingType == "COIN":
+		assetClassHint = "crypto"
+		underlyingCategory = "coin"
+	default:
+		return "", "", nil
+	}
+
+	tags = append(tags, "binance-futures")
+	if contractType != "" {
+		tags = append(tags, "contract-type:"+contractType)
+	}
+	if underlyingType != "" {
+		tags = append(tags, "underlying-type:"+underlyingType)
+	}
+	for _, item := range subTypes {
+		tags = append(tags, "underlying-subtype:"+item)
+	}
+	return assetClassHint, underlyingCategory, tags
+}
+
+func containsFold(items []string, target string) bool {
+	for _, item := range items {
+		if strings.EqualFold(strings.TrimSpace(item), target) {
+			return true
+		}
+	}
+	return false
 }
 
 func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {

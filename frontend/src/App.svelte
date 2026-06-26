@@ -854,7 +854,7 @@
           rawSymbol: market.rawSymbol,
           marketType: market.marketType,
           canonicalSymbol,
-          assetClass: selectedAsset?.asset_class || "crypto"
+          assetClass: selectedAsset?.asset_class || market.assetClass || ""
         })
       });
 

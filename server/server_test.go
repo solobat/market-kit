@@ -214,6 +214,40 @@ func TestHandleRuntimeRegistryOverrideReassignsMarket(t *testing.T) {
 	}
 }
 
+func TestHandleRuntimeRegistryOverrideRequiresAssetClassForNewAsset(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: filepath.Join(t.TempDir(), "runtime_generated_registry.json"),
+		},
+		baseRegistry:      base,
+		generatedRegistry: identity.Registry{},
+		registry:          base,
+		resolver:          identity.NewResolver(base),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/registry/overrides", strings.NewReader(`{
+		"exchange":"binance",
+		"rawSymbol":"KORUUSDT",
+		"marketType":"perp",
+		"canonicalSymbol":"KORU/USDT"
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistryOverride(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("expected missing assetClass to be rejected, got status %d body=%s", rec.Code, rec.Body.String())
+	}
+	if registryHasAsset(app.runtimeRegistry(), "KORU") {
+		t.Fatalf("expected KORU not to be inserted without explicit assetClass")
+	}
+}
+
 func TestHandlerAllowsConfiguredCORSPreflight(t *testing.T) {
 	app := &App{
 		config: Config{

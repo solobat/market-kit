@@ -274,8 +274,17 @@ func (a *App) handleRuntimeRegistryOverride(w http.ResponseWriter, r *http.Reque
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": err.Error()})
 		return
 	}
+	assetClass := normalizeRegistryAssetClass(req.AssetClass)
+	if strings.TrimSpace(req.AssetClass) != "" && assetClass == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass must be crypto, rwa_stock, rwa_commodity, fiat_stable, or unknown"})
+		return
+	}
+	if registryOverrideCreatesNewAsset(a.generatedRegistrySnapshot(), a.runtimeRegistry(), assetBase) && assetClass == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass is required when assigning a market to a new base asset"})
+		return
+	}
 
-	nextGenerated := upsertRuntimeRegistryOverride(a.generatedRegistrySnapshot(), a.runtimeRegistry(), override, assetBase, req.AssetClass)
+	nextGenerated := upsertRuntimeRegistryOverride(a.generatedRegistrySnapshot(), a.runtimeRegistry(), override, assetBase, assetClass)
 	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, nextGenerated); err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": "write runtime registry failed"})
 		return
@@ -329,6 +338,28 @@ func normalizeRegistryOverrideMarketType(value string) string {
 	}
 }
 
+func normalizeRegistryAssetClass(value string) string {
+	raw := strings.ToLower(strings.TrimSpace(value))
+	raw = strings.ReplaceAll(raw, "-", "_")
+	raw = strings.Join(strings.Fields(raw), "_")
+	switch raw {
+	case "":
+		return ""
+	case "crypto":
+		return "crypto"
+	case "rwa_stock", "stock", "equity", "share", "security", "etf", "index", "tradfi":
+		return "rwa_stock"
+	case "rwa_commodity", "commodity":
+		return "rwa_commodity"
+	case "fiat_stable", "stable", "stablecoin":
+		return "fiat_stable"
+	case "unknown":
+		return "unknown"
+	default:
+		return ""
+	}
+}
+
 func splitCanonicalSymbol(value string) (string, string, bool) {
 	parts := strings.Split(strings.ToUpper(strings.TrimSpace(value)), "/")
 	if len(parts) != 2 {
@@ -361,17 +392,24 @@ func upsertRuntimeRegistryOverride(generated identity.Registry, runtime identity
 	assetBase = strings.ToUpper(strings.TrimSpace(assetBase))
 	if assetBase != "" && !registryHasAsset(runtime, assetBase) && !registryHasAsset(generated, assetBase) {
 		class := strings.TrimSpace(assetClass)
-		if class == "" {
-			class = "crypto"
+		if class != "" {
+			generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
+				Canonical:  assetBase,
+				AssetClass: class,
+			})
 		}
-		generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
-			Canonical:  assetBase,
-			AssetClass: class,
-		})
 	}
 
 	generated.Normalize()
 	return generated
+}
+
+func registryOverrideCreatesNewAsset(generated identity.Registry, runtime identity.Registry, assetBase string) bool {
+	assetBase = strings.ToUpper(strings.TrimSpace(assetBase))
+	if assetBase == "" {
+		return false
+	}
+	return !registryHasAsset(runtime, assetBase) && !registryHasAsset(generated, assetBase)
 }
 
 func registryOverrideKey(item identity.MarketOverride) string {

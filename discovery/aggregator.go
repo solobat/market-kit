@@ -346,6 +346,7 @@ func normalizeImportedAssetClassHint(value string) string {
 		return "fiat_stable"
 	case strings.Contains(raw, "stock"),
 		strings.Contains(raw, "equity"),
+		strings.Contains(raw, "tradfi"),
 		strings.Contains(raw, "share"),
 		strings.Contains(raw, "security"),
 		strings.Contains(raw, "etf"),

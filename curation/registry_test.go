@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/solobat/market-kit/discovery"
+	"github.com/solobat/market-kit/identity"
 )
 
 func TestBuildGeneratedRegistryIncludesStableQuotedDEXMarkets(t *testing.T) {
@@ -42,6 +43,71 @@ func TestBuildGeneratedRegistryIncludesStableQuotedDEXMarkets(t *testing.T) {
 	if !foundZK {
 		t.Fatalf("expected ZK asset alias, got %+v", registry.AssetAliases)
 	}
+}
+
+func TestBuildGeneratedRegistryClassifiesBinanceTradFiPerpetualAsRWAStock(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:           "market-kit-bootstrap",
+			PlatformID:         "binance",
+			Platform:           "Binance",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             "KORUUSDT",
+			BaseAsset:          "KORU",
+			QuoteAsset:         "USDT",
+			AssetClassHint:     "equity",
+			Category:           "tradifi_perpetual",
+			UnderlyingCategory: "equity",
+			Status:             "live",
+		},
+	})
+
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "KORU" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected KORU to classify as rwa_stock, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected KORU asset alias, got %+v", registry.AssetAliases)
+}
+
+func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t *testing.T) {
+	existing := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "KORU", AssetClass: "crypto"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	current := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:           "market-kit-bootstrap",
+			PlatformID:         "binance",
+			Platform:           "Binance",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             "KORUUSDT",
+			BaseAsset:          "KORU",
+			QuoteAsset:         "USDT",
+			AssetClassHint:     "equity",
+			Category:           "tradifi_perpetual",
+			UnderlyingCategory: "equity",
+			Status:             "live",
+		},
+	})
+
+	merged := MergeGeneratedRegistry(existing, current, false)
+	for _, asset := range merged.AssetAliases {
+		if asset.Canonical == "KORU" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected current RWA evidence to correct KORU, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected KORU asset alias, got %+v", merged.AssetAliases)
 }
 
 func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) {
