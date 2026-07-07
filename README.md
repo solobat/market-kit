@@ -224,10 +224,13 @@ In production, the server can also be configured directly through environment va
 MARKET_KIT_SLIPSTREAM_DISCOVERY_URL=https://api.example.com/slipstream/api/discovery/markets?limit=5000
 MARKET_KIT_SLIPSTREAM_ADMIN_CODE=replace-me
 MARKET_KIT_AUTOSYNC_ENABLED=true
-MARKET_KIT_AUTOSYNC_INTERVAL=1m
+MARKET_KIT_AUTOSYNC_INTERVAL=5m
+MARKET_KIT_DISCOVERY_CACHE_TTL=5m
+MARKET_KIT_ADMIN_CODE=replace-me
 ```
 
 With auto-sync enabled, `market-kit` periodically pulls the configured slipstream discovery export, generates a dynamic registry layer, hot-swaps the runtime resolver, and writes that dynamic layer to `MARKET_KIT_RUNTIME_REGISTRY_PATH`.
+When `MARKET_KIT_ADMIN_CODE` is set, expensive manual sync and runtime registry mutation endpoints require `X-Market-Kit-Admin-Code` or `Authorization: Bearer <code>`.
 
 Even without any remote config, the server now exposes a built-in discovery source:
 
@@ -415,13 +418,18 @@ Override the local dev target with `VITE_MARKET_KIT_API_BASE` if needed.
 - `MARKET_KIT_AUTOSYNC_ENABLED`
   - default: `true`
 - `MARKET_KIT_AUTOSYNC_INTERVAL`
-  - default: `1m`
+  - default: `5m`
 - `MARKET_KIT_AUTOSYNC_SOURCE`
   - optional explicit discovery source id; by default the first non-bootstrap discovery source is used
 - `MARKET_KIT_RUNTIME_REGISTRY_PATH`
   - default: `data/runtime_generated_registry.json`
 - `MARKET_KIT_REQUEST_TIMEOUT`
   - default: `12s`
+- `MARKET_KIT_DISCOVERY_CACHE_TTL`
+  - default: `5m`; fresh cached discovery snapshots are reused by manual sync requests unless `refresh=1` or `force=1` is provided
+- `MARKET_KIT_ADMIN_CODE`
+  - optional code required for expensive manual sync, manual auto-sync, and runtime registry mutation endpoints
+  - send as `X-Market-Kit-Admin-Code` or `Authorization: Bearer <code>`
 - `MARKET_KIT_FRONTEND_DIST`
   - default: `frontend/dist`
 - `MARKET_KIT_ALLOWED_ORIGINS`

@@ -11,8 +11,10 @@ type Config struct {
 	HTTPAddr               string
 	SyncSourcesPath        string
 	RequestTimeout         time.Duration
+	DiscoveryCacheTTL      time.Duration
 	FrontendDistDir        string
 	AllowedOrigins         []string
+	AdminCode              string
 	SlipstreamDiscoveryURL string
 	SlipstreamAdminCode    string
 	AutoSyncEnabled        bool
@@ -26,12 +28,14 @@ func LoadConfig() Config {
 		HTTPAddr:               firstNonEmpty(os.Getenv("MARKET_KIT_HTTP_ADDR"), ":18120"),
 		SyncSourcesPath:        strings.TrimSpace(os.Getenv("MARKET_KIT_SYNC_SOURCES_PATH")),
 		RequestTimeout:         parseDuration(firstNonEmpty(os.Getenv("MARKET_KIT_REQUEST_TIMEOUT"), "12s"), 12*time.Second),
+		DiscoveryCacheTTL:      parseDuration(firstNonEmpty(os.Getenv("MARKET_KIT_DISCOVERY_CACHE_TTL"), "5m"), 5*time.Minute),
 		FrontendDistDir:        firstNonEmpty(os.Getenv("MARKET_KIT_FRONTEND_DIST"), filepathOrDefault()),
 		AllowedOrigins:         parseCSV(firstNonEmpty(os.Getenv("MARKET_KIT_ALLOWED_ORIGINS"), "http://127.0.0.1:5174,http://localhost:5174")),
+		AdminCode:              strings.TrimSpace(os.Getenv("MARKET_KIT_ADMIN_CODE")),
 		SlipstreamDiscoveryURL: strings.TrimSpace(os.Getenv("MARKET_KIT_SLIPSTREAM_DISCOVERY_URL")),
 		SlipstreamAdminCode:    strings.TrimSpace(os.Getenv("MARKET_KIT_SLIPSTREAM_ADMIN_CODE")),
 		AutoSyncEnabled:        parseBool(firstNonEmpty(os.Getenv("MARKET_KIT_AUTOSYNC_ENABLED"), "true"), true),
-		AutoSyncInterval:       parseDuration(firstNonEmpty(os.Getenv("MARKET_KIT_AUTOSYNC_INTERVAL"), "1m"), time.Minute),
+		AutoSyncInterval:       parseDuration(firstNonEmpty(os.Getenv("MARKET_KIT_AUTOSYNC_INTERVAL"), "5m"), 5*time.Minute),
 		AutoSyncSourceID:       strings.TrimSpace(os.Getenv("MARKET_KIT_AUTOSYNC_SOURCE")),
 		RuntimeRegistryPath:    firstNonEmpty(os.Getenv("MARKET_KIT_RUNTIME_REGISTRY_PATH"), filepath.Join("data", "runtime_generated_registry.json")),
 	}

@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"crypto/subtle"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -33,8 +34,10 @@ type App struct {
 	autoSyncStatus        AutoSyncStatus
 	discoveryCache        discovery.ImportEnvelope
 	discoveryCacheSources []SyncSource
+	discoveryCacheGroups  []discovery.AssetCandidateGroup
 	discoveryCachedAt     time.Time
 	discoveryCacheErr     string
+	discoveryRefreshMu    sync.Mutex
 	startedAt             time.Time
 }
 
@@ -116,6 +119,27 @@ func (a *App) withCORS(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+func (a *App) requireAdmin(w http.ResponseWriter, r *http.Request) bool {
+	expected := strings.TrimSpace(a.config.AdminCode)
+	if expected == "" {
+		return true
+	}
+
+	provided := strings.TrimSpace(r.Header.Get("X-Market-Kit-Admin-Code"))
+	if provided == "" {
+		auth := strings.TrimSpace(r.Header.Get("Authorization"))
+		if strings.HasPrefix(strings.ToLower(auth), "bearer ") {
+			provided = strings.TrimSpace(auth[len("bearer "):])
+		}
+	}
+	if subtle.ConstantTimeCompare([]byte(provided), []byte(expected)) == 1 {
+		return true
+	}
+
+	writeJSON(w, http.StatusUnauthorized, map[string]any{"error": "admin authorization required"})
+	return false
 }
 
 func (a *App) originAllowed(origin string) bool {
@@ -264,6 +288,9 @@ func (a *App) handleRuntimeRegistryOverride(w http.ResponseWriter, r *http.Reque
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", "POST")
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"error": "method not allowed"})
+		return
+	}
+	if !a.requireAdmin(w, r) {
 		return
 	}
 
@@ -460,6 +487,10 @@ func (a *App) handleAssetGet(w http.ResponseWriter, symbol string) {
 }
 
 func (a *App) handleAssetClassUpdate(w http.ResponseWriter, r *http.Request, symbol string) {
+	if !a.requireAdmin(w, r) {
+		return
+	}
+
 	var req assetClassUpdateRequest
 	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&req); err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "invalid asset class update json"})
@@ -554,13 +585,13 @@ func (a *App) handleDiscoveryCurrent(w http.ResponseWriter, r *http.Request) {
 		sourceID = "all"
 	}
 
-	payload, sources, cachedAt, errText := a.discoveryCacheSnapshot()
-	if len(payload.Items) == 0 || strings.TrimSpace(string(payload.Source)) == "" || (sourceID != "" && !strings.EqualFold(sourceID, string(payload.Source)) && !strings.EqualFold(sourceID, "all")) {
+	payload, sources, cachedAt, errText, _ := a.discoveryCacheSnapshot()
+	if !discoveryCacheMatchesSource(payload, sources, sourceID) {
 		if err := a.refreshDiscoveryCache(r.Context(), sourceID); err != nil {
 			a.writeDiscoveryError(w, err)
 			return
 		}
-		payload, sources, cachedAt, errText = a.discoveryCacheSnapshot()
+		payload, sources, cachedAt, errText, _ = a.discoveryCacheSnapshot()
 	}
 	if len(sources) == 0 {
 		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
@@ -583,34 +614,43 @@ func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "source is required"})
 		return
 	}
-
-	if strings.EqualFold(sourceID, "all") {
-		sources, payload, err := a.fetchDiscoveryLookupEnvelope(r.Context(), sourceID)
-		if err != nil {
-			a.writeDiscoveryError(w, err)
-			return
-		}
-		if len(sources) == 0 {
-			writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
-			return
-		}
-		writeJSON(w, http.StatusOK, map[string]any{
-			"source":  discoveryLookupSourcePayload(sources),
-			"sources": discoverySourcePayloads(sources),
-			"payload": payload,
-		})
+	if !a.requireAdmin(w, r) {
 		return
 	}
 
-	source, payload, err := a.fetchDiscoveryEnvelope(r.Context(), sourceID)
-	if err != nil {
+	forceRefresh := parseBool(firstNonEmpty(r.URL.Query().Get("refresh"), r.URL.Query().Get("force")), false)
+	if !forceRefresh {
+		payload, sources, cachedAt, errText, _ := a.discoveryCacheSnapshot()
+		if discoveryCacheMatchesSource(payload, sources, sourceID) && discoveryCacheFresh(cachedAt, a.config.DiscoveryCacheTTL) {
+			writeJSON(w, http.StatusOK, map[string]any{
+				"source":      discoveryLookupSourcePayload(sources),
+				"sources":     discoverySourcePayloads(sources),
+				"payload":     payload,
+				"cachedAt":    cachedAt,
+				"cacheError":  errText,
+				"serverCache": true,
+			})
+			return
+		}
+	}
+
+	if err := a.refreshDiscoveryCacheWithOptions(r.Context(), sourceID, forceRefresh); err != nil {
 		a.writeDiscoveryError(w, err)
+		return
+	}
+	payload, sources, cachedAt, errText, _ := a.discoveryCacheSnapshot()
+	if len(sources) == 0 {
+		writeJSON(w, http.StatusNotFound, map[string]any{"error": "no discovery source is configured"})
 		return
 	}
 
 	writeJSON(w, http.StatusOK, map[string]any{
-		"source":  discoverySourcePayload(source),
-		"payload": payload,
+		"source":      discoveryLookupSourcePayload(sources),
+		"sources":     discoverySourcePayloads(sources),
+		"payload":     payload,
+		"cachedAt":    cachedAt,
+		"cacheError":  errText,
+		"serverCache": true,
 	})
 }
 
@@ -622,7 +662,7 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sourceID := strings.TrimSpace(r.URL.Query().Get("source"))
-	sources, envelope, cachedAt, cacheErr, err := a.discoveryLookupEnvelopeFromCacheOrRefresh(r.Context(), sourceID)
+	sources, envelope, groups, cachedAt, cacheErr, err := a.discoveryLookupEnvelopeFromCacheOrRefresh(r.Context(), sourceID)
 	if err != nil {
 		a.writeDiscoveryError(w, err)
 		return
@@ -633,8 +673,9 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	registry := a.runtimeRegistry()
-	aggregator := discovery.NewAggregator(registry)
-	groups := aggregator.BuildAssetGroups(envelope.Items)
+	if len(groups) == 0 && len(envelope.Items) > 0 {
+		groups = buildDiscoveryGroups(envelope.Items, registry)
+	}
 	matches := filterDiscoveryGroups(groups, query, registry)
 
 	writeJSON(w, http.StatusOK, map[string]any{
@@ -652,22 +693,22 @@ func (a *App) handleDiscoveryLookup(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (a *App) discoveryLookupEnvelopeFromCacheOrRefresh(ctx context.Context, sourceID string) ([]SyncSource, discovery.ImportEnvelope, time.Time, string, error) {
+func (a *App) discoveryLookupEnvelopeFromCacheOrRefresh(ctx context.Context, sourceID string) ([]SyncSource, discovery.ImportEnvelope, []discovery.AssetCandidateGroup, time.Time, string, error) {
 	sourceID = strings.TrimSpace(sourceID)
 	if sourceID == "" {
 		sourceID = "all"
 	}
 
-	payload, sources, cachedAt, errText := a.discoveryCacheSnapshot()
+	payload, sources, cachedAt, errText, groups := a.discoveryCacheSnapshot()
 	if discoveryCacheMatchesSource(payload, sources, sourceID) {
-		return sources, payload, cachedAt, errText, nil
+		return sources, payload, groups, cachedAt, errText, nil
 	}
 
 	if err := a.refreshDiscoveryCache(ctx, sourceID); err != nil {
-		return nil, discovery.ImportEnvelope{}, time.Time{}, "", err
+		return nil, discovery.ImportEnvelope{}, nil, time.Time{}, "", err
 	}
-	payload, sources, cachedAt, errText = a.discoveryCacheSnapshot()
-	return sources, payload, cachedAt, errText, nil
+	payload, sources, cachedAt, errText, groups = a.discoveryCacheSnapshot()
+	return sources, payload, groups, cachedAt, errText, nil
 }
 
 func discoveryCacheMatchesSource(payload discovery.ImportEnvelope, sources []SyncSource, sourceID string) bool {
@@ -771,12 +812,30 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 }
 
 func (a *App) refreshDiscoveryCache(ctx context.Context, sourceID string) error {
+	return a.refreshDiscoveryCacheWithOptions(ctx, sourceID, false)
+}
+
+func (a *App) refreshDiscoveryCacheWithOptions(ctx context.Context, sourceID string, force bool) error {
 	sourceID = strings.TrimSpace(sourceID)
 	if sourceID == "" {
 		sourceID = "all"
 	}
+	a.discoveryRefreshMu.Lock()
+	defer a.discoveryRefreshMu.Unlock()
+
+	if !force {
+		payload, sources, cachedAt, _, _ := a.discoveryCacheSnapshot()
+		if discoveryCacheMatchesSource(payload, sources, sourceID) && discoveryCacheFresh(cachedAt, a.config.DiscoveryCacheTTL) {
+			return nil
+		}
+	}
+
 	sources, envelope, err := a.fetchDiscoveryLookupEnvelope(ctx, sourceID)
 	now := time.Now().UTC()
+	groups := []discovery.AssetCandidateGroup(nil)
+	if err == nil {
+		groups = buildDiscoveryGroups(envelope.Items, a.runtimeRegistry())
+	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	if err != nil {
@@ -785,16 +844,33 @@ func (a *App) refreshDiscoveryCache(ctx context.Context, sourceID string) error 
 	}
 	a.discoveryCacheSources = sources
 	a.discoveryCache = envelope
+	a.discoveryCacheGroups = groups
 	a.discoveryCachedAt = now
 	a.discoveryCacheErr = ""
 	return nil
 }
 
-func (a *App) discoveryCacheSnapshot() (discovery.ImportEnvelope, []SyncSource, time.Time, string) {
+func (a *App) discoveryCacheSnapshot() (discovery.ImportEnvelope, []SyncSource, time.Time, string, []discovery.AssetCandidateGroup) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	sources := append([]SyncSource(nil), a.discoveryCacheSources...)
-	return a.discoveryCache, sources, a.discoveryCachedAt, a.discoveryCacheErr
+	groups := append([]discovery.AssetCandidateGroup(nil), a.discoveryCacheGroups...)
+	return a.discoveryCache, sources, a.discoveryCachedAt, a.discoveryCacheErr, groups
+}
+
+func discoveryCacheFresh(cachedAt time.Time, ttl time.Duration) bool {
+	if cachedAt.IsZero() {
+		return false
+	}
+	if ttl <= 0 {
+		return true
+	}
+	return time.Since(cachedAt) <= ttl
+}
+
+func buildDiscoveryGroups(items []discovery.ImportedMarket, registry identity.Registry) []discovery.AssetCandidateGroup {
+	aggregator := discovery.NewAggregator(registry)
+	return aggregator.BuildAssetGroups(items)
 }
 
 func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {
@@ -1221,8 +1297,12 @@ func max(left, right int) int {
 
 func (a *App) ListenAndServe(ctx context.Context) error {
 	srv := &http.Server{
-		Addr:    a.config.HTTPAddr,
-		Handler: a.Handler(),
+		Addr:              a.config.HTTPAddr,
+		Handler:           a.Handler(),
+		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       15 * time.Second,
+		WriteTimeout:      30 * time.Second,
+		IdleTimeout:       60 * time.Second,
 	}
 	go a.runAutoSyncLoop(ctx)
 

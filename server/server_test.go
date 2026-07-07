@@ -901,6 +901,103 @@ func TestHandleDiscoverySyncAllSourcesReturnsMergedPayload(t *testing.T) {
 	}
 }
 
+func TestHandleDiscoverySyncUsesFreshServerCache(t *testing.T) {
+	upstreamCalls := 0
+	app := &App{
+		config: Config{
+			DiscoveryCacheTTL: time.Hour,
+		},
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				upstreamCalls++
+				t.Fatalf("sync should use fresh server cache, got upstream request: %s", req.URL.String())
+				return nil, nil
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+		discoveryCacheSources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/discovery.json",
+			},
+		},
+		discoveryCache: discovery.ImportEnvelope{
+			Source:      discovery.SourceKind("slipstream"),
+			GeneratedAt: time.Date(2026, 5, 15, 0, 0, 0, 0, time.UTC),
+			Items: []discovery.ImportedMarket{
+				{
+					SourceID:   "slipstream",
+					PlatformID: "bitget",
+					Platform:   "Bitget",
+					VenueType:  "cex",
+					MarketType: string(identity.MarketTypeSpot),
+					Symbol:     "PRESPCXUSDT",
+					BaseAsset:  "SPCX",
+					QuoteAsset: "USDT",
+					Status:     "live",
+				},
+			},
+		},
+		discoveryCachedAt: time.Now(),
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/sync?source=slipstream-test", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoverySync(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+	if upstreamCalls != 0 {
+		t.Fatalf("expected no upstream calls, got %d", upstreamCalls)
+	}
+
+	var payload struct {
+		ServerCache bool `json:"serverCache"`
+		Payload     struct {
+			Items []struct {
+				Symbol string `json:"symbol"`
+			} `json:"items"`
+		} `json:"payload"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if !payload.ServerCache {
+		t.Fatalf("expected server cache marker")
+	}
+	if len(payload.Payload.Items) != 1 || payload.Payload.Items[0].Symbol != "PRESPCXUSDT" {
+		t.Fatalf("unexpected cached payload: %+v", payload.Payload.Items)
+	}
+}
+
+func TestHandleDiscoverySyncRequiresAdminCodeWhenConfigured(t *testing.T) {
+	app := &App{
+		config: Config{
+			AdminCode: "secret",
+		},
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/discovery/sync?source=all", nil)
+	rec := httptest.NewRecorder()
+	app.handleDiscoverySync(rec, req)
+
+	if rec.Code != http.StatusUnauthorized {
+		t.Fatalf("expected unauthorized status, got %d body=%s", rec.Code, rec.Body.String())
+	}
+}
+
 func TestHandleDiscoveryCurrentBuildsServerCachedSnapshot(t *testing.T) {
 	app := &App{
 		client: &http.Client{

@@ -52,6 +52,9 @@ func (a *App) handleAutoSync(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		writeJSON(w, http.StatusOK, a.currentAutoSyncStatus())
 	case http.MethodPost:
+		if !a.requireAdmin(w, r) {
+			return
+		}
 		if err := a.runAutoSyncOnce(r.Context()); err != nil {
 			status := http.StatusBadGateway
 			if strings.Contains(err.Error(), "no discovery source") {
