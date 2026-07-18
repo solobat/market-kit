@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte";
   import { buildCandidateGroups, loadDiscoveryEnvelope, normalizeDiscoveryEnvelope } from "./lib/discovery.js";
-  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity, setRuntimeRegistry } from "./lib/identity.js";
+  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity, setRuntimeRegistry, upsertRuntimeAssetAlias, upsertRuntimeMarketOverride } from "./lib/identity.js";
 
   let registry = loadRegistry();
   let stats = registryStats(registry);
@@ -10,7 +10,8 @@
   const themeKey = "market-kit.theme";
   const syncConfigKey = "market-kit.sync-config";
   const syncCasesKey = "market-kit.sync-cases";
-  const writeApiBase = String(import.meta.env?.VITE_MARKET_KIT_WRITE_API_BASE || "").trim();
+  const apiBase = String(import.meta.env?.VITE_MARKET_KIT_API_BASE || "").trim();
+  const writeApiBase = String(import.meta.env?.VITE_MARKET_KIT_WRITE_API_BASE || apiBase || "").trim();
   const registryOverrideEndpoint = apiEndpoint("/api/v1/registry/overrides", writeApiBase);
   const editableAssetClasses = ["crypto", "rwa_stock", "rwa_commodity", "fiat_stable", "unknown"];
 
@@ -44,8 +45,10 @@
   let reassignMessage = "";
   let reassignDialogMarket = null;
   let reassignDialogTarget = "";
+  let reassignDialogUnitMultiplier = "";
   let reassignDialogError = "";
   let reassignInputElement;
+  let discoveryRefreshHandle = 0;
   let assetClassUpdateState = "idle";
   let assetClassUpdateMessage = "";
   let assetClassEditCanonical = "";
@@ -521,6 +524,8 @@
         baseAsset,
         quoteAsset,
         assetClass: assetClassIndex.get(baseAsset) || "unknown",
+        unitAlias: String(item.unit_alias || "").trim().toUpperCase(),
+        unitMultiplier: Number(item.unit_multiplier || 0),
         chain: "",
         status: "",
         sourceId: "registry"
@@ -545,6 +550,8 @@
           baseAsset,
           quoteAsset,
           assetClass: String(market.assetClass || group.assetClass || assetClassIndex.get(baseAsset) || "unknown").trim(),
+          unitAlias: String(market.unitAlias || "").trim().toUpperCase(),
+          unitMultiplier: Number(market.unitMultiplier || 0),
           chain: String(market.chain || "").trim(),
           status: String(market.status || "").trim().toLowerCase(),
           sourceId: String(market.sourceId || "").trim()
@@ -560,25 +567,37 @@
     const rows = [];
     const index = new Map();
     for (const item of overrides || []) {
+      const canonicalSymbol = String(item.canonical_symbol || "").trim().toUpperCase();
+      const [baseAsset = "", quoteAsset = ""] = canonicalSymbol.split("/");
       const row = {
         layer: "registry",
         exchange: normalizeExchange(item.exchange),
         platform: platformLabel(normalizeExchange(item.exchange)),
         marketType: normalizeMarketType(item.market_type) || String(item.market_type || "").trim().toLowerCase(),
         rawSymbol: String(item.raw_symbol || "").trim(),
-        canonicalSymbol: String(item.canonical_symbol || "").trim().toUpperCase(),
+        canonicalSymbol,
+        baseAsset,
+        quoteAsset,
+        unitAlias: String(item.unit_alias || "").trim().toUpperCase(),
+        unitMultiplier: Number(item.unit_multiplier || 0),
         sourceLabel: "registry override"
       };
       appendAssetDetailMarketRow(rows, index, row);
     }
     for (const market of markets || []) {
+      const canonicalSymbol = String(market.canonicalSymbol || "").trim().toUpperCase();
+      const [baseAsset = "", quoteAsset = ""] = canonicalSymbol.split("/");
       const row = {
         layer: "discovery",
         exchange: normalizeExchange(market.exchange || market.platform),
         platform: market.platform || platformLabel(normalizeExchange(market.exchange || market.platform)),
         marketType: normalizeMarketType(market.marketType) || String(market.marketType || "").trim().toLowerCase(),
         rawSymbol: String(market.rawSymbol || "").trim(),
-        canonicalSymbol: String(market.canonicalSymbol || "").trim().toUpperCase(),
+        canonicalSymbol,
+        baseAsset,
+        quoteAsset,
+        unitAlias: String(market.unitAlias || "").trim().toUpperCase(),
+        unitMultiplier: Number(market.unitMultiplier || 0),
         sourceLabel: market.sourceId || "discovery"
       };
       appendAssetDetailMarketRow(rows, index, row);
@@ -599,6 +618,10 @@
     if (existing) {
       existing.layer = existing.layer === row.layer ? existing.layer : "registry + discovery";
       existing.sourceLabel = existing.sourceLabel === row.sourceLabel ? existing.sourceLabel : `${existing.sourceLabel} / ${row.sourceLabel}`;
+      if (!existing.unitMultiplier && row.unitMultiplier) {
+        existing.unitAlias = row.unitAlias;
+        existing.unitMultiplier = row.unitMultiplier;
+      }
       return;
     }
     index.set(key, row);
@@ -795,22 +818,36 @@
     return `${cleanBase}/${cleanEndpoint.replace(/^\/+/, "")}`;
   }
 
+  function compactEndpoint(endpoint) {
+    const value = String(endpoint || "");
+    return `${value}${value.includes("?") ? "&" : "?"}compact=1`;
+  }
+
+  function apiReadEndpoints(...paths) {
+    const endpoints = [];
+    for (const path of paths) {
+      if (apiBase) endpoints.push(apiEndpoint(path, apiBase));
+      endpoints.push(path);
+    }
+    return Array.from(new Set(endpoints));
+  }
+
   async function loadRuntimeRegistry() {
     registryState = "loading";
     registryMessage = "正在读取后端 runtime registry…";
     try {
-      const payload = await fetchFromEndpoints(["/api/v1/registry", "/api/registry"]);
+      const payload = await fetchFromEndpoints(apiReadEndpoints("/api/v1/registry", "/api/registry"));
       const nextRegistry = payload.registry || payload;
       registry = setRuntimeRegistry(nextRegistry);
       registryState = "success";
       registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
       request = { ...request };
-      discoveryEnvelope = { ...discoveryEnvelope };
+      scheduleDiscoveryRegistryRefresh();
     } catch (error) {
       registryState = "embedded";
       registryMessage = error instanceof Error
-        ? `后端 registry 读取失败，继续使用前端内置 registry：${error.message}`
-        : "后端 registry 读取失败，继续使用前端内置 registry。";
+        ? `后端 registry 读取失败，继续使用前端最小 fallback registry：${error.message}`
+        : "后端 registry 读取失败，继续使用前端最小 fallback registry。";
     }
   }
 
@@ -823,6 +860,7 @@
     const currentTarget = String(market?.canonicalSymbol || "").trim().toUpperCase();
     reassignDialogMarket = market;
     reassignDialogTarget = currentTarget;
+    reassignDialogUnitMultiplier = market?.unitMultiplier ? String(market.unitMultiplier) : "";
     reassignDialogError = "";
     reassignMessage = "";
     await tick();
@@ -834,6 +872,7 @@
     if (reassignState === "loading") return;
     reassignDialogMarket = null;
     reassignDialogTarget = "";
+    reassignDialogUnitMultiplier = "";
     reassignDialogError = "";
   }
 
@@ -852,12 +891,17 @@
       reassignDialogError = "请输入 BASE/QUOTE，例如 QNTX/USDT。";
       return;
     }
+    const unitMultiplier = parseOptionalPositiveNumber(reassignDialogUnitMultiplier);
+    if (unitMultiplier === null) {
+      reassignDialogError = "Rebase multiplier 必须为空或大于 0，例如 0.1、10、1000。";
+      return;
+    }
 
     reassignDialogError = "";
     reassignState = "loading";
-    reassignMessage = `正在把 ${market.rawSymbol} 改到 ${canonicalSymbol}…`;
+    reassignMessage = `正在更新 ${market.rawSymbol} 的市场设置…`;
     try {
-      const payload = await fetchJSON(registryOverrideEndpoint, {
+      const payload = await fetchJSON(compactEndpoint(registryOverrideEndpoint), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -865,17 +909,18 @@
           rawSymbol: market.rawSymbol,
           marketType: market.marketType,
           canonicalSymbol,
-          assetClass: selectedAsset?.asset_class || market.assetClass || ""
+          assetClass: selectedAsset?.asset_class || market.assetClass || "",
+          ...(unitMultiplier ? { unitMultiplier, unitAlias: market.baseAsset || canonicalSymbol.split("/")[0] || "" } : {})
         })
       });
 
-      registry = setRuntimeRegistry(payload.registry || payload);
+      registry = payload.override ? upsertRuntimeMarketOverride(payload.override) : setRuntimeRegistry(payload.registry || payload);
       registryState = "success";
       registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
       request = { ...request };
-      discoveryEnvelope = { ...discoveryEnvelope };
+      scheduleDiscoveryRegistryRefresh();
       reassignState = "success";
-      reassignMessage = `已将 ${market.rawSymbol} 改到 ${canonicalSymbol}。`;
+      reassignMessage = `已更新 ${market.rawSymbol}：${canonicalSymbol}${unitMultiplier ? ` · rebase ${unitMultiplier}` : ""}。`;
       closeReassignDialog();
       navigate("asset-detail", { asset: canonicalSymbol.split("/")[0] });
     } catch (error) {
@@ -883,6 +928,14 @@
       reassignDialogError = formatReassignError(error);
       reassignMessage = reassignDialogError;
     }
+  }
+
+  function parseOptionalPositiveNumber(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return 0;
+    const numeric = Number(raw);
+    if (!Number.isFinite(numeric) || numeric <= 0) return null;
+    return numeric;
   }
 
   async function updateSelectedAssetClass() {
@@ -902,16 +955,16 @@
     assetClassUpdateState = "loading";
     assetClassUpdateMessage = `正在把 ${selectedAsset.canonical} 改为 ${assetClassLabel(assetClass)}…`;
     try {
-      const payload = await fetchJSON(apiEndpoint(`/api/v1/assets/${selectedAsset.canonical}`, writeApiBase), {
+      const payload = await fetchJSON(compactEndpoint(apiEndpoint(`/api/v1/assets/${selectedAsset.canonical}`, writeApiBase)), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ assetClass })
       });
-      registry = setRuntimeRegistry(payload.registry || registry);
+      registry = payload.asset ? upsertRuntimeAssetAlias(payload.asset) : setRuntimeRegistry(payload.registry || registry);
       registryState = "success";
       registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
       request = { ...request };
-      discoveryEnvelope = { ...discoveryEnvelope };
+      scheduleDiscoveryRegistryRefresh();
       assetClassUpdateState = "success";
       assetClassUpdateMessage = `已将 ${selectedAsset.canonical} 改为 ${assetClassLabel(assetClass)}。`;
     } catch (error) {
@@ -927,6 +980,21 @@
       return `写入 runtime registry 的 API 不可用。${target}如果这是线上 Vercel 页面，请确认远端 market-kit Go server 已部署包含写入路由的版本；如果要写本机 registry，请在构建前把 VITE_MARKET_KIT_WRITE_API_BASE 指向本地 Go server。原始错误：${message}`;
     }
     return message;
+  }
+
+  function scheduleDiscoveryRegistryRefresh() {
+    if (typeof window === "undefined") return;
+    if (discoveryRefreshHandle) {
+      if ("cancelIdleCallback" in window) window.cancelIdleCallback(discoveryRefreshHandle);
+      else window.clearTimeout(discoveryRefreshHandle);
+    }
+    const refresh = () => {
+      discoveryRefreshHandle = 0;
+      discoveryEnvelope = { ...discoveryEnvelope };
+    };
+    discoveryRefreshHandle = "requestIdleCallback" in window
+      ? window.requestIdleCallback(refresh, { timeout: 900 })
+      : window.setTimeout(refresh, 180);
   }
 
   function normalizeCanonicalTarget(input, market) {
@@ -996,7 +1064,7 @@
   async function loadRemoteSources(options = {}) {
     const { shouldAutoBootstrap = false } = options;
     try {
-      const payload = await fetchFromEndpoints(["/api/discovery/sources", "/__market-kit/sources"]);
+      const payload = await fetchFromEndpoints([...apiReadEndpoints("/api/discovery/sources"), "/__market-kit/sources"]);
       remoteSources = Array.isArray(payload.sources) ? payload.sources : [];
       proxyAvailable = true;
       const nextSampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
@@ -1031,8 +1099,10 @@
 
     try {
       const payload = await fetchFromEndpoints([
-        `/api/discovery/current?source=${encodeURIComponent(allDiscoverySourceId)}`,
-        `/api/discovery/sync?source=${encodeURIComponent(allDiscoverySourceId)}`
+        ...apiReadEndpoints(
+          `/api/discovery/current?source=${encodeURIComponent(allDiscoverySourceId)}`,
+          `/api/discovery/sync?source=${encodeURIComponent(allDiscoverySourceId)}`
+        )
       ]);
       const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
       discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
@@ -1060,7 +1130,7 @@
 
     try {
       const payload = await fetchFromEndpoints([
-        `/api/discovery/sync?source=${encodeURIComponent(sourceId)}`,
+        ...apiReadEndpoints(`/api/discovery/sync?source=${encodeURIComponent(sourceId)}`),
         `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
       ]);
       const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
@@ -1091,7 +1161,7 @@
 
     try {
       const payload = await fetchFromEndpoints([
-        `/api/discovery/sync?source=${encodeURIComponent(sourceId)}`,
+        ...apiReadEndpoints(`/api/discovery/sync?source=${encodeURIComponent(sourceId)}`),
         `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
       ]);
       const imported = normalizeImportedCases(payload.payload).map((item) => ({
@@ -1158,8 +1228,10 @@
         syncedCases = JSON.parse(savedCases);
       } catch {}
     }
-    loadRuntimeRegistry();
-    loadRemoteSources({ shouldAutoBootstrap: true });
+    (async () => {
+      await loadRuntimeRegistry();
+      await loadRemoteSources({ shouldAutoBootstrap: true });
+    })();
 
     return () => {
       window.removeEventListener("popstate", syncRouteFromLocation);
@@ -1560,6 +1632,9 @@
                         <div>
                           <div class="override-row__title">{market.exchange} · {market.marketType || "unknown"} · {market.layer}</div>
                           <div class="detail-market-row__symbol">{market.rawSymbol}</div>
+                          {#if market.unitMultiplier}
+                            <div class="detail-market-row__unit">rebase × {formatUnitMultiplier(market.unitMultiplier)}</div>
+                          {/if}
                         </div>
                         <div class="detail-market-row__actions">
                           <div class="detail-market-row__target">{market.canonicalSymbol}</div>
@@ -1568,7 +1643,7 @@
                             on:click={() => reassignMarketIdentity(market)}
                             disabled={reassignState === "loading"}
                           >
-                            改归属
+                            编辑市场
                           </button>
                         </div>
                       </div>
@@ -2395,6 +2470,12 @@
               <div class="identity-line"><span>venueSymbol</span><strong>{resolution.market.venueSymbol}</strong></div>
               <div class="identity-line"><span>canonical</span><strong>{resolution.market.canonicalSymbol}</strong></div>
               <div class="identity-line"><span>assetClass</span><strong>{resolution.market.assetClass}</strong></div>
+              {#if resolution.market.unitMultiplier}
+                <div class="identity-line"><span>unitAlias</span><strong>{resolution.market.unitAlias}</strong></div>
+                <div class="identity-line"><span>unitMultiplier</span><strong>{formatUnitMultiplier(resolution.market.unitMultiplier)}</strong></div>
+                <div class="identity-line"><span>price → canonical</span><strong>× {formatUnitMultiplier(resolution.market.canonicalPriceMultiplier)}</strong></div>
+                <div class="identity-line"><span>qty → canonical</span><strong>× {formatUnitMultiplier(resolution.market.canonicalQuantityMultiplier)}</strong></div>
+              {/if}
             </div>
           {:else if resolution.candidates?.length}
             <div class="candidate-list">
@@ -2403,6 +2484,10 @@
                   <div class="identity-line"><span>exchange</span><strong>{candidate.exchange}</strong></div>
                   <div class="identity-line"><span>marketType</span><strong>{candidate.marketType}</strong></div>
                   <div class="identity-line"><span>canonical</span><strong>{candidate.canonicalSymbol}</strong></div>
+                  {#if candidate.unitMultiplier}
+                    <div class="identity-line"><span>unitAlias</span><strong>{candidate.unitAlias}</strong></div>
+                    <div class="identity-line"><span>unitMultiplier</span><strong>{formatUnitMultiplier(candidate.unitMultiplier)}</strong></div>
+                  {/if}
                 </div>
               {/each}
             </div>
@@ -2429,7 +2514,7 @@
           <div class="modal-panel__head">
             <div>
               <div class="eyebrow">Market Identity</div>
-              <h3 id="reassign-modal-title">修改市场归属</h3>
+              <h3 id="reassign-modal-title">编辑市场设置</h3>
             </div>
             <button
               class="modal-close"
@@ -2458,11 +2543,22 @@
           </div>
 
           <label class="reassign-field">
-            <span>新的 Canonical Symbol</span>
+            <span>Canonical Symbol</span>
             <input
               bind:this={reassignInputElement}
               bind:value={reassignDialogTarget}
               placeholder="QNTX/USDT"
+              autocomplete="off"
+              disabled={reassignState === "loading"}
+            />
+          </label>
+
+          <label class="reassign-field">
+            <span>Rebase multiplier</span>
+            <input
+              bind:value={reassignDialogUnitMultiplier}
+              placeholder="空 / 0.1 / 10 / 1000"
+              inputmode="decimal"
               autocomplete="off"
               disabled={reassignState === "loading"}
             />
@@ -2473,6 +2569,10 @@
             <strong>{reassignDialogMarket.canonicalSymbol || "未解析"}</strong>
             <span>更新为</span>
             <strong>{reassignDialogPreview || "等待输入"}</strong>
+            <span>rebase</span>
+            <strong>{reassignDialogUnitMultiplier || "无"}</strong>
+            <span>price → canonical</span>
+            <strong>{parseOptionalPositiveNumber(reassignDialogUnitMultiplier) ? `× ${formatUnitMultiplier(1 / parseOptionalPositiveNumber(reassignDialogUnitMultiplier))}` : "× 1"}</strong>
           </div>
 
           {#if reassignDialogError}
@@ -2492,7 +2592,7 @@
               取消
             </button>
             <button class="sync-button" type="submit" disabled={reassignState === "loading"}>
-              {reassignState === "loading" ? "正在写入" : "确认改归属"}
+              {reassignState === "loading" ? "正在写入" : "保存市场设置"}
             </button>
           </div>
         </form>

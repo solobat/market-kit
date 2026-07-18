@@ -27,14 +27,18 @@ type ResolveRequest struct {
 }
 
 type MarketIdentity struct {
-	Exchange        string     `json:"exchange"`
-	MarketType      MarketType `json:"marketType"`
-	RawSymbol       string     `json:"rawSymbol"`
-	VenueSymbol     string     `json:"venueSymbol"`
-	CanonicalSymbol string     `json:"canonicalSymbol"`
-	BaseAsset       string     `json:"baseAsset"`
-	QuoteAsset      string     `json:"quoteAsset"`
-	AssetClass      string     `json:"assetClass"`
+	Exchange                    string     `json:"exchange"`
+	MarketType                  MarketType `json:"marketType"`
+	RawSymbol                   string     `json:"rawSymbol"`
+	VenueSymbol                 string     `json:"venueSymbol"`
+	CanonicalSymbol             string     `json:"canonicalSymbol"`
+	BaseAsset                   string     `json:"baseAsset"`
+	QuoteAsset                  string     `json:"quoteAsset"`
+	AssetClass                  string     `json:"assetClass"`
+	UnitAlias                   string     `json:"unitAlias,omitempty"`
+	UnitMultiplier              float64    `json:"unitMultiplier,omitempty"`
+	CanonicalPriceMultiplier    float64    `json:"canonicalPriceMultiplier,omitempty"`
+	CanonicalQuantityMultiplier float64    `json:"canonicalQuantityMultiplier,omitempty"`
 }
 
 type ResolveResult struct {
@@ -64,10 +68,12 @@ type AssetAliasRule struct {
 }
 
 type MarketOverride struct {
-	Exchange        string `json:"exchange"`
-	RawSymbol       string `json:"raw_symbol"`
-	MarketType      string `json:"market_type"`
-	CanonicalSymbol string `json:"canonical_symbol"`
+	Exchange        string  `json:"exchange"`
+	RawSymbol       string  `json:"raw_symbol"`
+	MarketType      string  `json:"market_type"`
+	CanonicalSymbol string  `json:"canonical_symbol"`
+	UnitAlias       string  `json:"unit_alias,omitempty"`
+	UnitMultiplier  float64 `json:"unit_multiplier,omitempty"`
 }
 
 func (r Registry) Merge(other Registry) Registry {

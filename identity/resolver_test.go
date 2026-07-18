@@ -109,6 +109,74 @@ func TestResolveUnitAliasToCanonicalBase(t *testing.T) {
 	if result.Market.CanonicalSymbol != "PEPE/USDT" || result.Market.BaseAsset != "PEPE" {
 		t.Fatalf("expected canonical PEPE market, got %+v", result.Market)
 	}
+	if result.Market.UnitAlias != "1000PEPE" ||
+		result.Market.UnitMultiplier != 1000 ||
+		result.Market.CanonicalPriceMultiplier != 0.001 ||
+		result.Market.CanonicalQuantityMultiplier != 1000 {
+		t.Fatalf("expected unit conversion to be preserved, got %+v", result.Market)
+	}
+}
+
+func TestResolveOverridePreservesUnitConversion(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "DOGE", AssetClass: "crypto"},
+			{Canonical: "100DOGE", AssetClass: "crypto"},
+		},
+		MarketOverrides: []MarketOverride{
+			{Exchange: "okx", RawSymbol: "100DOGE-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "100DOGE/USDT"},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange: "okx",
+		Symbol:   "100DOGE-USDT-SWAP",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected scaled override to resolve, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "DOGE/USDT" ||
+		result.Market.UnitAlias != "100DOGE" ||
+		result.Market.UnitMultiplier != 100 ||
+		result.Market.CanonicalPriceMultiplier != 0.01 ||
+		result.Market.CanonicalQuantityMultiplier != 100 {
+		t.Fatalf("expected override unit conversion to be preserved, got %+v", result.Market)
+	}
+}
+
+func TestResolveOverrideCanRebaseCanonicalMarket(t *testing.T) {
+	registry := Registry{
+		AssetAliases: []AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
+		},
+		MarketOverrides: []MarketOverride{
+			{
+				Exchange:        "okx",
+				RawSymbol:       "OPENAI-USDT-SWAP",
+				MarketType:      "perpetual",
+				CanonicalSymbol: "OPENAI/USDT",
+				UnitMultiplier:  0.1,
+			},
+		},
+	}
+	resolver := NewResolver(registry)
+
+	result := resolver.Resolve(ResolveRequest{
+		Exchange: "okx",
+		Symbol:   "OPENAI-USDT-SWAP",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected rebased OPENAI market to resolve, got %+v", result)
+	}
+	if result.Market.CanonicalSymbol != "OPENAI/USDT" ||
+		result.Market.BaseAsset != "OPENAI" ||
+		result.Market.UnitAlias != "OPENAI" ||
+		result.Market.UnitMultiplier != 0.1 ||
+		result.Market.CanonicalPriceMultiplier != 10 ||
+		result.Market.CanonicalQuantityMultiplier != 0.1 {
+		t.Fatalf("expected per-market rebase conversion, got %+v", result.Market)
+	}
 }
 
 func TestResolveHyperliquidKMOverride(t *testing.T) {

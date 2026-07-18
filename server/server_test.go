@@ -214,6 +214,113 @@ func TestHandleRuntimeRegistryOverrideReassignsMarket(t *testing.T) {
 	}
 }
 
+func TestHandleRuntimeRegistryOverrideCanSetRebaseMultiplier(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: identity.Registry{},
+		registry:          base,
+		resolver:          identity.NewResolver(base),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/registry/overrides", strings.NewReader(`{
+		"exchange":"okx",
+		"rawSymbol":"OPENAI-USDT-SWAP",
+		"marketType":"perp",
+		"canonicalSymbol":"OPENAI/USDT",
+		"unitMultiplier":0.1
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistryOverride(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	resolved := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange: "okx",
+		Symbol:   "OPENAI-USDT-SWAP",
+	})
+	if resolved.Status != identity.ResolveResolved || resolved.Market == nil {
+		t.Fatalf("expected rebased market to resolve, got %+v", resolved)
+	}
+	if resolved.Market.CanonicalSymbol != "OPENAI/USDT" ||
+		resolved.Market.UnitMultiplier != 0.1 ||
+		resolved.Market.CanonicalPriceMultiplier != 10 ||
+		resolved.Market.CanonicalQuantityMultiplier != 0.1 {
+		t.Fatalf("expected rebase conversion to be preserved, got %+v", resolved.Market)
+	}
+
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted registry: %v", err)
+	}
+	if len(persisted.MarketOverrides) != 1 || persisted.MarketOverrides[0].UnitMultiplier != 0.1 {
+		t.Fatalf("expected persisted rebase multiplier, got %+v", persisted.MarketOverrides)
+	}
+}
+
+func TestHandleRuntimeRegistryOverrideCompactReturnsNormalizedOverride(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: identity.Registry{},
+		registry:          base,
+		resolver:          identity.NewResolver(base),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/registry/overrides?compact=1", strings.NewReader(`{
+		"exchange":"okx",
+		"rawSymbol":"OPENAI-USDT-SWAP",
+		"marketType":"perp",
+		"canonicalSymbol":"OPENAI/USDT",
+		"unitAlias":"openai",
+		"unitMultiplier":0.1
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistryOverride(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	var payload struct {
+		Override identity.MarketOverride `json:"override"`
+		Registry *identity.Registry      `json:"registry,omitempty"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if payload.Registry != nil {
+		t.Fatalf("compact response should not include registry")
+	}
+	if payload.Override.MarketType != "perpetual" ||
+		payload.Override.CanonicalSymbol != "OPENAI/USDT" ||
+		payload.Override.UnitAlias != "OPENAI" ||
+		payload.Override.UnitMultiplier != 0.1 {
+		t.Fatalf("expected compact response to return normalized override, got %+v", payload.Override)
+	}
+}
+
 func TestHandleRuntimeRegistryOverrideRequiresAssetClassForNewAsset(t *testing.T) {
 	base := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{

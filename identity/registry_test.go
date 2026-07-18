@@ -56,17 +56,23 @@ func TestRegistryNormalizeCollapsesScaledUnitAliases(t *testing.T) {
 			{Canonical: "1000PEPE", AssetClass: "crypto"},
 			{Canonical: "SHIB", AssetClass: "crypto"},
 			{Canonical: "SHIB1000", AssetClass: "crypto"},
+			{Canonical: "DOGE", AssetClass: "crypto"},
+			{Canonical: "100DOGE", AssetClass: "crypto"},
+			{Canonical: "MOG", AssetClass: "crypto"},
+			{Canonical: "1000000MOG", AssetClass: "crypto"},
 		},
 		MarketOverrides: []MarketOverride{
 			{Exchange: "binance", RawSymbol: "1000PEPEUSDT", MarketType: "perpetual", CanonicalSymbol: "1000PEPE/USDT"},
 			{Exchange: "bybit", RawSymbol: "SHIB1000USDT", MarketType: "perpetual", CanonicalSymbol: "SHIB1000/USDT"},
+			{Exchange: "okx", RawSymbol: "100DOGE-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "100DOGE/USDT"},
+			{Exchange: "gate", RawSymbol: "1000000MOG_USDT", MarketType: "perpetual", CanonicalSymbol: "1000000MOG/USDT"},
 		},
 	}
 
 	registry.Normalize()
 
-	if len(registry.AssetAliases) != 2 {
-		t.Fatalf("expected scaled aliases to collapse into 2 assets, got %d", len(registry.AssetAliases))
+	if len(registry.AssetAliases) != 4 {
+		t.Fatalf("expected scaled aliases to collapse into 4 assets, got %d", len(registry.AssetAliases))
 	}
 
 	assets := map[string]AssetAliasRule{}
@@ -87,8 +93,25 @@ func TestRegistryNormalizeCollapsesScaledUnitAliases(t *testing.T) {
 	if len(shib.UnitAliases) != 1 || shib.UnitAliases[0].Alias != "SHIB1000" || shib.UnitAliases[0].Multiplier != 1000 {
 		t.Fatalf("expected SHIB1000 unit alias, got %+v", shib.UnitAliases)
 	}
+	doge, ok := assets["DOGE"]
+	if !ok {
+		t.Fatalf("expected DOGE asset to remain after collapse")
+	}
+	if len(doge.UnitAliases) != 1 || doge.UnitAliases[0].Alias != "100DOGE" || doge.UnitAliases[0].Multiplier != 100 {
+		t.Fatalf("expected 100DOGE unit alias, got %+v", doge.UnitAliases)
+	}
+	mog, ok := assets["MOG"]
+	if !ok {
+		t.Fatalf("expected MOG asset to remain after collapse")
+	}
+	if len(mog.UnitAliases) != 1 || mog.UnitAliases[0].Alias != "1000000MOG" || mog.UnitAliases[0].Multiplier != 1000000 {
+		t.Fatalf("expected 1000000MOG unit alias, got %+v", mog.UnitAliases)
+	}
 
-	if registry.MarketOverrides[0].CanonicalSymbol != "PEPE/USDT" || registry.MarketOverrides[1].CanonicalSymbol != "SHIB/USDT" {
+	if registry.MarketOverrides[0].CanonicalSymbol != "PEPE/USDT" ||
+		registry.MarketOverrides[1].CanonicalSymbol != "SHIB/USDT" ||
+		registry.MarketOverrides[2].CanonicalSymbol != "DOGE/USDT" ||
+		registry.MarketOverrides[3].CanonicalSymbol != "MOG/USDT" {
 		t.Fatalf("expected market overrides to be rewritten, got %+v", registry.MarketOverrides)
 	}
 }

@@ -1,8 +1,7 @@
 import baseRegistry from "../../../identity/default_registry.json";
-import generatedRegistry from "../../../identity/generated_registry.json";
 
 const quoteSuffixes = ["USDT", "USDC", "USD"];
-let registry = normalizeRegistry(mergeRegistries(baseRegistry, generatedRegistry));
+let registry = normalizeRegistry(baseRegistry);
 
 export function loadRegistry() {
   return registry;
@@ -13,54 +12,41 @@ export function setRuntimeRegistry(input) {
   return registry;
 }
 
-function mergeRegistries(left, right) {
-  const merged = {
-    exchange_aliases: { ...(left?.exchange_aliases || {}) },
-    asset_aliases: [...(left?.asset_aliases || [])],
-    market_overrides: [...(left?.market_overrides || [])]
-  };
+export function upsertRuntimeAssetAlias(input) {
+  const asset = normalizeAssetAliasEntry(input);
+  if (!asset?.canonical) return registry;
 
-  const normalizeExchangeValue = (value) => {
-    const raw = String(value || "").trim().toLowerCase();
-    return merged.exchange_aliases?.[raw] || raw;
-  };
-
-  const normalizeMarketTypeValue = (value) => {
-    const raw = String(value || "").trim().toLowerCase();
-    if (raw === "spot") return "spot";
-    if (["perpetual", "perp", "swap", "linear"].includes(raw)) return "perpetual";
-    if (["future", "futures", "delivery"].includes(raw)) return "future";
-    return "";
-  };
-
-  for (const [key, value] of Object.entries(right?.exchange_aliases || {})) {
-    if (!(key in merged.exchange_aliases)) {
-      merged.exchange_aliases[key] = value;
-    }
+  const items = [...(registry.asset_aliases || [])];
+  const index = items.findIndex((item) => String(item.canonical || "").toUpperCase() === asset.canonical);
+  if (index >= 0) {
+    items[index] = mergeAssetAliasEntry(items[index], asset);
+    items[index].asset_class = asset.asset_class || items[index].asset_class;
+    items[index].aliases = normalizeAliasList(items[index].canonical, items[index].aliases);
+    items[index].unit_aliases = normalizeUnitAliasList(items[index].canonical, items[index].unit_aliases);
+  } else {
+    items.push({
+      ...asset,
+      aliases: normalizeAliasList(asset.canonical, asset.aliases),
+      unit_aliases: normalizeUnitAliasList(asset.canonical, asset.unit_aliases)
+    });
   }
 
-  const assetKeys = new Set(merged.asset_aliases.map((item) => String(item.canonical || "").trim().toUpperCase()));
-  for (const item of right?.asset_aliases || []) {
-    const key = String(item.canonical || "").trim().toUpperCase();
-    if (!key || assetKeys.has(key)) continue;
-    merged.asset_aliases.push(item);
-    assetKeys.add(key);
-  }
+  registry = {
+    ...registry,
+    asset_aliases: items.sort((left, right) => String(left.canonical || "").localeCompare(String(right.canonical || "")))
+  };
+  return registry;
+}
 
-  const overrideKeys = new Set(
-    merged.market_overrides.map(
-      (item) =>
-        `${normalizeExchangeValue(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketTypeValue(item.market_type || item.marketType)}`
-    )
-  );
-  for (const item of right?.market_overrides || []) {
-    const key = `${normalizeExchangeValue(item.exchange)}|${String(item.raw_symbol || item.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketTypeValue(item.market_type || item.marketType)}`;
-    if (!key || overrideKeys.has(key)) continue;
-    merged.market_overrides.push(item);
-    overrideKeys.add(key);
-  }
+export function upsertRuntimeMarketOverride(input) {
+  const override = normalizeMarketOverrideItem(input, new Map());
+  if (!override) return registry;
 
-  return merged;
+  const key = marketOverrideKey(override);
+  const items = (registry.market_overrides || []).filter((item) => marketOverrideKey(item) !== key);
+  items.push(override);
+  registry = { ...registry, market_overrides: items };
+  return registry;
 }
 
 function normalizeRegistry(input) {
@@ -80,18 +66,9 @@ function normalizeRegistry(input) {
 function normalizeAssetAliases(items) {
   const merged = new Map();
   for (const item of items || []) {
-    const canonical = String(item?.canonical || "").trim().toUpperCase();
-    if (!canonical) continue;
-    const normalized = {
-      canonical,
-      asset_class: String(item?.asset_class || "").trim(),
-      aliases: (item?.aliases || []).map((alias) => String(alias || "").trim().toUpperCase()),
-      unit_aliases: (item?.unit_aliases || []).map((alias) => ({
-        alias: String(alias?.alias || "").trim().toUpperCase(),
-        multiplier: Number(alias?.multiplier || 0)
-      }))
-    };
-    merged.set(canonical, mergeAssetAliasEntry(merged.get(canonical), normalized));
+    const normalized = normalizeAssetAliasEntry(item);
+    if (!normalized?.canonical) continue;
+    merged.set(normalized.canonical, mergeAssetAliasEntry(merged.get(normalized.canonical), normalized));
   }
 
   const canonicalSet = new Set(merged.keys());
@@ -135,25 +112,57 @@ function normalizeAssetAliases(items) {
   return [normalized, scaledAliases];
 }
 
+function normalizeAssetAliasEntry(item) {
+  const canonical = String(item?.canonical || "").trim().toUpperCase();
+  if (!canonical) return null;
+  return {
+    canonical,
+    asset_class: String(item?.asset_class || item?.assetClass || "").trim(),
+    aliases: (item?.aliases || []).map((alias) => String(alias || "").trim().toUpperCase()),
+    unit_aliases: (item?.unit_aliases || item?.unitAliases || []).map((alias) => ({
+      alias: String(alias?.alias || "").trim().toUpperCase(),
+      multiplier: Number(alias?.multiplier || 0)
+    }))
+  };
+}
+
 function normalizeMarketOverrides(items, scaledAliases) {
   const seen = new Set();
   const normalized = [];
   for (const item of items || []) {
-    const exchange = String(item?.exchange || "").trim().toLowerCase();
-    const raw_symbol = String(item?.raw_symbol || item?.rawSymbol || "").trim();
-    const market_type = normalizeMarketType(item?.market_type || item?.marketType);
-    let canonical_symbol = String(item?.canonical_symbol || item?.canonicalSymbol || "").trim().toUpperCase();
-    const [base, quote] = splitCanonical(canonical_symbol);
-    if (base && quote && scaledAliases.has(base)) {
-      canonical_symbol = `${scaledAliases.get(base)}/${quote}`;
-    }
-
-    const key = `${exchange}|${raw_symbol}|${market_type}`;
-    if (!exchange || !raw_symbol || !market_type || !canonical_symbol || seen.has(key)) continue;
+    const override = normalizeMarketOverrideItem(item, scaledAliases);
+    if (!override) continue;
+    const key = marketOverrideKey(override);
+    if (seen.has(key)) continue;
     seen.add(key);
-    normalized.push({ exchange, raw_symbol, market_type, canonical_symbol });
+    normalized.push(override);
   }
   return normalized;
+}
+
+function normalizeMarketOverrideItem(item, scaledAliases) {
+  const exchange = String(item?.exchange || "").trim().toLowerCase();
+  const raw_symbol = String(item?.raw_symbol || item?.rawSymbol || "").trim();
+  const market_type = normalizeMarketType(item?.market_type || item?.marketType);
+  let canonical_symbol = String(item?.canonical_symbol || item?.canonicalSymbol || "").trim().toUpperCase();
+  const unit_alias = String(item?.unit_alias || item?.unitAlias || "").trim().toUpperCase();
+  const unit_multiplier = Number(item?.unit_multiplier || item?.unitMultiplier || 0);
+  const [base, quote] = splitCanonical(canonical_symbol);
+  if (base && quote && scaledAliases?.has?.(base)) {
+    canonical_symbol = `${scaledAliases.get(base)}/${quote}`;
+  }
+  if (!exchange || !raw_symbol || !market_type || !canonical_symbol) return null;
+  return {
+    exchange,
+    raw_symbol,
+    market_type,
+    canonical_symbol,
+    ...(Number.isFinite(unit_multiplier) && unit_multiplier > 0 ? { unit_alias, unit_multiplier } : {})
+  };
+}
+
+function marketOverrideKey(item) {
+  return `${normalizeExchange(item?.exchange)}|${String(item?.raw_symbol || item?.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item?.market_type || item?.marketType)}`;
 }
 
 function mergeAssetAliasEntry(left, right) {
@@ -225,6 +234,7 @@ function inferScaledUnitAlias(value, canonicalSet) {
     { token: "1000000", multiplier: 1000000 },
     { token: "10000", multiplier: 10000 },
     { token: "1000", multiplier: 1000 },
+    { token: "100", multiplier: 100 },
     { token: "1M", multiplier: 1000000 }
   ];
 
@@ -284,7 +294,7 @@ export function resolveIdentity(request) {
       status: "resolved",
       confidence: 1,
       reason: "matched explicit market override",
-      market: toIdentity(exchange, symbol, overrideMatches[0].market_type, overrideMatches[0].canonical_symbol)
+      market: toIdentity(exchange, symbol, overrideMatches[0].market_type, overrideMatches[0].canonical_symbol, overrideMatches[0])
     };
   }
   if (overrideMatches.length > 1) {
@@ -292,7 +302,7 @@ export function resolveIdentity(request) {
       status: "ambiguous",
       confidence: 0.5,
       reason: "multiple explicit market overrides matched",
-      candidates: overrideMatches.map((item) => toIdentity(exchange, symbol, item.market_type, item.canonical_symbol))
+      candidates: overrideMatches.map((item) => toIdentity(exchange, symbol, item.market_type, item.canonical_symbol, item))
     };
   }
 
@@ -334,7 +344,8 @@ export function resolveIdentity(request) {
       canonicalSymbol: `${base}/${pair.quote}`,
       baseAsset: base,
       quoteAsset: pair.quote,
-      assetClass: alias.assetClass || "unknown"
+      assetClass: alias.assetClass || "unknown",
+      ...unitConversionFields(alias)
     }
   };
 }
@@ -347,18 +358,28 @@ function unresolved(reason) {
   };
 }
 
-function toIdentity(exchange, symbol, marketType, canonicalSymbol) {
+function toIdentity(exchange, symbol, marketType, canonicalSymbol, override = null) {
   const [base, quote] = splitCanonical(canonicalSymbol);
   const alias = resolveAssetAlias(base);
+  const canonicalBase = alias.canonical || base;
+  const rawPair = derivePair(exchange, symbol, marketType, "");
+  const rawAlias = rawPair ? resolveAssetAlias(rawPair.base) : null;
+  const overrideUnitMultiplier = Number(override?.unit_multiplier || override?.unitMultiplier || 0);
+  const overrideUnitAlias = String(override?.unit_alias || override?.unitAlias || rawPair?.base || canonicalBase || "").trim().toUpperCase();
+  const unitAlias =
+    Number.isFinite(overrideUnitMultiplier) && overrideUnitMultiplier > 0
+      ? { unitAlias: overrideUnitAlias, unitMultiplier: overrideUnitMultiplier }
+      : rawAlias?.unitMultiplier > 0 && (rawAlias.canonical || rawPair.base) === canonicalBase ? rawAlias : alias;
   return {
     exchange,
     marketType,
     rawSymbol: symbol,
     venueSymbol: normalizeVenueSymbol(exchange, symbol, marketType),
     canonicalSymbol,
-    baseAsset: alias.canonical || base,
+    baseAsset: canonicalBase,
     quoteAsset: quote,
-    assetClass: alias.assetClass || "unknown"
+    assetClass: alias.assetClass || "unknown",
+    ...unitConversionFields(unitAlias)
   };
 }
 
@@ -370,9 +391,14 @@ function resolveAssetAlias(base) {
     return (item.unit_aliases || []).some((alias) => String(alias?.alias || "").trim().toUpperCase() === normalized);
   });
   if (matches.length === 1) {
+    const unitAlias = (matches[0].unit_aliases || []).find(
+      (alias) => String(alias?.alias || "").trim().toUpperCase() === normalized
+    );
     return {
       canonical: matches[0].canonical,
       assetClass: matches[0].asset_class,
+      unitAlias: unitAlias?.alias || "",
+      unitMultiplier: Number(unitAlias?.multiplier || 0),
       ambiguous: false
     };
   }
@@ -380,6 +406,17 @@ function resolveAssetAlias(base) {
     return { canonical: "", assetClass: "", ambiguous: true };
   }
   return { canonical: "", assetClass: "", ambiguous: false };
+}
+
+function unitConversionFields(alias) {
+  const multiplier = Number(alias?.unitMultiplier || 0);
+  if (!alias?.unitAlias || !Number.isFinite(multiplier) || multiplier <= 0) return {};
+  return {
+    unitAlias: alias.unitAlias,
+    unitMultiplier: multiplier,
+    canonicalPriceMultiplier: 1 / multiplier,
+    canonicalQuantityMultiplier: multiplier
+  };
 }
 
 function inferMarketType({ exchange, symbol, marketTypeHint, instType, productType }) {

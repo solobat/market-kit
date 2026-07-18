@@ -806,6 +806,13 @@ input::placeholder {
   font-weight: 600;
 }
 
+.detail-market-row__unit {
+  margin-top: 0.28rem;
+  color: color-mix(in srgb, #f1bf59 78%, var(--mk-text-muted));
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .detail-market-row__target {
   text-align: right;
 }

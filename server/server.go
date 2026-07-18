@@ -190,11 +190,13 @@ type resolveBatchRequest struct {
 }
 
 type registryOverrideRequest struct {
-	Exchange        string `json:"exchange"`
-	RawSymbol       string `json:"rawSymbol"`
-	MarketType      string `json:"marketType"`
-	CanonicalSymbol string `json:"canonicalSymbol"`
-	AssetClass      string `json:"assetClass,omitempty"`
+	Exchange        string  `json:"exchange"`
+	RawSymbol       string  `json:"rawSymbol"`
+	MarketType      string  `json:"marketType"`
+	CanonicalSymbol string  `json:"canonicalSymbol"`
+	AssetClass      string  `json:"assetClass,omitempty"`
+	UnitAlias       string  `json:"unitAlias,omitempty"`
+	UnitMultiplier  float64 `json:"unitMultiplier,omitempty"`
 }
 
 type assetClassUpdateRequest struct {
@@ -322,10 +324,17 @@ func (a *App) handleRuntimeRegistryOverride(w http.ResponseWriter, r *http.Reque
 	}
 	a.applyGeneratedRegistry(nextGenerated)
 
-	writeJSON(w, http.StatusOK, map[string]any{
-		"override": override,
-		"registry": a.runtimeRegistry(),
-	})
+	persistedOverride, ok := findMarketOverride(a.runtimeRegistry(), override)
+	if !ok {
+		persistedOverride = override
+	}
+	payload := map[string]any{
+		"override": persistedOverride,
+	}
+	if !compactRegistryResponse(r) {
+		payload["registry"] = a.runtimeRegistry()
+	}
+	writeJSON(w, http.StatusOK, payload)
 }
 
 func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.MarketOverride, string, error) {
@@ -347,12 +356,17 @@ func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.Mar
 	if !ok {
 		return identity.MarketOverride{}, "", errors.New("canonicalSymbol must be BASE/QUOTE")
 	}
+	if req.UnitMultiplier < 0 {
+		return identity.MarketOverride{}, "", errors.New("unitMultiplier must be greater than zero when provided")
+	}
 
 	return identity.MarketOverride{
 		Exchange:        exchange,
 		RawSymbol:       rawSymbol,
 		MarketType:      marketType,
 		CanonicalSymbol: base + "/" + quote,
+		UnitAlias:       strings.ToUpper(strings.TrimSpace(req.UnitAlias)),
+		UnitMultiplier:  req.UnitMultiplier,
 	}, base, nil
 }
 
@@ -408,6 +422,10 @@ func upsertRuntimeRegistryOverride(generated identity.Registry, runtime identity
 	override.RawSymbol = strings.TrimSpace(override.RawSymbol)
 	override.MarketType = normalizeRegistryOverrideMarketType(override.MarketType)
 	override.CanonicalSymbol = strings.ToUpper(strings.TrimSpace(override.CanonicalSymbol))
+	override.UnitAlias = strings.ToUpper(strings.TrimSpace(override.UnitAlias))
+	if override.UnitMultiplier <= 0 {
+		override.UnitMultiplier = 0
+	}
 	targetKey := registryOverrideKey(override)
 
 	nextOverrides := make([]identity.MarketOverride, 0, len(generated.MarketOverrides)+1)
@@ -449,6 +467,16 @@ func registryOverrideKey(item identity.MarketOverride) string {
 		strings.TrimSpace(item.RawSymbol),
 		normalizeRegistryOverrideMarketType(item.MarketType),
 	}, "|")
+}
+
+func findMarketOverride(registry identity.Registry, target identity.MarketOverride) (identity.MarketOverride, bool) {
+	targetKey := registryOverrideKey(target)
+	for _, item := range registry.MarketOverrides {
+		if registryOverrideKey(item) == targetKey {
+			return item, true
+		}
+	}
+	return identity.MarketOverride{}, false
 }
 
 func registryHasAsset(registry identity.Registry, canonical string) bool {
@@ -518,10 +546,16 @@ func (a *App) handleAssetClassUpdate(w http.ResponseWriter, r *http.Request, sym
 	a.applyGeneratedRegistry(nextGenerated)
 
 	asset, _ := findAssetAlias(a.runtimeRegistry(), symbol)
-	writeJSON(w, http.StatusOK, map[string]any{
-		"asset":    asset,
-		"registry": a.runtimeRegistry(),
-	})
+	payload := map[string]any{"asset": asset}
+	if !compactRegistryResponse(r) {
+		payload["registry"] = a.runtimeRegistry()
+	}
+	writeJSON(w, http.StatusOK, payload)
+}
+
+func compactRegistryResponse(r *http.Request) bool {
+	value := strings.ToLower(strings.TrimSpace(r.URL.Query().Get("compact")))
+	return value == "1" || value == "true" || value == "yes"
 }
 
 func updateRuntimeAssetClass(generated identity.Registry, symbol string, assetClass string) identity.Registry {

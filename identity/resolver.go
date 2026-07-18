@@ -59,7 +59,7 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 		}
 	}
 
-	baseCanonical, assetClass, ambiguous := r.resolveBaseAlias(base)
+	baseCanonical, assetClass, unitAlias, unitMultiplier, ambiguous := r.resolveBaseAlias(base)
 	if ambiguous {
 		return ResolveResult{
 			Status: ResolveAmbiguous,
@@ -103,6 +103,7 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 		QuoteAsset:      quote,
 		AssetClass:      assetClass,
 	}
+	applyUnitConversion(&identity, unitAlias, unitMultiplier)
 	if identity.AssetClass == "" {
 		identity.AssetClass = "unknown"
 	}
@@ -143,7 +144,7 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTyp
 		if !overrideRawSymbolMatches(exchange, item.RawSymbol, rawSymbol, overrideMarketType) {
 			continue
 		}
-		matches = append(matches, r.marketIdentityFromOverride(exchange, item.RawSymbol, item.CanonicalSymbol, overrideMarketType))
+		matches = append(matches, r.marketIdentityFromOverride(exchange, item, overrideMarketType))
 	}
 	return matches
 }
@@ -165,19 +166,20 @@ func (r *Resolver) resolveCanonicalOverrides(exchange string, canonicalSymbol st
 		if overrideMarketType != marketType {
 			continue
 		}
-		matches = append(matches, r.marketIdentityFromOverride(exchange, item.RawSymbol, item.CanonicalSymbol, overrideMarketType))
+		matches = append(matches, r.marketIdentityFromOverride(exchange, item, overrideMarketType))
 	}
 	return matches
 }
 
-func (r *Resolver) marketIdentityFromOverride(exchange string, rawSymbol string, canonicalSymbol string, marketType MarketType) MarketIdentity {
+func (r *Resolver) marketIdentityFromOverride(exchange string, override MarketOverride, marketType MarketType) MarketIdentity {
+	rawSymbol := strings.TrimSpace(override.RawSymbol)
+	canonicalSymbol := strings.TrimSpace(override.CanonicalSymbol)
 	base, quote := splitCanonicalSymbol(canonicalSymbol)
-	baseCanonical, assetClass, _ := r.resolveBaseAlias(base)
+	baseCanonical, assetClass, _, _, _ := r.resolveBaseAlias(base)
 	if baseCanonical == "" {
 		baseCanonical = base
 	}
-	rawSymbol = strings.TrimSpace(rawSymbol)
-	return MarketIdentity{
+	identity := MarketIdentity{
 		Exchange:        exchange,
 		MarketType:      marketType,
 		RawSymbol:       rawSymbol,
@@ -187,24 +189,50 @@ func (r *Resolver) marketIdentityFromOverride(exchange string, rawSymbol string,
 		QuoteAsset:      quote,
 		AssetClass:      firstNonEmpty(assetClass, "unknown"),
 	}
+
+	rawBase, _, ok := parseBaseQuote(exchange, rawSymbol, marketType, "")
+	if override.UnitMultiplier > 0 {
+		unitAlias := strings.ToUpper(strings.TrimSpace(override.UnitAlias))
+		if unitAlias == "" && ok {
+			unitAlias = rawBase
+		}
+		if unitAlias == "" {
+			unitAlias = baseCanonical
+		}
+		applyUnitConversion(&identity, unitAlias, override.UnitMultiplier)
+		return identity
+	}
+	if ok {
+		rawBaseCanonical, _, unitAlias, unitMultiplier, ambiguous := r.resolveBaseAlias(rawBase)
+		if !ambiguous && unitMultiplier > 0 && rawBaseCanonical == baseCanonical {
+			applyUnitConversion(&identity, unitAlias, unitMultiplier)
+		}
+	}
+	return identity
 }
 
-func (r *Resolver) resolveBaseAlias(base string) (canonical string, assetClass string, ambiguous bool) {
+type baseAliasMatch struct {
+	rule           AssetAliasRule
+	unitAlias      string
+	unitMultiplier float64
+}
+
+func (r *Resolver) resolveBaseAlias(base string) (canonical string, assetClass string, unitAlias string, unitMultiplier float64, ambiguous bool) {
 	base = strings.ToUpper(strings.TrimSpace(base))
 	if base == "" {
-		return "", "", false
+		return "", "", "", 0, false
 	}
 
-	var matches []AssetAliasRule
+	var matches []baseAliasMatch
 	for _, item := range r.registry.AssetAliases {
 		if item.Canonical == base {
-			matches = append(matches, item)
+			matches = append(matches, baseAliasMatch{rule: item})
 			continue
 		}
 		matched := false
 		for _, alias := range item.Aliases {
 			if alias == base {
-				matches = append(matches, item)
+				matches = append(matches, baseAliasMatch{rule: item})
 				matched = true
 				break
 			}
@@ -214,19 +242,34 @@ func (r *Resolver) resolveBaseAlias(base string) (canonical string, assetClass s
 		}
 		for _, alias := range item.UnitAliases {
 			if alias.Alias == base {
-				matches = append(matches, item)
+				matches = append(matches, baseAliasMatch{
+					rule:           item,
+					unitAlias:      alias.Alias,
+					unitMultiplier: alias.Multiplier,
+				})
 				break
 			}
 		}
 	}
 
 	if len(matches) == 0 {
-		return "", "", false
+		return "", "", "", 0, false
 	}
 	if len(matches) > 1 {
-		return "", "", true
+		return "", "", "", 0, true
 	}
-	return matches[0].Canonical, matches[0].AssetClass, false
+	match := matches[0]
+	return match.rule.Canonical, match.rule.AssetClass, match.unitAlias, match.unitMultiplier, false
+}
+
+func applyUnitConversion(identity *MarketIdentity, unitAlias string, unitMultiplier float64) {
+	if identity == nil || unitAlias == "" || unitMultiplier <= 0 {
+		return
+	}
+	identity.UnitAlias = unitAlias
+	identity.UnitMultiplier = unitMultiplier
+	identity.CanonicalPriceMultiplier = 1 / unitMultiplier
+	identity.CanonicalQuantityMultiplier = unitMultiplier
 }
 
 func inferMarketType(exchange string, rawSymbol string, marketTypeHint string, instType string, productType string) (MarketType, bool) {

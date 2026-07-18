@@ -52,6 +52,10 @@ func (r *Registry) Normalize() {
 		r.MarketOverrides[i].RawSymbol = strings.TrimSpace(r.MarketOverrides[i].RawSymbol)
 		r.MarketOverrides[i].MarketType = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].MarketType))
 		r.MarketOverrides[i].CanonicalSymbol = strings.ToUpper(strings.TrimSpace(r.MarketOverrides[i].CanonicalSymbol))
+		r.MarketOverrides[i].UnitAlias = strings.ToUpper(strings.TrimSpace(r.MarketOverrides[i].UnitAlias))
+		if r.MarketOverrides[i].UnitMultiplier <= 0 {
+			r.MarketOverrides[i].UnitMultiplier = 0
+		}
 	}
 
 	scaledAliases := r.normalizeAssetAliases()
@@ -204,6 +208,7 @@ func inferScaledUnitAlias(value string, canonicalSet map[string]bool) (string, f
 		{token: "1000000", multiplier: 1000000},
 		{token: "10000", multiplier: 10000},
 		{token: "1000", multiplier: 1000},
+		{token: "100", multiplier: 100},
 		{token: "1M", multiplier: 1000000},
 	}
 

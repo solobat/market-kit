@@ -162,6 +162,8 @@ This repo also includes a static Svelte console in `frontend/` for:
 - syncing unresolved / ambiguous samples exported from remote services such as `veridex`
 - reviewing candidate asset groups imported from `slipstream` discovery markets
 
+The console treats the Go server as the source of truth for the full runtime registry. It only embeds the small hand-curated fallback registry so the UI can still open when the API is unavailable; generated registry data is loaded from `/api/v1/registry` at runtime.
+
 Run the local API server:
 
 ```bash
@@ -175,6 +177,8 @@ cd frontend
 pnpm install
 pnpm dev
 ```
+
+For a separately hosted static console, set `VITE_MARKET_KIT_API_BASE` to the deployed Go API base URL. Set `VITE_MARKET_KIT_WRITE_API_BASE` only when write endpoints should go to a different server.
 
 When the console runs through `pnpm dev`, read-only `/api/*` requests default to
 `https://api.immortal.app/market-kit-api`, while the writable
@@ -272,6 +276,8 @@ That means online deployment no longer depends on the Vite dev proxy.
 
 Downstream projects should use the `/api/v1/*` endpoints as the stable service boundary. These endpoints use the runtime merged registry already embedded in the server binary and do not fetch remote discovery sources during request handling.
 
+The frontend console also uses these endpoints at runtime instead of bundling the generated registry. This keeps the browser payload small while preserving the same external API contract for downstream systems.
+
 Single resolve:
 
 ```bash
@@ -297,6 +303,21 @@ Response shape:
   }
 }
 ```
+
+Scaled venue contracts keep their conversion metadata on the resolved market. For example, `1000PEPEUSDT` resolves to canonical `PEPE/USDT` and includes:
+
+```json
+{
+  "unitAlias": "1000PEPE",
+  "unitMultiplier": 1000,
+  "canonicalPriceMultiplier": 0.001,
+  "canonicalQuantityMultiplier": 1000
+}
+```
+
+Use `canonicalPrice = venuePrice * canonicalPriceMultiplier` and `canonicalQuantity = venueQuantity * canonicalQuantityMultiplier`.
+
+The same fields are also used for per-market rebase or split adjustments when the canonical asset is already correct but one venue trades a rebased unit. For example, if OKX trades post-split `OPENAI` where `1 OKX OPENAI = 0.1 canonical OPENAI`, store `unit_multiplier: 0.1` on that `market_overrides` row. The resolver will return `canonicalPriceMultiplier: 10` and `canonicalQuantityMultiplier: 0.1` for that OKX market without changing the global `OPENAI` asset identity.
 
 Batch resolve:
 
