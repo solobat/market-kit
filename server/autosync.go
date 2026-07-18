@@ -96,6 +96,7 @@ func (a *App) generatedRegistrySnapshot() identity.Registry {
 func (a *App) applyGeneratedRegistry(generated identity.Registry) {
 	generated.Normalize()
 	runtime := a.baseRegistry.Merge(generated)
+	runtime = applyRuntimeAssetClassOverrides(runtime, generated)
 
 	a.mu.Lock()
 	a.generatedRegistry = generated

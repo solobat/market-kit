@@ -529,10 +529,6 @@ func (a *App) handleAssetClassUpdate(w http.ResponseWriter, r *http.Request, sym
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass must be crypto, rwa_stock, rwa_commodity, fiat_stable, or unknown"})
 		return
 	}
-	if registryHasAsset(a.baseRegistry, symbol) {
-		writeJSON(w, http.StatusConflict, map[string]any{"error": "static registry asset classes must be changed in source code"})
-		return
-	}
 	if !registryHasAsset(a.runtimeRegistry(), symbol) && !registryHasAsset(a.generatedRegistrySnapshot(), symbol) {
 		writeJSON(w, http.StatusNotFound, map[string]any{"error": "asset not found", "asset": symbol})
 		return
@@ -578,6 +574,29 @@ func updateRuntimeAssetClass(generated identity.Registry, symbol string, assetCl
 	})
 	generated.Normalize()
 	return generated
+}
+
+func applyRuntimeAssetClassOverrides(runtime identity.Registry, generated identity.Registry) identity.Registry {
+	overrides := map[string]string{}
+	for _, item := range generated.AssetAliases {
+		canonical := strings.ToUpper(strings.TrimSpace(item.Canonical))
+		assetClass := strings.TrimSpace(item.AssetClass)
+		if canonical == "" || assetClass == "" {
+			continue
+		}
+		overrides[canonical] = assetClass
+	}
+	if len(overrides) == 0 {
+		return runtime
+	}
+	for idx := range runtime.AssetAliases {
+		canonical := strings.ToUpper(strings.TrimSpace(runtime.AssetAliases[idx].Canonical))
+		if assetClass, ok := overrides[canonical]; ok {
+			runtime.AssetAliases[idx].AssetClass = assetClass
+		}
+	}
+	runtime.Normalize()
+	return runtime
 }
 
 func (a *App) handleVersion(w http.ResponseWriter, r *http.Request) {

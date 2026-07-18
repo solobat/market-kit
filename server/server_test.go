@@ -355,6 +355,55 @@ func TestHandleRuntimeRegistryOverrideRequiresAssetClassForNewAsset(t *testing.T
 	}
 }
 
+func TestHandleAssetClassUpdateOverridesStaticAssetClass(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "crypto"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "okx", RawSymbol: "OPENAI-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "OPENAI/USDT"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: identity.Registry{},
+		registry:          base,
+		resolver:          identity.NewResolver(base),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/assets/OPENAI?compact=1", strings.NewReader(`{"assetClass":"rwa_stock"}`))
+	rec := httptest.NewRecorder()
+	app.handleAssetClassUpdate(rec, req, "OPENAI")
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	resolved := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange: "okx",
+		Symbol:   "OPENAI-USDT-SWAP",
+	})
+	if resolved.Status != identity.ResolveResolved || resolved.Market == nil {
+		t.Fatalf("expected OPENAI market to resolve, got %+v", resolved)
+	}
+	if resolved.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("expected runtime asset class override, got %+v", resolved.Market)
+	}
+
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted registry: %v", err)
+	}
+	if asset, ok := findAssetAlias(persisted, "OPENAI"); !ok || asset.AssetClass != "rwa_stock" {
+		t.Fatalf("expected persisted runtime asset class override, got %+v", persisted.AssetAliases)
+	}
+}
+
 func TestHandlerAllowsConfiguredCORSPreflight(t *testing.T) {
 	app := &App{
 		config: Config{
