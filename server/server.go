@@ -599,6 +599,42 @@ func applyRuntimeAssetClassOverrides(runtime identity.Registry, generated identi
 	return runtime
 }
 
+func applyRuntimeMarketOverrides(runtime identity.Registry, generated identity.Registry) identity.Registry {
+	replacements := map[string]identity.MarketOverride{}
+	for _, item := range generated.MarketOverrides {
+		key := registryOverrideKey(item)
+		if key == "||" {
+			continue
+		}
+		replacements[key] = item
+	}
+	if len(replacements) == 0 {
+		return runtime
+	}
+
+	next := make([]identity.MarketOverride, 0, len(runtime.MarketOverrides))
+	replaced := map[string]bool{}
+	for _, item := range runtime.MarketOverrides {
+		key := registryOverrideKey(item)
+		if replacement, ok := replacements[key]; ok {
+			next = append(next, replacement)
+			replaced[key] = true
+			continue
+		}
+		next = append(next, item)
+	}
+	for key, item := range replacements {
+		if replaced[key] {
+			continue
+		}
+		next = append(next, item)
+	}
+
+	runtime.MarketOverrides = next
+	runtime.Normalize()
+	return runtime
+}
+
 func (a *App) handleVersion(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", "GET")

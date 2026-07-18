@@ -270,6 +270,68 @@ func TestHandleRuntimeRegistryOverrideCanSetRebaseMultiplier(t *testing.T) {
 	}
 }
 
+func TestHandleRuntimeRegistryOverrideRebaseOverridesStaticMarket(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
+		},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "okx", RawSymbol: "OPENAI-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "OPENAI/USDT"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			RuntimeRegistryPath: runtimePath,
+		},
+		baseRegistry:      base,
+		generatedRegistry: identity.Registry{},
+		registry:          base,
+		resolver:          identity.NewResolver(base),
+	}
+
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/registry/overrides?compact=1", strings.NewReader(`{
+		"exchange":"okx",
+		"rawSymbol":"OPENAI-USDT-SWAP",
+		"marketType":"perp",
+		"canonicalSymbol":"OPENAI/USDT",
+		"unitMultiplier":0.1
+	}`))
+	rec := httptest.NewRecorder()
+	app.handleRuntimeRegistryOverride(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unexpected status: %d body=%s", rec.Code, rec.Body.String())
+	}
+
+	// Simulate the next process refresh by applying the persisted generated layer
+	// over the static base registry.
+	persisted, err := identity.LoadRegistryFile(runtimePath)
+	if err != nil {
+		t.Fatalf("load persisted registry: %v", err)
+	}
+	reloaded := &App{
+		baseRegistry: base,
+		registry:     base,
+		resolver:     identity.NewResolver(base),
+	}
+	reloaded.applyGeneratedRegistry(persisted)
+
+	resolved := reloaded.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange: "okx",
+		Symbol:   "OPENAI-USDT-SWAP",
+	})
+	if resolved.Status != identity.ResolveResolved || resolved.Market == nil {
+		t.Fatalf("expected rebased static market to resolve after reload, got %+v", resolved)
+	}
+	if resolved.Market.UnitMultiplier != 0.1 ||
+		resolved.Market.CanonicalPriceMultiplier != 10 ||
+		resolved.Market.CanonicalQuantityMultiplier != 0.1 {
+		t.Fatalf("expected runtime rebase to override static market after reload, got %+v", resolved.Market)
+	}
+}
+
 func TestHandleRuntimeRegistryOverrideCompactReturnsNormalizedOverride(t *testing.T) {
 	base := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{
