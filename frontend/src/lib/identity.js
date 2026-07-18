@@ -162,7 +162,8 @@ function normalizeMarketOverrideItem(item, scaledAliases) {
 }
 
 function marketOverrideKey(item) {
-  return `${normalizeExchange(item?.exchange)}|${String(item?.raw_symbol || item?.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item?.market_type || item?.marketType)}`;
+  const exchange = String(item?.exchange || "").trim().toLowerCase();
+  return `${exchange}|${String(item?.raw_symbol || item?.rawSymbol || "").trim().toUpperCase()}|${normalizeMarketType(item?.market_type || item?.marketType)}`;
 }
 
 function mergeAssetAliasEntry(left, right) {
