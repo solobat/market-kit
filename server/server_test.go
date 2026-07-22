@@ -571,7 +571,8 @@ func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
 				  "source":"slipstream",
 				  "generatedAt":"2026-05-19T00:00:00Z",
 				  "items":[
-				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"NEW-USDT-SWAP","baseAsset":"NEW","quoteAsset":"USDT","assetClassHint":"stock","status":"live"}
+				    {"sourceId":"slipstream","platformId":"okx","platform":"OKX","venueType":"cex","marketType":"perp","symbol":"NEW-USDT-SWAP","baseAsset":"NEW","quoteAsset":"USDT","assetClassHint":"stock","status":"live"},
+				    {"sourceId":"slipstream","platformId":"gate","platform":"Gate","venueType":"cex","marketType":"spot","symbol":"AAPLON_USDT","baseAsset":"AAPLON","quoteAsset":"USDT","assetClassHint":"crypto","status":"live"}
 				  ]
 				}`), nil
 			}),
@@ -608,12 +609,16 @@ func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
 	if result.Market.AssetClass != "rwa_stock" || result.Market.CanonicalSymbol != "NEW/USDT" {
 		t.Fatalf("unexpected auto-synced market: %+v", result.Market)
 	}
+	status := app.currentAutoSyncStatus()
+	if status.SuspiciousCryptoCount != 1 || len(status.SuspiciousCryptoAssets) != 1 || status.SuspiciousCryptoAssets[0].Asset != "AAPLON" {
+		t.Fatalf("expected suspicious crypto candidate for AAPLON, got %+v", status)
+	}
 
 	persisted, err := identity.LoadRegistryFile(runtimePath)
 	if err != nil {
 		t.Fatalf("load persisted runtime registry: %v", err)
 	}
-	if len(persisted.AssetAliases) != 2 || len(persisted.MarketOverrides) != 1 {
+	if len(persisted.AssetAliases) != 3 || len(persisted.MarketOverrides) != 2 {
 		t.Fatalf("unexpected persisted registry: %+v", persisted)
 	}
 }

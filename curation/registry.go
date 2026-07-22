@@ -43,6 +43,14 @@ var (
 	}
 )
 
+type SuspiciousCryptoCandidate struct {
+	Asset      string `json:"asset"`
+	Exchange   string `json:"exchange,omitempty"`
+	Symbol     string `json:"symbol,omitempty"`
+	MarketType string `json:"marketType,omitempty"`
+	Reason     string `json:"reason"`
+}
+
 func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry {
 	assets := map[string]identity.AssetAliasRule{}
 	overrides := map[string]identity.MarketOverride{}
@@ -114,6 +122,105 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 	}
 	registry.Normalize()
 	return registry
+}
+
+func SuspiciousCryptoCandidates(items []discovery.ImportedMarket, registry identity.Registry, limit int) []SuspiciousCryptoCandidate {
+	if limit <= 0 {
+		limit = 25
+	}
+	registry.Normalize()
+	assetClasses := map[string]string{}
+	for _, item := range registry.AssetAliases {
+		assetClasses[strings.ToUpper(strings.TrimSpace(item.Canonical))] = strings.TrimSpace(item.AssetClass)
+	}
+
+	seen := map[string]bool{}
+	out := make([]SuspiciousCryptoCandidate, 0)
+	for _, item := range items {
+		base := strings.ToUpper(strings.TrimSpace(item.BaseAsset))
+		if base == "" || stableAssets[base] || assetClasses[base] != "crypto" {
+			continue
+		}
+		reason := suspiciousCryptoReason(item, base)
+		if reason == "" {
+			continue
+		}
+		key := base + "|" + strings.ToLower(strings.TrimSpace(item.PlatformID)) + "|" + strings.TrimSpace(item.Symbol)
+		if seen[key] {
+			continue
+		}
+		seen[key] = true
+		out = append(out, SuspiciousCryptoCandidate{
+			Asset:      base,
+			Exchange:   strings.ToLower(strings.TrimSpace(item.PlatformID)),
+			Symbol:     strings.TrimSpace(item.Symbol),
+			MarketType: normalizeGeneratedMarketType(item.MarketType),
+			Reason:     reason,
+		})
+	}
+	sort.Slice(out, func(i, j int) bool {
+		if out[i].Asset == out[j].Asset {
+			if out[i].Exchange == out[j].Exchange {
+				return out[i].Symbol < out[j].Symbol
+			}
+			return out[i].Exchange < out[j].Exchange
+		}
+		return out[i].Asset < out[j].Asset
+	})
+	if len(out) > limit {
+		out = out[:limit]
+	}
+	return out
+}
+
+func suspiciousCryptoReason(item discovery.ImportedMarket, asset string) string {
+	if hasExplicitRWAHint(item) {
+		return "crypto asset has explicit RWA/stock metadata"
+	}
+	if wrapped, base := wrappedKnownStockAsset(asset); wrapped {
+		return "crypto asset looks like wrapped stock ticker " + base
+	}
+	if strings.Contains(normalizedHintText(item.Symbol), "stock") {
+		return "crypto market symbol contains stock marker"
+	}
+	return ""
+}
+
+func hasExplicitRWAHint(item discovery.ImportedMarket) bool {
+	hints := []string{
+		item.AssetClass,
+		item.AssetClassHint,
+		item.Category,
+		item.UnderlyingCategory,
+	}
+	hints = append(hints, item.Tags...)
+	for _, hint := range hints {
+		class := normalizeAssetClassHint(hint)
+		if class == "rwa_stock" || class == "rwa_commodity" {
+			return true
+		}
+	}
+	return false
+}
+
+func wrappedKnownStockAsset(asset string) (bool, string) {
+	asset = strings.ToUpper(strings.TrimSpace(asset))
+	wrappers := []string{"STOCK", "ON", "G", "B", "X"}
+	for _, suffix := range wrappers {
+		if strings.HasSuffix(asset, suffix) && len(asset) > len(suffix) {
+			base := strings.TrimSuffix(asset, suffix)
+			if rwaStockAssets[base] {
+				return true, base
+			}
+		}
+	}
+	if strings.HasPrefix(asset, "X") && len(asset) > 1 {
+		base := strings.TrimPrefix(asset, "X")
+		if rwaStockAssets[base] {
+			return true, base
+		}
+	}
+	return false, ""
 }
 
 type hyperliquidHIP3AliasTarget struct {
@@ -389,10 +496,7 @@ func inferAssetClassFromExchangeMetadata(item discovery.ImportedMarket) string {
 }
 
 func normalizeAssetClassHint(value string) string {
-	raw := strings.ToLower(strings.TrimSpace(value))
-	raw = strings.ReplaceAll(raw, "_", " ")
-	raw = strings.ReplaceAll(raw, "-", " ")
-	raw = strings.Join(strings.Fields(raw), " ")
+	raw := normalizedHintText(value)
 
 	switch {
 	case raw == "":
@@ -428,6 +532,13 @@ func normalizeAssetClassHint(value string) string {
 	default:
 		return ""
 	}
+}
+
+func normalizedHintText(value string) string {
+	raw := strings.ToLower(strings.TrimSpace(value))
+	raw = strings.ReplaceAll(raw, "_", " ")
+	raw = strings.ReplaceAll(raw, "-", " ")
+	return strings.Join(strings.Fields(raw), " ")
 }
 
 func inferAssetClassFallback(asset string) string {

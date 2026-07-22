@@ -1,6 +1,7 @@
 package curation
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/solobat/market-kit/discovery"
@@ -130,6 +131,77 @@ func TestBuildGeneratedRegistryPrefersStockHintOverGenericTokenHint(t *testing.T
 		}
 	}
 	t.Fatalf("expected NEWSTOCK asset alias, got %+v", registry.AssetAliases)
+}
+
+func TestSuspiciousCryptoCandidatesFlagsWrappedKnownStockTicker(t *testing.T) {
+	items := []discovery.ImportedMarket{
+		{
+			SourceID:   "slipstream",
+			PlatformID: "gate",
+			Platform:   "Gate",
+			VenueType:  "cex",
+			MarketType: "spot",
+			Symbol:     "AAPLON_USDT",
+			BaseAsset:  "AAPLON",
+			QuoteAsset: "USDT",
+			Status:     "live",
+		},
+		{
+			SourceID:       "slipstream",
+			PlatformID:     "binance",
+			Platform:       "Binance",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "ONDOUSDT",
+			BaseAsset:      "ONDO",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "crypto",
+			Status:         "live",
+		},
+	}
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "AAPLON", AssetClass: "crypto"},
+			{Canonical: "ONDO", AssetClass: "crypto"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+
+	candidates := SuspiciousCryptoCandidates(items, registry, 10)
+	if len(candidates) != 1 {
+		t.Fatalf("expected one suspicious crypto candidate, got %+v", candidates)
+	}
+	if candidates[0].Asset != "AAPLON" || !strings.Contains(candidates[0].Reason, "AAPL") {
+		t.Fatalf("expected wrapped AAPL candidate, got %+v", candidates[0])
+	}
+}
+
+func TestSuspiciousCryptoCandidatesFlagsExplicitRWAHintRegression(t *testing.T) {
+	items := []discovery.ImportedMarket{
+		{
+			SourceID:           "slipstream",
+			PlatformID:         "okx",
+			Platform:           "OKX",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             "FRESH-USDT-SWAP",
+			BaseAsset:          "FRESH",
+			QuoteAsset:         "USDT",
+			Category:           "token",
+			UnderlyingCategory: "stock",
+			Status:             "live",
+		},
+	}
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "FRESH", AssetClass: "crypto"},
+		},
+	}
+
+	candidates := SuspiciousCryptoCandidates(items, registry, 10)
+	if len(candidates) != 1 || candidates[0].Asset != "FRESH" {
+		t.Fatalf("expected explicit stock metadata to be flagged, got %+v", candidates)
+	}
 }
 
 func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t *testing.T) {

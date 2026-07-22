@@ -17,19 +17,21 @@ import (
 )
 
 type AutoSyncStatus struct {
-	Enabled                bool      `json:"enabled"`
-	Interval               string    `json:"interval,omitempty"`
-	RuntimePath            string    `json:"runtimePath,omitempty"`
-	ConfiguredSourceID     string    `json:"configuredSourceId,omitempty"`
-	SourceID               string    `json:"sourceId,omitempty"`
-	LastStartedAt          time.Time `json:"lastStartedAt,omitempty"`
-	LastFinishedAt         time.Time `json:"lastFinishedAt,omitempty"`
-	LastError              string    `json:"lastError,omitempty"`
-	LastDiscoveryItems     int       `json:"lastDiscoveryItems,omitempty"`
-	LastGeneratedAssets    int       `json:"lastGeneratedAssets,omitempty"`
-	LastGeneratedOverrides int       `json:"lastGeneratedOverrides,omitempty"`
-	RuntimeAssets          int       `json:"runtimeAssets,omitempty"`
-	RuntimeOverrides       int       `json:"runtimeOverrides,omitempty"`
+	Enabled                bool                                 `json:"enabled"`
+	Interval               string                               `json:"interval,omitempty"`
+	RuntimePath            string                               `json:"runtimePath,omitempty"`
+	ConfiguredSourceID     string                               `json:"configuredSourceId,omitempty"`
+	SourceID               string                               `json:"sourceId,omitempty"`
+	LastStartedAt          time.Time                            `json:"lastStartedAt,omitempty"`
+	LastFinishedAt         time.Time                            `json:"lastFinishedAt,omitempty"`
+	LastError              string                               `json:"lastError,omitempty"`
+	LastDiscoveryItems     int                                  `json:"lastDiscoveryItems,omitempty"`
+	LastGeneratedAssets    int                                  `json:"lastGeneratedAssets,omitempty"`
+	LastGeneratedOverrides int                                  `json:"lastGeneratedOverrides,omitempty"`
+	RuntimeAssets          int                                  `json:"runtimeAssets,omitempty"`
+	RuntimeOverrides       int                                  `json:"runtimeOverrides,omitempty"`
+	SuspiciousCryptoCount  int                                  `json:"suspiciousCryptoCount,omitempty"`
+	SuspiciousCryptoAssets []curation.SuspiciousCryptoCandidate `json:"suspiciousCryptoAssets,omitempty"`
 }
 
 func loadRuntimeRegistry(path string) (identity.Registry, error) {
@@ -181,6 +183,7 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 
 	generated := curation.BuildGeneratedRegistry(envelope.Items)
 	next := curation.MergeGeneratedRegistry(a.generatedRegistrySnapshot(), generated, false)
+	suspiciousCrypto := curation.SuspiciousCryptoCandidates(envelope.Items, next, 25)
 	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, next); err != nil {
 		a.updateAutoSyncStatus(func(status *AutoSyncStatus) {
 			status.LastError = err.Error()
@@ -201,6 +204,8 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		status.LastDiscoveryItems = len(envelope.Items)
 		status.LastGeneratedAssets = len(next.AssetAliases)
 		status.LastGeneratedOverrides = len(next.MarketOverrides)
+		status.SuspiciousCryptoCount = len(suspiciousCrypto)
+		status.SuspiciousCryptoAssets = suspiciousCrypto
 	})
 	log.Printf("market-kit auto-sync refreshed source=%s discovery_items=%d generated_assets=%d generated_overrides=%d", sourceID, len(envelope.Items), len(next.AssetAliases), len(next.MarketOverrides))
 	return nil
