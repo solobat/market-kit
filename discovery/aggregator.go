@@ -95,7 +95,7 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 	canonicalBase, baseClass, aliasMatched := resolveAssetAlias(a.registry, base)
 	if aliasMatched {
 		base = canonicalBase
-		if assetClass == "unknown" && baseClass != "" {
+		if shouldPreferRegistryAssetClass(assetClass, baseClass) {
 			assetClass = baseClass
 		}
 		confidence = 0.9
@@ -197,6 +197,20 @@ func shouldPreferResolvedMarketIdentity(exchange string, rawSymbol string, base 
 	base = strings.TrimSpace(base)
 	quote = strings.ToUpper(strings.TrimSpace(quote))
 	return strings.Contains(rawSymbol, ":") || strings.Contains(base, ":") || quote == "USDH"
+}
+
+func isRWAAssetClass(value string) bool {
+	value = strings.TrimSpace(value)
+	return value == "rwa_stock" || value == "rwa_commodity"
+}
+
+func shouldPreferRegistryAssetClass(importedClass string, registryClass string) bool {
+	registryClass = strings.TrimSpace(registryClass)
+	if registryClass == "" {
+		return false
+	}
+	importedClass = strings.TrimSpace(importedClass)
+	return importedClass == "unknown" || (importedClass == "crypto" && isRWAAssetClass(registryClass))
 }
 
 func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
@@ -316,18 +330,24 @@ func resolveAssetAlias(reg identity.Registry, value string) (canonical string, a
 }
 
 func normalizeImportedAssetClassHints(hints ...any) string {
+	seen := map[string]bool{}
 	for _, hint := range hints {
 		switch value := hint.(type) {
 		case string:
 			if assetClass := normalizeImportedAssetClassHint(value); assetClass != "" {
-				return assetClass
+				seen[assetClass] = true
 			}
 		case []string:
 			for _, item := range value {
 				if assetClass := normalizeImportedAssetClassHint(item); assetClass != "" {
-					return assetClass
+					seen[assetClass] = true
 				}
 			}
+		}
+	}
+	for _, assetClass := range []string{"fiat_stable", "rwa_stock", "rwa_commodity", "crypto"} {
+		if seen[assetClass] {
+			return assetClass
 		}
 	}
 	return ""

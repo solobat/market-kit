@@ -50,22 +50,25 @@ var (
 		"USDG": true, "USDGO": true, "USDTB": true, "WUSD": true, "XUSD": true,
 	}
 	rwaStockAssets = map[string]bool{
-		"AAPL": true, "AAPLX": true, "AAOI": true, "AMAT": true, "AMD": true, "AMZN": true,
-		"APLD": true, "APP": true, "ARM": true, "ASML": true, "AVGO": true, "BA": true,
-		"BABA": true, "BILL": true, "COHR": true, "COIN": true, "COST": true, "CRCL": true,
+		"AAPL": true, "AAPLX": true, "AAOI": true, "ACN": true, "AMAT": true, "AMD": true, "AMZN": true,
+		"ANTHROPIC": true,
+		"APLD":      true, "APP": true, "ARM": true, "ASML": true, "AVGO": true, "BA": true,
+		"BABA": true, "BILL": true, "BMNR": true, "COHR": true, "COIN": true, "COST": true, "CRCL": true,
 		"CRWV": true, "CSCO": true, "D": true, "DAR": true, "DIA": true,
 		"DIS": true, "DRAM": true, "EAT": true, "EWH": true, "EWJ": true, "EWT": true,
 		"EWY": true, "F": true, "FIS": true, "FUTU": true, "GE": true, "GOOGL": true,
-		"HD": true, "HEI": true, "HIMS": true, "HOOD": true, "IAG": true, "IAU": true,
-		"INDA": true, "INTC": true, "IONQ": true, "ITOT": true, "IVV": true, "IWM": true,
+		"GME": true,
+		"HD":  true, "HEI": true, "HIMS": true, "HOOD": true, "IAG": true, "IAU": true,
+		"IBM": true, "INDA": true, "INTC": true, "IONQ": true, "ITOT": true, "IVV": true, "IWM": true,
 		"JD": true, "KLAC": true, "KOPN": true, "KWEB": true, "LLY": true, "LWLG": true,
-		"KORU": true, "MAS": true, "MCD": true, "META": true, "MP": true, "MPLX": true, "MRVL": true,
+		"KORU": true, "MA": true, "MAS": true, "MCD": true, "META": true, "MP": true, "MPLX": true, "MRVL": true,
 		"MSFT": true, "MSTR": true, "MU": true, "NBIS": true, "NFLX": true, "NIO": true,
 		"NVDA": true, "OKLO": true, "ORCL": true, "OXY": true, "PAYP": true, "PLTR": true,
-		"QCOM": true, "QQQ": true, "RKLB": true, "RTX": true, "SLV": true, "SNDK": true,
+		"OPENAI": true, "PEP": true, "QCOM": true, "QQQ": true, "RDDT": true, "RIOT": true,
+		"RKLB": true, "RTX": true, "SLV": true, "SNDK": true,
 		"SKHYNIX": true, "SOXL": true, "SOXS": true, "SPACEX": true, "SPCX": true, "SPY": true, "SQQQ": true,
-		"STXSTOCK": true, "TCOM": true, "TSLA": true, "TSM": true, "UBER": true,
-		"UNH": true, "USO": true, "WDC": true, "XLE": true, "XOM": true,
+		"STXSTOCK": true, "TCOM": true, "TQQQ": true, "TSLA": true, "TSM": true, "UBER": true,
+		"UNH": true, "USAR": true, "USO": true, "WDC": true, "WMT": true, "XLE": true, "XOM": true,
 	}
 	rwaCommodityAssets = map[string]bool{
 		"BRENT": true, "BRENTOIL": true, "CL": true, "GOLD": true, "NATGAS": true, "NG": true,
@@ -799,6 +802,9 @@ func classifyGeneratedAsset(item discoveryItem, asset string) string {
 	if stableAssets[asset] {
 		return "fiat_stable"
 	}
+	if fallback := inferAssetClassFallback(asset); fallback == "rwa_stock" || fallback == "rwa_commodity" {
+		return fallback
+	}
 	if fromExchange := inferAssetClassFromExchangeMetadata(item, asset); fromExchange != "" {
 		return fromExchange
 	}
@@ -815,8 +821,14 @@ func inferAssetClassFromExchangeMetadata(item discoveryItem, asset string) strin
 	}
 	hints = append(hints, item.Tags...)
 
+	seen := map[string]bool{}
 	for _, hint := range hints {
 		if assetClass := normalizeAssetClassHint(hint); assetClass != "" {
+			seen[assetClass] = true
+		}
+	}
+	for _, assetClass := range []string{"fiat_stable", "rwa_stock", "rwa_commodity", "crypto"} {
+		if seen[assetClass] {
 			return assetClass
 		}
 	}

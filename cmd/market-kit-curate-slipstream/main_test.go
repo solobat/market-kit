@@ -131,6 +131,32 @@ func TestClassifyGeneratedAssetTreatsTradFiEquityMetadataAsRWAStock(t *testing.T
 	}
 }
 
+func TestClassifyGeneratedAssetKeepsExplicitRWATickerAheadOfGenericCryptoMetadata(t *testing.T) {
+	item := discoveryItem{
+		BaseAsset:      "WMT",
+		AssetClassHint: "crypto",
+		Category:       "token",
+		Tags:           []string{"coin"},
+	}
+
+	if actual := classifyGeneratedAsset(item, "WMT"); actual != "rwa_stock" {
+		t.Fatalf("expected WMT to classify as rwa_stock despite generic crypto metadata, got %s", actual)
+	}
+}
+
+func TestClassifyGeneratedAssetPrefersStockHintOverGenericTokenHint(t *testing.T) {
+	item := discoveryItem{
+		BaseAsset:          "NEWSTOCK",
+		Category:           "token",
+		UnderlyingCategory: "stock",
+		Tags:               []string{"tokenized-stock"},
+	}
+
+	if actual := classifyGeneratedAsset(item, "NEWSTOCK"); actual != "rwa_stock" {
+		t.Fatalf("expected stock hint to beat generic token hint, got %s", actual)
+	}
+}
+
 func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t *testing.T) {
 	existing := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{

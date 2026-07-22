@@ -67,6 +67,10 @@ function normalizeImportedMarket(item, index) {
   const market = resolution.market || {};
   const baseAsset = explicitBase || market.baseAsset || "";
   const quoteAsset = explicitQuote || market.quoteAsset || "";
+  let assetClass = explicitAssetClass || market.assetClass || "unknown";
+  if (assetClass === "crypto" && isRwaAssetClass(market.assetClass)) {
+    assetClass = market.assetClass;
+  }
   const evidence = ["imported from slipstream market inventory"];
   if (explicitBase && explicitQuote) {
     evidence.push("used explicit base/quote from discovery source");
@@ -90,7 +94,7 @@ function normalizeImportedMarket(item, index) {
     baseAsset,
     quoteAsset,
     canonicalSymbol: baseAsset && quoteAsset ? `${baseAsset}/${quoteAsset}` : market.canonicalSymbol || "",
-    assetClass: explicitAssetClass || market.assetClass || "unknown",
+    assetClass,
     status: String(item.status || "").trim().toLowerCase(),
     chain: String(item.chain || "").trim(),
     externalUrl: String(item.externalUrl || item.external_url || "").trim(),
@@ -186,18 +190,26 @@ function envelopeSource(item) {
 }
 
 function normalizeImportedAssetClassHints(...hints) {
+  const seen = new Set();
   for (const hint of hints) {
     if (Array.isArray(hint)) {
       for (const value of hint) {
         const assetClass = normalizeImportedAssetClassHint(value);
-        if (assetClass) return assetClass;
+        if (assetClass) seen.add(assetClass);
       }
       continue;
     }
     const assetClass = normalizeImportedAssetClassHint(hint);
-    if (assetClass) return assetClass;
+    if (assetClass) seen.add(assetClass);
+  }
+  for (const assetClass of ["fiat_stable", "rwa_stock", "rwa_commodity", "crypto"]) {
+    if (seen.has(assetClass)) return assetClass;
   }
   return "";
+}
+
+function isRwaAssetClass(value) {
+  return value === "rwa_stock" || value === "rwa_commodity";
 }
 
 function normalizeImportedAssetClassHint(value) {

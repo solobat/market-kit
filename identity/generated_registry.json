@@ -108,7 +108,7 @@
     },
     {
       "canonical": "ACN",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -343,7 +343,7 @@
     },
     {
       "canonical": "ANTHROPIC",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -848,7 +848,7 @@
     },
     {
       "canonical": "BMNR",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -1992,7 +1992,7 @@
     },
     {
       "canonical": "GME",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -2722,6 +2722,11 @@
       "aliases": []
     },
     {
+      "canonical": "MA",
+      "asset_class": "rwa_stock",
+      "aliases": []
+    },
+    {
       "canonical": "MAGIC",
       "asset_class": "crypto",
       "aliases": []
@@ -3330,7 +3335,7 @@
     },
     {
       "canonical": "OPENAI",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -3777,7 +3782,7 @@
     },
     {
       "canonical": "RDDT",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -4539,7 +4544,7 @@
     },
     {
       "canonical": "TQQQ",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -4725,7 +4730,7 @@
     },
     {
       "canonical": "USAR",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {
@@ -4995,7 +5000,7 @@
     },
     {
       "canonical": "WMT",
-      "asset_class": "crypto",
+      "asset_class": "rwa_stock",
       "aliases": []
     },
     {

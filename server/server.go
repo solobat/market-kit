@@ -66,6 +66,8 @@ func New(config Config) (*App, error) {
 		return nil, err
 	}
 	runtimeRegistry := registry.Merge(generated)
+	runtimeRegistry = applyRuntimeAssetClassOverrides(runtimeRegistry, generated)
+	runtimeRegistry = applyRuntimeMarketOverrides(runtimeRegistry, generated)
 	return &App{
 		config: config,
 		client: &http.Client{

@@ -119,6 +119,37 @@ func TestNormalizeImportedMarketsSkipsGateLeveragedTokens(t *testing.T) {
 	}
 }
 
+func TestNormalizeImportedMarketsPrefersRegistryRWAOverGenericCryptoHint(t *testing.T) {
+	registry := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "WMT", AssetClass: "rwa_stock"},
+		},
+	}
+	aggregator := NewAggregator(registry)
+	markets := aggregator.NormalizeImportedMarkets([]ImportedMarket{
+		{
+			SourceID:       "market-kit-bootstrap",
+			PlatformID:     "bitget",
+			Platform:       "Bitget",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "WMTUSDT",
+			BaseAsset:      "WMT",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "crypto",
+			Category:       "token",
+			Tags:           []string{"coin"},
+		},
+	})
+
+	if len(markets) != 1 {
+		t.Fatalf("expected 1 normalized market, got %d", len(markets))
+	}
+	if markets[0].AssetClass != "rwa_stock" {
+		t.Fatalf("expected registry RWA class to beat generic crypto hint, got %+v", markets[0])
+	}
+}
+
 func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidKMMarket(t *testing.T) {
 	registry, err := identity.LoadDefaultRegistry()
 	if err != nil {

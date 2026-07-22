@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -463,6 +464,40 @@ func TestHandleAssetClassUpdateOverridesStaticAssetClass(t *testing.T) {
 	}
 	if asset, ok := findAssetAlias(persisted, "OPENAI"); !ok || asset.AssetClass != "rwa_stock" {
 		t.Fatalf("expected persisted runtime asset class override, got %+v", persisted.AssetAliases)
+	}
+}
+
+func TestNewAppliesPersistedRuntimeAssetClassOverrides(t *testing.T) {
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	runtime := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
+		},
+	}
+	runtime.Normalize()
+	payload, err := json.MarshalIndent(runtime, "", "  ")
+	if err != nil {
+		t.Fatalf("encode runtime registry: %v", err)
+	}
+	if err := os.WriteFile(runtimePath, append(payload, '\n'), 0o644); err != nil {
+		t.Fatalf("write runtime registry: %v", err)
+	}
+
+	app, err := New(Config{
+		RuntimeRegistryPath: runtimePath,
+		RequestTimeout:      time.Second,
+		AutoSyncInterval:    time.Minute,
+	})
+	if err != nil {
+		t.Fatalf("new app: %v", err)
+	}
+
+	asset, ok := findAssetAlias(app.runtimeRegistry(), "OPENAI")
+	if !ok {
+		t.Fatalf("expected OPENAI asset alias")
+	}
+	if asset.AssetClass != "rwa_stock" {
+		t.Fatalf("expected persisted runtime asset class to override static class, got %+v", asset)
 	}
 }
 

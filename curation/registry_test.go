@@ -74,6 +74,64 @@ func TestBuildGeneratedRegistryClassifiesBinanceTradFiPerpetualAsRWAStock(t *tes
 	t.Fatalf("expected KORU asset alias, got %+v", registry.AssetAliases)
 }
 
+func TestBuildGeneratedRegistryKeepsExplicitRWATickerAheadOfGenericCryptoMetadata(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:       "market-kit-bootstrap",
+			PlatformID:     "bitget",
+			Platform:       "Bitget",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "WMTUSDT",
+			BaseAsset:      "WMT",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "crypto",
+			Category:       "token",
+			Tags:           []string{"coin"},
+			Status:         "live",
+		},
+	})
+
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "WMT" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected WMT to classify as rwa_stock despite generic crypto metadata, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected WMT asset alias, got %+v", registry.AssetAliases)
+}
+
+func TestBuildGeneratedRegistryPrefersStockHintOverGenericTokenHint(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:           "market-kit-bootstrap",
+			PlatformID:         "binance-web3",
+			Platform:           "Binance Web3",
+			VenueType:          "cex",
+			MarketType:         "spot",
+			Symbol:             "NEWSTOCKONDO",
+			BaseAsset:          "NEWSTOCK",
+			QuoteAsset:         "USD",
+			Category:           "token",
+			UnderlyingCategory: "stock",
+			Tags:               []string{"tokenized-stock"},
+			Status:             "live",
+		},
+	})
+
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "NEWSTOCK" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected stock hint to beat generic token hint, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected NEWSTOCK asset alias, got %+v", registry.AssetAliases)
+}
+
 func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t *testing.T) {
 	existing := identity.Registry{
 		AssetAliases: []identity.AssetAliasRule{
