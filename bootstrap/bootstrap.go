@@ -19,7 +19,8 @@ const (
 	BuiltInSourceLabel = "交易所直连启动数据"
 	BuiltInSourceURL   = "builtin:bootstrap"
 
-	binanceWeb3OndoStockURL = "https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai"
+	binanceSpotExchangeInfoURL = "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT&symbolStatus=TRADING"
+	binanceWeb3OndoStockURL    = "https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai"
 )
 
 type collector struct {
@@ -121,20 +122,22 @@ func collectors() []collector {
 
 func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type symbol struct {
-		Symbol            string   `json:"symbol"`
-		Status            string   `json:"status"`
-		BaseAsset         string   `json:"baseAsset"`
-		QuoteAsset        string   `json:"quoteAsset"`
-		ContractType      string   `json:"contractType"`
-		UnderlyingType    string   `json:"underlyingType"`
-		UnderlyingSubType []string `json:"underlyingSubType"`
+		Symbol            string     `json:"symbol"`
+		Status            string     `json:"status"`
+		BaseAsset         string     `json:"baseAsset"`
+		QuoteAsset        string     `json:"quoteAsset"`
+		Permissions       []string   `json:"permissions"`
+		PermissionSets    [][]string `json:"permissionSets"`
+		ContractType      string     `json:"contractType"`
+		UnderlyingType    string     `json:"underlyingType"`
+		UnderlyingSubType []string   `json:"underlyingSubType"`
 	}
 	type response struct {
 		Symbols []symbol `json:"symbols"`
 	}
 
 	var spot response
-	if err := fetchJSON(ctx, client, http.MethodGet, "https://api.binance.com/api/v3/exchangeInfo", nil, &spot); err != nil {
+	if err := fetchJSON(ctx, client, http.MethodGet, binanceSpotExchangeInfoURL, nil, &spot); err != nil {
 		return nil, err
 	}
 
@@ -146,6 +149,9 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 	seenAt := time.Now().UTC()
 	out := make([]discovery.ImportedMarket, 0, len(spot.Symbols)+len(perp.Symbols))
 	for _, item := range spot.Symbols {
+		if !isBinanceTradableSpotSymbol(item.Status, item.Permissions, item.PermissionSets) {
+			continue
+		}
 		out = append(out, discovery.ImportedMarket{
 			SourceID:    BuiltInSourceID,
 			PlatformID:  "binance",
@@ -183,6 +189,28 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		})
 	}
 	return out, nil
+}
+
+func isBinanceTradableSpotSymbol(status string, permissions []string, permissionSets [][]string) bool {
+	if normalizeBinanceStatus(status) != "live" {
+		return false
+	}
+	if len(permissionSets) > 0 {
+		return binancePermissionSetsAllow(permissionSets, "SPOT")
+	}
+	if len(permissions) > 0 {
+		return containsFold(permissions, "SPOT")
+	}
+	return true
+}
+
+func binancePermissionSetsAllow(permissionSets [][]string, permission string) bool {
+	for _, set := range permissionSets {
+		if containsFold(set, permission) {
+			return true
+		}
+	}
+	return false
 }
 
 func binanceFuturesClassification(contractType string, underlyingType string, underlyingSubTypes []string) (assetClassHint string, underlyingCategory string, tags []string) {

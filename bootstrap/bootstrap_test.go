@@ -14,7 +14,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 			key := req.Method + " " + req.URL.String()
 			payloads := map[string]string{
-				"GET https://api.binance.com/api/v3/exchangeInfo":                                                                `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT"}]}`,
+				"GET https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT&symbolStatus=TRADING":                          `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT","permissionSets":[["SPOT","MARGIN"]]},{"symbol":"HALTUSDT","status":"HALT","baseAsset":"HALT","quoteAsset":"USDT","permissionSets":[["SPOT"]]},{"symbol":"MARGINUSDT","status":"TRADING","baseAsset":"MARGIN","quoteAsset":"USDT","permissionSets":[["MARGIN"]]}]}`,
 				"GET https://fapi.binance.com/fapi/v1/exchangeInfo":                                                              `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT","underlyingType":"COIN","underlyingSubType":["Layer-1"],"contractType":"PERPETUAL"},{"symbol":"KORUUSDT","status":"TRADING","baseAsset":"KORU","quoteAsset":"USDT","underlyingType":"EQUITY","underlyingSubType":["TradFi"],"contractType":"TRADIFI_PERPETUAL"}]}`,
 				"GET https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai": `{"data":{"list":[{"ticker":"AAPL","symbol":"AAPLONDO","quoteAsset":"USD","chainId":"1","contractAddress":"0xabc","type":1,"status":"TRADING","externalUrl":"https://www.binance.com/en/web3"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=spot&limit=1000":                                  `{"result":{"list":[{"symbol":"ETHUSDT","status":"Trading","baseCoin":"ETH","quoteCoin":"USDT"}]}}`,
@@ -105,6 +105,12 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	}
 	if found["gate:BTC3L_USDT:spot"] {
 		t.Fatalf("expected leveraged gate token to be filtered")
+	}
+	if found["binance:HALTUSDT:spot"] {
+		t.Fatalf("expected halted Binance spot symbol to be filtered")
+	}
+	if found["binance:MARGINUSDT:spot"] {
+		t.Fatalf("expected non-spot Binance symbol to be filtered")
 	}
 }
 

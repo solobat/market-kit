@@ -707,7 +707,7 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 		client: &http.Client{
 			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 				payloads := map[string]string{
-					"GET https://api.binance.com/api/v3/exchangeInfo":                                                                `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT"}]}`,
+					"GET https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT&symbolStatus=TRADING":                          `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT","permissionSets":[["SPOT"]]}]}`,
 					"GET https://fapi.binance.com/fapi/v1/exchangeInfo":                                                              `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT"}]}`,
 					"GET https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai": `{"data":{"list":[{"ticker":"AAPL","symbol":"AAPLONDO","quoteAsset":"USD","chainId":"1","contractAddress":"0xabc","type":1,"status":"TRADING"}]}}`,
 					"GET https://api.bybit.com/v5/market/instruments-info?category=spot&limit=1000":                                  `{"result":{"list":[]}}`,
