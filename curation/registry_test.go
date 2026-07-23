@@ -320,6 +320,41 @@ func TestBuildGeneratedRegistryPromotesRWAEvidenceOverCryptoMetadata(t *testing.
 	t.Fatalf("expected AEHR asset alias, got %+v", registry.AssetAliases)
 }
 
+func TestMergeGeneratedRegistryReplacesStaleMarketOverrideWithCurrentGenerated(t *testing.T) {
+	existing := identity.Registry{
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "bitget", RawSymbol: "RAAPLUSDT", MarketType: "spot", CanonicalSymbol: "RAAPL/USDT"},
+		},
+	}
+	current := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:       "market-kit-bootstrap",
+			PlatformID:     "bitget",
+			Platform:       "Bitget",
+			VenueType:      "cex",
+			MarketType:     "spot",
+			Symbol:         "RAAPLUSDT",
+			BaseAsset:      "AAPL",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Category:       "stock",
+			Tags:           []string{"bitget-reality"},
+			Status:         "live",
+		},
+	})
+
+	merged := MergeGeneratedRegistry(existing, current, false)
+	for _, override := range merged.MarketOverrides {
+		if override.Exchange == "bitget" && override.RawSymbol == "RAAPLUSDT" && override.MarketType == "spot" {
+			if override.CanonicalSymbol != "AAPL/USDT" {
+				t.Fatalf("expected current generated override to replace stale override, got %+v", override)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected bitget RAAPLUSDT override, got %+v", merged.MarketOverrides)
+}
+
 func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) {
 	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
 		{

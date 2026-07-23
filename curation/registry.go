@@ -346,7 +346,29 @@ func MergeGeneratedRegistry(existing identity.Registry, generated identity.Regis
 		return generated
 	}
 	merged := existing.Merge(generated)
+	merged.MarketOverrides = replaceCurrentGeneratedMarketOverrides(merged.MarketOverrides, generated.MarketOverrides)
 	merged.GeneratedVersion = GeneratedRegistryVersion
+	merged.Normalize()
+	return merged
+}
+
+func replaceCurrentGeneratedMarketOverrides(merged []identity.MarketOverride, current []identity.MarketOverride) []identity.MarketOverride {
+	replacements := map[string]identity.MarketOverride{}
+	for _, item := range current {
+		key := overrideKey(item)
+		if key == "||" {
+			continue
+		}
+		replacements[key] = item
+	}
+	if len(replacements) == 0 {
+		return merged
+	}
+	for idx, item := range merged {
+		if replacement, ok := replacements[overrideKey(item)]; ok {
+			merged[idx] = replacement
+		}
+	}
 	return merged
 }
 

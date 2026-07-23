@@ -98,6 +98,36 @@ func TestBuildGeneratedRegistryPromotesRWAEvidenceOverCryptoMetadata(t *testing.
 	t.Fatalf("expected AEHR asset alias, got %+v", registry.AssetAliases)
 }
 
+func TestReplaceCurrentGeneratedMarketOverrides(t *testing.T) {
+	existing := identity.Registry{
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "bitget", RawSymbol: "RAAPLUSDT", MarketType: "spot", CanonicalSymbol: "RAAPL/USDT"},
+		},
+	}
+	current := buildGeneratedRegistry([]discoveryItem{
+		{
+			PlatformID:     "bitget",
+			VenueType:      "cex",
+			MarketType:     "spot",
+			Symbol:         "RAAPLUSDT",
+			BaseAsset:      "AAPL",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Category:       "stock",
+			Tags:           []string{"bitget-reality"},
+			Status:         "live",
+		},
+	})
+
+	merged := existing.Merge(current)
+	merged.MarketOverrides = replaceCurrentGeneratedMarketOverrides(merged.MarketOverrides, current.MarketOverrides)
+	merged.Normalize()
+
+	if len(merged.MarketOverrides) != 1 || merged.MarketOverrides[0].CanonicalSymbol != "AAPL/USDT" {
+		t.Fatalf("expected current generated override to replace stale override, got %+v", merged.MarketOverrides)
+	}
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (fn roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {

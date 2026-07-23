@@ -125,6 +125,8 @@ func main() {
 	registry := generated
 	if !*prune {
 		registry = existing.Merge(generated)
+		registry.MarketOverrides = replaceCurrentGeneratedMarketOverrides(registry.MarketOverrides, generated.MarketOverrides)
+		registry.Normalize()
 	}
 	encoded, err := json.MarshalIndent(registry, "", "  ")
 	if err != nil {
@@ -502,6 +504,26 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 	}
 	out.Normalize()
 	return out
+}
+
+func replaceCurrentGeneratedMarketOverrides(merged []identity.MarketOverride, current []identity.MarketOverride) []identity.MarketOverride {
+	replacements := map[string]identity.MarketOverride{}
+	for _, item := range current {
+		key := overrideKey(item)
+		if key == "||" {
+			continue
+		}
+		replacements[key] = item
+	}
+	if len(replacements) == 0 {
+		return merged
+	}
+	for idx, item := range merged {
+		if replacement, ok := replacements[overrideKey(item)]; ok {
+			merged[idx] = replacement
+		}
+	}
+	return merged
 }
 
 func preciseGeneratedAssetClass(asset string) string {
