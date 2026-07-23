@@ -161,6 +161,30 @@ func TestFetchSubset(t *testing.T) {
 	}
 }
 
+func TestPermissionListUnmarshalAcceptsBinanceShapes(t *testing.T) {
+	cases := map[string][]string{
+		`[["SPOT","MARGIN"]]`: {"SPOT", "MARGIN"},
+		`["SPOT","MARGIN"]`:   {"SPOT", "MARGIN"},
+		`"SPOT"`:              {"SPOT"},
+		`null`:                nil,
+	}
+
+	for payload, expected := range cases {
+		var permissions permissionList
+		if err := json.Unmarshal([]byte(payload), &permissions); err != nil {
+			t.Fatalf("unmarshal %s: %v", payload, err)
+		}
+		if len(permissions) != len(expected) {
+			t.Fatalf("unmarshal %s: expected %v, got %v", payload, expected, permissions)
+		}
+		for idx := range expected {
+			if permissions[idx] != expected[idx] {
+				t.Fatalf("unmarshal %s: expected %v, got %v", payload, expected, permissions)
+			}
+		}
+	}
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (fn roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {

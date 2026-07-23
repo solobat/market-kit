@@ -122,15 +122,15 @@ func collectors() []collector {
 
 func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type symbol struct {
-		Symbol            string     `json:"symbol"`
-		Status            string     `json:"status"`
-		BaseAsset         string     `json:"baseAsset"`
-		QuoteAsset        string     `json:"quoteAsset"`
-		Permissions       []string   `json:"permissions"`
-		PermissionSets    [][]string `json:"permissionSets"`
-		ContractType      string     `json:"contractType"`
-		UnderlyingType    string     `json:"underlyingType"`
-		UnderlyingSubType []string   `json:"underlyingSubType"`
+		Symbol            string         `json:"symbol"`
+		Status            string         `json:"status"`
+		BaseAsset         string         `json:"baseAsset"`
+		QuoteAsset        string         `json:"quoteAsset"`
+		Permissions       []string       `json:"permissions"`
+		PermissionSets    permissionList `json:"permissionSets"`
+		ContractType      string         `json:"contractType"`
+		UnderlyingType    string         `json:"underlyingType"`
+		UnderlyingSubType []string       `json:"underlyingSubType"`
 	}
 	type response struct {
 		Symbols []symbol `json:"symbols"`
@@ -191,12 +191,12 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 	return out, nil
 }
 
-func isBinanceTradableSpotSymbol(status string, permissions []string, permissionSets [][]string) bool {
+func isBinanceTradableSpotSymbol(status string, permissions []string, permissionSets []string) bool {
 	if normalizeBinanceStatus(status) != "live" {
 		return false
 	}
 	if len(permissionSets) > 0 {
-		return binancePermissionSetsAllow(permissionSets, "SPOT")
+		return containsFold(permissionSets, "SPOT")
 	}
 	if len(permissions) > 0 {
 		return containsFold(permissions, "SPOT")
@@ -204,13 +204,40 @@ func isBinanceTradableSpotSymbol(status string, permissions []string, permission
 	return true
 }
 
-func binancePermissionSetsAllow(permissionSets [][]string, permission string) bool {
-	for _, set := range permissionSets {
-		if containsFold(set, permission) {
-			return true
+type permissionList []string
+
+func (permissions *permissionList) UnmarshalJSON(payload []byte) error {
+	var nested [][]string
+	if err := json.Unmarshal(payload, &nested); err == nil {
+		flattened := make([]string, 0)
+		for _, set := range nested {
+			flattened = append(flattened, set...)
 		}
+		*permissions = flattened
+		return nil
 	}
-	return false
+
+	var flat []string
+	if err := json.Unmarshal(payload, &flat); err == nil {
+		*permissions = flat
+		return nil
+	}
+
+	var single string
+	if err := json.Unmarshal(payload, &single); err == nil {
+		if strings.TrimSpace(single) == "" {
+			*permissions = nil
+		} else {
+			*permissions = []string{single}
+		}
+		return nil
+	}
+
+	if string(bytes.TrimSpace(payload)) == "null" {
+		*permissions = nil
+		return nil
+	}
+	return fmt.Errorf("unsupported permission list shape")
 }
 
 func binanceFuturesClassification(contractType string, underlyingType string, underlyingSubTypes []string) (assetClassHint string, underlyingCategory string, tags []string) {
