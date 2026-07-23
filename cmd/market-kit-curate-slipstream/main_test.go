@@ -61,6 +61,43 @@ func TestBuildGeneratedRegistryFiltersToStableQuotedMarkets(t *testing.T) {
 	}
 }
 
+func TestBuildGeneratedRegistryPromotesRWAEvidenceOverCryptoMetadata(t *testing.T) {
+	registry := buildGeneratedRegistry([]discoveryItem{
+		{
+			PlatformID:     "bitget",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "AEHRUSDT",
+			BaseAsset:      "AEHR",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "crypto",
+			Status:         "live",
+		},
+		{
+			PlatformID:     "bybit",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "AEHRUSDT",
+			BaseAsset:      "AEHR",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Category:       "linear",
+			Tags:           []string{"bybit-stock"},
+			Status:         "live",
+		},
+	})
+
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "AEHR" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected RWA evidence to beat crypto metadata, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected AEHR asset alias, got %+v", registry.AssetAliases)
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (fn roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {

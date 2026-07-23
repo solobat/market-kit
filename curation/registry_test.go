@@ -279,6 +279,47 @@ func TestMergeGeneratedRegistryPromotesBybitStockContract(t *testing.T) {
 	t.Fatalf("expected AEHR asset alias, got %+v", merged.AssetAliases)
 }
 
+func TestBuildGeneratedRegistryPromotesRWAEvidenceOverCryptoMetadata(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:       "slipstream",
+			PlatformID:     "bitget",
+			Platform:       "Bitget",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "AEHRUSDT",
+			BaseAsset:      "AEHR",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "crypto",
+			Status:         "live",
+		},
+		{
+			SourceID:       "market-kit-bootstrap",
+			PlatformID:     "bybit",
+			Platform:       "Bybit",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "AEHRUSDT",
+			BaseAsset:      "AEHR",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Category:       "linear",
+			Tags:           []string{"bybit-stock"},
+			Status:         "live",
+		},
+	})
+
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "AEHR" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected RWA evidence to beat crypto metadata, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected AEHR asset alias, got %+v", registry.AssetAliases)
+}
+
 func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) {
 	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
 		{

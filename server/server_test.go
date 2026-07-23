@@ -696,6 +696,92 @@ func TestAutoSyncUpdatesRuntimeRegistryFromSlipstream(t *testing.T) {
 	}
 }
 
+func TestAutoSyncAllSourcesPromotesRWAOverCryptoMetadata(t *testing.T) {
+	base := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	base.Normalize()
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	app := &App{
+		config: Config{
+			AutoSyncEnabled:     true,
+			AutoSyncInterval:    time.Minute,
+			AutoSyncSourceID:    "all",
+			RuntimeRegistryPath: runtimePath,
+			DiscoveryCacheTTL:   time.Minute,
+		},
+		client: &http.Client{
+			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				switch req.URL.String() {
+				case "https://example.com/slipstream.json":
+					return jsonResponse(`{
+					  "source":"slipstream",
+					  "generatedAt":"2026-07-23T04:58:22Z",
+					  "items":[
+					    {"sourceId":"slipstream","platformId":"bitget","platform":"Bitget","venueType":"cex","marketType":"perp","symbol":"AEHRUSDT","baseAsset":"AEHR","quoteAsset":"USDT","assetClassHint":"crypto","status":"live"}
+					  ]
+					}`), nil
+				case "https://example.com/bootstrap.json":
+					return jsonResponse(`{
+					  "source":"market-kit-bootstrap",
+					  "generatedAt":"2026-07-23T05:00:08Z",
+					  "items":[
+					    {"sourceId":"market-kit-bootstrap","platformId":"bybit","platform":"Bybit","venueType":"cex","marketType":"perp","symbol":"AEHRUSDT","baseAsset":"AEHR","quoteAsset":"USDT","assetClassHint":"stock","category":"linear","tags":["bybit-stock"],"status":"live"}
+					  ]
+					}`), nil
+				default:
+					t.Fatalf("unexpected request: %s", req.URL.String())
+					return nil, nil
+				}
+			}),
+		},
+		sources: []SyncSource{
+			{
+				ID:      "slipstream-test",
+				Label:   "Slipstream Test",
+				Project: "slipstream",
+				Kind:    "discovery",
+				URL:     "https://example.com/slipstream.json",
+			},
+			{
+				ID:      "bootstrap-test",
+				Label:   "Bootstrap Test",
+				Project: "market-kit",
+				Kind:    "discovery",
+				URL:     "https://example.com/bootstrap.json",
+			},
+		},
+		baseRegistry: base,
+		registry:     base,
+		resolver:     identity.NewResolver(base),
+		autoSyncStatus: AutoSyncStatus{
+			Enabled: true,
+		},
+	}
+
+	if err := app.runAutoSyncOnce(context.Background()); err != nil {
+		t.Fatalf("run auto-sync: %v", err)
+	}
+
+	result := app.runtimeResolver().Resolve(identity.ResolveRequest{
+		Exchange:       "bybit",
+		Symbol:         "AEHRUSDT",
+		MarketTypeHint: "perpetual",
+	})
+	if result.Status != identity.ResolveResolved || result.Market == nil {
+		t.Fatalf("expected AEHR to resolve, got %+v", result)
+	}
+	if result.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("expected auto-sync all to promote AEHR to rwa_stock, got %+v", result.Market)
+	}
+	status := app.currentAutoSyncStatus()
+	if status.SourceID != "all" || status.LastDiscoveryItems != 2 {
+		t.Fatalf("unexpected auto-sync all status: %+v", status)
+	}
+}
+
 func TestHandleAssetReturnsAliasRule(t *testing.T) {
 	app := testIdentityApp()
 

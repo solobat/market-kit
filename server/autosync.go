@@ -14,6 +14,7 @@ import (
 
 	"github.com/solobat/market-kit/bootstrap"
 	"github.com/solobat/market-kit/curation"
+	"github.com/solobat/market-kit/discovery"
 	"github.com/solobat/market-kit/identity"
 )
 
@@ -219,7 +220,7 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		status.LastError = ""
 	})
 
-	_, envelope, err := a.fetchDiscoveryEnvelope(ctx, sourceID)
+	envelope, err := a.fetchAutoSyncDiscoveryEnvelope(ctx, sourceID)
 	if err != nil {
 		a.updateAutoSyncStatus(func(status *AutoSyncStatus) {
 			status.LastError = err.Error()
@@ -258,6 +259,22 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 	})
 	log.Printf("market-kit auto-sync refreshed source=%s discovery_items=%d generated_assets=%d generated_overrides=%d", sourceID, len(envelope.Items), len(next.AssetAliases), len(next.MarketOverrides))
 	return nil
+}
+
+func (a *App) fetchAutoSyncDiscoveryEnvelope(ctx context.Context, sourceID string) (discovery.ImportEnvelope, error) {
+	if strings.EqualFold(strings.TrimSpace(sourceID), "all") {
+		sources, envelope, _, _, _, err := a.discoveryLookupEnvelopeFromCacheOrRefresh(ctx, "all")
+		if err != nil {
+			return discovery.ImportEnvelope{}, err
+		}
+		if len(sources) == 0 {
+			return discovery.ImportEnvelope{}, errors.New("no discovery source configured for auto-sync")
+		}
+		return envelope, nil
+	}
+
+	_, envelope, err := a.fetchDiscoveryEnvelope(ctx, sourceID)
+	return envelope, err
 }
 
 func writeRuntimeRegistry(path string, registry identity.Registry) error {

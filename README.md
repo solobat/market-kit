@@ -442,6 +442,7 @@ Override the local dev target with `VITE_MARKET_KIT_API_BASE` if needed.
   - default: `5m`
 - `MARKET_KIT_AUTOSYNC_SOURCE`
   - optional explicit discovery source id; by default the first non-bootstrap discovery source is used
+  - set to `all` when runtime auto-sync should merge bootstrap exchange metadata with configured discovery exports
 - `MARKET_KIT_RUNTIME_REGISTRY_PATH`
   - default: `data/runtime_generated_registry.json`
 - `MARKET_KIT_REQUEST_TIMEOUT`
@@ -463,7 +464,7 @@ If `MARKET_KIT_SYNC_SOURCES_PATH` is not set, the server falls back to:
 1. `frontend/sync-sources.local.json`
 2. `frontend/sync-sources.example.json`
 
-Auto-sync intentionally ignores the built-in `market-kit-bootstrap` source unless you explicitly set `MARKET_KIT_AUTOSYNC_SOURCE=market-kit-bootstrap`. This keeps slipstream as the single recurring market collector in production.
+Auto-sync intentionally ignores the built-in `market-kit-bootstrap` source unless you explicitly set `MARKET_KIT_AUTOSYNC_SOURCE=market-kit-bootstrap` or `MARKET_KIT_AUTOSYNC_SOURCE=all`. This keeps slipstream as the default recurring market collector in production while allowing bootstrap exchange metadata to participate in runtime classification when needed.
 
 Runtime generated registries are versioned with `generated_version`. On startup, the server ignores an older `MARKET_KIT_RUNTIME_REGISTRY_PATH` file instead of merging stale generated rules into the resolver; the next auto-sync or bootstrap run writes a fresh versioned file.
 

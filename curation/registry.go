@@ -433,13 +433,36 @@ func ensureAsset(target map[string]identity.AssetAliasRule, canonical string, as
 	if canonical == "" || assetClass == "" {
 		return
 	}
-	if _, exists := target[canonical]; exists {
+	if existing, exists := target[canonical]; exists {
+		if shouldPromoteGeneratedAssetClass(existing.AssetClass, assetClass) {
+			existing.AssetClass = assetClass
+			target[canonical] = existing
+		}
 		return
 	}
 	target[canonical] = identity.AssetAliasRule{
 		Canonical:  canonical,
 		AssetClass: assetClass,
 		Aliases:    []string{},
+	}
+}
+
+func shouldPromoteGeneratedAssetClass(current string, next string) bool {
+	return generatedAssetClassRank(next) > generatedAssetClassRank(current)
+}
+
+func generatedAssetClassRank(assetClass string) int {
+	switch strings.TrimSpace(assetClass) {
+	case "fiat_stable":
+		return 4
+	case "rwa_stock", "rwa_commodity":
+		return 3
+	case "crypto":
+		return 2
+	case "unknown":
+		return 1
+	default:
+		return 0
 	}
 }
 
