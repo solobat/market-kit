@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/solobat/market-kit/discovery"
 )
 
 func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
@@ -19,12 +21,12 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				"GET https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai": `{"data":{"list":[{"ticker":"AAPL","symbol":"AAPLONDO","quoteAsset":"USD","chainId":"1","contractAddress":"0xabc","type":1,"status":"TRADING","externalUrl":"https://www.binance.com/en/web3"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=spot&limit=1000":                                  `{"result":{"list":[{"symbol":"ETHUSDT","status":"Trading","baseCoin":"ETH","quoteCoin":"USDT"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000":                                `{"result":{"list":[{"symbol":"AAPLUSDT","status":"Trading","baseCoin":"AAPL","quoteCoin":"USDT"},{"symbol":"AEHRUSDT","status":"Trading","baseCoin":"AEHR","quoteCoin":"USDT","symbolType":"stock"}]}}`,
-				"GET https://www.okx.com/api/v5/public/instruments?instType=SPOT":                                                `{"data":[{"instId":"SOL-USDT","baseCcy":"SOL","quoteCcy":"USDT","state":"live"}]}`,
+				"GET https://www.okx.com/api/v5/public/instruments?instType=SPOT":                                                `{"data":[{"instId":"SOL-USDT","baseCcy":"SOL","quoteCcy":"USDT","state":"live","preDelisting":"true"}]}`,
 				"GET https://www.okx.com/api/v5/public/instruments?instType=SWAP":                                                `{"data":[{"instId":"CL-USDT-SWAP","baseCcy":"CL","quoteCcy":"USDT","state":"live"}]}`,
-				"GET https://api.bitget.com/api/v3/market/instruments?category=SPOT":                                             `{"data":[{"symbol":"DOGEUSDT","category":"SPOT","baseCoin":"DOGE","quoteCoin":"USDT","symbolType":"crypto","status":"online","isReality":"no"},{"symbol":"RAAPLUSDT","category":"SPOT","baseCoin":"rAAPL","quoteCoin":"USDT","symbolType":"stock","status":"online","isReality":"yes"}]}`,
+				"GET https://api.bitget.com/api/v3/market/instruments?category=SPOT":                                             `{"data":[{"symbol":"DOGEUSDT","category":"SPOT","baseCoin":"DOGE","quoteCoin":"USDT","symbolType":"crypto","status":"online","isReality":"no","st":true},{"symbol":"RAAPLUSDT","category":"SPOT","baseCoin":"rAAPL","quoteCoin":"USDT","symbolType":"stock","status":"online","isReality":"yes"}]}`,
 				"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES":                                `{"data":[{"symbol":"NGUSDT","baseCoin":"NG","quoteCoin":"USDT","symbolStatus":"normal"}]}`,
 				"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                                                           `[{"id":"XRP_USDT","base":"XRP","quote":"USDT","trade_status":"tradable"},{"id":"BTC3L_USDT","base":"BTC3L","quote":"USDT","trade_status":"tradable"}]`,
-				"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[{"name":"NATGAS_USDT","quanto_base":"NATGAS","settle":"USDT","in_delisting":false}]`,
+				"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[{"name":"NATGAS_USDT","quanto_base":"NATGAS","settle":"USDT","in_delisting":true}]`,
 			}
 			if key == "POST https://api.hyperliquid.xyz/info" {
 				body, _ := io.ReadAll(req.Body)
@@ -87,9 +89,24 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				t.Fatalf("expected Bitget Reality stock to import as stock spot: %+v", item)
 			}
 		}
+		if item.PlatformID == "bitget" && item.Symbol == "DOGEUSDT" {
+			if !item.ST || !containsString(item.Flags, discovery.MarketFlagST) {
+				t.Fatalf("expected Bitget st flag to be preserved: %+v", item)
+			}
+		}
 		if item.PlatformID == "bybit" && item.Symbol == "AEHRUSDT" {
 			if item.MarketType != "perp" || item.BaseAsset != "AEHR" || item.AssetClassHint != "stock" {
 				t.Fatalf("expected Bybit stock contract to import as stock perp: %+v", item)
+			}
+		}
+		if item.PlatformID == "gate" && item.Symbol == "NATGAS_USDT" {
+			if !item.PreDelisting || !containsString(item.Flags, discovery.MarketFlagPreDelisting) {
+				t.Fatalf("expected Gate pre-delisting flag to be preserved: %+v", item)
+			}
+		}
+		if item.PlatformID == "okx" && item.Symbol == "SOL-USDT" {
+			if !item.PreDelisting || !containsString(item.Flags, discovery.MarketFlagPreDelisting) {
+				t.Fatalf("expected OKX pre-delisting flag to be preserved: %+v", item)
 			}
 		}
 		if item.SourceID != BuiltInSourceID {
@@ -198,4 +215,13 @@ func jsonResponse(body string) *http.Response {
 		Header:     make(http.Header),
 		Body:       io.NopCloser(strings.NewReader(body)),
 	}
+}
+
+func containsString(items []string, target string) bool {
+	for _, item := range items {
+		if item == target {
+			return true
+		}
+	}
+	return false
 }

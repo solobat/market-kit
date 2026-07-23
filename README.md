@@ -90,6 +90,9 @@ Recommended payload shape:
       "quoteAsset": "USDT",
       "chain": "",
       "status": "live",
+      "st": true,
+      "preDelisting": true,
+      "flags": ["st", "pre_delisting"],
       "externalUrl": "https://www.okx.com/..."
     }
   ]

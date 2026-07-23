@@ -48,6 +48,10 @@ type binanceWeb3StockToken struct {
 	Type               any    `json:"type"`
 	Status             string `json:"status"`
 	TradingStatus      string `json:"tradingStatus"`
+	ST                 any    `json:"st"`
+	IsST               any    `json:"isST"`
+	PreDelisting       any    `json:"preDelisting"`
+	InDelisting        any    `json:"in_delisting"`
 	ExternalURL        string `json:"externalUrl"`
 	URL                string `json:"url"`
 	Provider           string `json:"provider"`
@@ -131,6 +135,10 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		ContractType      string         `json:"contractType"`
 		UnderlyingType    string         `json:"underlyingType"`
 		UnderlyingSubType []string       `json:"underlyingSubType"`
+		ST                any            `json:"st"`
+		IsST              any            `json:"isST"`
+		PreDelisting      any            `json:"preDelisting"`
+		InDelisting       any            `json:"in_delisting"`
 	}
 	type response struct {
 		Symbols []symbol `json:"symbols"`
@@ -152,23 +160,30 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		if !isBinanceTradableSpotSymbol(item.Status, item.Permissions, item.PermissionSets) {
 			continue
 		}
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "binance",
-			Platform:    "Binance",
-			VenueType:   "cex",
-			MarketType:  "spot",
-			Symbol:      strings.TrimSpace(item.Symbol),
-			BaseAsset:   strings.TrimSpace(item.BaseAsset),
-			QuoteAsset:  strings.TrimSpace(item.QuoteAsset),
-			Status:      normalizeBinanceStatus(item.Status),
-			ExternalURL: "https://www.binance.com/en/trade/" + strings.ToUpper(item.BaseAsset) + "_" + strings.ToUpper(item.QuoteAsset),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:     BuiltInSourceID,
+			PlatformID:   "binance",
+			Platform:     "Binance",
+			VenueType:    "cex",
+			MarketType:   "spot",
+			Symbol:       strings.TrimSpace(item.Symbol),
+			BaseAsset:    strings.TrimSpace(item.BaseAsset),
+			QuoteAsset:   strings.TrimSpace(item.QuoteAsset),
+			Status:       normalizeBinanceStatus(item.Status),
+			ST:           st,
+			PreDelisting: preDelisting,
+			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:  "https://www.binance.com/en/trade/" + strings.ToUpper(item.BaseAsset) + "_" + strings.ToUpper(item.QuoteAsset),
+			FirstSeenAt:  seenAt,
+			LastSeenAt:   seenAt,
 		})
 	}
 	for _, item := range perp.Symbols {
 		assetClassHint, underlyingCategory, tags := binanceFuturesClassification(item.ContractType, item.UnderlyingType, item.UnderlyingSubType)
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
 			SourceID:           BuiltInSourceID,
 			PlatformID:         "binance",
@@ -183,6 +198,9 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 			UnderlyingCategory: underlyingCategory,
 			Tags:               tags,
 			Status:             normalizeBinanceStatus(item.Status),
+			ST:                 st,
+			PreDelisting:       preDelisting,
+			Flags:              discovery.NormalizeMarketFlags(nil, st, preDelisting),
 			ExternalURL:        "https://www.binance.com/en/futures/" + strings.ToUpper(item.Symbol),
 			FirstSeenAt:        seenAt,
 			LastSeenAt:         seenAt,
@@ -284,6 +302,34 @@ func containsFold(items []string, target string) bool {
 	return false
 }
 
+func sourceBool(values ...any) bool {
+	for _, value := range values {
+		switch typed := value.(type) {
+		case nil:
+			continue
+		case bool:
+			if typed {
+				return true
+			}
+		case float64:
+			if typed != 0 {
+				return true
+			}
+		case string:
+			raw := strings.ToLower(strings.TrimSpace(typed))
+			switch raw {
+			case "1", "true", "t", "yes", "y", "on", "enabled", "st", "special_treatment", "special treatment", "pre_delisting", "pre-delisting", "in_delisting":
+				return true
+			}
+		default:
+			if sourceBool(fmt.Sprint(typed)) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type response struct {
 		Data json.RawMessage `json:"data"`
@@ -322,6 +368,8 @@ func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]dis
 		if contract != "" {
 			tags = append(tags, "contract:"+contract)
 		}
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 
 		out = append(out, discovery.ImportedMarket{
 			SourceID:           BuiltInSourceID,
@@ -338,6 +386,9 @@ func fetchBinanceWeb3OndoStocks(ctx context.Context, client *http.Client) ([]dis
 			Tags:               tags,
 			Chain:              chain,
 			Status:             normalizeBinanceWeb3Status(firstNonEmpty(item.TradingStatus, item.Status)),
+			ST:                 st,
+			PreDelisting:       preDelisting,
+			Flags:              discovery.NormalizeMarketFlags(nil, st, preDelisting),
 			ExternalURL:        firstNonEmpty(item.ExternalURL, item.URL, "https://www.binance.com/en/web3"),
 			FirstSeenAt:        seenAt,
 			LastSeenAt:         seenAt,
@@ -438,11 +489,15 @@ func fetchBybit(ctx context.Context, client *http.Client) ([]discovery.ImportedM
 
 func fetchBybitCategory(ctx context.Context, client *http.Client, category, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
-		Symbol     string `json:"symbol"`
-		Status     string `json:"status"`
-		BaseCoin   string `json:"baseCoin"`
-		QuoteCoin  string `json:"quoteCoin"`
-		SymbolType string `json:"symbolType"`
+		Symbol       string `json:"symbol"`
+		Status       string `json:"status"`
+		BaseCoin     string `json:"baseCoin"`
+		QuoteCoin    string `json:"quoteCoin"`
+		SymbolType   string `json:"symbolType"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
+		InDelisting  any    `json:"in_delisting"`
 	}
 	type response struct {
 		Result struct {
@@ -465,6 +520,8 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 			base, quote = splitSymbol(item.Symbol)
 		}
 		assetClassHint, tags := bybitAssetClassification(item.SymbolType)
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
 			SourceID:       BuiltInSourceID,
 			PlatformID:     "bybit",
@@ -478,6 +535,9 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 			Category:       category,
 			Tags:           tags,
 			Status:         normalizeBybitStatus(item.Status),
+			ST:             st,
+			PreDelisting:   preDelisting,
+			Flags:          discovery.NormalizeMarketFlags(nil, st, preDelisting),
 			ExternalURL:    "https://www.bybit.com/trade/usdt/" + strings.ToUpper(item.Symbol),
 			FirstSeenAt:    seenAt,
 			LastSeenAt:     seenAt,
@@ -510,10 +570,14 @@ func fetchOKX(ctx context.Context, client *http.Client) ([]discovery.ImportedMar
 
 func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
-		InstID   string `json:"instId"`
-		BaseCcy  string `json:"baseCcy"`
-		QuoteCcy string `json:"quoteCcy"`
-		State    string `json:"state"`
+		InstID       string `json:"instId"`
+		BaseCcy      string `json:"baseCcy"`
+		QuoteCcy     string `json:"quoteCcy"`
+		State        string `json:"state"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
+		InDelisting  any    `json:"in_delisting"`
 	}
 	type response struct {
 		Data []item `json:"data"`
@@ -533,20 +597,25 @@ func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType
 		if base == "" || quote == "" {
 			base, quote = splitDelimitedSymbol(item.InstID)
 		}
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "okx",
-			Platform:    "OKX",
-			VenueType:   "cex",
-			MarketType:  marketType,
-			Symbol:      strings.TrimSpace(item.InstID),
-			BaseAsset:   base,
-			QuoteAsset:  quote,
-			Category:    strings.ToLower(instType),
-			Status:      normalizeSimpleLiveState(item.State),
-			ExternalURL: "https://www.okx.com/trade-swap/" + strings.ToLower(item.InstID),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:     BuiltInSourceID,
+			PlatformID:   "okx",
+			Platform:     "OKX",
+			VenueType:    "cex",
+			MarketType:   marketType,
+			Symbol:       strings.TrimSpace(item.InstID),
+			BaseAsset:    base,
+			QuoteAsset:   quote,
+			Category:     strings.ToLower(instType),
+			Status:       normalizeSimpleLiveState(item.State),
+			ST:           st,
+			PreDelisting: preDelisting,
+			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:  "https://www.okx.com/trade-swap/" + strings.ToLower(item.InstID),
+			FirstSeenAt:  seenAt,
+			LastSeenAt:   seenAt,
 		})
 	}
 	return out, nil
@@ -554,14 +623,18 @@ func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType
 
 func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type spotSymbol struct {
-		Symbol     string `json:"symbol"`
-		Category   string `json:"category"`
-		BaseCoin   string `json:"baseCoin"`
-		QuoteCoin  string `json:"quoteCoin"`
-		SymbolType string `json:"symbolType"`
-		Status     string `json:"status"`
-		IsRWA      string `json:"isRwa"`
-		IsReality  string `json:"isReality"`
+		Symbol       string `json:"symbol"`
+		Category     string `json:"category"`
+		BaseCoin     string `json:"baseCoin"`
+		QuoteCoin    string `json:"quoteCoin"`
+		SymbolType   string `json:"symbolType"`
+		Status       string `json:"status"`
+		IsRWA        string `json:"isRwa"`
+		IsReality    string `json:"isReality"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
+		InDelisting  any    `json:"in_delisting"`
 	}
 	type spotResponse struct {
 		Data []spotSymbol `json:"data"`
@@ -577,6 +650,10 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 		BaseCoin     string `json:"baseCoin"`
 		QuoteCoin    string `json:"quoteCoin"`
 		SymbolStatus string `json:"symbolStatus"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
+		InDelisting  any    `json:"in_delisting"`
 	}
 	type contractResponse struct {
 		Data []contract `json:"data"`
@@ -600,6 +677,8 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 			tags = []string{"bitget-reality", "rtoken", "tokenized-stock"}
 			category = "stock"
 		}
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
 			SourceID:       BuiltInSourceID,
 			PlatformID:     "bitget",
@@ -613,26 +692,34 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 			Category:       category,
 			Tags:           tags,
 			Status:         normalizeBitgetInstrumentStatus(item.Status),
+			ST:             st,
+			PreDelisting:   preDelisting,
+			Flags:          discovery.NormalizeMarketFlags(nil, st, preDelisting),
 			ExternalURL:    "https://www.bitget.com/spot/" + strings.ToUpper(item.Symbol),
 			FirstSeenAt:    seenAt,
 			LastSeenAt:     seenAt,
 		})
 	}
 	for _, item := range perp.Data {
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "bitget",
-			Platform:    "Bitget",
-			VenueType:   "cex",
-			MarketType:  "perp",
-			Symbol:      strings.TrimSpace(item.Symbol),
-			BaseAsset:   strings.TrimSpace(item.BaseCoin),
-			QuoteAsset:  strings.TrimSpace(item.QuoteCoin),
-			Category:    "usdt-futures",
-			Status:      normalizeSimpleLiveState(item.SymbolStatus),
-			ExternalURL: "https://www.bitget.com/futures/usdt/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:     BuiltInSourceID,
+			PlatformID:   "bitget",
+			Platform:     "Bitget",
+			VenueType:    "cex",
+			MarketType:   "perp",
+			Symbol:       strings.TrimSpace(item.Symbol),
+			BaseAsset:    strings.TrimSpace(item.BaseCoin),
+			QuoteAsset:   strings.TrimSpace(item.QuoteCoin),
+			Category:     "usdt-futures",
+			Status:       normalizeSimpleLiveState(item.SymbolStatus),
+			ST:           st,
+			PreDelisting: preDelisting,
+			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:  "https://www.bitget.com/futures/usdt/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:  seenAt,
+			LastSeenAt:   seenAt,
 		})
 	}
 	return out, nil
@@ -653,10 +740,14 @@ func bitgetRealityUnderlying(baseCoin string) string {
 
 func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type pair struct {
-		ID          string `json:"id"`
-		Base        string `json:"base"`
-		Quote       string `json:"quote"`
-		TradeStatus string `json:"trade_status"`
+		ID           string `json:"id"`
+		Base         string `json:"base"`
+		Quote        string `json:"quote"`
+		TradeStatus  string `json:"trade_status"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
+		InDelisting  any    `json:"in_delisting"`
 	}
 	var spot []pair
 	if err := fetchJSON(ctx, client, http.MethodGet, "https://api.gateio.ws/api/v4/spot/currency_pairs", nil, &spot); err != nil {
@@ -664,10 +755,13 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 	}
 
 	type contract struct {
-		Name        string `json:"name"`
-		QuantoBase  string `json:"quanto_base"`
-		Settle      string `json:"settle"`
-		InDelisting bool   `json:"in_delisting"`
+		Name         string `json:"name"`
+		QuantoBase   string `json:"quanto_base"`
+		Settle       string `json:"settle"`
+		InDelisting  bool   `json:"in_delisting"`
+		ST           any    `json:"st"`
+		IsST         any    `json:"isST"`
+		PreDelisting any    `json:"preDelisting"`
 	}
 	var perp []contract
 	if err := fetchJSON(ctx, client, http.MethodGet, "https://api.gateio.ws/api/v4/futures/usdt/contracts", nil, &perp); err != nil {
@@ -677,19 +771,24 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 	seenAt := time.Now().UTC()
 	out := make([]discovery.ImportedMarket, 0, len(spot)+len(perp))
 	for _, item := range spot {
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		market := discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "gate",
-			Platform:    "Gate",
-			VenueType:   "cex",
-			MarketType:  "spot",
-			Symbol:      strings.TrimSpace(item.ID),
-			BaseAsset:   strings.TrimSpace(item.Base),
-			QuoteAsset:  strings.TrimSpace(item.Quote),
-			Status:      normalizeGateTradeStatus(item.TradeStatus),
-			ExternalURL: "https://www.gate.com/trade/" + strings.ToUpper(item.ID),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:     BuiltInSourceID,
+			PlatformID:   "gate",
+			Platform:     "Gate",
+			VenueType:    "cex",
+			MarketType:   "spot",
+			Symbol:       strings.TrimSpace(item.ID),
+			BaseAsset:    strings.TrimSpace(item.Base),
+			QuoteAsset:   strings.TrimSpace(item.Quote),
+			Status:       normalizeGateTradeStatus(item.TradeStatus),
+			ST:           st,
+			PreDelisting: preDelisting,
+			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:  "https://www.gate.com/trade/" + strings.ToUpper(item.ID),
+			FirstSeenAt:  seenAt,
+			LastSeenAt:   seenAt,
 		}
 		if discovery.ShouldIgnoreImportedMarket(market) {
 			continue
@@ -701,20 +800,25 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 		if item.InDelisting {
 			status = "paused"
 		}
+		st := sourceBool(item.ST, item.IsST)
+		preDelisting := item.InDelisting || sourceBool(item.PreDelisting)
 		market := discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "gate",
-			Platform:    "Gate",
-			VenueType:   "cex",
-			MarketType:  "perp",
-			Symbol:      strings.TrimSpace(item.Name),
-			BaseAsset:   strings.TrimSpace(item.QuantoBase),
-			QuoteAsset:  strings.TrimSpace(item.Settle),
-			Category:    "usdt-futures",
-			Status:      status,
-			ExternalURL: "https://www.gate.com/futures/" + strings.ToUpper(item.Name),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:     BuiltInSourceID,
+			PlatformID:   "gate",
+			Platform:     "Gate",
+			VenueType:    "cex",
+			MarketType:   "perp",
+			Symbol:       strings.TrimSpace(item.Name),
+			BaseAsset:    strings.TrimSpace(item.QuantoBase),
+			QuoteAsset:   strings.TrimSpace(item.Settle),
+			Category:     "usdt-futures",
+			Status:       status,
+			ST:           st,
+			PreDelisting: preDelisting,
+			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:  "https://www.gate.com/futures/" + strings.ToUpper(item.Name),
+			FirstSeenAt:  seenAt,
+			LastSeenAt:   seenAt,
 		}
 		if discovery.ShouldIgnoreImportedMarket(market) {
 			continue

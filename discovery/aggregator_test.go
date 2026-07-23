@@ -1,6 +1,7 @@
 package discovery
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/solobat/market-kit/identity"
@@ -52,6 +53,76 @@ func TestBuildAssetGroupsGroupsCrossVenueMarkets(t *testing.T) {
 	}
 }
 
+func TestImportedMarketUnmarshalCollectsStatusFlags(t *testing.T) {
+	var market ImportedMarket
+	if err := json.Unmarshal([]byte(`{
+		"sourceId":"slipstream",
+		"platformId":"bitget",
+		"marketType":"spot",
+		"symbol":"FOOUSDT",
+		"baseAsset":"FOO",
+		"quoteAsset":"USDT",
+		"st":"1",
+		"pre_delisting":"true",
+		"flags":["Special Treatment"]
+	}`), &market); err != nil {
+		t.Fatalf("unmarshal market: %v", err)
+	}
+
+	if !market.ST || !market.PreDelisting {
+		t.Fatalf("expected st and pre-delisting flags, got %+v", market)
+	}
+	if !containsString(market.Flags, MarketFlagST) || !containsString(market.Flags, MarketFlagPreDelisting) {
+		t.Fatalf("expected normalized flags, got %+v", market.Flags)
+	}
+}
+
+func TestNormalizeImportedMarketsPreservesStatusFlags(t *testing.T) {
+	aggregator := NewAggregator(identity.Registry{})
+	markets := aggregator.NormalizeImportedMarkets([]ImportedMarket{
+		{
+			SourceID:     "slipstream",
+			PlatformID:   "bitget",
+			Platform:     "Bitget",
+			VenueType:    "cex",
+			MarketType:   "spot",
+			Symbol:       "FOOUSDT",
+			BaseAsset:    "FOO",
+			QuoteAsset:   "USDT",
+			ST:           true,
+			PreDelisting: true,
+		},
+	})
+
+	if len(markets) != 1 {
+		t.Fatalf("expected one market, got %d", len(markets))
+	}
+	if !markets[0].ST || !markets[0].PreDelisting {
+		t.Fatalf("expected status flags on candidate, got %+v", markets[0])
+	}
+	if !containsString(markets[0].Flags, MarketFlagST) || !containsString(markets[0].Flags, MarketFlagPreDelisting) {
+		t.Fatalf("expected normalized candidate flags, got %+v", markets[0].Flags)
+	}
+
+	groups := aggregator.BuildAssetGroups([]ImportedMarket{
+		{
+			SourceID:     "slipstream",
+			PlatformID:   "bitget",
+			Platform:     "Bitget",
+			VenueType:    "cex",
+			MarketType:   "spot",
+			Symbol:       "FOOUSDT",
+			BaseAsset:    "FOO",
+			QuoteAsset:   "USDT",
+			ST:           true,
+			PreDelisting: true,
+		},
+	})
+	if len(groups) != 1 || !containsString(groups[0].Flags, MarketFlagST) || !containsString(groups[0].Flags, MarketFlagPreDelisting) {
+		t.Fatalf("expected grouped status flags, got %+v", groups)
+	}
+}
+
 func TestNormalizeImportedMarketsUsesResolverFallback(t *testing.T) {
 	registry, err := identity.LoadDefaultRegistry()
 	if err != nil {
@@ -79,6 +150,15 @@ func TestNormalizeImportedMarketsUsesResolverFallback(t *testing.T) {
 	if markets[0].VenueSymbol == "" {
 		t.Fatalf("expected venue symbol to be normalized")
 	}
+}
+
+func containsString(items []string, target string) bool {
+	for _, item := range items {
+		if item == target {
+			return true
+		}
+	}
+	return false
 }
 
 func TestNormalizeImportedMarketsSkipsGateLeveragedTokens(t *testing.T) {

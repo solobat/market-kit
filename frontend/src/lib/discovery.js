@@ -81,6 +81,7 @@ function normalizeImportedMarket(item, index) {
   if (resolution.reason) {
     evidence.push(resolution.reason);
   }
+  const flags = normalizeMarketStatusFlags(item);
 
   return {
     id: String(item.id || `${exchange}:${rawSymbol}:${index}`),
@@ -96,6 +97,9 @@ function normalizeImportedMarket(item, index) {
     canonicalSymbol: baseAsset && quoteAsset ? `${baseAsset}/${quoteAsset}` : market.canonicalSymbol || "",
     assetClass,
     status: String(item.status || "").trim().toLowerCase(),
+    st: flags.includes("st"),
+    preDelisting: flags.includes("pre_delisting"),
+    flags,
     chain: String(item.chain || "").trim(),
     externalUrl: String(item.externalUrl || item.external_url || "").trim(),
     confidence: Number(explicitAssetClass ? 0.95 : (resolution.confidence || (explicitBase && explicitQuote ? 0.9 : 0.7))),
@@ -106,6 +110,7 @@ function normalizeImportedMarket(item, index) {
 
 function normalizeDiscoveryItem(item, source) {
   if (!item || typeof item !== "object") return null;
+  const flags = normalizeMarketStatusFlags(item);
   const normalized = {
     sourceId: String(item.sourceId || item.source_id || source || "slipstream").trim(),
     platformId: String(item.platformId || item.platform_id || item.exchange || item.platform || "").trim(),
@@ -123,6 +128,9 @@ function normalizeDiscoveryItem(item, source) {
     tags: Array.isArray(item.tags) ? item.tags.map((value) => String(value || "").trim()).filter(Boolean) : [],
     chain: String(item.chain || item.chainName || item.chain_name || "").trim(),
     status: String(item.status || "").trim(),
+    st: flags.includes("st"),
+    preDelisting: flags.includes("pre_delisting"),
+    flags,
     externalUrl: String(item.externalUrl || item.external_url || "").trim(),
     firstSeenAt: String(item.firstSeenAt || item.first_seen_at || "").trim(),
     lastSeenAt: String(item.lastSeenAt || item.last_seen_at || "").trim()
@@ -143,6 +151,7 @@ function summarizeGroup(groupKey, rows) {
   const exchanges = new Set();
   const marketTypes = new Set();
   const venueTypes = new Set();
+  const flags = new Set();
   const evidence = [];
   let minConfidence = 1;
   let needsReview = false;
@@ -151,6 +160,7 @@ function summarizeGroup(groupKey, rows) {
     if (row.exchange) exchanges.add(row.exchange);
     if (row.marketType) marketTypes.add(row.marketType);
     if (row.venueType) venueTypes.add(row.venueType);
+    for (const flag of row.flags || []) flags.add(flag);
     if (row.resolutionStatus !== "resolved" || row.assetClass === "unknown") needsReview = true;
     minConfidence = Math.min(minConfidence, Number(row.confidence || 0));
     evidence.push(...(row.evidence || []));
@@ -166,6 +176,7 @@ function summarizeGroup(groupKey, rows) {
     exchanges: Array.from(exchanges).sort(),
     marketTypes: Array.from(marketTypes).sort(),
     venueTypes: Array.from(venueTypes).sort(),
+    flags: Array.from(flags).sort(),
     needsReview,
     primaryConfidence: Number.isFinite(minConfidence) ? minConfidence : 0,
     evidence: dedupeStrings(evidence),
@@ -183,6 +194,53 @@ function dedupeStrings(values) {
     out.push(normalized);
   }
   return out;
+}
+
+function normalizeMarketStatusFlags(item) {
+  const flags = [];
+  const rawFlags = Array.isArray(item?.flags) ? item.flags : [];
+  const rawStatusFlags = Array.isArray(item?.statusFlags)
+    ? item.statusFlags
+    : Array.isArray(item?.status_flags)
+      ? item.status_flags
+      : [];
+
+  for (const flag of [...rawFlags, ...rawStatusFlags]) {
+    const normalized = normalizeStatusFlag(flag);
+    if (normalized) flags.push(normalized);
+  }
+  if (boolish(item?.st) || boolish(item?.isST) || boolish(item?.is_st)) flags.push("st");
+  if (
+    boolish(item?.preDelisting) ||
+    boolish(item?.pre_delisting) ||
+    boolish(item?.inDelisting) ||
+    boolish(item?.in_delisting)
+  ) {
+    flags.push("pre_delisting");
+  }
+  return dedupeStrings(flags);
+}
+
+function normalizeStatusFlag(value) {
+  const raw = String(value || "")
+    .trim()
+    .toLowerCase()
+    .replaceAll("-", "_")
+    .replaceAll(" ", "_")
+    .replace(/_+/g, "_");
+  if (!raw || raw === "false" || raw === "0" || raw === "no" || raw === "none") return "";
+  if (["st", "special_treatment", "specialtreatment", "special"].includes(raw)) return "st";
+  if (["pre_delisting", "predelisting", "pre_delist", "predelist", "in_delisting", "indelisting", "delisting"].includes(raw)) {
+    return "pre_delisting";
+  }
+  return raw;
+}
+
+function boolish(value) {
+  if (typeof value === "boolean") return value;
+  if (typeof value === "number") return value !== 0;
+  const raw = String(value || "").trim().toLowerCase();
+  return ["1", "true", "t", "yes", "y", "on", "enabled", "st", "special_treatment", "special treatment", "pre_delisting", "pre-delisting", "in_delisting"].includes(raw);
 }
 
 function envelopeSource(item) {

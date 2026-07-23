@@ -165,6 +165,7 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		canonicalSymbol = base + "/" + quote
 	}
 
+	flags := NormalizeMarketFlags(item.Flags, item.ST, item.PreDelisting)
 	candidate := CandidateMarket{
 		SourceID:        firstNonEmpty(item.SourceID, string(SourceKindSlipstream)),
 		PlatformID:      strings.TrimSpace(item.PlatformID),
@@ -180,6 +181,9 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		AssetClass:      assetClass,
 		Chain:           strings.TrimSpace(item.Chain),
 		Status:          strings.TrimSpace(item.Status),
+		ST:              hasMarketFlag(flags, MarketFlagST),
+		PreDelisting:    hasMarketFlag(flags, MarketFlagPreDelisting),
+		Flags:           flags,
 		ExternalURL:     strings.TrimSpace(item.ExternalURL),
 		Confidence:      confidence,
 		Evidence:        dedupeStrings(evidence),
@@ -222,6 +226,7 @@ func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
 	marketTypes := map[identity.MarketType]bool{}
 	venueTypes := map[string]bool{}
 	chains := map[string]bool{}
+	flags := map[string]bool{}
 	evidence := []string{}
 	needsReview := false
 	primaryConfidence := 1.0
@@ -238,6 +243,12 @@ func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
 		}
 		if market.Chain != "" {
 			chains[market.Chain] = true
+		}
+		for _, flag := range market.Flags {
+			flag = normalizeMarketFlag(flag)
+			if flag != "" {
+				flags[flag] = true
+			}
 		}
 		evidence = append(evidence, market.Evidence...)
 		if market.Confidence < primaryConfidence {
@@ -263,6 +274,7 @@ func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
 		MarketTypes:       sortedMarketTypes(marketTypes),
 		VenueTypes:        sortedStringKeys(venueTypes),
 		Chains:            sortedStringKeys(chains),
+		Flags:             sortedStringKeys(flags),
 		NeedsReview:       needsReview,
 		PrimaryConfidence: primaryConfidence,
 		Evidence:          dedupeStrings(evidence),
