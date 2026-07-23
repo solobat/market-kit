@@ -411,10 +411,11 @@ func fetchBybit(ctx context.Context, client *http.Client) ([]discovery.ImportedM
 
 func fetchBybitCategory(ctx context.Context, client *http.Client, category, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
-		Symbol    string `json:"symbol"`
-		Status    string `json:"status"`
-		BaseCoin  string `json:"baseCoin"`
-		QuoteCoin string `json:"quoteCoin"`
+		Symbol     string `json:"symbol"`
+		Status     string `json:"status"`
+		BaseCoin   string `json:"baseCoin"`
+		QuoteCoin  string `json:"quoteCoin"`
+		SymbolType string `json:"symbolType"`
 	}
 	type response struct {
 		Result struct {
@@ -436,23 +437,36 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 		if base == "" || quote == "" {
 			base, quote = splitSymbol(item.Symbol)
 		}
+		assetClassHint, tags := bybitAssetClassification(item.SymbolType)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "bybit",
-			Platform:    "Bybit",
-			VenueType:   "cex",
-			MarketType:  marketType,
-			Symbol:      strings.TrimSpace(item.Symbol),
-			BaseAsset:   base,
-			QuoteAsset:  quote,
-			Category:    category,
-			Status:      normalizeBybitStatus(item.Status),
-			ExternalURL: "https://www.bybit.com/trade/usdt/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:       BuiltInSourceID,
+			PlatformID:     "bybit",
+			Platform:       "Bybit",
+			VenueType:      "cex",
+			MarketType:     marketType,
+			Symbol:         strings.TrimSpace(item.Symbol),
+			BaseAsset:      base,
+			QuoteAsset:     quote,
+			AssetClassHint: assetClassHint,
+			Category:       category,
+			Tags:           tags,
+			Status:         normalizeBybitStatus(item.Status),
+			ExternalURL:    "https://www.bybit.com/trade/usdt/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:    seenAt,
+			LastSeenAt:     seenAt,
 		})
 	}
 	return out, nil
+}
+
+func bybitAssetClassification(symbolType string) (assetClassHint string, tags []string) {
+	symbolType = strings.ToLower(strings.TrimSpace(symbolType))
+	switch symbolType {
+	case "stock":
+		return "stock", []string{"bybit-stock"}
+	default:
+		return "", nil
+	}
 }
 
 func fetchOKX(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
@@ -513,17 +527,21 @@ func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType
 
 func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type spotSymbol struct {
-		Symbol       string `json:"symbol"`
-		BaseCoin     string `json:"baseCoin"`
-		QuoteCoin    string `json:"quoteCoin"`
-		SymbolStatus string `json:"symbolStatus"`
+		Symbol     string `json:"symbol"`
+		Category   string `json:"category"`
+		BaseCoin   string `json:"baseCoin"`
+		QuoteCoin  string `json:"quoteCoin"`
+		SymbolType string `json:"symbolType"`
+		Status     string `json:"status"`
+		IsRWA      string `json:"isRwa"`
+		IsReality  string `json:"isReality"`
 	}
 	type spotResponse struct {
 		Data []spotSymbol `json:"data"`
 	}
 
 	var spot spotResponse
-	if err := fetchJSON(ctx, client, http.MethodGet, "https://api.bitget.com/api/v2/spot/public/symbols", nil, &spot); err != nil {
+	if err := fetchJSON(ctx, client, http.MethodGet, "https://api.bitget.com/api/v3/market/instruments?category=SPOT", nil, &spot); err != nil {
 		return nil, err
 	}
 
@@ -545,19 +563,32 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 	seenAt := time.Now().UTC()
 	out := make([]discovery.ImportedMarket, 0, len(spot.Data)+len(perp.Data))
 	for _, item := range spot.Data {
+		base := strings.TrimSpace(item.BaseCoin)
+		assetClassHint := ""
+		category := strings.ToLower(strings.TrimSpace(item.Category))
+		tags := []string(nil)
+		if isBitgetRealityStock(item.IsReality, item.SymbolType) {
+			base = bitgetRealityUnderlying(base)
+			assetClassHint = "stock"
+			tags = []string{"bitget-reality", "rtoken", "tokenized-stock"}
+			category = "stock"
+		}
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "bitget",
-			Platform:    "Bitget",
-			VenueType:   "cex",
-			MarketType:  "spot",
-			Symbol:      strings.TrimSpace(item.Symbol),
-			BaseAsset:   strings.TrimSpace(item.BaseCoin),
-			QuoteAsset:  strings.TrimSpace(item.QuoteCoin),
-			Status:      normalizeSimpleLiveState(item.SymbolStatus),
-			ExternalURL: "https://www.bitget.com/spot/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			SourceID:       BuiltInSourceID,
+			PlatformID:     "bitget",
+			Platform:       "Bitget",
+			VenueType:      "cex",
+			MarketType:     "spot",
+			Symbol:         strings.TrimSpace(item.Symbol),
+			BaseAsset:      base,
+			QuoteAsset:     strings.TrimSpace(item.QuoteCoin),
+			AssetClassHint: assetClassHint,
+			Category:       category,
+			Tags:           tags,
+			Status:         normalizeBitgetInstrumentStatus(item.Status),
+			ExternalURL:    "https://www.bitget.com/spot/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:    seenAt,
+			LastSeenAt:     seenAt,
 		})
 	}
 	for _, item := range perp.Data {
@@ -578,6 +609,19 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 		})
 	}
 	return out, nil
+}
+
+func isBitgetRealityStock(isReality string, symbolType string) bool {
+	return strings.EqualFold(strings.TrimSpace(isReality), "yes") &&
+		strings.EqualFold(strings.TrimSpace(symbolType), "stock")
+}
+
+func bitgetRealityUnderlying(baseCoin string) string {
+	baseCoin = strings.TrimSpace(baseCoin)
+	if len(baseCoin) > 1 && baseCoin[0] == 'r' {
+		return strings.ToUpper(baseCoin[1:])
+	}
+	return strings.ToUpper(baseCoin)
 }
 
 func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
@@ -892,6 +936,21 @@ func normalizeSimpleLiveState(status string) string {
 	case "prelaunch", "pre_market":
 		return "prelaunch"
 	case "offline", "suspend", "paused":
+		return "paused"
+	default:
+		return "unknown"
+	}
+}
+
+func normalizeBitgetInstrumentStatus(status string) string {
+	switch strings.ToLower(strings.TrimSpace(status)) {
+	case "online":
+		return "live"
+	case "listed":
+		return "prelaunch"
+	case "offline", "restrictedapi":
+		return "paused"
+	case "limit_open", "limit_close":
 		return "paused"
 	default:
 		return "unknown"

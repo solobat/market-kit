@@ -50,9 +50,10 @@ type ResolveResult struct {
 }
 
 type Registry struct {
-	ExchangeAliases map[string]string `json:"exchange_aliases"`
-	AssetAliases    []AssetAliasRule  `json:"asset_aliases"`
-	MarketOverrides []MarketOverride  `json:"market_overrides"`
+	GeneratedVersion int               `json:"generated_version,omitempty"`
+	ExchangeAliases  map[string]string `json:"exchange_aliases"`
+	AssetAliases     []AssetAliasRule  `json:"asset_aliases"`
+	MarketOverrides  []MarketOverride  `json:"market_overrides"`
 }
 
 type AssetUnitAlias struct {
@@ -81,9 +82,10 @@ func (r Registry) Merge(other Registry) Registry {
 	other.Normalize()
 
 	out := Registry{
-		ExchangeAliases: make(map[string]string, len(r.ExchangeAliases)+len(other.ExchangeAliases)),
-		AssetAliases:    append([]AssetAliasRule(nil), r.AssetAliases...),
-		MarketOverrides: append([]MarketOverride(nil), r.MarketOverrides...),
+		GeneratedVersion: maxInt(r.GeneratedVersion, other.GeneratedVersion),
+		ExchangeAliases:  make(map[string]string, len(r.ExchangeAliases)+len(other.ExchangeAliases)),
+		AssetAliases:     append([]AssetAliasRule(nil), r.AssetAliases...),
+		MarketOverrides:  append([]MarketOverride(nil), r.MarketOverrides...),
 	}
 
 	for key, value := range r.ExchangeAliases {
@@ -123,6 +125,13 @@ func (r Registry) Merge(other Registry) Registry {
 
 	out.Normalize()
 	return out
+}
+
+func maxInt(left int, right int) int {
+	if right > left {
+		return right
+	}
+	return left
 }
 
 func marketOverrideKey(item MarketOverride) string {

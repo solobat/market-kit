@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -17,36 +18,76 @@ import (
 )
 
 type AutoSyncStatus struct {
-	Enabled                bool                                 `json:"enabled"`
-	Interval               string                               `json:"interval,omitempty"`
-	RuntimePath            string                               `json:"runtimePath,omitempty"`
-	ConfiguredSourceID     string                               `json:"configuredSourceId,omitempty"`
-	SourceID               string                               `json:"sourceId,omitempty"`
-	LastStartedAt          time.Time                            `json:"lastStartedAt,omitempty"`
-	LastFinishedAt         time.Time                            `json:"lastFinishedAt,omitempty"`
-	LastError              string                               `json:"lastError,omitempty"`
-	LastDiscoveryItems     int                                  `json:"lastDiscoveryItems,omitempty"`
-	LastGeneratedAssets    int                                  `json:"lastGeneratedAssets,omitempty"`
-	LastGeneratedOverrides int                                  `json:"lastGeneratedOverrides,omitempty"`
-	RuntimeAssets          int                                  `json:"runtimeAssets,omitempty"`
-	RuntimeOverrides       int                                  `json:"runtimeOverrides,omitempty"`
-	SuspiciousCryptoCount  int                                  `json:"suspiciousCryptoCount,omitempty"`
-	SuspiciousCryptoAssets []curation.SuspiciousCryptoCandidate `json:"suspiciousCryptoAssets,omitempty"`
+	Enabled                  bool                                 `json:"enabled"`
+	Interval                 string                               `json:"interval,omitempty"`
+	RuntimePath              string                               `json:"runtimePath,omitempty"`
+	RuntimeGeneratedVersion  int                                  `json:"runtimeGeneratedVersion,omitempty"`
+	RequiredGeneratedVersion int                                  `json:"requiredGeneratedVersion,omitempty"`
+	ConfiguredSourceID       string                               `json:"configuredSourceId,omitempty"`
+	SourceID                 string                               `json:"sourceId,omitempty"`
+	LastStartedAt            time.Time                            `json:"lastStartedAt,omitempty"`
+	LastFinishedAt           time.Time                            `json:"lastFinishedAt,omitempty"`
+	LastError                string                               `json:"lastError,omitempty"`
+	LastDiscoveryItems       int                                  `json:"lastDiscoveryItems,omitempty"`
+	LastGeneratedAssets      int                                  `json:"lastGeneratedAssets,omitempty"`
+	LastGeneratedOverrides   int                                  `json:"lastGeneratedOverrides,omitempty"`
+	RuntimeAssets            int                                  `json:"runtimeAssets,omitempty"`
+	RuntimeOverrides         int                                  `json:"runtimeOverrides,omitempty"`
+	SuspiciousCryptoCount    int                                  `json:"suspiciousCryptoCount,omitempty"`
+	SuspiciousCryptoAssets   []curation.SuspiciousCryptoCandidate `json:"suspiciousCryptoAssets,omitempty"`
 }
 
-func loadRuntimeRegistry(path string) (identity.Registry, error) {
+type runtimeRegistryLoadResult struct {
+	Registry identity.Registry
+	Warning  string
+}
+
+func loadRuntimeRegistry(path string) (runtimeRegistryLoadResult, error) {
 	path = strings.TrimSpace(path)
 	if path == "" {
-		return identity.Registry{}, nil
+		return runtimeRegistryLoadResult{}, nil
 	}
 	registry, err := identity.LoadRegistryFile(path)
 	if err == nil {
-		return registry, nil
+		if isStaleRuntimeRegistry(registry) {
+			return runtimeRegistryLoadResult{
+				Warning: staleRuntimeRegistryWarning(path, registry.GeneratedVersion),
+			}, nil
+		}
+		return runtimeRegistryLoadResult{Registry: registry}, nil
 	}
 	if errors.Is(err, os.ErrNotExist) {
-		return identity.Registry{}, nil
+		return runtimeRegistryLoadResult{}, nil
 	}
-	return identity.Registry{}, err
+	return runtimeRegistryLoadResult{}, err
+}
+
+func isStaleRuntimeRegistry(registry identity.Registry) bool {
+	if !hasGeneratedRegistryContent(registry) {
+		return false
+	}
+	return registry.GeneratedVersion < curation.GeneratedRegistryVersion
+}
+
+func hasGeneratedRegistryContent(registry identity.Registry) bool {
+	return len(registry.ExchangeAliases) > 0 ||
+		len(registry.AssetAliases) > 0 ||
+		len(registry.MarketOverrides) > 0
+}
+
+func staleRuntimeRegistryWarning(path string, version int) string {
+	return fmt.Sprintf("runtime registry %s generated_version=%d is older than required generated_version=%d; ignored until regenerated", path, version, curation.GeneratedRegistryVersion)
+}
+
+func curationGeneratedRegistryVersion() int {
+	return curation.GeneratedRegistryVersion
+}
+
+func stampCurrentGeneratedRegistryVersion(registry identity.Registry) identity.Registry {
+	if hasGeneratedRegistryContent(registry) && registry.GeneratedVersion < curation.GeneratedRegistryVersion {
+		registry.GeneratedVersion = curation.GeneratedRegistryVersion
+	}
+	return registry
 }
 
 func (a *App) handleAutoSync(w http.ResponseWriter, r *http.Request) {
@@ -96,6 +137,7 @@ func (a *App) generatedRegistrySnapshot() identity.Registry {
 }
 
 func (a *App) applyGeneratedRegistry(generated identity.Registry) {
+	generated = stampCurrentGeneratedRegistryVersion(generated)
 	generated.Normalize()
 	runtime := a.baseRegistry.Merge(generated)
 	runtime = applyRuntimeAssetClassOverrides(runtime, generated)
@@ -107,6 +149,8 @@ func (a *App) applyGeneratedRegistry(generated identity.Registry) {
 	a.resolver = identity.NewResolver(runtime)
 	a.autoSyncStatus.RuntimeAssets = len(runtime.AssetAliases)
 	a.autoSyncStatus.RuntimeOverrides = len(runtime.MarketOverrides)
+	a.autoSyncStatus.RuntimeGeneratedVersion = generated.GeneratedVersion
+	a.autoSyncStatus.RequiredGeneratedVersion = curation.GeneratedRegistryVersion
 	a.mu.Unlock()
 }
 
@@ -162,10 +206,13 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 	}
 
 	startedAt := time.Now().UTC()
+	runtimeGeneratedVersion := a.generatedRegistrySnapshot().GeneratedVersion
 	a.updateAutoSyncStatus(func(status *AutoSyncStatus) {
 		status.Enabled = a.config.AutoSyncEnabled
 		status.Interval = a.config.AutoSyncInterval.String()
 		status.RuntimePath = a.config.RuntimeRegistryPath
+		status.RuntimeGeneratedVersion = runtimeGeneratedVersion
+		status.RequiredGeneratedVersion = curation.GeneratedRegistryVersion
 		status.ConfiguredSourceID = a.config.AutoSyncSourceID
 		status.SourceID = sourceID
 		status.LastStartedAt = startedAt
@@ -204,6 +251,8 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		status.LastDiscoveryItems = len(envelope.Items)
 		status.LastGeneratedAssets = len(next.AssetAliases)
 		status.LastGeneratedOverrides = len(next.MarketOverrides)
+		status.RuntimeGeneratedVersion = next.GeneratedVersion
+		status.RequiredGeneratedVersion = curation.GeneratedRegistryVersion
 		status.SuspiciousCryptoCount = len(suspiciousCrypto)
 		status.SuspiciousCryptoAssets = suspiciousCrypto
 	})
@@ -216,6 +265,7 @@ func writeRuntimeRegistry(path string, registry identity.Registry) error {
 	if path == "" {
 		return nil
 	}
+	registry = stampCurrentGeneratedRegistryVersion(registry)
 	payload, err := json.MarshalIndent(registry, "", "  ")
 	if err != nil {
 		return err

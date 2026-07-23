@@ -61,10 +61,11 @@ func New(config Config) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	generated, err := loadRuntimeRegistry(config.RuntimeRegistryPath)
+	runtimeLoad, err := loadRuntimeRegistry(config.RuntimeRegistryPath)
 	if err != nil {
 		return nil, err
 	}
+	generated := runtimeLoad.Registry
 	runtimeRegistry := registry.Merge(generated)
 	runtimeRegistry = applyRuntimeAssetClassOverrides(runtimeRegistry, generated)
 	runtimeRegistry = applyRuntimeMarketOverrides(runtimeRegistry, generated)
@@ -79,10 +80,13 @@ func New(config Config) (*App, error) {
 		registry:          runtimeRegistry,
 		resolver:          identity.NewResolver(runtimeRegistry),
 		autoSyncStatus: AutoSyncStatus{
-			Enabled:            config.AutoSyncEnabled,
-			Interval:           config.AutoSyncInterval.String(),
-			RuntimePath:        config.RuntimeRegistryPath,
-			ConfiguredSourceID: config.AutoSyncSourceID,
+			Enabled:                  config.AutoSyncEnabled,
+			Interval:                 config.AutoSyncInterval.String(),
+			RuntimePath:              config.RuntimeRegistryPath,
+			RuntimeGeneratedVersion:  generated.GeneratedVersion,
+			RequiredGeneratedVersion: curationGeneratedRegistryVersion(),
+			ConfiguredSourceID:       config.AutoSyncSourceID,
+			LastError:                runtimeLoad.Warning,
 		},
 		startedAt: time.Now().UTC(),
 	}, nil

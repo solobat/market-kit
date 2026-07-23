@@ -44,6 +44,9 @@ func TestBuildGeneratedRegistryIncludesStableQuotedDEXMarkets(t *testing.T) {
 	if !foundZK {
 		t.Fatalf("expected ZK asset alias, got %+v", registry.AssetAliases)
 	}
+	if registry.GeneratedVersion != GeneratedRegistryVersion {
+		t.Fatalf("expected generated registry version %d, got %d", GeneratedRegistryVersion, registry.GeneratedVersion)
+	}
 }
 
 func TestBuildGeneratedRegistryClassifiesBinanceTradFiPerpetualAsRWAStock(t *testing.T) {
@@ -238,6 +241,42 @@ func TestMergeGeneratedRegistryPromotesExistingCryptoWhenCurrentRWAHasEvidence(t
 		}
 	}
 	t.Fatalf("expected KORU asset alias, got %+v", merged.AssetAliases)
+}
+
+func TestMergeGeneratedRegistryPromotesBybitStockContract(t *testing.T) {
+	existing := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "AEHR", AssetClass: "crypto"},
+			{Canonical: "USDT", AssetClass: "fiat_stable"},
+		},
+	}
+	current := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			SourceID:       "market-kit-bootstrap",
+			PlatformID:     "bybit",
+			Platform:       "Bybit",
+			VenueType:      "cex",
+			MarketType:     "perp",
+			Symbol:         "AEHRUSDT",
+			BaseAsset:      "AEHR",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Category:       "linear",
+			Tags:           []string{"bybit-stock"},
+			Status:         "live",
+		},
+	})
+
+	merged := MergeGeneratedRegistry(existing, current, false)
+	for _, asset := range merged.AssetAliases {
+		if asset.Canonical == "AEHR" {
+			if asset.AssetClass != "rwa_stock" {
+				t.Fatalf("expected current Bybit stock evidence to correct AEHR, got %+v", asset)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected AEHR asset alias, got %+v", merged.AssetAliases)
 }
 
 func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) {

@@ -465,6 +465,16 @@ If `MARKET_KIT_SYNC_SOURCES_PATH` is not set, the server falls back to:
 
 Auto-sync intentionally ignores the built-in `market-kit-bootstrap` source unless you explicitly set `MARKET_KIT_AUTOSYNC_SOURCE=market-kit-bootstrap`. This keeps slipstream as the single recurring market collector in production.
 
+Runtime generated registries are versioned with `generated_version`. On startup, the server ignores an older `MARKET_KIT_RUNTIME_REGISTRY_PATH` file instead of merging stale generated rules into the resolver; the next auto-sync or bootstrap run writes a fresh versioned file.
+
+To explicitly refresh the runtime generated registry during deployment:
+
+```bash
+./scripts/bootstrap-runtime-registry.sh
+```
+
+The script writes `data/runtime_generated_registry.json` by default. Override `MARKET_KIT_RUNTIME_REGISTRY_PATH`, `MARKET_KIT_RUNTIME_REGISTRY_REVIEW_PATH`, `MARKET_KIT_BOOTSTRAP_SOURCES`, or `MARKET_KIT_BOOTSTRAP_TIMEOUT` for production hosts.
+
 ## Repo boundaries
 
 This repository intentionally keeps both the shared backend module and the local review console in one place.
@@ -593,6 +603,8 @@ This only handles downstream repos that consume `market-kit` as a Go module. HTT
   - intended to collapse the long tail of venue-specific stable-quote CEX symbols into explicit `market_overrides`
 
 At runtime the Go resolver and local frontend audit console merge these two layers, with the hand-curated default registry taking precedence when keys overlap.
+
+Generated registry JSON includes `generated_version`. Bump `curation.GeneratedRegistryVersion` whenever generated classification semantics change in a way that should invalidate previously written runtime generated data.
 
 ## Bootstrap discovery export
 

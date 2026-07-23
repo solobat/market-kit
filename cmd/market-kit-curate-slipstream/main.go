@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/solobat/market-kit/bootstrap"
+	"github.com/solobat/market-kit/curation"
 	"github.com/solobat/market-kit/discovery"
 	"github.com/solobat/market-kit/identity"
 )
@@ -347,9 +348,10 @@ func buildGeneratedRegistry(items []discoveryItem) identity.Registry {
 	})
 
 	registry := identity.Registry{
-		ExchangeAliases: map[string]string{},
-		AssetAliases:    assetList,
-		MarketOverrides: overrideList,
+		GeneratedVersion: curation.GeneratedRegistryVersion,
+		ExchangeAliases:  map[string]string{},
+		AssetAliases:     assetList,
+		MarketOverrides:  overrideList,
 	}
 	registry.Normalize()
 	return registry
@@ -478,9 +480,10 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 	}
 
 	out := identity.Registry{
-		ExchangeAliases: existing.ExchangeAliases,
-		MarketOverrides: existing.MarketOverrides,
-		AssetAliases:    make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
+		GeneratedVersion: existing.GeneratedVersion,
+		ExchangeAliases:  existing.ExchangeAliases,
+		MarketOverrides:  existing.MarketOverrides,
+		AssetAliases:     make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
 	}
 	for _, item := range existing.AssetAliases {
 		if currentClass, ok := supportedRWA[item.Canonical]; ok {

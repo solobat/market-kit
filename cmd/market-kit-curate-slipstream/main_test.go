@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/solobat/market-kit/curation"
 	"github.com/solobat/market-kit/identity"
 )
 
@@ -54,6 +55,9 @@ func TestBuildGeneratedRegistryFiltersToStableQuotedMarkets(t *testing.T) {
 	}
 	if len(registry.AssetAliases) != 2 {
 		t.Fatalf("expected DRAM and USDT asset aliases, got %d", len(registry.AssetAliases))
+	}
+	if registry.GeneratedVersion != curation.GeneratedRegistryVersion {
+		t.Fatalf("expected generated registry version %d, got %d", curation.GeneratedRegistryVersion, registry.GeneratedVersion)
 	}
 }
 

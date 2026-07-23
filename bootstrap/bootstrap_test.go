@@ -18,10 +18,10 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				"GET https://fapi.binance.com/fapi/v1/exchangeInfo":                                                              `{"symbols":[{"symbol":"BTCUSDT","status":"TRADING","baseAsset":"BTC","quoteAsset":"USDT","underlyingType":"COIN","underlyingSubType":["Layer-1"],"contractType":"PERPETUAL"},{"symbol":"KORUUSDT","status":"TRADING","baseAsset":"KORU","quoteAsset":"USDT","underlyingType":"EQUITY","underlyingSubType":["TradFi"],"contractType":"TRADIFI_PERPETUAL"}]}`,
 				"GET https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai": `{"data":{"list":[{"ticker":"AAPL","symbol":"AAPLONDO","quoteAsset":"USD","chainId":"1","contractAddress":"0xabc","type":1,"status":"TRADING","externalUrl":"https://www.binance.com/en/web3"}]}}`,
 				"GET https://api.bybit.com/v5/market/instruments-info?category=spot&limit=1000":                                  `{"result":{"list":[{"symbol":"ETHUSDT","status":"Trading","baseCoin":"ETH","quoteCoin":"USDT"}]}}`,
-				"GET https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000":                                `{"result":{"list":[{"symbol":"AAPLUSDT","status":"Trading","baseCoin":"AAPL","quoteCoin":"USDT"}]}}`,
+				"GET https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000":                                `{"result":{"list":[{"symbol":"AAPLUSDT","status":"Trading","baseCoin":"AAPL","quoteCoin":"USDT"},{"symbol":"AEHRUSDT","status":"Trading","baseCoin":"AEHR","quoteCoin":"USDT","symbolType":"stock"}]}}`,
 				"GET https://www.okx.com/api/v5/public/instruments?instType=SPOT":                                                `{"data":[{"instId":"SOL-USDT","baseCcy":"SOL","quoteCcy":"USDT","state":"live"}]}`,
 				"GET https://www.okx.com/api/v5/public/instruments?instType=SWAP":                                                `{"data":[{"instId":"CL-USDT-SWAP","baseCcy":"CL","quoteCcy":"USDT","state":"live"}]}`,
-				"GET https://api.bitget.com/api/v2/spot/public/symbols":                                                          `{"data":[{"symbol":"DOGEUSDT","baseCoin":"DOGE","quoteCoin":"USDT","symbolStatus":"online"}]}`,
+				"GET https://api.bitget.com/api/v3/market/instruments?category=SPOT":                                             `{"data":[{"symbol":"DOGEUSDT","category":"SPOT","baseCoin":"DOGE","quoteCoin":"USDT","symbolType":"crypto","status":"online","isReality":"no"},{"symbol":"RAAPLUSDT","category":"SPOT","baseCoin":"rAAPL","quoteCoin":"USDT","symbolType":"stock","status":"online","isReality":"yes"}]}`,
 				"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES":                                `{"data":[{"symbol":"NGUSDT","baseCoin":"NG","quoteCoin":"USDT","symbolStatus":"normal"}]}`,
 				"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                                                           `[{"id":"XRP_USDT","base":"XRP","quote":"USDT","trade_status":"tradable"},{"id":"BTC3L_USDT","base":"BTC3L","quote":"USDT","trade_status":"tradable"}]`,
 				"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[{"name":"NATGAS_USDT","quanto_base":"NATGAS","settle":"USDT","in_delisting":false}]`,
@@ -67,7 +67,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	if envelope.Source != "market-kit-bootstrap" {
 		t.Fatalf("unexpected source: %s", envelope.Source)
 	}
-	if len(envelope.Items) != 14 {
+	if len(envelope.Items) != 16 {
 		t.Fatalf("unexpected item count: %d", len(envelope.Items))
 	}
 
@@ -82,6 +82,16 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				t.Fatalf("expected Binance TradFi perpetual to carry equity evidence: %+v", item)
 			}
 		}
+		if item.PlatformID == "bitget" && item.Symbol == "RAAPLUSDT" {
+			if item.MarketType != "spot" || item.BaseAsset != "AAPL" || item.AssetClassHint != "stock" {
+				t.Fatalf("expected Bitget Reality stock to import as stock spot: %+v", item)
+			}
+		}
+		if item.PlatformID == "bybit" && item.Symbol == "AEHRUSDT" {
+			if item.MarketType != "perp" || item.BaseAsset != "AEHR" || item.AssetClassHint != "stock" {
+				t.Fatalf("expected Bybit stock contract to import as stock perp: %+v", item)
+			}
+		}
 		if item.SourceID != BuiltInSourceID {
 			t.Fatalf("unexpected source id: %s", item.SourceID)
 		}
@@ -93,7 +103,9 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		"binance:KORUUSDT:perp",
 		"binance-web3:AAPLONDO:spot",
 		"bybit:AAPLUSDT:perp",
+		"bybit:AEHRUSDT:perp",
 		"okx:CL-USDT-SWAP:perp",
+		"bitget:RAAPLUSDT:spot",
 		"bitget:NGUSDT:perp",
 		"gate:NATGAS_USDT:perp",
 		"hyperliquid:HYPE:perp",

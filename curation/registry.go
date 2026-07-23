@@ -8,6 +8,8 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
+const GeneratedRegistryVersion = 2
+
 var (
 	stableAssets = map[string]bool{
 		"USDT": true, "USDC": true, "USD": true, "FDUSD": true, "USDE": true, "USDS": true,
@@ -116,9 +118,10 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 	})
 
 	registry := identity.Registry{
-		ExchangeAliases: map[string]string{},
-		AssetAliases:    assetList,
-		MarketOverrides: overrideList,
+		GeneratedVersion: GeneratedRegistryVersion,
+		ExchangeAliases:  map[string]string{},
+		AssetAliases:     assetList,
+		MarketOverrides:  overrideList,
 	}
 	registry.Normalize()
 	return registry
@@ -339,9 +342,12 @@ func preferredStableQuote(left string, right string) string {
 func MergeGeneratedRegistry(existing identity.Registry, generated identity.Registry, prune bool) identity.Registry {
 	existing = sanitizeExistingGeneratedRegistry(existing, generated)
 	if prune {
+		generated.GeneratedVersion = GeneratedRegistryVersion
 		return generated
 	}
-	return existing.Merge(generated)
+	merged := existing.Merge(generated)
+	merged.GeneratedVersion = GeneratedRegistryVersion
+	return merged
 }
 
 func sanitizeExistingGeneratedRegistry(existing identity.Registry, current identity.Registry) identity.Registry {
@@ -354,9 +360,10 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 	}
 
 	out := identity.Registry{
-		ExchangeAliases: existing.ExchangeAliases,
-		MarketOverrides: existing.MarketOverrides,
-		AssetAliases:    make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
+		GeneratedVersion: existing.GeneratedVersion,
+		ExchangeAliases:  existing.ExchangeAliases,
+		MarketOverrides:  existing.MarketOverrides,
+		AssetAliases:     make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
 	}
 	for _, item := range existing.AssetAliases {
 		if currentClass, ok := supportedRWA[item.Canonical]; ok {

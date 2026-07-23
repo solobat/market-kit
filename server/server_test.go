@@ -470,6 +470,7 @@ func TestHandleAssetClassUpdateOverridesStaticAssetClass(t *testing.T) {
 func TestNewAppliesPersistedRuntimeAssetClassOverrides(t *testing.T) {
 	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
 	runtime := identity.Registry{
+		GeneratedVersion: curationGeneratedRegistryVersion(),
 		AssetAliases: []identity.AssetAliasRule{
 			{Canonical: "OPENAI", AssetClass: "rwa_stock"},
 		},
@@ -498,6 +499,78 @@ func TestNewAppliesPersistedRuntimeAssetClassOverrides(t *testing.T) {
 	}
 	if asset.AssetClass != "rwa_stock" {
 		t.Fatalf("expected persisted runtime asset class to override static class, got %+v", asset)
+	}
+}
+
+func TestNewIgnoresStaleRuntimeRegistry(t *testing.T) {
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	runtime := identity.Registry{
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "OLDONLY", AssetClass: "crypto"},
+		},
+	}
+	runtime.Normalize()
+	payload, err := json.MarshalIndent(runtime, "", "  ")
+	if err != nil {
+		t.Fatalf("encode runtime registry: %v", err)
+	}
+	if err := os.WriteFile(runtimePath, append(payload, '\n'), 0o644); err != nil {
+		t.Fatalf("write runtime registry: %v", err)
+	}
+
+	app, err := New(Config{
+		RuntimeRegistryPath: runtimePath,
+		RequestTimeout:      time.Second,
+		AutoSyncInterval:    time.Minute,
+	})
+	if err != nil {
+		t.Fatalf("new app: %v", err)
+	}
+
+	if registryHasAsset(app.runtimeRegistry(), "OLDONLY") {
+		t.Fatalf("expected stale runtime registry to be ignored")
+	}
+	status := app.currentAutoSyncStatus()
+	if status.RuntimeGeneratedVersion != 0 || status.RequiredGeneratedVersion != curationGeneratedRegistryVersion() {
+		t.Fatalf("unexpected version status: %+v", status)
+	}
+	if !strings.Contains(status.LastError, "older than required generated_version") {
+		t.Fatalf("expected stale runtime warning, got %+v", status)
+	}
+}
+
+func TestNewAppliesCurrentRuntimeRegistryVersion(t *testing.T) {
+	runtimePath := filepath.Join(t.TempDir(), "runtime_generated_registry.json")
+	runtime := identity.Registry{
+		GeneratedVersion: curationGeneratedRegistryVersion(),
+		AssetAliases: []identity.AssetAliasRule{
+			{Canonical: "CURRENTONLY", AssetClass: "crypto"},
+		},
+	}
+	runtime.Normalize()
+	payload, err := json.MarshalIndent(runtime, "", "  ")
+	if err != nil {
+		t.Fatalf("encode runtime registry: %v", err)
+	}
+	if err := os.WriteFile(runtimePath, append(payload, '\n'), 0o644); err != nil {
+		t.Fatalf("write runtime registry: %v", err)
+	}
+
+	app, err := New(Config{
+		RuntimeRegistryPath: runtimePath,
+		RequestTimeout:      time.Second,
+		AutoSyncInterval:    time.Minute,
+	})
+	if err != nil {
+		t.Fatalf("new app: %v", err)
+	}
+
+	if !registryHasAsset(app.runtimeRegistry(), "CURRENTONLY") {
+		t.Fatalf("expected current runtime registry to be applied")
+	}
+	status := app.currentAutoSyncStatus()
+	if status.RuntimeGeneratedVersion != curationGeneratedRegistryVersion() || status.LastError != "" {
+		t.Fatalf("unexpected auto-sync status: %+v", status)
 	}
 }
 
@@ -714,7 +787,7 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 					"GET https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000":                                `{"result":{"list":[]}}`,
 					"GET https://www.okx.com/api/v5/public/instruments?instType=SPOT":                                                `{"data":[]}`,
 					"GET https://www.okx.com/api/v5/public/instruments?instType=SWAP":                                                `{"data":[]}`,
-					"GET https://api.bitget.com/api/v2/spot/public/symbols":                                                          `{"data":[]}`,
+					"GET https://api.bitget.com/api/v3/market/instruments?category=SPOT":                                             `{"data":[]}`,
 					"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES":                                `{"data":[]}`,
 					"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                                                           `[]`,
 					"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[]`,
