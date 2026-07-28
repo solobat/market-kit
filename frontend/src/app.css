@@ -1,51 +1,41 @@
 :root {
   color-scheme: dark;
-  --mk-bg: #0d110f;
-  --mk-bg-2: #161c18;
-  --mk-panel: rgba(24, 30, 26, 0.9);
-  --mk-panel-strong: rgba(28, 35, 31, 0.98);
-  --mk-line: rgba(179, 154, 113, 0.18);
-  --mk-line-strong: rgba(179, 154, 113, 0.35);
-  --mk-text: #f1ece2;
-  --mk-text-muted: rgba(241, 236, 226, 0.72);
-  --mk-text-faint: rgba(241, 236, 226, 0.46);
-  --mk-accent: #c1a06d;
-  --mk-accent-soft: rgba(193, 160, 109, 0.14);
-  --mk-good: #5d9474;
-  --mk-warn: #c58f41;
-  --mk-danger: #ce6a60;
-  --mk-shadow: rgba(0, 0, 0, 0.36);
-  --mk-font-sans:
-    "Avenir Next",
-    "PingFang SC",
-    "Hiragino Sans GB",
-    "Noto Sans SC",
-    "Microsoft YaHei UI",
-    sans-serif;
-  --mk-font-display:
-    "Iowan Old Style",
-    "Palatino Linotype",
-    "Source Han Serif SC",
-    serif;
+  --mk-bg: #0b1018;
+  --mk-bg-2: #111821;
+  --mk-panel: rgba(17, 24, 33, 0.92);
+  --mk-panel-strong: rgba(21, 30, 43, 0.98);
+  --mk-line: rgba(38, 51, 69, 0.86);
+  --mk-line-strong: rgba(58, 70, 88, 0.9);
+  --mk-text: #e7edf7;
+  --mk-text-muted: rgba(184, 195, 211, 0.76);
+  --mk-text-faint: rgba(127, 139, 158, 0.72);
+  --mk-accent: #79a8ff;
+  --mk-accent-soft: rgba(121, 168, 255, 0.14);
+  --mk-good: #49c996;
+  --mk-warn: #f2b94b;
+  --mk-danger: #ff7474;
+  --mk-shadow: rgba(0, 0, 0, 0.34);
+  --mk-font-sans: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei UI", "Segoe UI", sans-serif;
+  --mk-font-display: "Iowan Old Style", "Palatino Linotype", "Source Han Serif SC", serif;
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --mk-bg: #f6f1e7;
-  --mk-bg-2: #ece3d6;
-  --mk-panel: rgba(255, 251, 244, 0.9);
-  --mk-panel-strong: rgba(255, 253, 249, 0.98);
-  --mk-line: rgba(115, 80, 28, 0.16);
-  --mk-line-strong: rgba(115, 80, 28, 0.3);
-  --mk-text: #241d16;
-  --mk-text-muted: rgba(36, 29, 22, 0.72);
-  --mk-text-faint: rgba(36, 29, 22, 0.46);
-  --mk-accent: #97662a;
-  --mk-accent-soft: rgba(151, 102, 42, 0.12);
-  --mk-good: #356f54;
-  --mk-warn: #8f641e;
-  --mk-danger: #a64b43;
-  --mk-shadow: rgba(60, 43, 22, 0.12);
+  --mk-bg: #f7f6f2;
+  --mk-bg-2: #fbfcfa;
+  --mk-panel: rgba(255, 255, 255, 0.92);
+  --mk-panel-strong: rgba(255, 255, 255, 0.98);
+  --mk-line: rgba(223, 229, 236, 0.9);
+  --mk-line-strong: rgba(156, 163, 175, 0.78);
+  --mk-text: #111827;
+  --mk-text-muted: rgba(75, 85, 99, 0.76);
+  --mk-text-faint: rgba(107, 116, 131, 0.64);
+  --mk-accent: #1d5fd7;
+  --mk-accent-soft: rgba(29, 95, 215, 0.1);
+  --mk-good: #16845b;
+  --mk-warn: #d97706;
+  --mk-danger: #d12d2d;
+  --mk-shadow: rgba(17, 24, 39, 0.1);
 }
 
 html,
@@ -140,7 +130,7 @@ code {
   border: 1px solid var(--mk-line-strong);
   background:
     radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--mk-accent) 28%, transparent), transparent 56%),
-    linear-gradient(180deg, rgba(193, 160, 109, 0.24), rgba(193, 160, 109, 0.05));
+    linear-gradient(180deg, rgba(121, 168, 255, 0.22), rgba(121, 168, 255, 0.05));
   color: var(--mk-text);
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -190,7 +180,7 @@ code {
 .panel h3 {
   margin: 0.3rem 0 0;
   font-family: var(--mk-font-display);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .rail__nav,
@@ -727,7 +717,7 @@ input::placeholder {
 
 .detail-hero__identity strong {
   font-size: 1.42rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .detail-copy,
@@ -1120,7 +1110,7 @@ label span {
   min-height: 2.85rem;
   border-radius: 0.95rem;
   border: 1px solid var(--mk-line-strong);
-  background: linear-gradient(180deg, rgba(193, 160, 109, 0.24), rgba(193, 160, 109, 0.08));
+  background: linear-gradient(180deg, rgba(121, 168, 255, 0.22), rgba(193, 160, 109, 0.08));
   color: var(--mk-text);
   padding: 0 1rem;
 }
