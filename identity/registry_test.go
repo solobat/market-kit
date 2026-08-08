@@ -1,6 +1,9 @@
 package identity
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestRegistryMergePrefersExistingEntries(t *testing.T) {
 	base := Registry{
@@ -46,6 +49,20 @@ func TestRegistryMergePrefersExistingEntries(t *testing.T) {
 	}
 	if len(merged.MarketOverrides) != 2 {
 		t.Fatalf("expected 2 unique market overrides, got %d", len(merged.MarketOverrides))
+	}
+}
+
+func TestRegistryNormalizeBackfillsKnownAssetAliasIdentity(t *testing.T) {
+	registry := Registry{AssetAliases: []AssetAliasRule{
+		{Canonical: "COTI", AssetClass: "crypto"},
+		{Canonical: "HFT", AssetClass: "crypto", AssetID: "unknown:ticker:hft", UnderlyingID: "unknown:ticker:hft"},
+	}}
+	registry.Normalize()
+	for _, item := range registry.AssetAliases {
+		expected := "crypto:ticker:" + strings.ToLower(item.Canonical)
+		if item.AssetID != expected || item.UnderlyingID != expected {
+			t.Fatalf("expected known alias identity backfill %q, got %+v", expected, item)
+		}
 	}
 }
 

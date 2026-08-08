@@ -41,6 +41,14 @@ func (r *Registry) Normalize() {
 		r.AssetAliases[i].AssetClass = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].AssetClass))
 		r.AssetAliases[i].AssetID = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].AssetID))
 		r.AssetAliases[i].UnderlyingID = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].UnderlyingID))
+		if r.AssetAliases[i].AssetClass != "" && r.AssetAliases[i].AssetClass != "unknown" &&
+			(r.AssetAliases[i].AssetID == "" || strings.HasPrefix(r.AssetAliases[i].AssetID, "unknown:")) {
+			r.AssetAliases[i].AssetID = CanonicalAssetID(r.AssetAliases[i].AssetClass, r.AssetAliases[i].Canonical)
+		}
+		if r.AssetAliases[i].AssetID != "" &&
+			(r.AssetAliases[i].UnderlyingID == "" || strings.HasPrefix(r.AssetAliases[i].UnderlyingID, "unknown:")) {
+			r.AssetAliases[i].UnderlyingID = r.AssetAliases[i].AssetID
+		}
 		for j := range r.AssetAliases[i].Aliases {
 			r.AssetAliases[i].Aliases[j] = strings.ToUpper(strings.TrimSpace(r.AssetAliases[i].Aliases[j]))
 		}

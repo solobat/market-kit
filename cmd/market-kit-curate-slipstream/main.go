@@ -26,19 +26,28 @@ type discoveryEnvelope struct {
 }
 
 type discoveryItem struct {
-	PlatformID         string   `json:"platformId"`
-	VenueType          string   `json:"venueType"`
-	MarketType         string   `json:"marketType"`
-	Symbol             string   `json:"symbol"`
-	BaseAsset          string   `json:"baseAsset"`
-	QuoteAsset         string   `json:"quoteAsset"`
-	Status             string   `json:"status"`
-	AssetClass         string   `json:"assetClass"`
-	AssetClassHint     string   `json:"assetClassHint"`
-	Category           string   `json:"category"`
-	UnderlyingCategory string   `json:"underlyingCategory"`
-	Sector             string   `json:"sector"`
-	Tags               []string `json:"tags"`
+	SourceID           string    `json:"sourceId"`
+	PlatformID         string    `json:"platformId"`
+	Platform           string    `json:"platform"`
+	VenueType          string    `json:"venueType"`
+	MarketType         string    `json:"marketType"`
+	Symbol             string    `json:"symbol"`
+	BaseAsset          string    `json:"baseAsset"`
+	QuoteAsset         string    `json:"quoteAsset"`
+	Status             string    `json:"status"`
+	AssetClass         string    `json:"assetClass"`
+	AssetClassHint     string    `json:"assetClassHint"`
+	Category           string    `json:"category"`
+	UnderlyingCategory string    `json:"underlyingCategory"`
+	Sector             string    `json:"sector"`
+	Tags               []string  `json:"tags"`
+	Chain              string    `json:"chain"`
+	ST                 bool      `json:"st,omitempty"`
+	PreDelisting       bool      `json:"preDelisting,omitempty"`
+	Flags              []string  `json:"flags,omitempty"`
+	ExternalURL        string    `json:"externalUrl"`
+	FirstSeenAt        time.Time `json:"firstSeenAt"`
+	LastSeenAt         time.Time `json:"lastSeenAt"`
 }
 
 type repeatedHeaders []string
@@ -121,13 +130,7 @@ func main() {
 	}
 
 	generated := buildGeneratedRegistry(envelope.Items)
-	existing = sanitizeExistingGeneratedRegistry(existing, generated)
-	registry := generated
-	if !*prune {
-		registry = existing.Merge(generated)
-		registry.MarketOverrides = replaceCurrentGeneratedMarketOverrides(registry.MarketOverrides, generated.MarketOverrides)
-		registry.Normalize()
-	}
+	registry := curation.MergeGeneratedRegistry(existing, generated, *prune)
 	encoded, err := json.MarshalIndent(registry, "", "  ")
 	if err != nil {
 		fatalf("encode registry: %v", err)
@@ -286,77 +289,33 @@ func splitCSV(value string) []string {
 }
 
 func buildGeneratedRegistry(items []discoveryItem) identity.Registry {
-	assets := map[string]identity.AssetAliasRule{}
-	overrides := map[string]identity.MarketOverride{}
-	hyperliquidAliases := inferHyperliquidHIP3AliasTargets(items)
-
+	imported := make([]discovery.ImportedMarket, 0, len(items))
 	for _, item := range items {
-		if !shouldInclude(item) {
-			continue
-		}
-
-		exchange := strings.ToLower(strings.TrimSpace(item.PlatformID))
-		base := strings.ToUpper(strings.TrimSpace(item.BaseAsset))
-		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
-		symbol := strings.TrimSpace(item.Symbol)
-		marketType := normalizeGeneratedMarketType(item.MarketType)
-
-		if exchange == "" || base == "" || quote == "" || symbol == "" || marketType == "" {
-			continue
-		}
-
-		venueBase := hyperliquidHIP3Base(symbol, base)
-		if exchange == "hyperliquid" && marketType == "perpetual" {
-			if target, ok := hyperliquidAliases[venueBase]; ok {
-				base = target.Base
-				quote = target.Quote
-				ensureAsset(assets, base, target.AssetClass)
-				addAssetAlias(assets, base, venueBase)
-			}
-		}
-
-		ensureAsset(assets, base, classifyGeneratedAsset(item, base))
-		ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
-
-		override := identity.MarketOverride{
-			Exchange:        exchange,
-			RawSymbol:       symbol,
-			MarketType:      marketType,
-			CanonicalSymbol: base + "/" + quote,
-		}
-		overrides[overrideKey(override)] = override
+		imported = append(imported, discovery.ImportedMarket{
+			SourceID:           item.SourceID,
+			PlatformID:         item.PlatformID,
+			Platform:           item.Platform,
+			VenueType:          item.VenueType,
+			MarketType:         item.MarketType,
+			Symbol:             item.Symbol,
+			BaseAsset:          item.BaseAsset,
+			QuoteAsset:         item.QuoteAsset,
+			AssetClass:         item.AssetClass,
+			AssetClassHint:     item.AssetClassHint,
+			Category:           item.Category,
+			UnderlyingCategory: item.UnderlyingCategory,
+			Tags:               append([]string(nil), item.Tags...),
+			Chain:              item.Chain,
+			Status:             item.Status,
+			ST:                 item.ST,
+			PreDelisting:       item.PreDelisting,
+			Flags:              append([]string(nil), item.Flags...),
+			ExternalURL:        item.ExternalURL,
+			FirstSeenAt:        item.FirstSeenAt,
+			LastSeenAt:         item.LastSeenAt,
+		})
 	}
-
-	assetList := make([]identity.AssetAliasRule, 0, len(assets))
-	for _, item := range assets {
-		assetList = append(assetList, item)
-	}
-	sort.Slice(assetList, func(i, j int) bool {
-		return assetList[i].Canonical < assetList[j].Canonical
-	})
-
-	overrideList := make([]identity.MarketOverride, 0, len(overrides))
-	for _, item := range overrides {
-		overrideList = append(overrideList, item)
-	}
-	sort.Slice(overrideList, func(i, j int) bool {
-		if overrideList[i].Exchange == overrideList[j].Exchange {
-			if overrideList[i].RawSymbol == overrideList[j].RawSymbol {
-				return overrideList[i].MarketType < overrideList[j].MarketType
-			}
-			return overrideList[i].RawSymbol < overrideList[j].RawSymbol
-		}
-		return overrideList[i].Exchange < overrideList[j].Exchange
-	})
-
-	registry := identity.Registry{
-		GeneratedVersion: curation.GeneratedRegistryVersion,
-		ExchangeAliases:  map[string]string{},
-		AssetAliases:     assetList,
-		MarketOverrides:  overrideList,
-	}
-	registry.Normalize()
-	return registry
+	return curation.BuildGeneratedRegistry(imported)
 }
 
 type hyperliquidHIP3AliasTarget struct {

@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 3
+const GeneratedRegistryVersion = 4
 
 var (
 	stableAssets = map[string]bool{
@@ -54,8 +54,17 @@ type SuspiciousCryptoCandidate struct {
 }
 
 func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry {
+	type generatedMarketCandidate struct {
+		exchange    string
+		base        string
+		quote       string
+		symbol      string
+		marketType  string
+		directClass string
+	}
+
 	assets := map[string]identity.AssetAliasRule{}
-	overrides := map[string]identity.MarketOverride{}
+	candidates := make([]generatedMarketCandidate, 0, len(items))
 	hyperliquidAliases := inferHyperliquidHIP3AliasTargets(items)
 	assetClassSets := generatedAssetClassSets(items)
 	collisions := generatedAssetCollisions(assetClassSets)
@@ -94,25 +103,38 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ensureAsset(assets, base, baseClass)
 		}
 		ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
-		assetID := identity.CanonicalAssetID(baseClass, base)
-		comparisonKey := identity.DefaultComparisonKey(assetID, quote)
+		candidates = append(candidates, generatedMarketCandidate{
+			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass,
+		})
+	}
+
+	overrides := map[string]identity.MarketOverride{}
+	for _, candidate := range candidates {
+		baseClass := candidate.directClass
+		if !collisionSet[candidate.base] && (baseClass == "" || baseClass == "unknown") {
+			if asset, ok := assets[candidate.base]; ok {
+				baseClass = asset.AssetClass
+			}
+		}
+		assetID := identity.CanonicalAssetID(baseClass, candidate.base)
+		comparisonKey := identity.DefaultComparisonKey(assetID, candidate.quote)
 		comparisonStatus := identity.ComparisonEligible
 		if comparisonKey == "" {
 			comparisonStatus = identity.ComparisonAmbiguous
 		}
 
 		override := identity.MarketOverride{
-			Exchange:         exchange,
-			RawSymbol:        symbol,
-			MarketType:       marketType,
-			CanonicalSymbol:  base + "/" + quote,
+			Exchange:         candidate.exchange,
+			RawSymbol:        candidate.symbol,
+			MarketType:       candidate.marketType,
+			CanonicalSymbol:  candidate.base + "/" + candidate.quote,
 			AssetClass:       baseClass,
 			AssetID:          assetID,
 			UnderlyingID:     assetID,
 			ComparisonKey:    comparisonKey,
 			ComparisonStatus: comparisonStatus,
-			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(marketType), baseClass),
-			SettlementAsset:  quote,
+			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
+			SettlementAsset:  candidate.quote,
 		}
 		overrides[overrideKey(override)] = override
 	}
@@ -363,16 +385,101 @@ func preferredStableQuote(left string, right string) string {
 }
 
 func MergeGeneratedRegistry(existing identity.Registry, generated identity.Registry, prune bool) identity.Registry {
-	existing = sanitizeExistingGeneratedRegistry(existing, generated)
 	if prune {
+		generated = backfillGeneratedRegistryIdentities(generated, generated)
 		generated.GeneratedVersion = GeneratedRegistryVersion
 		return generated
 	}
+	existing = sanitizeExistingGeneratedRegistry(existing, generated)
+	generated = backfillGeneratedRegistryIdentities(generated, existing.Merge(generated))
 	merged := existing.Merge(generated)
 	merged.MarketOverrides = replaceCurrentGeneratedMarketOverrides(merged.MarketOverrides, generated.MarketOverrides)
 	merged.GeneratedVersion = GeneratedRegistryVersion
 	merged.Normalize()
 	return merged
+}
+
+func backfillGeneratedRegistryIdentities(generated identity.Registry, reference identity.Registry) identity.Registry {
+	generated.Normalize()
+	reference.Normalize()
+
+	aliases := make(map[string]identity.AssetAliasRule, len(reference.AssetAliases))
+	for _, item := range reference.AssetAliases {
+		aliases[item.Canonical] = item
+	}
+	collisions := map[string]bool{}
+	for _, item := range reference.AssetCollisions {
+		collisions[item.Symbol] = true
+	}
+
+	for idx := range generated.MarketOverrides {
+		override := &generated.MarketOverrides[idx]
+		base, quote := splitGeneratedCanonicalSymbol(override.CanonicalSymbol)
+		if base == "" || quote == "" {
+			continue
+		}
+
+		originalAssetIDInvalid := generatedIdentityMissing(override.AssetID)
+		originalComparisonKeyInvalid := generatedIdentityMissing(override.ComparisonKey)
+		assetClass := strings.ToLower(strings.TrimSpace(override.AssetClass))
+		alias := aliases[base]
+		if (assetClass == "" || assetClass == "unknown") && !collisions[base] {
+			assetClass = alias.AssetClass
+		}
+		if assetClass == "" || assetClass == "unknown" {
+			continue
+		}
+
+		assetID := identity.CanonicalAssetID(assetClass, base)
+		underlyingID := assetID
+		if !collisions[base] && alias.AssetClass == assetClass {
+			if !generatedIdentityMissing(alias.AssetID) {
+				assetID = alias.AssetID
+			}
+			if !generatedIdentityMissing(alias.UnderlyingID) {
+				underlyingID = alias.UnderlyingID
+			} else {
+				underlyingID = assetID
+			}
+		}
+
+		override.AssetClass = assetClass
+		if originalAssetIDInvalid {
+			override.AssetID = assetID
+		}
+		if generatedIdentityMissing(override.UnderlyingID) {
+			override.UnderlyingID = underlyingID
+		}
+		if originalComparisonKeyInvalid {
+			override.ComparisonKey = identity.DefaultComparisonKey(override.UnderlyingID, quote)
+		}
+		if override.InstrumentKind == "" || override.InstrumentKind == "unknown" {
+			override.InstrumentKind = identity.DefaultInstrumentKind(identity.MarketType(override.MarketType), assetClass)
+		}
+		if override.SettlementAsset == "" {
+			override.SettlementAsset = quote
+		}
+		if originalAssetIDInvalid && originalComparisonKeyInvalid && override.ComparisonKey != "" &&
+			(override.ComparisonStatus == "" || override.ComparisonStatus == identity.ComparisonAmbiguous) {
+			override.ComparisonStatus = identity.ComparisonEligible
+		}
+	}
+	generated.GeneratedVersion = GeneratedRegistryVersion
+	generated.Normalize()
+	return generated
+}
+
+func generatedIdentityMissing(value string) bool {
+	value = strings.ToLower(strings.TrimSpace(value))
+	return value == "" || strings.HasPrefix(value, "unknown:")
+}
+
+func splitGeneratedCanonicalSymbol(value string) (string, string) {
+	parts := strings.SplitN(strings.ToUpper(strings.TrimSpace(value)), "/", 2)
+	if len(parts) != 2 {
+		return "", ""
+	}
+	return strings.TrimSpace(parts[0]), strings.TrimSpace(parts[1])
 }
 
 func replaceCurrentGeneratedMarketOverrides(merged []identity.MarketOverride, current []identity.MarketOverride) []identity.MarketOverride {
@@ -396,10 +503,13 @@ func replaceCurrentGeneratedMarketOverrides(merged []identity.MarketOverride, cu
 }
 
 func sanitizeExistingGeneratedRegistry(existing identity.Registry, current identity.Registry) identity.Registry {
+	existing.Normalize()
 	current.Normalize()
+	collisionRegistry := identity.Registry{AssetCollisions: append(append([]identity.AssetCollision(nil), existing.AssetCollisions...), current.AssetCollisions...)}
+	collisionRegistry.Normalize()
 	supportedRWA := map[string]string{}
 	collisions := map[string]bool{}
-	for _, item := range current.AssetCollisions {
+	for _, item := range collisionRegistry.AssetCollisions {
 		collisions[item.Symbol] = true
 	}
 	for _, item := range current.AssetAliases {
@@ -413,7 +523,7 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 		ExchangeAliases:  existing.ExchangeAliases,
 		MarketOverrides:  existing.MarketOverrides,
 		AssetAliases:     make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
-		AssetCollisions:  current.AssetCollisions,
+		AssetCollisions:  collisionRegistry.AssetCollisions,
 	}
 	for _, item := range existing.AssetAliases {
 		if collisions[item.Canonical] {

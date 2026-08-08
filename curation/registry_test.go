@@ -363,6 +363,102 @@ func TestBuildGeneratedRegistrySeparatesStrongCrossClassTickerCollision(t *testi
 	}
 }
 
+func TestBuildGeneratedRegistryBackfillsWeakMarketFromStrongAssetEvidence(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			PlatformID: "bybit", VenueType: "cex", MarketType: "perpetual",
+			Symbol: "COTIUSDT", BaseAsset: "COTI", QuoteAsset: "USDT",
+		},
+		{
+			PlatformID: "binance", VenueType: "cex", MarketType: "perpetual",
+			Symbol: "COTIUSDT", BaseAsset: "COTI", QuoteAsset: "USDT",
+			AssetClassHint: "crypto", UnderlyingCategory: "coin",
+		},
+	})
+	for _, override := range registry.MarketOverrides {
+		if override.Exchange != "bybit" || override.RawSymbol != "COTIUSDT" {
+			continue
+		}
+		if override.AssetClass != "crypto" || override.AssetID != "crypto:ticker:coti" ||
+			override.ComparisonKey != "crypto:ticker:coti/USDT" || override.ComparisonStatus != identity.ComparisonEligible {
+			t.Fatalf("weak market should inherit strong non-collision identity, got %+v", override)
+		}
+		return
+	}
+	t.Fatalf("expected bybit COTI override, got %+v", registry.MarketOverrides)
+}
+
+func TestMergeGeneratedRegistryBackfillsKnownNonCollisionIdentity(t *testing.T) {
+	existing := identity.Registry{
+		GeneratedVersion: 3,
+		AssetAliases:     []identity.AssetAliasRule{{Canonical: "HFT", AssetClass: "crypto"}},
+	}
+	generated := identity.Registry{
+		GeneratedVersion: 4,
+		MarketOverrides: []identity.MarketOverride{{
+			Exchange: "bybit", RawSymbol: "HFTUSDT", MarketType: "perpetual", CanonicalSymbol: "HFT/USDT",
+			AssetID: "unknown:ticker:hft", UnderlyingID: "unknown:ticker:hft", ComparisonStatus: identity.ComparisonAmbiguous,
+		}},
+	}
+	merged := MergeGeneratedRegistry(existing, generated, false)
+	for _, override := range merged.MarketOverrides {
+		if override.RawSymbol != "HFTUSDT" {
+			continue
+		}
+		if override.AssetClass != "crypto" || override.AssetID != "crypto:ticker:hft" ||
+			override.UnderlyingID != "crypto:ticker:hft" || override.ComparisonKey != "crypto:ticker:hft/USDT" ||
+			override.ComparisonStatus != identity.ComparisonEligible {
+			t.Fatalf("expected safe v4 identity backfill, got %+v", override)
+		}
+		return
+	}
+	t.Fatalf("expected HFT override, got %+v", merged.MarketOverrides)
+}
+
+func TestMergeGeneratedRegistryDoesNotBackfillCollisionFromGlobalAlias(t *testing.T) {
+	existing := identity.Registry{
+		GeneratedVersion: 3,
+		AssetAliases:     []identity.AssetAliasRule{{Canonical: "CAT", AssetClass: "rwa_stock"}},
+	}
+	generated := identity.Registry{
+		GeneratedVersion: 4,
+		AssetCollisions:  []identity.AssetCollision{{Symbol: "CAT", AssetClasses: []string{"crypto", "rwa_stock"}}},
+		MarketOverrides: []identity.MarketOverride{{
+			Exchange: "binance", RawSymbol: "1000CATUSDT", MarketType: "perpetual", CanonicalSymbol: "CAT/USDT",
+			AssetID: "unknown:ticker:1000cat", UnderlyingID: "unknown:ticker:1000cat", ComparisonStatus: identity.ComparisonAmbiguous,
+		}},
+	}
+	merged := MergeGeneratedRegistry(existing, generated, false)
+	for _, override := range merged.MarketOverrides {
+		if override.RawSymbol != "1000CATUSDT" {
+			continue
+		}
+		if override.ComparisonStatus != identity.ComparisonAmbiguous || override.ComparisonKey != "" ||
+			override.AssetID != "unknown:ticker:1000cat" {
+			t.Fatalf("collision must remain fail-closed without market evidence, got %+v", override)
+		}
+		return
+	}
+	t.Fatalf("expected CAT override, got %+v", merged.MarketOverrides)
+}
+
+func TestMergeGeneratedRegistryPreservesExistingCollisionWhenEvidenceTemporarilyDisappears(t *testing.T) {
+	existing := identity.Registry{
+		GeneratedVersion: 3,
+		AssetAliases:     []identity.AssetAliasRule{{Canonical: "ON", AssetClass: "crypto"}},
+		AssetCollisions:  []identity.AssetCollision{{Symbol: "ON", AssetClasses: []string{"crypto", "rwa_stock"}}},
+	}
+	merged := MergeGeneratedRegistry(existing, identity.Registry{GeneratedVersion: 4}, false)
+	if len(merged.AssetCollisions) != 1 || merged.AssetCollisions[0].Symbol != "ON" {
+		t.Fatalf("incremental sync must preserve historical collision evidence, got %+v", merged.AssetCollisions)
+	}
+	for _, asset := range merged.AssetAliases {
+		if asset.Canonical == "ON" {
+			t.Fatalf("preserved collision must not regain a global alias: %+v", asset)
+		}
+	}
+}
+
 func TestMergeGeneratedRegistryReplacesStaleMarketOverrideWithCurrentGenerated(t *testing.T) {
 	existing := identity.Registry{
 		MarketOverrides: []identity.MarketOverride{

@@ -44,12 +44,13 @@ func TestBuildGeneratedRegistryFiltersToStableQuotedMarkets(t *testing.T) {
 	if len(registry.MarketOverrides) != 2 {
 		t.Fatalf("expected 2 generated overrides, got %d", len(registry.MarketOverrides))
 	}
-	expectedOverrides := map[identity.MarketOverride]bool{
-		{Exchange: "okx", RawSymbol: "DRAM-USDT-SWAP", MarketType: "perpetual", CanonicalSymbol: "DRAM/USDT"}: true,
-		{Exchange: "hyperliquid", RawSymbol: "DRAM", MarketType: "perpetual", CanonicalSymbol: "DRAM/USDT"}:   true,
+	expectedOverrides := map[string]bool{
+		"okx|DRAM-USDT-SWAP|perpetual|DRAM/USDT": true,
+		"hyperliquid|DRAM|perpetual|DRAM/USDT":   true,
 	}
 	for _, override := range registry.MarketOverrides {
-		if !expectedOverrides[override] {
+		key := strings.Join([]string{override.Exchange, override.RawSymbol, string(override.MarketType), override.CanonicalSymbol}, "|")
+		if !expectedOverrides[key] {
 			t.Fatalf("unexpected generated override: %+v", override)
 		}
 	}

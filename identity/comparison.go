@@ -4,7 +4,7 @@ import "strings"
 
 func CanonicalAssetID(assetClass string, symbol string) string {
 	assetClass = strings.ToLower(strings.TrimSpace(assetClass))
-	symbol = strings.ToUpper(strings.TrimSpace(symbol))
+	symbol = strings.ToLower(strings.TrimSpace(symbol))
 	if symbol == "" {
 		return ""
 	}
