@@ -115,34 +115,39 @@ func (market *ImportedMarket) UnmarshalJSON(payload []byte) error {
 }
 
 type CandidateMarket struct {
-	SourceID        string              `json:"sourceId"`
-	PlatformID      string              `json:"platformId"`
-	Platform        string              `json:"platform"`
-	Exchange        string              `json:"exchange"`
-	VenueType       string              `json:"venueType"`
-	MarketType      identity.MarketType `json:"marketType"`
-	RawSymbol       string              `json:"rawSymbol"`
-	VenueSymbol     string              `json:"venueSymbol"`
-	BaseAsset       string              `json:"baseAsset"`
-	QuoteAsset      string              `json:"quoteAsset"`
-	CanonicalSymbol string              `json:"canonicalSymbol"`
-	AssetClass      string              `json:"assetClass"`
-	Chain           string              `json:"chain"`
-	Status          string              `json:"status"`
-	ST              bool                `json:"st,omitempty"`
-	PreDelisting    bool                `json:"preDelisting,omitempty"`
-	Flags           []string            `json:"flags,omitempty"`
-	ExternalURL     string              `json:"externalUrl"`
-	Confidence      float64             `json:"confidence"`
-	Evidence        []string            `json:"evidence"`
-	FirstSeenAt     time.Time           `json:"firstSeenAt"`
-	LastSeenAt      time.Time           `json:"lastSeenAt"`
+	SourceID         string                    `json:"sourceId"`
+	PlatformID       string                    `json:"platformId"`
+	Platform         string                    `json:"platform"`
+	Exchange         string                    `json:"exchange"`
+	VenueType        string                    `json:"venueType"`
+	MarketType       identity.MarketType       `json:"marketType"`
+	RawSymbol        string                    `json:"rawSymbol"`
+	VenueSymbol      string                    `json:"venueSymbol"`
+	BaseAsset        string                    `json:"baseAsset"`
+	QuoteAsset       string                    `json:"quoteAsset"`
+	CanonicalSymbol  string                    `json:"canonicalSymbol"`
+	AssetClass       string                    `json:"assetClass"`
+	AssetID          string                    `json:"assetId,omitempty"`
+	UnderlyingID     string                    `json:"underlyingId,omitempty"`
+	ComparisonKey    string                    `json:"comparisonKey,omitempty"`
+	ComparisonStatus identity.ComparisonStatus `json:"comparisonStatus,omitempty"`
+	Chain            string                    `json:"chain"`
+	Status           string                    `json:"status"`
+	ST               bool                      `json:"st,omitempty"`
+	PreDelisting     bool                      `json:"preDelisting,omitempty"`
+	Flags            []string                  `json:"flags,omitempty"`
+	ExternalURL      string                    `json:"externalUrl"`
+	Confidence       float64                   `json:"confidence"`
+	Evidence         []string                  `json:"evidence"`
+	FirstSeenAt      time.Time                 `json:"firstSeenAt"`
+	LastSeenAt       time.Time                 `json:"lastSeenAt"`
 }
 
 type AssetCandidateGroup struct {
 	GroupKey          string                `json:"groupKey"`
 	CanonicalAsset    string                `json:"canonicalAsset"`
 	CanonicalSymbol   string                `json:"canonicalSymbol"`
+	ComparisonKey     string                `json:"comparisonKey,omitempty"`
 	QuoteAsset        string                `json:"quoteAsset"`
 	AssetClass        string                `json:"assetClass"`
 	Exchanges         []string              `json:"exchanges"`

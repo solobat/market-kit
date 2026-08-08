@@ -1,4 +1,5 @@
 {
+  "generated_version": 3,
   "exchange_aliases": {},
   "asset_aliases": [
     {
@@ -3301,6 +3302,8 @@
     {
       "canonical": "ON",
       "asset_class": "crypto",
+      "asset_id": "crypto:ticker:on",
+      "underlying_id": "crypto:ticker:on",
       "aliases": []
     },
     {
@@ -10506,7 +10509,15 @@
       "exchange": "binance",
       "raw_symbol": "ONUSDT",
       "market_type": "perpetual",
-      "canonical_symbol": "ON/USDT"
+      "canonical_symbol": "ON/USDT",
+      "asset_class": "crypto",
+      "asset_id": "crypto:ticker:on",
+      "underlying_id": "crypto:ticker:on",
+      "comparison_key": "crypto:ticker:on/USDT",
+      "comparison_status": "eligible",
+      "instrument_kind": "perpetual",
+      "contract_type": "perpetual",
+      "settlement_asset": "USDT"
     },
     {
       "exchange": "binance",
@@ -25411,6 +25422,20 @@
       "raw_symbol": "ONGUSDT",
       "market_type": "perpetual",
       "canonical_symbol": "ONG/USDT"
+    },
+    {
+      "exchange": "bybit",
+      "raw_symbol": "ONUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "ON/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "derivative:bybit:on-usdt",
+      "underlying_id": "equity:us:on",
+      "comparison_key": "equity:us:on/USDT",
+      "comparison_status": "eligible",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "linear_perpetual",
+      "settlement_asset": "USDT"
     },
     {
       "exchange": "bybit",
@@ -52375,6 +52400,13 @@
       "raw_symbol": "TRX-USD-SWAP",
       "market_type": "perpetual",
       "canonical_symbol": "TRX/USD"
+    }
+  ],
+  "asset_collisions": [
+    {
+      "symbol": "ON",
+      "asset_classes": ["crypto", "rwa_stock"],
+      "reason": "same ticker discovered in multiple asset classes"
     }
   ]
 }

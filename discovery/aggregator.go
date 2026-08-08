@@ -79,6 +79,10 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 	}
 
 	confidence := 0.7
+	assetID := ""
+	underlyingID := ""
+	comparisonKey := ""
+	comparisonStatus := identity.ComparisonStatus("")
 	assetClass := normalizeImportedAssetClassHints(
 		item.AssetClass,
 		item.AssetClassHint,
@@ -108,6 +112,9 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 			Symbol:         rawSymbol,
 			MarketTypeHint: item.MarketType,
 		})
+		if resolved.Status == identity.ResolveAmbiguous {
+			comparisonStatus = identity.ComparisonAmbiguous
+		}
 		if resolved.Market != nil {
 			if base == "" {
 				base = resolved.Market.BaseAsset
@@ -121,6 +128,10 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 			if assetClass == "unknown" && strings.TrimSpace(resolved.Market.AssetClass) != "" {
 				assetClass = resolved.Market.AssetClass
 			}
+			assetID = resolved.Market.AssetID
+			underlyingID = resolved.Market.UnderlyingID
+			comparisonKey = resolved.Market.ComparisonKey
+			comparisonStatus = resolved.Market.ComparisonStatus
 			evidence = append(evidence, resolved.Reason)
 			if resolved.Confidence > confidence {
 				confidence = resolved.Confidence
@@ -129,11 +140,15 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 	}
 
 	venueSymbol := rawSymbol
-	if resolved := a.resolver.Resolve(identity.ResolveRequest{
+	resolved := a.resolver.Resolve(identity.ResolveRequest{
 		Exchange:       exchange,
 		Symbol:         rawSymbol,
 		MarketTypeHint: string(marketType),
-	}); resolved.Market != nil {
+	})
+	if resolved.Status == identity.ResolveAmbiguous {
+		comparisonStatus = identity.ComparisonAmbiguous
+	}
+	if resolved.Market != nil {
 		venueSymbol = resolved.Market.VenueSymbol
 		if resolved.Confidence >= 1 || shouldPreferResolvedMarketIdentity(exchange, rawSymbol, base, quote) {
 			base = resolved.Market.BaseAsset
@@ -144,6 +159,10 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 			if strings.TrimSpace(resolved.Market.AssetClass) != "" {
 				assetClass = resolved.Market.AssetClass
 			}
+			assetID = resolved.Market.AssetID
+			underlyingID = resolved.Market.UnderlyingID
+			comparisonKey = resolved.Market.ComparisonKey
+			comparisonStatus = resolved.Market.ComparisonStatus
 			evidence = append(evidence, resolved.Reason)
 		}
 		if base == "" {
@@ -164,31 +183,51 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 	if base != "" && quote != "" {
 		canonicalSymbol = base + "/" + quote
 	}
+	if assetID == "" {
+		assetID = identity.CanonicalAssetID(assetClass, base)
+	}
+	if underlyingID == "" {
+		underlyingID = assetID
+	}
+	if comparisonKey == "" {
+		comparisonKey = identity.DefaultComparisonKey(underlyingID, quote)
+	}
+	if comparisonStatus == "" {
+		if comparisonKey == "" {
+			comparisonStatus = identity.ComparisonAmbiguous
+		} else {
+			comparisonStatus = identity.ComparisonEligible
+		}
+	}
 
 	flags := NormalizeMarketFlags(item.Flags, item.ST, item.PreDelisting)
 	candidate := CandidateMarket{
-		SourceID:        firstNonEmpty(item.SourceID, string(SourceKindSlipstream)),
-		PlatformID:      strings.TrimSpace(item.PlatformID),
-		Platform:        strings.TrimSpace(item.Platform),
-		Exchange:        exchange,
-		VenueType:       strings.ToLower(strings.TrimSpace(item.VenueType)),
-		MarketType:      marketType,
-		RawSymbol:       rawSymbol,
-		VenueSymbol:     venueSymbol,
-		BaseAsset:       base,
-		QuoteAsset:      quote,
-		CanonicalSymbol: canonicalSymbol,
-		AssetClass:      assetClass,
-		Chain:           strings.TrimSpace(item.Chain),
-		Status:          strings.TrimSpace(item.Status),
-		ST:              hasMarketFlag(flags, MarketFlagST),
-		PreDelisting:    hasMarketFlag(flags, MarketFlagPreDelisting),
-		Flags:           flags,
-		ExternalURL:     strings.TrimSpace(item.ExternalURL),
-		Confidence:      confidence,
-		Evidence:        dedupeStrings(evidence),
-		FirstSeenAt:     item.FirstSeenAt,
-		LastSeenAt:      item.LastSeenAt,
+		SourceID:         firstNonEmpty(item.SourceID, string(SourceKindSlipstream)),
+		PlatformID:       strings.TrimSpace(item.PlatformID),
+		Platform:         strings.TrimSpace(item.Platform),
+		Exchange:         exchange,
+		VenueType:        strings.ToLower(strings.TrimSpace(item.VenueType)),
+		MarketType:       marketType,
+		RawSymbol:        rawSymbol,
+		VenueSymbol:      venueSymbol,
+		BaseAsset:        base,
+		QuoteAsset:       quote,
+		CanonicalSymbol:  canonicalSymbol,
+		AssetClass:       assetClass,
+		AssetID:          assetID,
+		UnderlyingID:     underlyingID,
+		ComparisonKey:    comparisonKey,
+		ComparisonStatus: comparisonStatus,
+		Chain:            strings.TrimSpace(item.Chain),
+		Status:           strings.TrimSpace(item.Status),
+		ST:               hasMarketFlag(flags, MarketFlagST),
+		PreDelisting:     hasMarketFlag(flags, MarketFlagPreDelisting),
+		Flags:            flags,
+		ExternalURL:      strings.TrimSpace(item.ExternalURL),
+		Confidence:       confidence,
+		Evidence:         dedupeStrings(evidence),
+		FirstSeenAt:      item.FirstSeenAt,
+		LastSeenAt:       item.LastSeenAt,
 	}
 	return &candidate
 }
@@ -254,7 +293,7 @@ func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
 		if market.Confidence < primaryConfidence {
 			primaryConfidence = market.Confidence
 		}
-		if market.AssetClass == "unknown" || market.BaseAsset == "" || market.QuoteAsset == "" {
+		if market.AssetClass == "unknown" || market.BaseAsset == "" || market.QuoteAsset == "" || market.ComparisonStatus != identity.ComparisonEligible {
 			needsReview = true
 		}
 	}
@@ -264,10 +303,19 @@ func summarizeGroup(key string, markets []CandidateMarket) AssetCandidateGroup {
 	}
 
 	representative := markets[0]
+	comparisonKey := representative.ComparisonKey
+	for _, market := range markets {
+		if market.ComparisonStatus != identity.ComparisonEligible || market.ComparisonKey != comparisonKey {
+			comparisonKey = ""
+			needsReview = true
+			break
+		}
+	}
 	return AssetCandidateGroup{
-		GroupKey:          key,
+		GroupKey:          representative.CanonicalSymbol,
 		CanonicalAsset:    representative.BaseAsset,
 		CanonicalSymbol:   representative.CanonicalSymbol,
+		ComparisonKey:     comparisonKey,
 		QuoteAsset:        representative.QuoteAsset,
 		AssetClass:        representative.AssetClass,
 		Exchanges:         sortedStringKeys(exchanges),

@@ -320,6 +320,49 @@ func TestBuildGeneratedRegistryPromotesRWAEvidenceOverCryptoMetadata(t *testing.
 	t.Fatalf("expected AEHR asset alias, got %+v", registry.AssetAliases)
 }
 
+func TestBuildGeneratedRegistrySeparatesStrongCrossClassTickerCollision(t *testing.T) {
+	registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+		{
+			PlatformID:         "binance",
+			VenueType:          "cex",
+			MarketType:         "perpetual",
+			Symbol:             "ONUSDT",
+			BaseAsset:          "ON",
+			QuoteAsset:         "USDT",
+			AssetClassHint:     "crypto",
+			UnderlyingCategory: "coin",
+			Tags:               []string{"underlying-type:coin"},
+		},
+		{
+			PlatformID:     "bybit",
+			VenueType:      "cex",
+			MarketType:     "perpetual",
+			Symbol:         "ONUSDT",
+			BaseAsset:      "ON",
+			QuoteAsset:     "USDT",
+			AssetClassHint: "stock",
+			Tags:           []string{"bybit-stock"},
+		},
+	})
+	if len(registry.AssetCollisions) != 1 || registry.AssetCollisions[0].Symbol != "ON" {
+		t.Fatalf("expected ON collision, got %+v", registry.AssetCollisions)
+	}
+	for _, asset := range registry.AssetAliases {
+		if asset.Canonical == "ON" {
+			t.Fatalf("colliding ticker must not become a global alias: %+v", asset)
+		}
+	}
+	keys := map[string]string{}
+	for _, override := range registry.MarketOverrides {
+		if override.RawSymbol == "ONUSDT" {
+			keys[override.Exchange] = override.ComparisonKey
+		}
+	}
+	if keys["binance"] == "" || keys["bybit"] == "" || keys["binance"] == keys["bybit"] {
+		t.Fatalf("expected distinct ON comparison keys, got %+v", keys)
+	}
+}
+
 func TestMergeGeneratedRegistryReplacesStaleMarketOverrideWithCurrentGenerated(t *testing.T) {
 	existing := identity.Registry{
 		MarketOverrides: []identity.MarketOverride{

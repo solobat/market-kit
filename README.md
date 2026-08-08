@@ -16,6 +16,26 @@ The goal is to centralize:
 - venue symbol normalization
 - canonical symbol / asset identity mapping
 - explicit `resolved / ambiguous / unresolved` outcomes
+- collision-safe asset ids and cross-venue comparison keys
+
+## Identity and comparison contract
+
+`canonicalSymbol` is a display and compatibility field. Consumers must not use it as the sole cross-venue join key.
+
+The resolver also returns:
+
+- `assetId`: the exact asset or venue product identity
+- `underlyingId`: the economic exposure behind the instrument
+- `comparisonKey`: the key that automated cross-venue comparisons may join on
+- `comparisonStatus`: `eligible`, `ambiguous`, or `prohibited`
+- `registryVersion`: the generated registry revision used for the decision
+- `instrumentKind`, `contractType`, `settlementAsset`, and `expiryAtMs`: product-level boundaries used to keep incompatible contracts apart
+
+The registry records ticker collisions across asset classes. A market with an explicit override can still resolve to its own identity, while an unregistered venue using a colliding ticker fails closed as `ambiguous`.
+
+For example, Binance crypto `ONUSDT` and Bybit stock `ONUSDT` keep the same display symbol but receive different `assetId`, `underlyingId`, and `comparisonKey` values.
+
+Consumers should resolve market inventory in batches, cache results by `exchange / marketType / rawSymbol / registryVersion`, and perform only an O(1) lookup on ticker hot paths. Do not call the resolve API for every realtime tick.
 
 ## Recommended integration boundary
 

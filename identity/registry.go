@@ -38,7 +38,9 @@ func (r *Registry) Normalize() {
 
 	for i := range r.AssetAliases {
 		r.AssetAliases[i].Canonical = strings.ToUpper(strings.TrimSpace(r.AssetAliases[i].Canonical))
-		r.AssetAliases[i].AssetClass = strings.TrimSpace(r.AssetAliases[i].AssetClass)
+		r.AssetAliases[i].AssetClass = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].AssetClass))
+		r.AssetAliases[i].AssetID = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].AssetID))
+		r.AssetAliases[i].UnderlyingID = strings.ToLower(strings.TrimSpace(r.AssetAliases[i].UnderlyingID))
 		for j := range r.AssetAliases[i].Aliases {
 			r.AssetAliases[i].Aliases[j] = strings.ToUpper(strings.TrimSpace(r.AssetAliases[i].Aliases[j]))
 		}
@@ -52,14 +54,78 @@ func (r *Registry) Normalize() {
 		r.MarketOverrides[i].RawSymbol = strings.TrimSpace(r.MarketOverrides[i].RawSymbol)
 		r.MarketOverrides[i].MarketType = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].MarketType))
 		r.MarketOverrides[i].CanonicalSymbol = strings.ToUpper(strings.TrimSpace(r.MarketOverrides[i].CanonicalSymbol))
+		r.MarketOverrides[i].AssetClass = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].AssetClass))
+		r.MarketOverrides[i].AssetID = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].AssetID))
+		r.MarketOverrides[i].UnderlyingID = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].UnderlyingID))
+		r.MarketOverrides[i].ComparisonKey = normalizeComparisonKey(r.MarketOverrides[i].ComparisonKey)
+		r.MarketOverrides[i].InstrumentKind = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].InstrumentKind))
+		r.MarketOverrides[i].ContractType = strings.ToLower(strings.TrimSpace(r.MarketOverrides[i].ContractType))
+		r.MarketOverrides[i].SettlementAsset = strings.ToUpper(strings.TrimSpace(r.MarketOverrides[i].SettlementAsset))
+		if r.MarketOverrides[i].ExpiryAtMs < 0 {
+			r.MarketOverrides[i].ExpiryAtMs = 0
+		}
+		if r.MarketOverrides[i].ComparisonStatus != "" {
+			r.MarketOverrides[i].ComparisonStatus = NormalizeComparisonStatus(r.MarketOverrides[i].ComparisonStatus)
+		}
 		r.MarketOverrides[i].UnitAlias = strings.ToUpper(strings.TrimSpace(r.MarketOverrides[i].UnitAlias))
 		if r.MarketOverrides[i].UnitMultiplier <= 0 {
 			r.MarketOverrides[i].UnitMultiplier = 0
 		}
 	}
 
+	r.normalizeAssetCollisions()
+
 	scaledAliases := r.normalizeAssetAliases()
 	r.normalizeMarketOverrides(scaledAliases)
+}
+
+func (r *Registry) normalizeAssetCollisions() {
+	merged := map[string]AssetCollision{}
+	for _, item := range r.AssetCollisions {
+		item.Symbol = strings.ToUpper(strings.TrimSpace(item.Symbol))
+		item.Reason = strings.TrimSpace(item.Reason)
+		if item.Symbol == "" {
+			continue
+		}
+		classes := make([]string, 0, len(item.AssetClasses))
+		seen := map[string]bool{}
+		for _, value := range item.AssetClasses {
+			value = strings.ToLower(strings.TrimSpace(value))
+			if value == "" || seen[value] {
+				continue
+			}
+			seen[value] = true
+			classes = append(classes, value)
+		}
+		sort.Strings(classes)
+		item.AssetClasses = classes
+		if existing, ok := merged[item.Symbol]; ok {
+			item = mergeAssetCollision(existing, item)
+			sort.Strings(item.AssetClasses)
+		}
+		merged[item.Symbol] = item
+	}
+	keys := make([]string, 0, len(merged))
+	for key := range merged {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	r.AssetCollisions = make([]AssetCollision, 0, len(keys))
+	for _, key := range keys {
+		r.AssetCollisions = append(r.AssetCollisions, merged[key])
+	}
+}
+
+func normalizeComparisonKey(value string) string {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return ""
+	}
+	parts := strings.SplitN(value, "/", 2)
+	if len(parts) != 2 {
+		return strings.ToLower(value)
+	}
+	return strings.ToLower(strings.TrimSpace(parts[0])) + "/" + strings.ToUpper(strings.TrimSpace(parts[1]))
 }
 
 func (r *Registry) normalizeAssetAliases() map[string]string {

@@ -105,7 +105,8 @@ func TestHandleResolveBatchReturnsPerItemResults(t *testing.T) {
 
 	var payload struct {
 		Summary struct {
-			Count int `json:"count"`
+			Count           int `json:"count"`
+			RegistryVersion int `json:"registryVersion"`
 		} `json:"summary"`
 		Results []identity.ResolveResult `json:"results"`
 	}
@@ -114,6 +115,9 @@ func TestHandleResolveBatchReturnsPerItemResults(t *testing.T) {
 	}
 	if payload.Summary.Count != 2 || len(payload.Results) != 2 {
 		t.Fatalf("unexpected batch response: %+v", payload)
+	}
+	if payload.Results[0].Market == nil || payload.Summary.RegistryVersion != payload.Results[0].Market.RegistryVersion {
+		t.Fatalf("batch summary and resolver must use the same registry snapshot: %+v", payload)
 	}
 	if payload.Results[0].Status != identity.ResolveResolved {
 		t.Fatalf("expected first item to resolve, got %+v", payload.Results[0])

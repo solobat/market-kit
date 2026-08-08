@@ -196,13 +196,21 @@ type resolveBatchRequest struct {
 }
 
 type registryOverrideRequest struct {
-	Exchange        string  `json:"exchange"`
-	RawSymbol       string  `json:"rawSymbol"`
-	MarketType      string  `json:"marketType"`
-	CanonicalSymbol string  `json:"canonicalSymbol"`
-	AssetClass      string  `json:"assetClass,omitempty"`
-	UnitAlias       string  `json:"unitAlias,omitempty"`
-	UnitMultiplier  float64 `json:"unitMultiplier,omitempty"`
+	Exchange         string  `json:"exchange"`
+	RawSymbol        string  `json:"rawSymbol"`
+	MarketType       string  `json:"marketType"`
+	CanonicalSymbol  string  `json:"canonicalSymbol"`
+	AssetClass       string  `json:"assetClass,omitempty"`
+	AssetID          string  `json:"assetId,omitempty"`
+	UnderlyingID     string  `json:"underlyingId,omitempty"`
+	ComparisonKey    string  `json:"comparisonKey,omitempty"`
+	ComparisonStatus string  `json:"comparisonStatus,omitempty"`
+	InstrumentKind   string  `json:"instrumentKind,omitempty"`
+	ContractType     string  `json:"contractType,omitempty"`
+	SettlementAsset  string  `json:"settlementAsset,omitempty"`
+	ExpiryAtMs       int64   `json:"expiryAtMs,omitempty"`
+	UnitAlias        string  `json:"unitAlias,omitempty"`
+	UnitMultiplier   float64 `json:"unitMultiplier,omitempty"`
 }
 
 type assetClassUpdateRequest struct {
@@ -259,14 +267,15 @@ func (a *App) handleResolveBatch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resolver := a.runtimeResolver()
+	registry, resolver := a.runtimeIdentitySnapshot()
 	results := make([]identity.ResolveResult, 0, len(batch.Items))
 	for _, item := range batch.Items {
 		results = append(results, resolver.Resolve(item.toIdentityRequest()))
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"summary": map[string]any{
-			"count": len(results),
+			"count":           len(results),
+			"registryVersion": registry.GeneratedVersion,
 		},
 		"results": results,
 	})
@@ -365,14 +374,30 @@ func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.Mar
 	if req.UnitMultiplier < 0 {
 		return identity.MarketOverride{}, "", errors.New("unitMultiplier must be greater than zero when provided")
 	}
+	if req.ExpiryAtMs < 0 {
+		return identity.MarketOverride{}, "", errors.New("expiryAtMs must not be negative")
+	}
 
+	comparisonStatus := identity.ComparisonStatus("")
+	if strings.TrimSpace(req.ComparisonStatus) != "" {
+		comparisonStatus = identity.NormalizeComparisonStatus(identity.ComparisonStatus(req.ComparisonStatus))
+	}
 	return identity.MarketOverride{
-		Exchange:        exchange,
-		RawSymbol:       rawSymbol,
-		MarketType:      marketType,
-		CanonicalSymbol: base + "/" + quote,
-		UnitAlias:       strings.ToUpper(strings.TrimSpace(req.UnitAlias)),
-		UnitMultiplier:  req.UnitMultiplier,
+		Exchange:         exchange,
+		RawSymbol:        rawSymbol,
+		MarketType:       marketType,
+		CanonicalSymbol:  base + "/" + quote,
+		AssetClass:       normalizeRegistryAssetClass(req.AssetClass),
+		AssetID:          strings.ToLower(strings.TrimSpace(req.AssetID)),
+		UnderlyingID:     strings.ToLower(strings.TrimSpace(req.UnderlyingID)),
+		ComparisonKey:    strings.TrimSpace(req.ComparisonKey),
+		ComparisonStatus: comparisonStatus,
+		InstrumentKind:   strings.ToLower(strings.TrimSpace(req.InstrumentKind)),
+		ContractType:     strings.ToLower(strings.TrimSpace(req.ContractType)),
+		SettlementAsset:  strings.ToUpper(strings.TrimSpace(req.SettlementAsset)),
+		ExpiryAtMs:       req.ExpiryAtMs,
+		UnitAlias:        strings.ToUpper(strings.TrimSpace(req.UnitAlias)),
+		UnitMultiplier:   req.UnitMultiplier,
 	}, base, nil
 }
 
@@ -449,8 +474,10 @@ func upsertRuntimeRegistryOverride(generated identity.Registry, runtime identity
 		class := strings.TrimSpace(assetClass)
 		if class != "" {
 			generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
-				Canonical:  assetBase,
-				AssetClass: class,
+				Canonical:    assetBase,
+				AssetClass:   class,
+				AssetID:      identity.CanonicalAssetID(class, assetBase),
+				UnderlyingID: identity.CanonicalAssetID(class, assetBase),
 			})
 		}
 	}
@@ -979,29 +1006,32 @@ func (a *App) handleRegistry(w http.ResponseWriter, _ *http.Request) {
 }
 
 func (a *App) runtimeRegistry() identity.Registry {
-	a.mu.RLock()
-	if a.registry.AssetAliases != nil || a.registry.MarketOverrides != nil || a.registry.ExchangeAliases != nil {
-		registry := a.registry
-		a.mu.RUnlock()
-		return registry
-	}
-	a.mu.RUnlock()
-	registry, err := identity.LoadDefaultRegistry()
-	if err != nil {
-		return identity.Registry{}
-	}
+	registry, _ := a.runtimeIdentitySnapshot()
 	return registry
 }
 
 func (a *App) runtimeResolver() *identity.Resolver {
+	_, resolver := a.runtimeIdentitySnapshot()
+	return resolver
+}
+
+func (a *App) runtimeIdentitySnapshot() (identity.Registry, *identity.Resolver) {
 	a.mu.RLock()
-	if a.resolver != nil {
-		resolver := a.resolver
-		a.mu.RUnlock()
-		return resolver
-	}
+	registry := a.registry
+	resolver := a.resolver
+	hasRegistry := registry.AssetAliases != nil || registry.MarketOverrides != nil || registry.ExchangeAliases != nil
 	a.mu.RUnlock()
-	return identity.NewResolver(a.runtimeRegistry())
+	if hasRegistry {
+		if resolver == nil {
+			resolver = identity.NewResolver(registry)
+		}
+		return registry, resolver
+	}
+	registry, err := identity.LoadDefaultRegistry()
+	if err != nil {
+		registry = identity.Registry{}
+	}
+	return registry, identity.NewResolver(registry)
 }
 
 func findAssetAlias(registry identity.Registry, symbol string) (identity.AssetAliasRule, bool) {

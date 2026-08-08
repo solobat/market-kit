@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 2
+const GeneratedRegistryVersion = 3
 
 var (
 	stableAssets = map[string]bool{
@@ -57,6 +57,12 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 	assets := map[string]identity.AssetAliasRule{}
 	overrides := map[string]identity.MarketOverride{}
 	hyperliquidAliases := inferHyperliquidHIP3AliasTargets(items)
+	assetClassSets := generatedAssetClassSets(items)
+	collisions := generatedAssetCollisions(assetClassSets)
+	collisionSet := map[string]bool{}
+	for _, item := range collisions {
+		collisionSet[item.Symbol] = true
+	}
 
 	for _, item := range items {
 		if !shouldInclude(item) {
@@ -83,14 +89,30 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			}
 		}
 
-		ensureAsset(assets, base, classifyGeneratedAsset(item, base))
+		baseClass := classifyGeneratedAsset(item, base)
+		if !collisionSet[base] {
+			ensureAsset(assets, base, baseClass)
+		}
 		ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
+		assetID := identity.CanonicalAssetID(baseClass, base)
+		comparisonKey := identity.DefaultComparisonKey(assetID, quote)
+		comparisonStatus := identity.ComparisonEligible
+		if comparisonKey == "" {
+			comparisonStatus = identity.ComparisonAmbiguous
+		}
 
 		override := identity.MarketOverride{
-			Exchange:        exchange,
-			RawSymbol:       symbol,
-			MarketType:      marketType,
-			CanonicalSymbol: base + "/" + quote,
+			Exchange:         exchange,
+			RawSymbol:        symbol,
+			MarketType:       marketType,
+			CanonicalSymbol:  base + "/" + quote,
+			AssetClass:       baseClass,
+			AssetID:          assetID,
+			UnderlyingID:     assetID,
+			ComparisonKey:    comparisonKey,
+			ComparisonStatus: comparisonStatus,
+			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(marketType), baseClass),
+			SettlementAsset:  quote,
 		}
 		overrides[overrideKey(override)] = override
 	}
@@ -122,6 +144,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		ExchangeAliases:  map[string]string{},
 		AssetAliases:     assetList,
 		MarketOverrides:  overrideList,
+		AssetCollisions:  collisions,
 	}
 	registry.Normalize()
 	return registry
@@ -375,6 +398,10 @@ func replaceCurrentGeneratedMarketOverrides(merged []identity.MarketOverride, cu
 func sanitizeExistingGeneratedRegistry(existing identity.Registry, current identity.Registry) identity.Registry {
 	current.Normalize()
 	supportedRWA := map[string]string{}
+	collisions := map[string]bool{}
+	for _, item := range current.AssetCollisions {
+		collisions[item.Symbol] = true
+	}
 	for _, item := range current.AssetAliases {
 		if item.AssetClass == "rwa_stock" || item.AssetClass == "rwa_commodity" {
 			supportedRWA[item.Canonical] = item.AssetClass
@@ -386,8 +413,12 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 		ExchangeAliases:  existing.ExchangeAliases,
 		MarketOverrides:  existing.MarketOverrides,
 		AssetAliases:     make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
+		AssetCollisions:  current.AssetCollisions,
 	}
 	for _, item := range existing.AssetAliases {
+		if collisions[item.Canonical] {
+			continue
+		}
 		if currentClass, ok := supportedRWA[item.Canonical]; ok {
 			item.AssetClass = currentClass
 			out.AssetAliases = append(out.AssetAliases, item)
@@ -458,15 +489,78 @@ func ensureAsset(target map[string]identity.AssetAliasRule, canonical string, as
 	if existing, exists := target[canonical]; exists {
 		if shouldPromoteGeneratedAssetClass(existing.AssetClass, assetClass) {
 			existing.AssetClass = assetClass
+			existing.AssetID = identity.CanonicalAssetID(assetClass, canonical)
+			existing.UnderlyingID = existing.AssetID
 			target[canonical] = existing
 		}
 		return
 	}
 	target[canonical] = identity.AssetAliasRule{
-		Canonical:  canonical,
-		AssetClass: assetClass,
-		Aliases:    []string{},
+		Canonical:    canonical,
+		AssetClass:   assetClass,
+		AssetID:      identity.CanonicalAssetID(assetClass, canonical),
+		UnderlyingID: identity.CanonicalAssetID(assetClass, canonical),
+		Aliases:      []string{},
 	}
+}
+
+func generatedAssetClassSets(items []discovery.ImportedMarket) map[string]map[string]bool {
+	out := map[string]map[string]bool{}
+	for _, item := range items {
+		if !shouldInclude(item) {
+			continue
+		}
+		base := strings.ToUpper(strings.TrimSpace(item.BaseAsset))
+		class := classifyGeneratedAsset(item, base)
+		if base == "" || class == "" || class == "unknown" {
+			continue
+		}
+		if class == "crypto" && !hasExplicitCryptoIdentityHint(item) {
+			continue
+		}
+		if out[base] == nil {
+			out[base] = map[string]bool{}
+		}
+		out[base][class] = true
+	}
+	return out
+}
+
+func hasExplicitCryptoIdentityHint(item discovery.ImportedMarket) bool {
+	if strings.EqualFold(strings.TrimSpace(item.UnderlyingCategory), "coin") {
+		return true
+	}
+	for _, tag := range item.Tags {
+		tag = strings.ToLower(strings.TrimSpace(tag))
+		if tag == "underlying-type:coin" || tag == "asset-class:crypto" {
+			return true
+		}
+	}
+	return false
+}
+
+func generatedAssetCollisions(classSets map[string]map[string]bool) []identity.AssetCollision {
+	keys := make([]string, 0)
+	for symbol, classes := range classSets {
+		if len(classes) > 1 {
+			keys = append(keys, symbol)
+		}
+	}
+	sort.Strings(keys)
+	out := make([]identity.AssetCollision, 0, len(keys))
+	for _, symbol := range keys {
+		classes := make([]string, 0, len(classSets[symbol]))
+		for class := range classSets[symbol] {
+			classes = append(classes, class)
+		}
+		sort.Strings(classes)
+		out = append(out, identity.AssetCollision{
+			Symbol:       symbol,
+			AssetClasses: classes,
+			Reason:       "same ticker discovered in multiple asset classes",
+		})
+	}
+	return out
 }
 
 func shouldPromoteGeneratedAssetClass(current string, next string) bool {

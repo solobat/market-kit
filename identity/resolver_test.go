@@ -2,6 +2,63 @@ package identity
 
 import "testing"
 
+func TestResolveDefaultRegistrySeparatesCryptoAndEquityON(t *testing.T) {
+	registry, err := LoadDefaultRegistry()
+	if err != nil {
+		t.Fatal(err)
+	}
+	resolver := NewResolver(registry)
+	binance := resolver.Resolve(ResolveRequest{Exchange: "binance", Symbol: "ONUSDT", MarketTypeHint: "perpetual"})
+	bybit := resolver.Resolve(ResolveRequest{Exchange: "bybit", Symbol: "ONUSDT", MarketTypeHint: "perpetual"})
+	if binance.Status != ResolveResolved || binance.Market == nil || bybit.Status != ResolveResolved || bybit.Market == nil {
+		t.Fatalf("expected explicit ON overrides to resolve, binance=%+v bybit=%+v", binance, bybit)
+	}
+	if binance.Market.AssetClass != "crypto" || bybit.Market.AssetClass != "rwa_stock" {
+		t.Fatalf("expected separate ON asset classes, binance=%+v bybit=%+v", binance.Market, bybit.Market)
+	}
+	if binance.Market.ComparisonKey == bybit.Market.ComparisonKey {
+		t.Fatalf("ON collision must not share comparison key: %q", binance.Market.ComparisonKey)
+	}
+	if binance.Market.ComparisonStatus != ComparisonEligible || bybit.Market.ComparisonStatus != ComparisonEligible {
+		t.Fatalf("explicit ON identities should be independently eligible: binance=%+v bybit=%+v", binance.Market, bybit.Market)
+	}
+	if binance.Market.InstrumentKind != "perpetual" || bybit.Market.InstrumentKind != "equity_perpetual" || bybit.Market.SettlementAsset != "USDT" {
+		t.Fatalf("expected product metadata to remain distinct: binance=%+v bybit=%+v", binance.Market, bybit.Market)
+	}
+
+	unknownVenue := resolver.Resolve(ResolveRequest{Exchange: "newvenue", Symbol: "ONUSDT", MarketTypeHint: "perpetual"})
+	if unknownVenue.Status != ResolveAmbiguous {
+		t.Fatalf("unregistered venue ON must fail closed, got %+v", unknownVenue)
+	}
+}
+
+func TestResolveUnknownIdentityIsNotComparisonEligible(t *testing.T) {
+	result := NewResolver(Registry{}).Resolve(ResolveRequest{
+		Exchange: "binance", Symbol: "UNREGISTEREDUSDT", MarketTypeHint: "perpetual",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected backwards-compatible heuristic resolution, got %+v", result)
+	}
+	if result.Market.ComparisonStatus != ComparisonAmbiguous || result.Market.ComparisonKey != "" {
+		t.Fatalf("unknown identity must fail closed for cross-venue comparison, got %+v", result.Market)
+	}
+}
+
+func BenchmarkResolveDefaultRegistryIndexed(b *testing.B) {
+	registry, err := LoadDefaultRegistry()
+	if err != nil {
+		b.Fatal(err)
+	}
+	resolver := NewResolver(registry)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		result := resolver.Resolve(ResolveRequest{Exchange: "bybit", Symbol: "ONUSDT", MarketTypeHint: "perpetual"})
+		if result.Market == nil {
+			b.Fatal("expected resolved market")
+		}
+	}
+}
+
 func TestResolveOverride(t *testing.T) {
 	registry := Registry{
 		MarketOverrides: []MarketOverride{

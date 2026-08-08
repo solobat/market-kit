@@ -53,6 +53,29 @@ func TestBuildAssetGroupsGroupsCrossVenueMarkets(t *testing.T) {
 	}
 }
 
+func TestBuildAssetGroupsSurfacesCrossClassTickerCollisionForReview(t *testing.T) {
+	registry := identity.Registry{
+		AssetCollisions: []identity.AssetCollision{{Symbol: "ON", AssetClasses: []string{"crypto", "rwa_stock"}}},
+		MarketOverrides: []identity.MarketOverride{
+			{Exchange: "binance", RawSymbol: "ONUSDT", MarketType: "perpetual", CanonicalSymbol: "ON/USDT", AssetClass: "crypto", ComparisonKey: "crypto:ticker:on/USDT", ComparisonStatus: identity.ComparisonEligible},
+			{Exchange: "bybit", RawSymbol: "ONUSDT", MarketType: "perpetual", CanonicalSymbol: "ON/USDT", AssetClass: "rwa_stock", ComparisonKey: "equity:us:on/USDT", ComparisonStatus: identity.ComparisonEligible},
+		},
+	}
+	groups := NewAggregator(registry).BuildAssetGroups([]ImportedMarket{
+		{PlatformID: "binance", VenueType: "cex", MarketType: "perpetual", Symbol: "ONUSDT", BaseAsset: "ON", QuoteAsset: "USDT"},
+		{PlatformID: "bybit", VenueType: "cex", MarketType: "perpetual", Symbol: "ONUSDT", BaseAsset: "ON", QuoteAsset: "USDT"},
+	})
+	if len(groups) != 1 || groups[0].GroupKey != "ON/USDT" {
+		t.Fatalf("collision review must preserve the legacy display group, got %+v", groups)
+	}
+	if !groups[0].NeedsReview || groups[0].ComparisonKey != "" {
+		t.Fatalf("mixed comparison identities must not expose one automatable group key: %+v", groups[0])
+	}
+	if groups[0].Markets[0].ComparisonKey == groups[0].Markets[1].ComparisonKey {
+		t.Fatalf("market-level identities must remain distinct: %+v", groups[0].Markets)
+	}
+}
+
 func TestImportedMarketUnmarshalCollectsStatusFlags(t *testing.T) {
 	var market ImportedMarket
 	if err := json.Unmarshal([]byte(`{
