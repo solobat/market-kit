@@ -21,6 +21,7 @@ const (
 
 	binanceSpotExchangeInfoURL = "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT&symbolStatus=TRADING"
 	binanceWeb3OndoStockURL    = "https://www.binance.com/bapi/defi/v1/public/wallet-direct/buw/wallet/market/token/rwa/stock/detail/list/ai"
+	backpackMarketsURL         = "https://api.backpack.exchange/api/v1/markets"
 )
 
 type collector struct {
@@ -121,6 +122,107 @@ func collectors() []collector {
 		{id: "bitget", label: "Bitget", fetch: fetchBitget, enabled: true},
 		{id: "gate", label: "Gate", fetch: fetchGate, enabled: true},
 		{id: "hyperliquid", label: "Hyperliquid", fetch: fetchHyperliquid, enabled: true},
+		{id: "backpack", label: "Backpack", fetch: fetchBackpack, enabled: true},
+	}
+}
+
+func fetchBackpack(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
+	type market struct {
+		Symbol         string `json:"symbol"`
+		BaseSymbol     string `json:"baseSymbol"`
+		QuoteSymbol    string `json:"quoteSymbol"`
+		MarketType     string `json:"marketType"`
+		OrderBookState string `json:"orderBookState"`
+		Visible        *bool  `json:"visible"`
+		RWAMarketType  string `json:"rwaMarketType"`
+	}
+
+	var payload []market
+	if err := fetchJSON(ctx, client, http.MethodGet, backpackMarketsURL, nil, &payload); err != nil {
+		return nil, err
+	}
+
+	seenAt := time.Now().UTC()
+	out := make([]discovery.ImportedMarket, 0, len(payload))
+	for _, item := range payload {
+		marketType, supported := normalizeBackpackMarketType(item.MarketType)
+		if !supported {
+			continue
+		}
+		symbol := strings.TrimSpace(item.Symbol)
+		base := normalizeBackpackBaseAsset(item.BaseSymbol, item.RWAMarketType)
+		quote := strings.ToUpper(strings.TrimSpace(item.QuoteSymbol))
+		if symbol == "" || base == "" || quote == "" {
+			continue
+		}
+		assetClassHint, tags := backpackAssetClassification(item.RWAMarketType)
+		status := normalizeBackpackOrderBookState(item.OrderBookState)
+		if item.Visible != nil && !*item.Visible {
+			status = "paused"
+		}
+		out = append(out, discovery.ImportedMarket{
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "backpack",
+			Platform:           "Backpack",
+			VenueType:          "cex",
+			MarketType:         marketType,
+			Symbol:             symbol,
+			BaseAsset:          base,
+			QuoteAsset:         quote,
+			AssetClassHint:     assetClassHint,
+			Category:           strings.ToLower(strings.TrimSpace(item.MarketType)),
+			UnderlyingCategory: strings.ToLower(strings.TrimSpace(item.RWAMarketType)),
+			Tags:               tags,
+			Status:             status,
+			ExternalURL:        "https://backpack.exchange/trade/" + symbol,
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
+		})
+	}
+	return out, nil
+}
+
+func normalizeBackpackMarketType(value string) (string, bool) {
+	switch strings.ToUpper(strings.TrimSpace(value)) {
+	case "SPOT":
+		return "spot", true
+	case "PERP", "IPERP":
+		return "perp", true
+	case "DATED":
+		return "future", true
+	default:
+		return "", false
+	}
+}
+
+func normalizeBackpackBaseAsset(value string, rwaMarketType string) string {
+	base := strings.ToUpper(strings.TrimSpace(value))
+	if strings.TrimSpace(rwaMarketType) != "" {
+		base = strings.TrimSuffix(base, ".US")
+	}
+	return base
+}
+
+func backpackAssetClassification(rwaMarketType string) (assetClassHint string, tags []string) {
+	rwaMarketType = strings.ToUpper(strings.TrimSpace(rwaMarketType))
+	switch rwaMarketType {
+	case "STOCK":
+		return "stock", []string{"backpack-rwa", "tokenized-stock", "rwa-market-type:stock"}
+	case "INDEX":
+		return "index", []string{"backpack-rwa", "tokenized-index", "rwa-market-type:index"}
+	default:
+		return "crypto", []string{"backpack-crypto"}
+	}
+}
+
+func normalizeBackpackOrderBookState(value string) string {
+	switch strings.ToLower(strings.TrimSpace(value)) {
+	case "open":
+		return "live"
+	case "closed":
+		return "paused"
+	default:
+		return "unknown"
 	}
 }
 

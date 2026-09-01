@@ -560,3 +560,20 @@ func TestResolveUnresolvedWithoutSymbol(t *testing.T) {
 		t.Fatalf("expected unresolved result, got %+v", result)
 	}
 }
+
+func TestResolveBackpackRWAPerp(t *testing.T) {
+	resolver := NewResolver(Registry{})
+	result := resolver.Resolve(ResolveRequest{
+		Exchange: "backpack",
+		Symbol:   "QQQ.US_USDC_PERP",
+	})
+	if result.Status != ResolveResolved || result.Market == nil {
+		t.Fatalf("expected Backpack RWA perp to resolve, got %+v", result)
+	}
+	if result.Market.MarketType != MarketTypePerpetual || result.Market.BaseAsset != "QQQ" || result.Market.QuoteAsset != "USDC" {
+		t.Fatalf("expected Backpack RWA base and quote normalization, got %+v", result.Market)
+	}
+	if result.Market.CanonicalSymbol != "QQQ/USDC" || result.Market.VenueSymbol != "QQQ.US_USDC_PERP" {
+		t.Fatalf("expected canonical QQQ while preserving Backpack venue symbol, got %+v", result.Market)
+	}
+}

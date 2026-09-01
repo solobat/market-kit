@@ -27,6 +27,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES":                                `{"data":[{"symbol":"NGUSDT","baseCoin":"NG","quoteCoin":"USDT","symbolStatus":"normal"}]}`,
 				"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                                                           `[{"id":"XRP_USDT","base":"XRP","quote":"USDT","trade_status":"tradable"},{"id":"BTC3L_USDT","base":"BTC3L","quote":"USDT","trade_status":"tradable"}]`,
 				"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[{"name":"NATGAS_USDT","quanto_base":"NATGAS","settle":"USDT","in_delisting":true}]`,
+				"GET https://api.backpack.exchange/api/v1/markets":                                                               `[{"symbol":"SOL_USDC","baseSymbol":"SOL","quoteSymbol":"USDC","marketType":"SPOT","orderBookState":"Open","visible":true},{"symbol":"QQQ.US_USDC_PERP","baseSymbol":"QQQ.US","quoteSymbol":"USDC","marketType":"PERP","orderBookState":"Open","visible":true,"rwaMarketType":"INDEX"},{"symbol":"AAPL.US_USDC_PERP","baseSymbol":"AAPL.US","quoteSymbol":"USDC","marketType":"PERP","orderBookState":"Closed","visible":false,"rwaMarketType":"STOCK"},{"symbol":"PREDICTION_USDC","baseSymbol":"PREDICTION","quoteSymbol":"USDC","marketType":"PREDICTION","orderBookState":"Open","visible":true}]`,
 			}
 			if key == "POST https://api.hyperliquid.xyz/info" {
 				body, _ := io.ReadAll(req.Body)
@@ -69,7 +70,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 	if envelope.Source != "market-kit-bootstrap" {
 		t.Fatalf("unexpected source: %s", envelope.Source)
 	}
-	if len(envelope.Items) != 16 {
+	if len(envelope.Items) != 19 {
 		t.Fatalf("unexpected item count: %d", len(envelope.Items))
 	}
 
@@ -109,6 +110,16 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 				t.Fatalf("expected OKX pre-delisting flag to be preserved: %+v", item)
 			}
 		}
+		if item.PlatformID == "backpack" && item.Symbol == "QQQ.US_USDC_PERP" {
+			if item.MarketType != "perp" || item.BaseAsset != "QQQ" || item.QuoteAsset != "USDC" || item.AssetClassHint != "index" || item.Status != "live" {
+				t.Fatalf("expected Backpack index perp to be normalized: %+v", item)
+			}
+		}
+		if item.PlatformID == "backpack" && item.Symbol == "AAPL.US_USDC_PERP" {
+			if item.BaseAsset != "AAPL" || item.AssetClassHint != "stock" || item.Status != "paused" {
+				t.Fatalf("expected hidden Backpack stock perp to remain discoverable as paused: %+v", item)
+			}
+		}
 		if item.SourceID != BuiltInSourceID {
 			t.Fatalf("unexpected source id: %s", item.SourceID)
 		}
@@ -127,6 +138,9 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		"gate:NATGAS_USDT:perp",
 		"hyperliquid:HYPE:perp",
 		"hyperliquid:km:USOIL:perp",
+		"backpack:SOL_USDC:spot",
+		"backpack:QQQ.US_USDC_PERP:perp",
+		"backpack:AAPL.US_USDC_PERP:perp",
 	} {
 		if !found[key] {
 			t.Fatalf("missing expected market %s", key)

@@ -362,6 +362,13 @@ func inferMarketType(exchange string, rawSymbol string, marketTypeHint string, i
 	}
 
 	switch exchange {
+	case "backpack":
+		if strings.HasSuffix(raw, "_PERP") || strings.HasSuffix(raw, "_IPERP") {
+			return MarketTypePerpetual, true
+		}
+		if strings.Contains(raw, "_") {
+			return MarketTypeSpot, true
+		}
 	case "okx":
 		if strings.HasSuffix(raw, "-SWAP") {
 			return MarketTypePerpetual, true
@@ -399,6 +406,19 @@ func parseBaseQuote(exchange string, rawSymbol string, marketType MarketType, ca
 	}
 
 	raw := strings.ToUpper(strings.TrimSpace(rawSymbol))
+	if exchange == "backpack" {
+		if marketType == MarketTypePerpetual {
+			raw = strings.TrimSuffix(strings.TrimSuffix(raw, "_IPERP"), "_PERP")
+		}
+		for _, sep := range []string{"/", "-", "_"} {
+			if strings.Contains(raw, sep) {
+				parts := strings.SplitN(raw, sep, 2)
+				if len(parts) == 2 && parts[0] != "" && parts[1] != "" {
+					return strings.TrimSuffix(parts[0], ".US"), parts[1], true
+				}
+			}
+		}
+	}
 	if exchange == "okx" && strings.HasSuffix(raw, "-SWAP") {
 		raw = strings.TrimSuffix(raw, "-SWAP")
 	}

@@ -881,6 +881,7 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 					"GET https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES":                                `{"data":[]}`,
 					"GET https://api.gateio.ws/api/v4/spot/currency_pairs":                                                           `[]`,
 					"GET https://api.gateio.ws/api/v4/futures/usdt/contracts":                                                        `[]`,
+					"GET https://api.backpack.exchange/api/v1/markets":                                                               `[]`,
 				}
 				key := req.Method + " " + req.URL.String()
 				body, ok := payloads[key]

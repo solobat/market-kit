@@ -263,7 +263,7 @@ Even without any remote config, the server now exposes a built-in discovery sour
 
 - id: `market-kit-bootstrap`
 - kind: `discovery`
-- behavior: fetches bootstrap market inventory directly from exchange public REST endpoints such as Binance, Bybit, OKX, Bitget, Gate, and Hyperliquid
+- behavior: fetches bootstrap market inventory directly from exchange public REST endpoints such as Binance, Bybit, OKX, Bitget, Gate, Hyperliquid, and Backpack
 
 When the console is running with `pnpm dev`, it exposes a local sync proxy so you can pull remote unresolved / ambiguous samples with one click, without retyping URLs every time and without depending on browser CORS against the remote exporter.
 
