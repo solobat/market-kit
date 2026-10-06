@@ -79,6 +79,7 @@
   let symbolOutputFormat = "quotedCsv";
   let selectedSymbolIds = new Set();
   let symbolCopyMessage = "";
+  let symbolRowsAll = [];
   $: stats = registryStats(registry);
   $: discoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
   $: sampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
@@ -208,7 +209,7 @@
   $: selectedAssetUnifiedMarkets = buildAssetDetailMarketRows(selectedAssetOverrideRows, selectedAssetMarkets);
   $: selectedAssetUnifiedExchanges = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetUnifiedMarketTypes = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.marketType).filter(Boolean))).sort();
-  $: symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
+  $: if (page === "symbols") symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
   $: symbolPlatformOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.platform));
   $: symbolMarketTypeOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.marketType));
   $: symbolAssetClassOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.assetClass));

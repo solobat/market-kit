@@ -1,4 +1,4 @@
-import payload from "./mock-discovery.json";
+import payload from "./mock-discovery.json" with { type: "json" };
 import { normalizeExchange, normalizeMarketType, resolveIdentity } from "./identity.js";
 
 export function loadDiscoveryEnvelope() {

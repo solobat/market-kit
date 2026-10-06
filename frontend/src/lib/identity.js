@@ -1,7 +1,33 @@
-import baseRegistry from "../../../identity/default_registry.json";
+import baseRegistry from "../../../identity/default_registry.json" with { type: "json" };
 
 const quoteSuffixes = ["USDT", "USDC", "USD"];
 let registry = normalizeRegistry(baseRegistry);
+let indexedRegistry;
+let overrideIndex;
+let assetAliasIndex;
+
+// Rebuild once per registry revision, rather than scanning every rule for every market.
+function ensureRegistryIndexes() {
+  if (indexedRegistry === registry) return;
+  overrideIndex = new Map();
+  assetAliasIndex = new Map();
+  for (const item of registry.market_overrides) {
+    const key = JSON.stringify([normalizeExchange(item.exchange), item.raw_symbol.toUpperCase()]);
+    const matches = overrideIndex.get(key) || [];
+    matches.push(item);
+    overrideIndex.set(key, matches);
+  }
+  for (const item of registry.asset_aliases) {
+    // One asset may mention an alias more than once; it still counts as one match.
+    const aliases = new Set([item.canonical, ...item.aliases, ...item.unit_aliases.map((alias) => alias.alias)]);
+    for (const alias of aliases) {
+      const matches = assetAliasIndex.get(alias) || [];
+      matches.push(item);
+      assetAliasIndex.set(alias, matches);
+    }
+  }
+  indexedRegistry = registry;
+}
 
 export function loadRegistry() {
   return registry;
@@ -284,12 +310,11 @@ export function resolveIdentity(request) {
   }
 
   const hintedMarketType = normalizeMarketType(request.marketTypeHint);
-  const overrideMatches = registry.market_overrides.filter((item) => {
-    if (normalizeExchange(item.exchange) !== exchange) return false;
-    if (String(item.raw_symbol || "").trim().toUpperCase() !== symbol.toUpperCase()) return false;
-    if (hintedMarketType && normalizeMarketType(item.market_type) !== hintedMarketType) return false;
-    return true;
-  });
+  ensureRegistryIndexes();
+  const symbolOverrides = overrideIndex.get(JSON.stringify([exchange, symbol.toUpperCase()])) || [];
+  const overrideMatches = hintedMarketType
+    ? symbolOverrides.filter((item) => item.market_type === hintedMarketType)
+    : symbolOverrides;
   if (overrideMatches.length === 1) {
     return {
       status: "resolved",
@@ -386,11 +411,8 @@ function toIdentity(exchange, symbol, marketType, canonicalSymbol, override = nu
 
 function resolveAssetAlias(base) {
   const normalized = String(base || "").trim().toUpperCase();
-  const matches = registry.asset_aliases.filter((item) => {
-    if (String(item.canonical || "").trim().toUpperCase() === normalized) return true;
-    if ((item.aliases || []).some((alias) => String(alias || "").trim().toUpperCase() === normalized)) return true;
-    return (item.unit_aliases || []).some((alias) => String(alias?.alias || "").trim().toUpperCase() === normalized);
-  });
+  ensureRegistryIndexes();
+  const matches = assetAliasIndex.get(normalized) || [];
   if (matches.length === 1) {
     const unitAlias = (matches[0].unit_aliases || []).find(
       (alias) => String(alias?.alias || "").trim().toUpperCase() === normalized
