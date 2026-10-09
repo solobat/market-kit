@@ -577,3 +577,19 @@ func TestResolveBackpackRWAPerp(t *testing.T) {
 		t.Fatalf("expected canonical QQQ while preserving Backpack venue symbol, got %+v", result.Market)
 	}
 }
+
+func TestArcusAndQfexNativePerpetualSymbols(t *testing.T) {
+	registry, err := LoadDefaultRegistry()
+	if err != nil {
+		t.Fatal(err)
+	}
+	resolver := NewResolver(registry)
+	for _, exchange := range []string{"arcus", "qfex"} {
+		for _, symbol := range []string{"USO-USD", "USO/USD"} {
+			result := resolver.Resolve(ResolveRequest{Exchange: exchange, Symbol: symbol})
+			if result.Market == nil || result.Market.MarketType != MarketTypePerpetual || result.Market.BaseAsset != "USO" || result.Market.QuoteAsset != "USD" {
+				t.Fatalf("unexpected %s identity: %+v", exchange, result)
+			}
+		}
+	}
+}

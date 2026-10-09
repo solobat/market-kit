@@ -784,3 +784,28 @@ Then once stable:
 2. tag a version
 3. remove `replace`
 4. upgrade dependency normally
+
+## QFEX and Arcus perpetual discovery
+
+The default built-in bootstrap source includes `qfex` and `arcus`. To fetch only
+these inventories:
+
+```sh
+go run ./cmd/market-kit-bootstrap-discovery --sources qfex,arcus --output /tmp/new-perps.json
+```
+
+QFEX joins official `/refdata` metadata with `/md/contracts` and accepts only
+`Perpetual` products. Arcus reads `/v1/markets` and accepts only `PERPETUAL`
+products. Native symbols and quote currencies are retained, and offline/inactive
+markets remain paused rather than being presented as live. Missing response arrays
+fail discovery instead of silently erasing inventory. These are low-frequency
+metadata requests, with no per-symbol price polling.
+
+Arcus GLD, SLV, USO and CPER are ETF/fund identities, distinct from spot gold,
+silver, crude oil and copper. Native `USO-USD` and `USO/USD` are recognized as
+perpetuals by both venue resolvers. Discovered candidates continue through the
+existing curation and collision checks; ticker resemblance is not identity proof.
+
+Sources: [Arcus markets](https://docs.arcus.xyz/api-reference/public/get-markets),
+[QFEX reference data](https://api.qfex.com/refdata),
+[QFEX contracts](https://api.qfex.com/md/contracts).

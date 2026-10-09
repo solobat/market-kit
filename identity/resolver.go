@@ -362,6 +362,10 @@ func inferMarketType(exchange string, rawSymbol string, marketTypeHint string, i
 	}
 
 	switch exchange {
+	case "arcus", "qfex":
+		if strings.Count(raw, "-") == 1 || strings.Count(raw, "/") == 1 {
+			return MarketTypePerpetual, true
+		}
 	case "backpack":
 		if strings.HasSuffix(raw, "_PERP") || strings.HasSuffix(raw, "_IPERP") {
 			return MarketTypePerpetual, true
