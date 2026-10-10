@@ -115,6 +115,7 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 
 func collectors() []collector {
 	return []collector{
+		{id: "popdex", label: "Popdex", fetch: fetchPopdex, enabled: true},
 		{id: "arcus", label: "Arcus", fetch: fetchArcus, enabled: true},
 		{id: "qfex", label: "QFEX", fetch: fetchQfex, enabled: true},
 		{id: "binance", label: "Binance", fetch: fetchBinance, enabled: true},

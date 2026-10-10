@@ -809,3 +809,9 @@ existing curation and collision checks; ticker resemblance is not identity proof
 Sources: [Arcus markets](https://docs.arcus.xyz/api-reference/public/get-markets),
 [QFEX reference data](https://api.qfex.com/refdata),
 [QFEX contracts](https://api.qfex.com/md/contracts).
+
+## Popdex perpetual discovery
+
+`market-kit-bootstrap` now includes `popdex`. Use `--sources popdex` to fetch only its perpetual markets from the official `/api/v1/config/symbols?category=Futures` API. It retains native USDT symbols, Morph Tachyon identity, paused/delisted status, and separates commodities, indices and ETFs. Unknown RWA classifications fail explicitly for review rather than silently being treated as crypto or stock. The same ticker alone is not evidence to merge SKHY with SKHYNIX or other distinct instruments.
+
+Official references: [API metadata](https://popdex.xyz/docs/api/info/Get-All-Symbol-Config), [RWA contracts](https://popdex.xyz/docs/product-docs/trading/RWA-futures).
