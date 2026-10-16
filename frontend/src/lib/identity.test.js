@@ -59,3 +59,11 @@ test('full discovery resolution does not rescan registry arrays per market', () 
   assert.ok(groups.every((group) => !group.needsReview));
   assert.ok(visits <= count * 2, `expected one index build, got ${visits} rule visits`);
 });
+
+test('index digits stay semantic while token unit aliases remain scaled', () => {
+  setRuntimeRegistry({ asset_aliases: [asset('US', [], [{ alias: 'US100', multiplier: 100 }]), { canonical: 'US100', asset_class: 'rwa_stock', aliases: [] }, asset('PEPE'), asset('1000PEPE')] });
+  const index = resolve('US100USDT').market;
+  assert.equal(index.baseAsset, 'US100');
+  assert.equal(index.assetClass, 'rwa_stock');
+  assert.equal(resolve('1000PEPEUSDT').market.canonicalPriceMultiplier, 0.001);
+});

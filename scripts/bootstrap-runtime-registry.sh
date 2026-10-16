@@ -7,7 +7,7 @@ cd "${repo_root}"
 
 runtime_registry_path="${MARKET_KIT_RUNTIME_REGISTRY_PATH:-data/runtime_generated_registry.json}"
 review_output_path="${MARKET_KIT_RUNTIME_REGISTRY_REVIEW_PATH:-data/runtime_generated_registry.review.md}"
-bootstrap_sources="${MARKET_KIT_BOOTSTRAP_SOURCES:-binance,binance-web3,bybit,okx,bitget,gate,hyperliquid}"
+bootstrap_sources="${MARKET_KIT_BOOTSTRAP_SOURCES:-binance,binance-web3,bybit,okx,bitget,gate,hyperliquid,extended,gtrade}"
 bootstrap_timeout="${MARKET_KIT_BOOTSTRAP_TIMEOUT:-45s}"
 
 mkdir -p "$(dirname "${runtime_registry_path}")"

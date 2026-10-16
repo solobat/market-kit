@@ -323,14 +323,14 @@ func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) 
 			}
 		}
 	}
-	if !foundAlias {
-		t.Fatalf("expected SKHYNIX alias SKHX, got %+v", registry.AssetAliases)
+	if foundAlias {
+		t.Fatalf("SKHX must not be a global alias because another venue uses it for a leveraged ETP: %+v", registry.AssetAliases)
 	}
 
 	for _, override := range registry.MarketOverrides {
 		if override.Exchange == "hyperliquid" && override.RawSymbol == "xyz:SKHX" {
-			if override.CanonicalSymbol != "SKHYNIX/USDT" {
-				t.Fatalf("expected xyz:SKHX to canonicalize to SKHYNIX/USDT, got %+v", override)
+			if override.CanonicalSymbol != "SKHYNIX/USDC" {
+				t.Fatalf("expected xyz:SKHX to preserve quote as SKHYNIX/USDC, got %+v", override)
 			}
 			return
 		}

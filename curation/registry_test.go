@@ -534,17 +534,53 @@ func TestBuildGeneratedRegistryInfersHyperliquidHIP3RWAStockAlias(t *testing.T) 
 			}
 		}
 	}
-	if !foundAlias {
-		t.Fatalf("expected SKHYNIX alias SKHX, got %+v", registry.AssetAliases)
+	if foundAlias {
+		t.Fatalf("SKHX must not be a global alias because another venue uses it for a leveraged ETP: %+v", registry.AssetAliases)
 	}
 
 	for _, override := range registry.MarketOverrides {
 		if override.Exchange == "hyperliquid" && override.RawSymbol == "xyz:SKHX" {
-			if override.CanonicalSymbol != "SKHYNIX/USDT" {
-				t.Fatalf("expected xyz:SKHX to canonicalize to SKHYNIX/USDT, got %+v", override)
+			if override.CanonicalSymbol != "SKHYNIX/USDC" {
+				t.Fatalf("expected xyz:SKHX to preserve quote as SKHYNIX/USDC, got %+v", override)
 			}
 			return
 		}
 	}
 	t.Fatalf("expected hyperliquid xyz:SKHX override, got %+v", registry.MarketOverrides)
+}
+
+func TestKnownRWATickerDoesNotOverrideExplicitCoinIdentity(t *testing.T) {
+	for _, ticker := range []string{"DIA", "DAR", "FIS", "BILL", "D", "F", "HEI"} {
+		t.Run(ticker, func(t *testing.T) {
+			registry := BuildGeneratedRegistry([]discovery.ImportedMarket{
+				{PlatformID: "binance", VenueType: "cex", MarketType: "perp", Symbol: ticker + "USDT", BaseAsset: ticker, QuoteAsset: "USDT", AssetClassHint: "crypto", UnderlyingCategory: "coin"},
+				{PlatformID: "bitget", VenueType: "cex", MarketType: "spot", Symbol: "R" + ticker + "USDT", BaseAsset: ticker, QuoteAsset: "USDT", AssetClassHint: "stock"},
+			})
+			if len(registry.AssetCollisions) != 1 || registry.AssetCollisions[0].Symbol != ticker {
+				t.Fatalf("missing collision: %+v", registry.AssetCollisions)
+			}
+			resolver := identity.NewResolver(registry)
+			coin := resolver.Resolve(identity.ResolveRequest{Exchange: "binance", Symbol: ticker + "USDT", MarketTypeHint: "perpetual"})
+			stock := resolver.Resolve(identity.ResolveRequest{Exchange: "bitget", Symbol: "R" + ticker + "USDT", MarketTypeHint: "spot"})
+			if coin.Market == nil || stock.Market == nil {
+				t.Fatalf("missing resolved markets: %+v %+v", coin, stock)
+			}
+			if coin.Market.AssetClass != "crypto" || stock.Market.AssetClass != "rwa_stock" || coin.Market.ComparisonKey == "" || coin.Market.ComparisonKey == stock.Market.ComparisonKey {
+				t.Fatalf("identities incorrectly joined: %+v %+v", coin.Market, stock.Market)
+			}
+			unknown := resolver.Resolve(identity.ResolveRequest{Exchange: "unregistered", Symbol: ticker + "USDT", MarketTypeHint: "perpetual"})
+			if unknown.Status != "ambiguous" {
+				t.Fatalf("unknown venue must fail closed: %+v", unknown)
+			}
+		})
+	}
+}
+
+func TestExplicitCoinMetadataPreservesCommodityBackedTokens(t *testing.T) {
+	for _, asset := range []string{"PAXG", "XAUT"} {
+		item := discovery.ImportedMarket{UnderlyingCategory: "coin", AssetClassHint: "crypto"}
+		if got := classifyGeneratedAsset(item, asset); got != "rwa_commodity" {
+			t.Fatalf("%s: got %s", asset, got)
+		}
+	}
 }

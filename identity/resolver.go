@@ -11,6 +11,8 @@ type Resolver struct {
 }
 
 func NewResolver(registry Registry) *Resolver {
+	// Constructors own mutable normalization state; Resolve only reads indexes.
+	registry = registry.Clone()
 	registry.Normalize()
 	r := &Resolver{
 		registry:             registry,
@@ -423,6 +425,9 @@ func parseBaseQuote(exchange string, rawSymbol string, marketType MarketType, ca
 			}
 		}
 	}
+	if exchange == "bybit" && marketType == MarketTypePerpetual && strings.HasSuffix(raw, "PERP") {
+		return strings.TrimSuffix(raw, "PERP"), "USDC", true
+	}
 	if exchange == "okx" && strings.HasSuffix(raw, "-SWAP") {
 		raw = strings.TrimSuffix(raw, "-SWAP")
 	}
@@ -435,9 +440,6 @@ func parseBaseQuote(exchange string, rawSymbol string, marketType MarketType, ca
 			parts := strings.SplitN(raw, sep, 2)
 			if len(parts) == 2 && parts[0] != "" && parts[1] != "" {
 				quote := parts[1]
-				if exchange == "hyperliquid" && quote == "USDH" {
-					quote = "USDT"
-				}
 				return parts[0], quote, true
 			}
 		}

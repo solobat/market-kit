@@ -3,6 +3,7 @@ package identity
 import (
 	_ "embed"
 	"encoding/json"
+	"sync"
 )
 
 //go:embed default_registry.json
@@ -10,6 +11,26 @@ var defaultRegistryJSON []byte
 
 //go:embed generated_registry.json
 var generatedRegistryJSON []byte
+
+//go:embed reviewed_registry.json
+var reviewedRegistryJSON []byte
+
+var reviewedOnce sync.Once
+var reviewedTemplate Registry
+var reviewedError error
+
+func LoadReviewedRegistry() (Registry, error) {
+	reviewedOnce.Do(func() {
+		reviewedError = json.Unmarshal(reviewedRegistryJSON, &reviewedTemplate)
+		if reviewedError == nil {
+			reviewedTemplate.Normalize()
+		}
+	})
+	if reviewedError != nil {
+		return Registry{}, reviewedError
+	}
+	return reviewedTemplate.Clone(), nil
+}
 
 func LoadDefaultRegistry() (Registry, error) {
 	var registry Registry
@@ -27,5 +48,9 @@ func LoadDefaultRegistry() (Registry, error) {
 		registry = registry.Merge(generated)
 	}
 
-	return registry, nil
+	reviewed, err := LoadReviewedRegistry()
+	if err != nil {
+		return Registry{}, err
+	}
+	return registry.Overlay(reviewed), nil
 }

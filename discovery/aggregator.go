@@ -14,6 +14,7 @@ type Aggregator struct {
 }
 
 func NewAggregator(registry identity.Registry) *Aggregator {
+	registry = registry.Clone()
 	registry.Normalize()
 	return &Aggregator{
 		registry: registry,

@@ -489,7 +489,7 @@ func TestDefaultRegistryResolveHyperliquidSKHYNIXToXYZSKHX(t *testing.T) {
 
 	result := resolver.Resolve(ResolveRequest{
 		Exchange:       "hyperliquid",
-		Symbol:         "SKHYNIX/USDT",
+		Symbol:         "SKHYNIX/USDC",
 		MarketTypeHint: "perpetual",
 	})
 	if result.Status != ResolveResolved || result.Market == nil {
@@ -498,7 +498,7 @@ func TestDefaultRegistryResolveHyperliquidSKHYNIXToXYZSKHX(t *testing.T) {
 	if result.Market.RawSymbol != "xyz:SKHX" || result.Market.VenueSymbol != "XYZ:SKHX" {
 		t.Fatalf("expected default registry to route SKHYNIX to xyz:SKHX, got %+v", result.Market)
 	}
-	if result.Market.CanonicalSymbol != "SKHYNIX/USDT" || result.Market.BaseAsset != "SKHYNIX" {
+	if result.Market.CanonicalSymbol != "SKHYNIX/USDC" || result.Market.BaseAsset != "SKHYNIX" {
 		t.Fatalf("expected canonical SKHYNIX identity, got %+v", result.Market)
 	}
 }

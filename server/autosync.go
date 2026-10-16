@@ -19,6 +19,9 @@ import (
 )
 
 type AutoSyncStatus struct {
+	ManualOverrideCount      int                                  `json:"manualOverrideCount"`
+	ReviewedOverrideCount    int                                  `json:"reviewedOverrideCount"`
+	ManualPath               string                               `json:"manualPath,omitempty"`
 	Enabled                  bool                                 `json:"enabled"`
 	Interval                 string                               `json:"interval,omitempty"`
 	RuntimePath              string                               `json:"runtimePath,omitempty"`
@@ -39,8 +42,9 @@ type AutoSyncStatus struct {
 }
 
 type runtimeRegistryLoadResult struct {
-	Registry identity.Registry
-	Warning  string
+	Registry     identity.Registry
+	LegacyManual identity.Registry
+	Warning      string
 }
 
 func loadRuntimeRegistry(path string) (runtimeRegistryLoadResult, error) {
@@ -52,7 +56,8 @@ func loadRuntimeRegistry(path string) (runtimeRegistryLoadResult, error) {
 	if err == nil {
 		if isStaleRuntimeRegistry(registry) {
 			return runtimeRegistryLoadResult{
-				Warning: staleRuntimeRegistryWarning(path, registry.GeneratedVersion),
+				Warning:      staleRuntimeRegistryWarning(path, registry.GeneratedVersion),
+				LegacyManual: recoverLegacyProductSettings(registry),
 			}, nil
 		}
 		return runtimeRegistryLoadResult{Registry: registry}, nil
@@ -138,16 +143,22 @@ func (a *App) generatedRegistrySnapshot() identity.Registry {
 }
 
 func (a *App) applyGeneratedRegistry(generated identity.Registry) {
-	generated = stampCurrentGeneratedRegistryVersion(generated)
+	generated = stampCurrentGeneratedRegistryVersion(generated.Clone())
 	generated.Normalize()
-	runtime := a.baseRegistry.Merge(generated)
+	runtime := a.baseRegistry.Clone().Merge(generated.Clone())
 	runtime = applyRuntimeAssetClassOverrides(runtime, generated)
 	runtime = applyRuntimeMarketOverrides(runtime, generated)
+	runtime = runtime.Overlay(a.reviewedRegistry)
+	runtime = overlayManualRegistry(runtime, a.manualRegistry)
+	resolver := identity.NewResolver(runtime)
 
 	a.mu.Lock()
 	a.generatedRegistry = generated
 	a.registry = runtime
-	a.resolver = identity.NewResolver(runtime)
+	a.resolver = resolver
+	a.autoSyncStatus.ManualOverrideCount = len(a.manualRegistry.MarketOverrides)
+	a.autoSyncStatus.ReviewedOverrideCount = len(a.reviewedRegistry.MarketOverrides)
+	a.autoSyncStatus.ManualPath = manualRegistryPath(a.config)
 	a.autoSyncStatus.RuntimeAssets = len(runtime.AssetAliases)
 	a.autoSyncStatus.RuntimeOverrides = len(runtime.MarketOverrides)
 	a.autoSyncStatus.RuntimeGeneratedVersion = generated.GeneratedVersion
@@ -230,9 +241,11 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 	}
 
 	generated := curation.BuildGeneratedRegistry(envelope.Items)
-	next := curation.MergeGeneratedRegistry(a.generatedRegistrySnapshot(), generated, false)
-	suspiciousCrypto := curation.SuspiciousCryptoCandidates(envelope.Items, next, 25)
-	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, next); err != nil {
+	a.registryUpdateMu.Lock()
+	next := curation.MergeGeneratedRegistry(a.generatedRegistrySnapshot().Clone(), generated, false)
+	suspiciousCrypto := curation.SuspiciousCryptoCandidates(envelope.Items, next, len(envelope.Items))
+	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, overlayManualRegistry(next, a.manualRegistry)); err != nil {
+		a.registryUpdateMu.Unlock()
 		a.updateAutoSyncStatus(func(status *AutoSyncStatus) {
 			status.LastError = err.Error()
 			status.LastFinishedAt = time.Now().UTC()
@@ -240,6 +253,7 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		return err
 	}
 	a.applyGeneratedRegistry(next)
+	a.registryUpdateMu.Unlock()
 	if err := a.refreshDiscoveryCache(ctx, "all"); err != nil {
 		log.Printf("market-kit discovery cache refresh failed: %v", err)
 	}
@@ -256,6 +270,9 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		status.RequiredGeneratedVersion = curation.GeneratedRegistryVersion
 		status.SuspiciousCryptoCount = len(suspiciousCrypto)
 		status.SuspiciousCryptoAssets = suspiciousCrypto
+		if len(status.SuspiciousCryptoAssets) > 25 {
+			status.SuspiciousCryptoAssets = status.SuspiciousCryptoAssets[:25]
+		}
 	})
 	log.Printf("market-kit auto-sync refreshed source=%s discovery_items=%d generated_assets=%d generated_overrides=%d", sourceID, len(envelope.Items), len(next.AssetAliases), len(next.MarketOverrides))
 	return nil
@@ -291,7 +308,26 @@ func writeRuntimeRegistry(path string, registry identity.Registry) error {
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return err
 	}
-	return os.WriteFile(path, payload, 0o644)
+	tmp, err := os.CreateTemp(filepath.Dir(path), ".market-kit-registry-*")
+	if err != nil {
+		return err
+	}
+	name := tmp.Name()
+	defer os.Remove(name)
+	if err = tmp.Chmod(0o644); err == nil {
+		_, err = tmp.Write(payload)
+	}
+	if err == nil {
+		err = tmp.Sync()
+	}
+	closeErr := tmp.Close()
+	if err != nil {
+		return err
+	}
+	if closeErr != nil {
+		return closeErr
+	}
+	return os.Rename(name, path)
 }
 
 func (a *App) defaultAutoSyncSourceID() string {

@@ -1,5 +1,6 @@
 import baseRegistry from "../../../identity/default_registry.json" with { type: "json" };
 
+const numericIndexSymbols = new Set(["US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40"]);
 const quoteSuffixes = ["USDT", "USDC", "USD"];
 let registry = normalizeRegistry(baseRegistry);
 let indexedRegistry;
@@ -244,7 +245,7 @@ function normalizeUnitAliasList(canonical, aliases) {
   for (const item of aliases || []) {
     const alias = String(item?.alias || "").trim().toUpperCase();
     const multiplier = Number(item?.multiplier || 0);
-    if (!alias || alias === canonical || multiplier <= 0 || map.has(alias)) continue;
+    if (!alias || alias === canonical || numericIndexSymbols.has(alias) || multiplier <= 0 || map.has(alias)) continue;
     map.set(alias, { alias, multiplier });
   }
   return Array.from(map.values()).sort((left, right) => {
@@ -255,7 +256,7 @@ function normalizeUnitAliasList(canonical, aliases) {
 
 function inferScaledUnitAlias(value, canonicalSet) {
   const normalized = String(value || "").trim().toUpperCase();
-  if (!normalized) return null;
+  if (!normalized || numericIndexSymbols.has(normalized)) return null;
 
   const prefixes = [
     { token: "1000000", multiplier: 1000000 },

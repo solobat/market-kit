@@ -26,6 +26,9 @@ type App struct {
 	config                Config
 	client                *http.Client
 	sources               []SyncSource
+	registryUpdateMu      sync.Mutex
+	manualRegistry        identity.Registry
+	reviewedRegistry      identity.Registry
 	mu                    sync.RWMutex
 	baseRegistry          identity.Registry
 	generatedRegistry     identity.Registry
@@ -65,10 +68,28 @@ func New(config Config) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
+	manual, err := loadManualRegistry(config)
+	if err != nil {
+		return nil, err
+	}
+	// Older versions mixed human product settings with generated output. Recover
+	// only explicit split/expiry/prohibition fields, never freeze the old full feed.
+	if hasGeneratedRegistryContent(runtimeLoad.LegacyManual) {
+		manual = runtimeLoad.LegacyManual.Overlay(manual)
+		if err := writeRuntimeRegistry(manualRegistryPath(config), manual); err != nil {
+			return nil, err
+		}
+	}
+	reviewed, err := identity.LoadReviewedRegistry()
+	if err != nil {
+		return nil, err
+	}
 	generated := runtimeLoad.Registry
 	runtimeRegistry := registry.Merge(generated)
 	runtimeRegistry = applyRuntimeAssetClassOverrides(runtimeRegistry, generated)
 	runtimeRegistry = applyRuntimeMarketOverrides(runtimeRegistry, generated)
+	runtimeRegistry = runtimeRegistry.Overlay(reviewed)
+	runtimeRegistry = overlayManualRegistry(runtimeRegistry, manual)
 	return &App{
 		config: config,
 		client: &http.Client{
@@ -77,9 +98,14 @@ func New(config Config) (*App, error) {
 		sources:           sources,
 		baseRegistry:      registry,
 		generatedRegistry: generated,
+		manualRegistry:    manual,
+		reviewedRegistry:  reviewed,
 		registry:          runtimeRegistry,
 		resolver:          identity.NewResolver(runtimeRegistry),
 		autoSyncStatus: AutoSyncStatus{
+			ManualOverrideCount:      len(manual.MarketOverrides),
+			ReviewedOverrideCount:    len(reviewed.MarketOverrides),
+			ManualPath:               manualRegistryPath(config),
 			Enabled:                  config.AutoSyncEnabled,
 			Interval:                 config.AutoSyncInterval.String(),
 			RuntimePath:              config.RuntimeRegistryPath,
@@ -99,6 +125,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/v1/resolve", a.handleResolve)
 	mux.HandleFunc("/api/v1/registry", a.handleRuntimeRegistry)
 	mux.HandleFunc("/api/v1/registry/overrides", a.handleRuntimeRegistryOverride)
+	mux.HandleFunc("/api/v1/registry/overrides/batch", a.handleRuntimeRegistryOverrideBatch)
 	mux.HandleFunc("/api/v1/assets/", a.handleAsset)
 	mux.HandleFunc("/api/v1/version", a.handleVersion)
 	mux.HandleFunc("/api/v1/auto-sync", a.handleAutoSync)
@@ -317,32 +344,12 @@ func (a *App) handleRuntimeRegistryOverride(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	override, assetBase, err := normalizeRegistryOverrideRequest(req)
+	overrides, err := a.commitManualOverrides([]registryOverrideRequest{req})
 	if err != nil {
-		writeJSON(w, http.StatusBadRequest, map[string]any{"error": err.Error()})
+		writeRegistryMutationError(w, err)
 		return
 	}
-	assetClass := normalizeRegistryAssetClass(req.AssetClass)
-	if strings.TrimSpace(req.AssetClass) != "" && assetClass == "" {
-		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass must be crypto, rwa_stock, rwa_commodity, fiat_stable, or unknown"})
-		return
-	}
-	if registryOverrideCreatesNewAsset(a.generatedRegistrySnapshot(), a.runtimeRegistry(), assetBase) && assetClass == "" {
-		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass is required when assigning a market to a new base asset"})
-		return
-	}
-
-	nextGenerated := upsertRuntimeRegistryOverride(a.generatedRegistrySnapshot(), a.runtimeRegistry(), override, assetBase, assetClass)
-	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, nextGenerated); err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": "write runtime registry failed"})
-		return
-	}
-	a.applyGeneratedRegistry(nextGenerated)
-
-	persistedOverride, ok := findMarketOverride(a.runtimeRegistry(), override)
-	if !ok {
-		persistedOverride = override
-	}
+	persistedOverride := overrides[0]
 	payload := map[string]any{
 		"override": persistedOverride,
 	}
@@ -378,6 +385,24 @@ func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.Mar
 		return identity.MarketOverride{}, "", errors.New("expiryAtMs must not be negative")
 	}
 
+	class := normalizeRegistryAssetClass(req.AssetClass)
+	if class != "" && class != "unknown" {
+		if strings.TrimSpace(req.AssetID) == "" {
+			req.AssetID = identity.CanonicalAssetID(class, base)
+		}
+		if strings.TrimSpace(req.UnderlyingID) == "" {
+			req.UnderlyingID = req.AssetID
+		}
+		if strings.TrimSpace(req.ComparisonKey) == "" {
+			req.ComparisonKey = identity.DefaultComparisonKey(req.UnderlyingID, quote)
+		}
+		if strings.TrimSpace(req.InstrumentKind) == "" {
+			req.InstrumentKind = identity.DefaultInstrumentKind(identity.MarketType(marketType), class)
+		}
+		if strings.TrimSpace(req.SettlementAsset) == "" {
+			req.SettlementAsset = quote
+		}
+	}
 	comparisonStatus := identity.ComparisonStatus("")
 	if strings.TrimSpace(req.ComparisonStatus) != "" {
 		comparisonStatus = identity.NormalizeComparisonStatus(identity.ComparisonStatus(req.ComparisonStatus))
@@ -446,70 +471,12 @@ func splitCanonicalSymbol(value string) (string, string, bool) {
 	return base, quote, base != "" && quote != ""
 }
 
-func upsertRuntimeRegistryOverride(generated identity.Registry, runtime identity.Registry, override identity.MarketOverride, assetBase string, assetClass string) identity.Registry {
-	generated.Normalize()
-	runtime.Normalize()
-	override.Exchange = strings.ToLower(strings.TrimSpace(override.Exchange))
-	override.RawSymbol = strings.TrimSpace(override.RawSymbol)
-	override.MarketType = normalizeRegistryOverrideMarketType(override.MarketType)
-	override.CanonicalSymbol = strings.ToUpper(strings.TrimSpace(override.CanonicalSymbol))
-	override.UnitAlias = strings.ToUpper(strings.TrimSpace(override.UnitAlias))
-	if override.UnitMultiplier <= 0 {
-		override.UnitMultiplier = 0
-	}
-	targetKey := registryOverrideKey(override)
-
-	nextOverrides := make([]identity.MarketOverride, 0, len(generated.MarketOverrides)+1)
-	for _, item := range generated.MarketOverrides {
-		if registryOverrideKey(item) == targetKey {
-			continue
-		}
-		nextOverrides = append(nextOverrides, item)
-	}
-	nextOverrides = append(nextOverrides, override)
-	generated.MarketOverrides = nextOverrides
-
-	assetBase = strings.ToUpper(strings.TrimSpace(assetBase))
-	if assetBase != "" && !registryHasAsset(runtime, assetBase) && !registryHasAsset(generated, assetBase) {
-		class := strings.TrimSpace(assetClass)
-		if class != "" {
-			generated.AssetAliases = append(generated.AssetAliases, identity.AssetAliasRule{
-				Canonical:    assetBase,
-				AssetClass:   class,
-				AssetID:      identity.CanonicalAssetID(class, assetBase),
-				UnderlyingID: identity.CanonicalAssetID(class, assetBase),
-			})
-		}
-	}
-
-	generated.Normalize()
-	return generated
-}
-
-func registryOverrideCreatesNewAsset(generated identity.Registry, runtime identity.Registry, assetBase string) bool {
-	assetBase = strings.ToUpper(strings.TrimSpace(assetBase))
-	if assetBase == "" {
-		return false
-	}
-	return !registryHasAsset(runtime, assetBase) && !registryHasAsset(generated, assetBase)
-}
-
 func registryOverrideKey(item identity.MarketOverride) string {
 	return strings.Join([]string{
 		strings.ToLower(strings.TrimSpace(item.Exchange)),
 		strings.TrimSpace(item.RawSymbol),
 		normalizeRegistryOverrideMarketType(item.MarketType),
 	}, "|")
-}
-
-func findMarketOverride(registry identity.Registry, target identity.MarketOverride) (identity.MarketOverride, bool) {
-	targetKey := registryOverrideKey(target)
-	for _, item := range registry.MarketOverrides {
-		if registryOverrideKey(item) == targetKey {
-			return item, true
-		}
-	}
-	return identity.MarketOverride{}, false
 }
 
 func registryHasAsset(registry identity.Registry, canonical string) bool {
@@ -562,18 +529,24 @@ func (a *App) handleAssetClassUpdate(w http.ResponseWriter, r *http.Request, sym
 		writeJSON(w, http.StatusBadRequest, map[string]any{"error": "assetClass must be crypto, rwa_stock, rwa_commodity, fiat_stable, or unknown"})
 		return
 	}
-	if !registryHasAsset(a.runtimeRegistry(), symbol) && !registryHasAsset(a.generatedRegistrySnapshot(), symbol) {
+	a.registryUpdateMu.Lock()
+	defer a.registryUpdateMu.Unlock()
+	runtime := a.runtimeRegistry()
+	if !registryHasAsset(runtime, symbol) {
 		writeJSON(w, http.StatusNotFound, map[string]any{"error": "asset not found", "asset": symbol})
 		return
 	}
-
-	nextGenerated := updateRuntimeAssetClass(a.generatedRegistrySnapshot(), symbol, assetClass)
-	if err := writeRuntimeRegistry(a.config.RuntimeRegistryPath, nextGenerated); err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"error": "write runtime registry failed"})
+	for _, collision := range runtime.AssetCollisions {
+		if collision.Symbol == symbol {
+			writeJSON(w, http.StatusBadRequest, map[string]any{"error": "colliding ticker requires market-specific overrides"})
+			return
+		}
+	}
+	manual := updateRuntimeAssetClass(a.manualRegistry.Clone(), symbol, assetClass)
+	if err := a.persistManualRegistry(manual); err != nil {
+		writeRegistryMutationError(w, err)
 		return
 	}
-	a.applyGeneratedRegistry(nextGenerated)
-
 	asset, _ := findAssetAlias(a.runtimeRegistry(), symbol)
 	payload := map[string]any{"asset": asset}
 	if !compactRegistryResponse(r) {
@@ -597,6 +570,8 @@ func updateRuntimeAssetClass(generated identity.Registry, symbol string, assetCl
 	for idx := range generated.AssetAliases {
 		if strings.EqualFold(generated.AssetAliases[idx].Canonical, symbol) {
 			generated.AssetAliases[idx].AssetClass = assetClass
+			generated.AssetAliases[idx].AssetID = identity.CanonicalAssetID(assetClass, symbol)
+			generated.AssetAliases[idx].UnderlyingID = generated.AssetAliases[idx].AssetID
 			generated.Normalize()
 			return generated
 		}
@@ -1140,13 +1115,18 @@ func (a *App) fetchDiscoveryEnvelope(ctx context.Context, sourceID string) (Sync
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
+	const maxDiscoveryPayloadBytes = 32 << 20
+	body, err := io.ReadAll(io.LimitReader(resp.Body, maxDiscoveryPayloadBytes+1))
 	if err != nil {
 		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{
 			Status:  http.StatusBadGateway,
 			Source:  source.ID,
 			Message: err.Error(),
 		}
+	}
+
+	if len(body) > maxDiscoveryPayloadBytes {
+		return SyncSource{}, discovery.ImportEnvelope{}, &discoveryFetchError{Status: http.StatusBadGateway, Source: source.ID, Message: "discovery payload exceeds 32 MiB limit"}
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {

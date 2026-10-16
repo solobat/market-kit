@@ -870,6 +870,8 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 		client: &http.Client{
 			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 				payloads := map[string]string{
+					"GET https://api.starknet.extended.exchange/api/v1/info/markets":                                                 `{"status":"OK","data":[]}`,
+					"GET https://backend-arbitrum.gains.trade/trading-variables":                                                     `{"pairs":[],"groups":[]}`,
 					"GET https://api.popdex.xyz/api/v1/config/symbols?category=Futures":                                              `{"code":"200","data":[]}`,
 					"GET https://api.arcus.xyz/v1/markets":                                                                           `{"markets":[]}`,
 					"GET https://api.qfex.com/refdata":                                                                               `{"data":[]}`,
@@ -1722,17 +1724,19 @@ func TestHandleDiscoveryLookupMatchesCommodityAliasesForHyperliquidTickers(t *te
 			if payload.Query != tc.query {
 				t.Fatalf("unexpected query: %s", payload.Query)
 			}
-			if payload.Summary.GroupCount != 1 || payload.Summary.MarketCount != 2 {
+			if payload.Summary.GroupCount != 2 || payload.Summary.MarketCount != 2 {
 				t.Fatalf("unexpected summary for %s: %+v", tc.query, payload.Summary)
 			}
-			if len(payload.Groups) != 1 || payload.Groups[0].GroupKey != tc.groupKey {
+			if len(payload.Groups) != 2 {
 				t.Fatalf("unexpected groups for %s: %+v", tc.query, payload.Groups)
 			}
 			foundHL := false
-			for _, market := range payload.Groups[0].Markets {
-				if market.Exchange == "hyperliquid" && market.RawSymbol == tc.hlRawSymbol {
-					foundHL = true
-					break
+			for _, group := range payload.Groups {
+				for _, market := range group.Markets {
+					if market.Exchange == "hyperliquid" && market.RawSymbol == tc.hlRawSymbol {
+						foundHL = true
+						break
+					}
 				}
 			}
 			if !foundHL {

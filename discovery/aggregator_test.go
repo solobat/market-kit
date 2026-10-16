@@ -2,6 +2,7 @@ package discovery
 
 import (
 	"encoding/json"
+	"strings"
 	"testing"
 
 	"github.com/solobat/market-kit/identity"
@@ -283,15 +284,15 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidKMMarket(t *testing.T
 		},
 	})
 
-	if len(groups) != 1 {
-		t.Fatalf("expected km market and okx market to group together, got %d groups: %+v", len(groups), groups)
+	if len(groups) != 2 {
+		t.Fatalf("USO ETF and USOIL/USDH must stay separate: %+v", groups)
 	}
-	if groups[0].GroupKey != "USO/USDT" {
-		t.Fatalf("expected canonical USO/USDT group, got %s", groups[0].GroupKey)
+	for _, group := range groups {
+		if group.CanonicalAsset == "USOIL" && !group.NeedsReview {
+			t.Fatalf("unverified oil token needs review: %+v", group)
+		}
 	}
-	if len(groups[0].Markets) != 2 {
-		t.Fatalf("expected 2 grouped markets, got %d", len(groups[0].Markets))
-	}
+
 }
 
 func TestBuildAssetGroupsKeepsGenericHyperliquidHIP3Namespaced(t *testing.T) {
@@ -411,6 +412,12 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidWTIMarkets(t *testing
 			BaseAsset:  "CL",
 			QuoteAsset: "USDT",
 		}})
+		if market.Symbol == "WTIOIL/USDH" {
+			if len(groups) != 2 {
+				t.Fatalf("USDH must remain distinct from USDT: %+v", groups)
+			}
+			continue
+		}
 		if len(groups) != 1 {
 			t.Fatalf("expected %s to group with okx CL, got %d groups: %+v", market.Symbol, len(groups), groups)
 		}
@@ -466,15 +473,21 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidCommodityAliasMarkets
 					QuoteAsset: "USDT",
 				},
 			})
-			if len(groups) != 1 {
+			if len(groups) != 2 {
 				t.Fatalf("expected %s to group with %s, got %d groups: %+v", tc.symbol, tc.okxSymbol, len(groups), groups)
 			}
-			if groups[0].GroupKey != tc.expectedGroupKey {
-				t.Fatalf("expected canonical group %s for %s, got %s", tc.expectedGroupKey, tc.symbol, groups[0].GroupKey)
+			found := map[string]bool{}
+			for _, group := range groups {
+				found[group.GroupKey] = true
+				if len(group.Markets) != 1 {
+					t.Fatalf("quote groups must remain separate: %+v", groups)
+				}
 			}
-			if len(groups[0].Markets) != 2 {
-				t.Fatalf("expected 2 grouped markets for %s, got %d", tc.symbol, len(groups[0].Markets))
+			usdc := strings.TrimSuffix(tc.expectedGroupKey, "USDT") + "USDC"
+			if !found[tc.expectedGroupKey] || !found[usdc] {
+				t.Fatalf("expected both quote currencies: %+v", groups)
 			}
+
 		})
 	}
 }

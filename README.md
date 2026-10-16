@@ -815,3 +815,9 @@ Sources: [Arcus markets](https://docs.arcus.xyz/api-reference/public/get-markets
 `market-kit-bootstrap` now includes `popdex`. Use `--sources popdex` to fetch only its perpetual markets from the official `/api/v1/config/symbols?category=Futures` API. It retains native USDT symbols, Morph Tachyon identity, paused/delisted status, and separates commodities, indices and ETFs. Unknown RWA classifications fail explicitly for review rather than silently being treated as crypto or stock. The same ticker alone is not evidence to merge SKHY with SKHYNIX or other distinct instruments.
 
 Official references: [API metadata](https://popdex.xyz/docs/api/info/Get-All-Symbol-Config), [RWA contracts](https://popdex.xyz/docs/product-docs/trading/RWA-futures).
+
+## Persistent curation and full market audits
+
+Human corrections are stored separately in `<MARKET_KIT_RUNTIME_REGISTRY_PATH>.manual.json` and take precedence over discovery and the embedded reviewed rules. Back up this sidecar with runtime data. Bulk corrections use `POST /api/v1/registry/overrides/batch` with `{"items":[...]}` (1–500 items, existing admin authorization); invalid batches write nothing, and identical submissions avoid rebuilding the resolver.
+
+For the version-6 identity fixes, official metadata coverage, reviewed rule evidence, ECS upgrade steps and validation commands, see [the curation upgrade guide](docs/identity-curation-upgrade-2026-10-16.md). The read-only `scripts/audit-online-markets.py` audits every unique market in saved discovery and registry snapshots against the online batch resolver; flags require evidence before changing an identity.

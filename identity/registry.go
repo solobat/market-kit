@@ -215,13 +215,59 @@ func (r *Registry) normalizeAssetAliases() map[string]string {
 }
 
 func (r *Registry) normalizeMarketOverrides(scaledAliases map[string]string) {
+	type unitTarget struct {
+		base         string
+		alias        string
+		multiplier   float64
+		class        string
+		assetID      string
+		underlyingID string
+	}
+	units := map[string]unitTarget{}
+	for _, asset := range r.AssetAliases {
+		for _, unit := range asset.UnitAliases {
+			units[unit.Alias] = unitTarget{asset.Canonical, unit.Alias, unit.Multiplier, asset.AssetClass, asset.AssetID, asset.UnderlyingID}
+		}
+	}
 	overrideKeys := map[string]bool{}
 	normalized := make([]MarketOverride, 0, len(r.MarketOverrides))
 	for _, item := range r.MarketOverrides {
-		if base, quote := splitCanonicalSymbol(item.CanonicalSymbol); base != "" && quote != "" {
-			if canonicalBase, ok := scaledAliases[base]; ok {
-				item.CanonicalSymbol = canonicalBase + "/" + quote
+		base, quote := splitCanonicalSymbol(item.CanonicalSymbol)
+		// Preserve explicit market rebases/splits, independent of global unit aliases.
+		if item.UnitMultiplier <= 0 && (item.AssetClass == "" || item.AssetClass == "unknown" || item.AssetClass == "crypto") {
+			raw := strings.ToUpper(strings.TrimSpace(item.RawSymbol))
+			target, ok := units[raw]
+			if !ok {
+				if parsed, _, parsedOK := parseBaseQuote(item.Exchange, item.RawSymbol, MarketType(item.MarketType), ""); parsedOK {
+					target, ok = units[parsed]
+				}
 			}
+			if !ok {
+				target, ok = units[base]
+			}
+			if ok && (base == target.base || base == target.alias || scaledAliases[base] == target.base) {
+				oldID := item.AssetID
+				oldUnderlying := item.UnderlyingID
+				item.CanonicalSymbol = target.base + "/" + quote
+				item.UnitAlias = target.alias
+				item.UnitMultiplier = target.multiplier
+				if item.AssetClass == "" || item.AssetClass == "unknown" {
+					item.AssetClass = target.class
+				}
+				// Only repair inferred ticker IDs, never rewrite an explicit custom product ID.
+				if oldID == "" || oldID == CanonicalAssetID(item.AssetClass, target.alias) || strings.HasPrefix(oldID, "unknown:ticker:") {
+					item.AssetID = target.assetID
+				}
+				if oldUnderlying == "" || oldUnderlying == CanonicalAssetID(item.AssetClass, target.alias) || strings.HasPrefix(oldUnderlying, "unknown:ticker:") {
+					item.UnderlyingID = target.underlyingID
+				}
+				if item.ComparisonKey == "" || item.ComparisonKey == DefaultComparisonKey(oldID, quote) || item.ComparisonKey == DefaultComparisonKey(oldUnderlying, quote) {
+					item.ComparisonKey = DefaultComparisonKey(item.UnderlyingID, quote)
+				}
+			}
+		}
+		if canonicalBase, ok := scaledAliases[base]; ok {
+			item.CanonicalSymbol = canonicalBase + "/" + quote
 		}
 		key := marketOverrideKey(item)
 		if key == "||" || overrideKeys[key] {
@@ -253,7 +299,7 @@ func normalizeUnitAliasList(canonical string, aliases []AssetUnitAlias) []AssetU
 	out := make([]AssetUnitAlias, 0, len(aliases))
 	for _, alias := range aliases {
 		alias.Alias = strings.ToUpper(strings.TrimSpace(alias.Alias))
-		if alias.Alias == "" || alias.Alias == canonical || alias.Multiplier <= 0 || seen[alias.Alias] {
+		if alias.Alias == "" || alias.Alias == canonical || isNumericIndexSymbol(alias.Alias) || alias.Multiplier <= 0 || seen[alias.Alias] {
 			continue
 		}
 		seen[alias.Alias] = true
@@ -268,9 +314,17 @@ func normalizeUnitAliasList(canonical string, aliases []AssetUnitAlias) []AssetU
 	return out
 }
 
+func isNumericIndexSymbol(value string) bool {
+	switch value {
+	case "US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40":
+		return true
+	}
+	return false
+}
+
 func inferScaledUnitAlias(value string, canonicalSet map[string]bool) (string, float64, bool) {
 	value = strings.ToUpper(strings.TrimSpace(value))
-	if value == "" {
+	if value == "" || isNumericIndexSymbol(value) {
 		return "", 0, false
 	}
 

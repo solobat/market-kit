@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 4
+const GeneratedRegistryVersion = 6
 
 var (
 	stableAssets = map[string]bool{
@@ -36,10 +36,12 @@ var (
 		"RKLB": true, "RTX": true, "SLV": true, "SNDK": true,
 		"SKHYNIX": true, "SOXL": true, "SOXS": true, "SPACEX": true, "SPCX": true, "SPY": true, "SQQQ": true,
 		"STXSTOCK": true, "TCOM": true, "TQQQ": true, "TSLA": true, "TSM": true, "UBER": true,
+		"US100": true, "US500": true,
 		"UNH": true, "USAR": true, "USO": true, "WDC": true, "WMT": true, "XLE": true, "XOM": true,
 	}
 	rwaCommodityAssets = map[string]bool{
 		"BRENT": true, "BRENTOIL": true, "CL": true, "GOLD": true, "NATGAS": true, "NG": true,
+		"XPD": true, "XPT": true, "PALLADIUM": true, "PLATINUM": true, "BZ": true, "XCU": true,
 		"PAXG": true, "SILVER": true, "WTI": true, "WTIOIL": true, "XAG": true, "XAGT": true,
 		"XAU": true, "XAUT": true,
 	}
@@ -54,6 +56,7 @@ type SuspiciousCryptoCandidate struct {
 }
 
 func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry {
+	items, conflicts := selectMarketIdentityEvidence(items)
 	type generatedMarketCandidate struct {
 		exchange    string
 		base        string
@@ -88,17 +91,17 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			continue
 		}
 
-		venueBase := hyperliquidHIP3Base(symbol, base)
 		if exchange == "hyperliquid" && marketType == "perpetual" {
-			if target, ok := hyperliquidAliases[venueBase]; ok {
+			if target, ok := hyperliquidAliases[strings.ToUpper(strings.TrimSpace(symbol))]; ok {
 				base = target.Base
-				quote = target.Quote
 				ensureAsset(assets, base, target.AssetClass)
-				addAssetAlias(assets, base, venueBase)
 			}
 		}
 
 		baseClass := classifyGeneratedAsset(item, base)
+		if collisionSet[base] && !hasExplicitCryptoIdentityHint(item) && !hasExplicitRWAHint(item) {
+			baseClass = "unknown"
+		}
 		if !collisionSet[base] {
 			ensureAsset(assets, base, baseClass)
 		}
@@ -135,6 +138,13 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ComparisonStatus: comparisonStatus,
 			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
 			SettlementAsset:  candidate.quote,
+		}
+		if conflicts[overrideKey(override)] {
+			override.AssetClass = "unknown"
+			override.AssetID = identity.CanonicalAssetID("unknown", candidate.base)
+			override.UnderlyingID = override.AssetID
+			override.ComparisonKey = ""
+			override.ComparisonStatus = identity.ComparisonAmbiguous
 		}
 		overrides[overrideKey(override)] = override
 	}
@@ -304,6 +314,13 @@ func inferHyperliquidHIP3AliasTargets(items []discovery.ImportedMarket) map[stri
 		anchors[base] = hyperliquidHIP3AliasTarget{Base: base, Quote: quote, AssetClass: assetClass}
 	}
 
+	reviewed, _ := identity.LoadReviewedRegistry()
+	exact := map[string]identity.MarketOverride{}
+	for _, v := range reviewed.MarketOverrides {
+		if v.Exchange == "hyperliquid" && v.MarketType == "perpetual" {
+			exact[strings.ToUpper(v.RawSymbol)] = v
+		}
+	}
 	out := map[string]hyperliquidHIP3AliasTarget{}
 	for _, item := range items {
 		if !shouldInclude(item) {
@@ -319,37 +336,20 @@ func inferHyperliquidHIP3AliasTargets(items []discovery.ImportedMarket) map[stri
 		if venueBase == "" || !strings.Contains(strings.TrimSpace(item.Symbol), ":") {
 			continue
 		}
+		key := strings.ToUpper(strings.TrimSpace(item.Symbol))
+		if reviewed, ok := exact[key]; ok {
+			base, quote, found := strings.Cut(reviewed.CanonicalSymbol, "/")
+			if found {
+				out[key] = hyperliquidHIP3AliasTarget{Base: base, Quote: quote, AssetClass: reviewed.AssetClass}
+				continue
+			}
+		}
 		if target, ok := anchors[venueBase]; ok {
-			out[venueBase] = target
-			continue
+			out[key] = target
 		}
-		if target, ok := inferWrappedStockTickerTarget(venueBase, anchors); ok {
-			out[venueBase] = target
-		}
+
 	}
 	return out
-}
-
-func inferWrappedStockTickerTarget(venueBase string, anchors map[string]hyperliquidHIP3AliasTarget) (hyperliquidHIP3AliasTarget, bool) {
-	venueBase = strings.ToUpper(strings.TrimSpace(venueBase))
-	if len(venueBase) < 3 || !strings.HasSuffix(venueBase, "X") {
-		return hyperliquidHIP3AliasTarget{}, false
-	}
-	prefix := strings.TrimSuffix(venueBase, "X")
-	if len(prefix) < 3 {
-		return hyperliquidHIP3AliasTarget{}, false
-	}
-
-	var match hyperliquidHIP3AliasTarget
-	count := 0
-	for base, target := range anchors {
-		if base == venueBase || target.AssetClass != "rwa_stock" || !strings.HasPrefix(base, prefix) {
-			continue
-		}
-		match = target
-		count++
-	}
-	return match, count == 1
 }
 
 func hyperliquidHIP3Base(symbol string, fallback string) string {
@@ -692,25 +692,6 @@ func generatedAssetClassRank(assetClass string) int {
 	}
 }
 
-func addAssetAlias(target map[string]identity.AssetAliasRule, canonical string, alias string) {
-	canonical = strings.ToUpper(strings.TrimSpace(canonical))
-	alias = strings.ToUpper(strings.TrimSpace(alias))
-	if canonical == "" || alias == "" || canonical == alias {
-		return
-	}
-	item, ok := target[canonical]
-	if !ok {
-		return
-	}
-	for _, existing := range item.Aliases {
-		if existing == alias {
-			return
-		}
-	}
-	item.Aliases = append(item.Aliases, alias)
-	target[canonical] = item
-}
-
 func classifyGeneratedAsset(item discovery.ImportedMarket, asset string) string {
 	asset = strings.ToUpper(strings.TrimSpace(asset))
 	if asset == "" {
@@ -718,6 +699,12 @@ func classifyGeneratedAsset(item discovery.ImportedMarket, asset string) string 
 	}
 	if stableAssets[asset] {
 		return "fiat_stable"
+	}
+	// Explicit venue identity must beat ticker-only fallback lists. Generic crypto
+	// labels remain weaker than known RWA tickers (some venues label every perp crypto).
+	// Commodity-backed tokens such as PAXG/XAUT still carry commodity exposure.
+	if hasExplicitCryptoIdentityHint(item) && !hasExplicitRWAHint(item) && asset != "PAXG" && asset != "XAUT" && asset != "XAGT" {
+		return "crypto"
 	}
 	if fallback := inferAssetClassFallback(asset); fallback == "rwa_stock" || fallback == "rwa_commodity" {
 		return fallback

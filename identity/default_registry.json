@@ -27,7 +27,7 @@
     {
       "canonical": "SKHYNIX",
       "asset_class": "rwa_stock",
-      "aliases": ["SKHX"]
+      "aliases": []
     },
     {
       "canonical": "AAPL",
@@ -67,7 +67,7 @@
     {
       "canonical": "USO",
       "asset_class": "rwa_stock",
-      "aliases": ["USOIL"]
+      "aliases": []
     },
     {
       "canonical": "USDT",
@@ -115,7 +115,7 @@
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:SKHX",
       "market_type": "perpetual",
-      "canonical_symbol": "SKHYNIX/USDT"
+      "canonical_symbol": "SKHYNIX/USDC"
     },
     {
       "exchange": "hyperliquid",
@@ -133,43 +133,47 @@
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:BRENTOIL",
       "market_type": "perpetual",
-      "canonical_symbol": "BZ/USDT"
+      "canonical_symbol": "BZ/USDC"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:GOLD",
       "market_type": "perpetual",
-      "canonical_symbol": "XAU/USDT"
+      "canonical_symbol": "XAU/USDC"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:SILVER",
       "market_type": "perpetual",
-      "canonical_symbol": "XAG/USDT"
+      "canonical_symbol": "XAG/USDC"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:PALLADIUM",
       "market_type": "perpetual",
-      "canonical_symbol": "XPD/USDT"
+      "canonical_symbol": "XPD/USDC"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "xyz:PLATINUM",
       "market_type": "perpetual",
-      "canonical_symbol": "XPT/USDT"
+      "canonical_symbol": "XPT/USDC"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "km:USOIL",
       "market_type": "perpetual",
-      "canonical_symbol": "USO/USDT"
+      "canonical_symbol": "USOIL/USDC",
+      "asset_class": "unknown",
+      "comparison_status": "ambiguous"
     },
     {
       "exchange": "hyperliquid",
       "raw_symbol": "USOIL/USDH",
       "market_type": "spot",
-      "canonical_symbol": "USO/USDT"
+      "canonical_symbol": "USOIL/USDH",
+      "asset_class": "unknown",
+      "comparison_status": "ambiguous"
     },
     {
       "exchange": "bitget",
