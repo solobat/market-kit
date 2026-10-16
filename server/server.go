@@ -23,25 +23,29 @@ import (
 )
 
 type App struct {
-	config                Config
-	client                *http.Client
-	sources               []SyncSource
-	registryUpdateMu      sync.Mutex
-	manualRegistry        identity.Registry
-	reviewedRegistry      identity.Registry
-	mu                    sync.RWMutex
-	baseRegistry          identity.Registry
-	generatedRegistry     identity.Registry
-	registry              identity.Registry
-	resolver              *identity.Resolver
-	autoSyncStatus        AutoSyncStatus
-	discoveryCache        discovery.ImportEnvelope
-	discoveryCacheSources []SyncSource
-	discoveryCacheGroups  []discovery.AssetCandidateGroup
-	discoveryCachedAt     time.Time
-	discoveryCacheErr     string
-	discoveryRefreshMu    sync.Mutex
-	startedAt             time.Time
+	consoleMu    sync.Mutex
+	consoleIndex *consoleIndex
+
+	config                 Config
+	client                 *http.Client
+	sources                []SyncSource
+	registryUpdateMu       sync.Mutex
+	manualRegistry         identity.Registry
+	reviewedRegistry       identity.Registry
+	mu                     sync.RWMutex
+	baseRegistry           identity.Registry
+	generatedRegistry      identity.Registry
+	registry               identity.Registry
+	resolver               *identity.Resolver
+	autoSyncStatus         AutoSyncStatus
+	discoveryCache         discovery.ImportEnvelope
+	discoveryCacheSources  []SyncSource
+	discoveryCacheGroups   []discovery.AssetCandidateGroup
+	discoveryCacheResolver *identity.Resolver
+	discoveryCachedAt      time.Time
+	discoveryCacheErr      string
+	discoveryRefreshMu     sync.Mutex
+	startedAt              time.Time
 }
 
 type discoveryScoredGroup struct {
@@ -123,6 +127,7 @@ func (a *App) Handler() http.Handler {
 	mux.HandleFunc("/api/healthz", a.handleHealthz)
 	mux.HandleFunc("/api/v1/resolve/batch", a.handleResolveBatch)
 	mux.HandleFunc("/api/v1/resolve", a.handleResolve)
+	mux.HandleFunc("/api/v1/console", a.handleConsole)
 	mux.HandleFunc("/api/v1/registry", a.handleRuntimeRegistry)
 	mux.HandleFunc("/api/v1/registry/overrides", a.handleRuntimeRegistryOverride)
 	mux.HandleFunc("/api/v1/registry/overrides/batch", a.handleRuntimeRegistryOverrideBatch)
@@ -722,7 +727,7 @@ func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, http.StatusOK, map[string]any{
 				"source":      discoveryLookupSourcePayload(sources),
 				"sources":     discoverySourcePayloads(sources),
-				"payload":     payload,
+				"payload":     compactDiscoveryPayload(payload, r),
 				"cachedAt":    cachedAt,
 				"cacheError":  errText,
 				"serverCache": true,
@@ -744,7 +749,7 @@ func (a *App) handleDiscoverySync(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{
 		"source":      discoveryLookupSourcePayload(sources),
 		"sources":     discoverySourcePayloads(sources),
-		"payload":     payload,
+		"payload":     compactDiscoveryPayload(payload, r),
 		"cachedAt":    cachedAt,
 		"cacheError":  errText,
 		"serverCache": true,
@@ -930,8 +935,11 @@ func (a *App) refreshDiscoveryCacheWithOptions(ctx context.Context, sourceID str
 	sources, envelope, err := a.fetchDiscoveryLookupEnvelope(ctx, sourceID)
 	now := time.Now().UTC()
 	groups := []discovery.AssetCandidateGroup(nil)
+	var groupResolver *identity.Resolver
 	if err == nil {
-		groups = buildDiscoveryGroups(envelope.Items, a.runtimeRegistry())
+		var registry identity.Registry
+		registry, groupResolver = a.runtimeIdentitySnapshot()
+		groups = buildDiscoveryGroups(envelope.Items, registry)
 	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
@@ -942,6 +950,7 @@ func (a *App) refreshDiscoveryCacheWithOptions(ctx context.Context, sourceID str
 	a.discoveryCacheSources = sources
 	a.discoveryCache = envelope
 	a.discoveryCacheGroups = groups
+	a.discoveryCacheResolver = groupResolver
 	a.discoveryCachedAt = now
 	a.discoveryCacheErr = ""
 	return nil
@@ -1428,4 +1437,11 @@ func (a *App) ListenAndServe(ctx context.Context) error {
 		}
 		return err
 	}
+}
+
+func compactDiscoveryPayload(payload discovery.ImportEnvelope, r *http.Request) any {
+	if r.URL.Query().Get("compact") == "1" {
+		return map[string]any{"marketCount": len(payload.Items)}
+	}
+	return payload
 }

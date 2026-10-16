@@ -1,12 +1,22 @@
 <script>
+  import { createQueryLoader } from "./lib/query-loader.js";
   import { onMount, tick } from "svelte";
-  import { buildCandidateGroups, loadDiscoveryEnvelope, normalizeDiscoveryEnvelope } from "./lib/discovery.js";
-  import { loadRegistry, normalizeExchange, normalizeImportedCases, normalizeMarketType, registryStats, resolveIdentity, setRuntimeRegistry, upsertRuntimeAssetAlias, upsertRuntimeMarketOverride } from "./lib/identity.js";
+  import { normalizeExchange, normalizeImportedCases, normalizeMarketType, setRuntimeRegistry, upsertRuntimeAssetAlias, upsertRuntimeMarketOverride } from "./lib/identity.js";
 
-  let registry = loadRegistry();
-  let stats = registryStats(registry);
+  let registry = setRuntimeRegistry({});
+  let stats = { assets: 0, overrides: 0 };
+  let browse = null;
+  let browsePage = 1;
+  let browseLimit = 50;
+  let browseLoading = true;
+  let browseError = "";
+  let mounted = false;
+  let browseKey = "";
+  let previousBrowseLimit = 50;
+  let queryLoader;
+  let resolveLoader;
+  let serverResolution = { status: "unresolved", reason: "正在读取后端解析结果" };
   const allDiscoverySourceId = "all";
-  const defaultDiscoveryEnvelope = loadDiscoveryEnvelope();
   const themeKey = "market-kit.theme";
   const syncConfigKey = "market-kit.sync-config";
   const syncCasesKey = "market-kit.sync-cases";
@@ -39,8 +49,8 @@
   let syncedCases = [];
   let syncState = "idle";
   let syncMessage = "";
-  let registryState = "embedded";
-  let registryMessage = "正在使用前端内置 registry。";
+  let registryState = "loading";
+  let registryMessage = "正在读取当前页…";
   let reassignState = "idle";
   let reassignMessage = "";
   let reassignDialogMarket = null;
@@ -48,7 +58,6 @@
   let reassignDialogUnitMultiplier = "";
   let reassignDialogError = "";
   let reassignInputElement;
-  let discoveryRefreshHandle = 0;
   let assetClassUpdateState = "idle";
   let assetClassUpdateMessage = "";
   let assetClassEditCanonical = "";
@@ -57,7 +66,7 @@
   let proxyAvailable = false;
   let remoteSources = [];
   let selectedSourceId = "";
-  let discoveryEnvelope = defaultDiscoveryEnvelope;
+  let discoveryEnvelope = { source: "server-cache", items: [] };
   let discoveryState = "idle";
   let discoveryMessage = "";
   let selectedDiscoverySourceId = "";
@@ -79,36 +88,12 @@
   let symbolOutputFormat = "quotedCsv";
   let selectedSymbolIds = new Set();
   let symbolCopyMessage = "";
-  let symbolRowsAll = [];
-  $: stats = registryStats(registry);
+  $: stats = browse?.stats || { assets: 0, overrides: 0 };
   $: discoverySources = remoteSources.filter((item) => sourceKind(item) === "discovery");
   $: sampleSources = remoteSources.filter((item) => sourceKind(item) !== "discovery");
 
-  $: assetClassOptions = Array.from(new Set((registry.asset_aliases || []).map((item) => item.asset_class).filter(Boolean))).sort();
-  $: assetRows = (registry.asset_aliases || [])
-    .filter((item) => {
-      const query = assetQuery.trim().toUpperCase();
-      const matchesQuery = !query || (
-        String(item.canonical || "").toUpperCase().includes(query) ||
-        String(item.asset_class || "").toUpperCase().includes(query) ||
-        (item.aliases || []).some((alias) => String(alias || "").toUpperCase().includes(query)) ||
-        (item.unit_aliases || []).some((alias) => String(alias?.alias || "").toUpperCase().includes(query))
-      );
-      const matchesClass = assetClassFilter === "all" || item.asset_class === assetClassFilter;
-      return matchesQuery && matchesClass;
-    })
-    .sort((left, right) => {
-      const query = assetQuery.trim().toUpperCase();
-      if (query) {
-        const rankCompare = assetSearchRank(left, query) - assetSearchRank(right, query);
-        if (rankCompare !== 0) return rankCompare;
-      }
-      const classCompare = String(left.asset_class || "").localeCompare(String(right.asset_class || ""));
-      if (classCompare !== 0) return classCompare;
-      const aliasCompare = totalAssetAliasCount(right) - totalAssetAliasCount(left);
-      if (aliasCompare !== 0) return aliasCompare;
-      return String(left.canonical || "").localeCompare(String(right.canonical || ""));
-    });
+  $: assetClassOptions = browse?.facets?.assetClasses || editableAssetClasses;
+  $: assetRows = registry.asset_aliases || [];
   $: visibleAliasCount = assetRows.reduce((sum, item) => sum + totalAssetAliasCount(item), 0);
   $: registryAssetRows = registry.asset_aliases || [];
   $: effectiveSelectedAssetCanonical =
@@ -124,48 +109,13 @@
     assetClassUpdateMessage = "";
   }
 
-  $: overrideRows = (registry.market_overrides || []).filter((item) => {
-    const query = overrideQuery.trim().toUpperCase();
-    if (!query) return true;
-    return (
-      String(item.exchange || "").toUpperCase().includes(query) ||
-      String(item.raw_symbol || "").toUpperCase().includes(query) ||
-      String(item.canonical_symbol || "").toUpperCase().includes(query) ||
-      String(item.market_type || "").toUpperCase().includes(query)
-    );
-  });
-  $: allCandidateGroups = buildCandidateGroups(discoveryEnvelope);
-  $: groupAssetClassOptions = Array.from(new Set(allCandidateGroups.map((group) => group.assetClass).filter(Boolean))).sort();
-  $: groupMarketTypeOptions = Array.from(
-    new Set(allCandidateGroups.flatMap((group) => group.marketTypes || []).filter(Boolean))
-  ).sort();
-  $: groupExchangeOptions = Array.from(
-    new Set(allCandidateGroups.flatMap((group) => group.exchanges || []).filter(Boolean))
-  ).sort();
-  $: candidateGroups = allCandidateGroups.filter((group) => {
-    const query = groupQuery.trim().toUpperCase();
-    const matchesQuery = !query || (
-      String(group.groupKey || "").toUpperCase().includes(query) ||
-      String(group.assetClass || "").toUpperCase().includes(query) ||
-      (group.exchanges || []).some((value) => String(value || "").toUpperCase().includes(query)) ||
-      (group.markets || []).some((market) =>
-        [market.rawSymbol, market.platform, market.marketType, market.venueType]
-          .some((value) => String(value || "").toUpperCase().includes(query))
-      )
-    );
-    const matchesStatus =
-      groupStatusFilter === "all" ||
-      (groupStatusFilter === "review" && group.needsReview) ||
-      (groupStatusFilter === "ready" && !group.needsReview);
-    const matchesAssetClass = groupAssetClassFilter === "all" || group.assetClass === groupAssetClassFilter;
-    const matchesMarketType =
-      groupMarketTypeFilter === "all" || (group.marketTypes || []).includes(groupMarketTypeFilter);
-    const matchesExchange =
-      groupExchangeFilter === "all" || (group.exchanges || []).includes(groupExchangeFilter);
-    return matchesQuery && matchesStatus && matchesAssetClass && matchesMarketType && matchesExchange;
-  });
-
-  $: resolution = resolveIdentity(request);
+  $: overrideRows = registry.market_overrides || [];
+  $: allCandidateGroups = browse?.groups || [];
+  $: groupAssetClassOptions = browse?.facets?.groupAssetClasses || [];
+  $: groupMarketTypeOptions = browse?.facets?.groupMarketTypes || [];
+  $: groupExchangeOptions = browse?.facets?.groupPlatforms || [];
+  $: candidateGroups = allCandidateGroups;
+  $: resolution = serverResolution;
   $: syncRows = syncedCases.filter((item) => {
     const query = syncQuery.trim().toUpperCase();
     if (!query) return true;
@@ -181,8 +131,8 @@
   });
   $: unresolvedCount = syncedCases.filter((item) => item.status === "unresolved").length;
   $: ambiguousCount = syncedCases.filter((item) => item.status === "ambiguous").length;
-  $: discoveryMarketCount = Array.isArray(discoveryEnvelope?.items) ? discoveryEnvelope.items.length : 0;
-  $: reviewGroupCount = candidateGroups.filter((group) => group.needsReview).length;
+  $: discoveryMarketCount = browse?.stats?.markets || 0;
+  $: reviewGroupCount = browse?.stats?.review || 0;
   $: readyGroupCount = candidateGroups.filter((group) => !group.needsReview).length;
   $: selectedAssetOverrideRows = selectedAsset
     ? (registry.market_overrides || [])
@@ -205,55 +155,15 @@
   $: selectedAssetMarkets = selectedAssetGroups.flatMap((group) => group.markets || []);
   $: selectedAssetQuotes = Array.from(new Set(selectedAssetOverrideRows.map((item) => String(item.canonical_symbol || "").split("/")[1]).filter(Boolean))).sort();
   $: selectedAssetOverrideExchanges = Array.from(new Set(selectedAssetOverrideRows.map((item) => item.exchange).filter(Boolean))).sort();
-  $: selectedAssetDiscoveryLoading = selectedAsset && (discoveryState === "loading" || discoveryEnvelope === defaultDiscoveryEnvelope);
+  $: selectedAssetDiscoveryLoading = browseLoading;
   $: selectedAssetUnifiedMarkets = buildAssetDetailMarketRows(selectedAssetOverrideRows, selectedAssetMarkets);
   $: selectedAssetUnifiedExchanges = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.exchange).filter(Boolean))).sort();
   $: selectedAssetUnifiedMarketTypes = Array.from(new Set(selectedAssetUnifiedMarkets.map((item) => item.marketType).filter(Boolean))).sort();
-  $: if (page === "symbols") symbolRowsAll = buildSymbolRows(registry, allCandidateGroups);
-  $: symbolPlatformOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.platform));
-  $: symbolMarketTypeOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.marketType));
-  $: symbolAssetClassOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.assetClass));
-  $: symbolLayerOptions = uniqueSymbolOptions(symbolRowsAll.map((item) => item.layer));
-  $: symbolPresenceRows = symbolRowsAll.filter((item) =>
-    matchesSymbolFilters(item, {
-      platforms: symbolPresencePlatformFilter,
-      marketTypes: symbolPresenceMarketTypeFilter,
-      assetClasses: symbolPresenceAssetClassFilter,
-      layers: []
-    })
-  );
-  $: symbolPresenceBases = new Set(symbolPresenceRows.map((item) => item.baseAsset).filter(Boolean));
-  $: symbolRows = symbolRowsAll
-    .filter((item) =>
-      matchesSymbolFilters(item, {
-        platforms: symbolPlatformFilter,
-        marketTypes: symbolMarketTypeFilter,
-        assetClasses: symbolAssetClassFilter,
-        layers: symbolLayerFilter
-      })
-    )
-    .filter((item) => !symbolPresenceEnabled || symbolPresenceBases.has(item.baseAsset))
-    .filter((item) => {
-      const query = symbolQuery.trim().toUpperCase();
-      if (!query) return true;
-      return [
-        item.rawSymbol,
-        item.canonicalSymbol,
-        item.baseAsset,
-        item.quoteAsset,
-        item.platform,
-        item.marketType,
-        item.assetClass,
-        item.layer
-      ].some((value) => String(value || "").toUpperCase().includes(query));
-    })
-    .sort((left, right) => {
-      const baseCompare = String(left.baseAsset || "").localeCompare(String(right.baseAsset || ""));
-      if (baseCompare !== 0) return baseCompare;
-      const platformCompare = String(left.platform || "").localeCompare(String(right.platform || ""));
-      if (platformCompare !== 0) return platformCompare;
-      return String(left.rawSymbol || "").localeCompare(String(right.rawSymbol || ""));
-    });
+  $: symbolPlatformOptions = browse?.facets?.platforms || [];
+  $: symbolMarketTypeOptions = browse?.facets?.marketTypes || [];
+  $: symbolAssetClassOptions = browse?.facets?.symbolAssetClasses || [];
+  $: symbolLayerOptions = browse?.facets?.layers || [];
+  $: symbolRows = browse?.symbols || [];
   $: {
     const visibleIds = new Set(symbolRows.map((item) => item.id));
     const nextSelected = Array.from(selectedSymbolIds).filter((id) => visibleIds.has(id));
@@ -265,7 +175,25 @@
   $: generatedSymbolText = buildGeneratedSymbolText(selectedSymbolRows, symbolOutputField, symbolOutputFormat);
   $: symbolSelectedCount = selectedSymbolIds.size;
   $: symbolBaseCount = new Set(symbolRows.map((item) => item.baseAsset).filter(Boolean)).size;
-  $: symbolPresenceBaseCount = symbolPresenceBases.size;
+  $: symbolPresenceBaseCount = browse?.presenceCount || 0;
+
+  $: nextBrowseKey = JSON.stringify({ view: page, asset: selectedAssetCanonical,
+    q: page === "registry" ? assetQuery : page === "rules" ? overrideQuery : page === "groups" ? groupQuery : symbolQuery,
+    class: page === "registry" ? assetClassFilter : page === "groups" ? groupAssetClassFilter : symbolAssetClassFilter.join(","),
+    platform: page === "groups" ? groupExchangeFilter : symbolPlatformFilter.join(","),
+    type: page === "groups" ? groupMarketTypeFilter : symbolMarketTypeFilter.join(","),
+    status: groupStatusFilter, layer: symbolLayerFilter.join(","), presence: symbolPresenceEnabled,
+    presence_platform: symbolPresencePlatformFilter.join(","), presence_type: symbolPresenceMarketTypeFilter.join(","),
+    presence_class: symbolPresenceAssetClassFilter.join(",") });
+  $: symbolExportURL = apiEndpoint(`/api/v1/console?${new URLSearchParams({ ...JSON.parse(nextBrowseKey), export: symbolOutputFormat, field: symbolOutputField })}`, apiBase);
+  $: if (mounted) scheduleBrowse(nextBrowseKey, browsePage, browseLimit);
+  $: if (mounted && page === "playground") resolveLoader.schedule(JSON.stringify(request));
+
+  function scheduleBrowse(key, number, limit) {
+    if (key !== browseKey || limit !== previousBrowseLimit) { browseKey = key; previousBrowseLimit = limit; browsePage = 1; number = 1; }
+    queryLoader.schedule(JSON.stringify({ ...JSON.parse(key), page: number, limit }));
+  }
+  function refreshBrowse() { queryLoader?.refresh(); }
 
   function applyTheme(next) {
     theme = next;
@@ -306,23 +234,6 @@
     return (asset?.aliases?.length || 0) + (asset?.unit_aliases?.length || 0);
   }
 
-  function assetSearchRank(asset, query) {
-    const canonical = String(asset?.canonical || "").trim().toUpperCase();
-    const aliases = [
-      ...(asset?.aliases || []),
-      ...(asset?.unit_aliases || []).map((alias) => alias?.alias)
-    ].map((value) => String(value || "").trim().toUpperCase()).filter(Boolean);
-    const assetClass = String(asset?.asset_class || "").trim().toUpperCase();
-
-    if (canonical === query) return 0;
-    if (aliases.some((alias) => alias === query)) return 1;
-    if (canonical.startsWith(query)) return 2;
-    if (aliases.some((alias) => alias.startsWith(query))) return 3;
-    if (canonical.includes(query)) return 4;
-    if (aliases.some((alias) => alias.includes(query))) return 5;
-    if (assetClass.includes(query)) return 6;
-    return 7;
-  }
 
   function formatUnitMultiplier(value) {
     const numeric = Number(value || 0);
@@ -391,6 +302,7 @@
       selectAsset(route.asset);
     }
     page = route.page || "registry";
+    if (page === "playground") resolveLoader?.refresh();
   }
 
   function syncRouteFromLocation() {
@@ -407,6 +319,7 @@
       selectAsset(options.asset);
     }
     page = nextPage || "registry";
+    if (page === "playground") resolveLoader?.refresh();
     if (typeof window === "undefined") return;
 
     const nextPath = pathForPage(nextPage, options);
@@ -458,13 +371,6 @@
     return rows[0]?.id || "";
   }
 
-  function shouldRefreshDiscoveryEnvelope(preferredDiscoveryId) {
-    if (!preferredDiscoveryId) return false;
-    const currentSource = String(discoveryEnvelope?.source || "").trim();
-    if (discoveryEnvelope === defaultDiscoveryEnvelope) return true;
-    if (preferredDiscoveryId === allDiscoverySourceId && currentSource !== "market-kit-all") return true;
-    return false;
-  }
 
   function formatTime(value) {
     if (!value) return "未记录";
@@ -498,70 +404,6 @@
     groupAssetClassFilter = "all";
     groupMarketTypeFilter = "all";
     groupExchangeFilter = "all";
-  }
-
-  function buildSymbolRows(registryInput, groups) {
-    const assetClassIndex = new Map(
-      (registryInput.asset_aliases || []).map((item) => [
-        String(item.canonical || "").trim().toUpperCase(),
-        String(item.asset_class || "unknown").trim() || "unknown"
-      ])
-    );
-    const rows = [];
-    const seen = new Set();
-
-    for (const item of registryInput.market_overrides || []) {
-      const canonicalSymbol = String(item.canonical_symbol || "").trim().toUpperCase();
-      const [baseAsset = "", quoteAsset = ""] = canonicalSymbol.split("/");
-      const row = {
-        id: `registry:${item.exchange}:${item.market_type}:${item.raw_symbol}`,
-        layer: "registry",
-        platform: normalizeExchange(item.exchange),
-        platformLabel: platformLabel(normalizeExchange(item.exchange)),
-        venueType: "registry",
-        marketType: normalizeMarketType(item.market_type) || String(item.market_type || "").trim().toLowerCase(),
-        rawSymbol: String(item.raw_symbol || "").trim(),
-        canonicalSymbol,
-        baseAsset,
-        quoteAsset,
-        assetClass: assetClassIndex.get(baseAsset) || "unknown",
-        unitAlias: String(item.unit_alias || "").trim().toUpperCase(),
-        unitMultiplier: Number(item.unit_multiplier || 0),
-        chain: "",
-        status: "",
-        sourceId: "registry"
-      };
-      appendUniqueSymbolRow(rows, seen, row);
-    }
-
-    for (const group of groups || []) {
-      for (const market of group.markets || []) {
-        const baseAsset = String(market.baseAsset || group.canonicalAsset || "").trim().toUpperCase();
-        const quoteAsset = String(market.quoteAsset || group.quoteAsset || "").trim().toUpperCase();
-        const platform = normalizeExchange(market.exchange || market.platform);
-        const row = {
-          id: `discovery:${platform}:${market.marketType}:${market.rawSymbol}:${baseAsset}:${quoteAsset}:${market.chain || ""}`,
-          layer: "discovery",
-          platform,
-          platformLabel: platformLabel(platform),
-          venueType: String(market.venueType || "").trim().toLowerCase(),
-          marketType: normalizeMarketType(market.marketType) || String(market.marketType || "").trim().toLowerCase(),
-          rawSymbol: String(market.rawSymbol || "").trim(),
-          canonicalSymbol: String(market.canonicalSymbol || (baseAsset && quoteAsset ? `${baseAsset}/${quoteAsset}` : "")).trim().toUpperCase(),
-          baseAsset,
-          quoteAsset,
-          assetClass: String(market.assetClass || group.assetClass || assetClassIndex.get(baseAsset) || "unknown").trim(),
-          unitAlias: String(market.unitAlias || "").trim().toUpperCase(),
-          unitMultiplier: Number(market.unitMultiplier || 0),
-          chain: String(market.chain || "").trim(),
-          status: String(market.status || "").trim().toLowerCase(),
-          sourceId: String(market.sourceId || "").trim()
-        };
-        appendUniqueSymbolRow(rows, seen, row);
-      }
-    }
-
-    return rows;
   }
 
   function buildAssetDetailMarketRows(overrides, markets) {
@@ -629,39 +471,8 @@
     rows.push(row);
   }
 
-  function appendUniqueSymbolRow(rows, seen, row) {
-    if (!row.rawSymbol || !row.baseAsset) return;
-    const key = [
-      row.layer,
-      row.platform,
-      row.marketType,
-      row.rawSymbol.toUpperCase(),
-      row.baseAsset,
-      row.quoteAsset,
-      row.chain
-    ].join("|");
-    if (seen.has(key)) return;
-    seen.add(key);
-    rows.push({ ...row, id: key });
-  }
 
-  function uniqueSymbolOptions(values) {
-    return Array.from(new Set(values.map((value) => String(value || "").trim()).filter(Boolean))).sort();
-  }
 
-  function matchesSymbolFilters(item, filters) {
-    return (
-      matchesFilterValue(item.platform, filters.platforms) &&
-      matchesFilterValue(item.marketType, filters.marketTypes) &&
-      matchesFilterValue(item.assetClass, filters.assetClasses) &&
-      matchesFilterValue(item.layer, filters.layers)
-    );
-  }
-
-  function matchesFilterValue(value, selected) {
-    if (!selected?.length) return true;
-    return selected.includes(String(value || "").trim());
-  }
 
   function toggleArrayValue(values, value) {
     const normalized = String(value || "").trim();
@@ -833,25 +644,6 @@
     return Array.from(new Set(endpoints));
   }
 
-  async function loadRuntimeRegistry() {
-    registryState = "loading";
-    registryMessage = "正在读取后端 runtime registry…";
-    try {
-      const payload = await fetchFromEndpoints(apiReadEndpoints("/api/v1/registry", "/api/registry"));
-      const nextRegistry = payload.registry || payload;
-      registry = setRuntimeRegistry(nextRegistry);
-      registryState = "success";
-      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
-      request = { ...request };
-      scheduleDiscoveryRegistryRefresh();
-    } catch (error) {
-      registryState = "embedded";
-      registryMessage = error instanceof Error
-        ? `后端 registry 读取失败，继续使用前端最小 fallback registry：${error.message}`
-        : "后端 registry 读取失败，继续使用前端最小 fallback registry。";
-    }
-  }
-
   $: reassignDialogPreview = reassignDialogMarket
     ? normalizeCanonicalTarget(reassignDialogTarget, reassignDialogMarket)
     : "";
@@ -917,7 +709,7 @@
 
       registry = payload.override ? upsertRuntimeMarketOverride(payload.override) : setRuntimeRegistry(payload.registry || payload);
       registryState = "success";
-      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
+      registryMessage = "已保存 · 正在刷新当前页";
       request = { ...request };
       scheduleDiscoveryRegistryRefresh();
       reassignState = "success";
@@ -963,7 +755,7 @@
       });
       registry = payload.asset ? upsertRuntimeAssetAlias(payload.asset) : setRuntimeRegistry(payload.registry || registry);
       registryState = "success";
-      registryMessage = `runtime · ${registry.market_overrides.length} overrides`;
+      registryMessage = "已保存 · 正在刷新当前页";
       request = { ...request };
       scheduleDiscoveryRegistryRefresh();
       assetClassUpdateState = "success";
@@ -983,20 +775,7 @@
     return message;
   }
 
-  function scheduleDiscoveryRegistryRefresh() {
-    if (typeof window === "undefined") return;
-    if (discoveryRefreshHandle) {
-      if ("cancelIdleCallback" in window) window.cancelIdleCallback(discoveryRefreshHandle);
-      else window.clearTimeout(discoveryRefreshHandle);
-    }
-    const refresh = () => {
-      discoveryRefreshHandle = 0;
-      discoveryEnvelope = { ...discoveryEnvelope };
-    };
-    discoveryRefreshHandle = "requestIdleCallback" in window
-      ? window.requestIdleCallback(refresh, { timeout: 900 })
-      : window.setTimeout(refresh, 180);
-  }
+  function scheduleDiscoveryRegistryRefresh() { refreshBrowse(); resolveLoader?.refresh(); }
 
   function normalizeCanonicalTarget(input, market) {
     const value = String(input || "").trim().toUpperCase();
@@ -1016,6 +795,19 @@
     if (quotes.includes("USDT")) return "USDT";
     const currentQuote = String(market?.canonicalSymbol || "").split("/")[1];
     return currentQuote ? currentQuote.toUpperCase() : "USDT";
+  }
+
+  async function normalizeCasesOnServer(payload) {
+    const rows = normalizeImportedCases(payload, () => ({ status: "unresolved" }));
+    const resolved = new Map();
+    for (let i = 0; i < rows.length; i += 500) {
+      const batch = rows.slice(i, i + 500);
+      const result = await fetchJSON(apiEndpoint("/api/v1/resolve/batch", apiBase), {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: batch.map(row => row.request) })
+      });
+      batch.forEach((row, index) => resolved.set(JSON.stringify(row.request), result.results[index]));
+    }
+    return normalizeImportedCases(payload, request => resolved.get(JSON.stringify(request)));
   }
 
   function mergeCases(nextRows) {
@@ -1046,7 +838,7 @@
         headers[syncConfig.authHeader.trim()] = syncConfig.authValue.trim();
       }
       const payload = await fetchJSON(syncConfig.url.trim(), { headers });
-      syncedCases = normalizeImportedCases(payload).map((item) => ({
+      syncedCases = (await normalizeCasesOnServer(payload)).map((item) => ({
         ...item,
         source: item.source === "unknown" ? syncConfig.source : item.source
       }));
@@ -1062,8 +854,8 @@
     }
   }
 
-  async function loadRemoteSources(options = {}) {
-    const { shouldAutoBootstrap = false } = options;
+  async function loadRemoteSources() {
+
     try {
       const payload = await fetchFromEndpoints([...apiReadEndpoints("/api/discovery/sources"), "/__market-kit/sources"]);
       remoteSources = Array.isArray(payload.sources) ? payload.sources : [];
@@ -1077,78 +869,23 @@
       if (!selectedDiscoverySourceId && preferredDiscoveryId) {
         selectedDiscoverySourceId = preferredDiscoveryId;
       }
-      if (preferredDiscoveryId && (shouldAutoBootstrap || shouldRefreshDiscoveryEnvelope(preferredDiscoveryId))) {
-        await loadCurrentDiscovery({
-          loadingMessage: "正在读取后端发现市场快照…",
-          fallbackErrorMessage: "读取后端发现市场快照失败。"
-        });
-      }
+
     } catch {
       proxyAvailable = false;
       remoteSources = [];
     }
   }
 
-  async function loadCurrentDiscovery(options = {}) {
-    const {
-      loadingMessage = "正在读取后端发现市场快照…",
-      fallbackErrorMessage = "读取后端发现市场快照失败。"
-    } = options;
-
+  async function syncDiscoverySource(sourceId = selectedDiscoverySourceId) {
+    if (!sourceId) return;
     discoveryState = "loading";
-    discoveryMessage = loadingMessage;
-
     try {
-      const payload = await fetchFromEndpoints([
-        ...apiReadEndpoints(
-          `/api/discovery/current?source=${encodeURIComponent(allDiscoverySourceId)}`,
-          `/api/discovery/sync?source=${encodeURIComponent(allDiscoverySourceId)}`
-        )
-      ]);
-      const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
-      discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
-      discoveryState = "success";
-      discoveryMessage = `已读取后端发现市场快照，共 ${discoveryEnvelope.items.length} 个市场。`;
-    } catch (error) {
-      discoveryState = "error";
-      discoveryMessage = error instanceof Error ? `读取失败：${error.message}` : fallbackErrorMessage;
-    }
+      await fetchFromEndpoints(apiReadEndpoints(`/api/discovery/sync?source=${encodeURIComponent(sourceId)}&compact=1`));
+      discoveryState = "success"; discoveryMessage = "服务端快照已更新，正在读取当前页。";
+      refreshBrowse();
+    } catch (error) { discoveryState = "error"; discoveryMessage = error.message; }
   }
-
-  async function syncDiscoverySource(sourceId = selectedDiscoverySourceId, options = {}) {
-    const {
-      loadingMessage = "正在同步发现市场清单…",
-      fallbackErrorMessage = "同步发现源失败。"
-    } = options;
-    if (!sourceId) {
-      discoveryState = "error";
-      discoveryMessage = "请先选择一个发现源。";
-      return;
-    }
-
-    discoveryState = "loading";
-    discoveryMessage = loadingMessage;
-
-    try {
-      const payload = await fetchFromEndpoints([
-        ...apiReadEndpoints(`/api/discovery/sync?source=${encodeURIComponent(sourceId)}`),
-        `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
-      ]);
-      const project = payload.payload?.source || payload.source?.project || payload.source?.id || "market-discovery";
-      discoveryEnvelope = normalizeDiscoveryEnvelope(payload.payload, project);
-      discoveryState = "success";
-      discoveryMessage = `已从 ${payload.source?.label || sourceId} 导入 ${discoveryEnvelope.items.length} 个市场。`;
-    } catch (error) {
-      discoveryState = "error";
-      discoveryMessage = error instanceof Error ? `同步失败：${error.message}` : fallbackErrorMessage;
-    }
-  }
-
-  function resetDiscoveryToMock() {
-    discoveryEnvelope = defaultDiscoveryEnvelope;
-    discoveryState = "success";
-    discoveryMessage = "已切回仓库内置的本地示例市场清单。";
-  }
+  function refreshCurrentDiscovery() { refreshBrowse(); }
 
   async function syncPresetSource(sourceId = selectedSourceId) {
     if (!sourceId) {
@@ -1165,7 +902,7 @@
         ...apiReadEndpoints(`/api/discovery/sync?source=${encodeURIComponent(sourceId)}`),
         `/__market-kit/sync?source=${encodeURIComponent(sourceId)}`
       ]);
-      const imported = normalizeImportedCases(payload.payload).map((item) => ({
+      const imported = (await normalizeCasesOnServer(payload.payload)).map((item) => ({
         ...item,
         source: item.source === "unknown" ? payload.source?.project || payload.source?.id || sourceId : item.source
       }));
@@ -1196,7 +933,7 @@
           `/api/discovery/sync?source=${encodeURIComponent(source.id)}`,
           `/__market-kit/sync?source=${encodeURIComponent(source.id)}`
         ]);
-        const imported = normalizeImportedCases(payload.payload).map((item) => ({
+        const imported = (await normalizeCasesOnServer(payload.payload)).map((item) => ({
           ...item,
           source: item.source === "unknown" ? payload.source?.project || payload.source?.id || source.id : item.source
         }));
@@ -1229,12 +966,31 @@
         syncedCases = JSON.parse(savedCases);
       } catch {}
     }
-    (async () => {
-      await loadRuntimeRegistry();
-      await loadRemoteSources({ shouldAutoBootstrap: true });
-    })();
+    queryLoader = createQueryLoader(async (key, signal) => {
+      const params = new URLSearchParams(JSON.parse(key));
+      return fetchJSON(apiEndpoint(`/api/v1/console?${params}`, apiBase), { signal });
+    }, {
+      loading: () => { browseLoading = true; browseError = ""; },
+      success: (payload) => {
+        const lastPage = Math.max(1, Math.ceil(payload.total / payload.limit));
+        if (payload.page > lastPage) { browsePage = lastPage; return; }
+        browse = payload; registry = setRuntimeRegistry(payload.registry);
+        discoveryEnvelope = { source: "server-cache", items: [] };
+        registryState = "success"; registryMessage = `服务端分页 · ${payload.stats.overrides} overrides`;
+        discoveryState = "success"; browseLoading = false;
+      },
+      error: (error) => { browseLoading = false; browseError = error.message; registryState = "error"; }
+    });
+    resolveLoader = createQueryLoader((key, signal) => fetchJSON(apiEndpoint("/api/v1/resolve", apiBase), {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: key, signal
+    }), { success: (value) => { serverResolution = value; }, error: (error) => {
+      serverResolution = { status: "unresolved", reason: error.message };
+    } });
+    mounted = true;
+    loadRemoteSources();
 
     return () => {
+      mounted = false; queryLoader?.dispose(); resolveLoader?.dispose();
       window.removeEventListener("popstate", syncRouteFromLocation);
     };
   });
@@ -1263,7 +1019,7 @@
     </div>
 
     <div class="rail__session">
-      <span>{registryState === "success" ? "runtime registry" : "embedded registry"}</span>
+      <span>{registryState === "error" ? "连接异常" : "服务端 registry"}</span>
       <strong>{registryState === "loading" ? "loading..." : registryMessage}</strong>
     </div>
 
@@ -1335,9 +1091,30 @@
         <p class="hero__copy">{pageDescription(page)}</p>
       </div>
       <div class="hero__status">
-        <span>默认解析状态</span>
+        <span>解析试验台状态</span>
         <strong class={`status status--${resolution.status}`}>{statusLabel(resolution.status)}</strong>
       </div>
+    </section>
+
+    <section class="panel browse-toolbar" aria-busy={browseLoading}>
+      <div role="status" aria-live="polite">
+        {#if browseError}<span>读取失败：{browseError}。请确认后端已部署分页接口。</span>
+        {:else if browseLoading}<span>正在查询…</span>
+        {:else if page === "playground" || page === "samples"}<span>服务端已连接</span>
+        {:else}<span>共 {browse?.total || 0} 条 · 第 {browsePage} / {Math.max(1, Math.ceil((browse?.total || 0) / browseLimit))} 页</span>{/if}
+      </div>
+      <div class="button-row">
+        <button class="sync-button sync-button--ghost" on:click={refreshBrowse}>刷新</button>
+        {#if page !== "playground" && page !== "samples"}
+        <button class="sync-button" disabled={browseLoading || browsePage <= 1} on:click={() => browsePage--}>上一页</button>
+        <button class="sync-button" disabled={browseLoading || browsePage * browseLimit >= (browse?.total || 0)} on:click={() => browsePage++}>下一页</button>
+        <label>每页 <select bind:value={browseLimit}><option value={25}>25</option><option value={50}>50</option><option value={100}>100</option></select></label>
+        {/if}
+      </div>
+      {#if browse?.cachedAt && !String(browse.cachedAt).startsWith("0001")}<p>发现快照：{formatTime(browse.cachedAt)}{browse.cacheError ? ` · 最近同步失败：${browse.cacheError}` : ""}</p>{/if}
+      {#if page === "symbols"}<p>选择和复制针对当前页；下载可导出全部筛选结果。交集条件在服务端全量市场中计算。</p>{/if}
+      {#if browse?.cachedAt && String(browse.cachedAt).startsWith("0001")}<p>发现快照尚未就绪，请稍后刷新；Registry 规则已可查询。</p>{/if}
+      {#if page === "asset-detail"}<p>市场列表按当前标的分页，保留 registry 与 discovery 的来源信息。</p>{/if}
     </section>
 
     {#if page === "registry"}
@@ -1349,7 +1126,7 @@
               <h3>资产别名表</h3>
             </div>
             <div class="group-toolbar__stats group-toolbar__stats--head">
-              <strong>{assetRows.length}</strong>
+              <strong>{browse?.total || 0}</strong>
               <span>当前资产</span>
             </div>
           </div>
@@ -1530,7 +1307,7 @@
                     <strong>{selectedAsset.canonical}</strong>
                   </div>
                   <p class="detail-copy">
-                    当前详情会先展示静态 registry 里的 alias 和显式 override；discovery 市场分布会在后端发现源同步完成后补齐。
+                    当前页合并此标的的 registry 规则与服务端发现快照；其他市场可通过翻页查看。
                   </p>
                 </div>
 
@@ -1661,11 +1438,11 @@
                     </strong>
                     <p>
                       {#if selectedAssetDiscoveryLoading}
-                        静态 registry 会先显示 `xyz:SKHX` 这类显式规则；Binance 等平台要等 `/api/discovery/current` 或同步接口返回后才会出现在这里。
+                        正在读取此标的的市场分页。
                       {:else if proxyAvailable}
                         去“候选分组”或“Symbol 生成器”同步发现市场后，这里会自动带出平台分布。
                       {:else}
-                        当前还是本地 mock discovery，接上发现源后这里会更完整。
+                        此标的在当前页没有更多发现市场。
                       {/if}
                     </p>
                   </div>
@@ -1717,7 +1494,7 @@
               <h3>候选资产分组</h3>
             </div>
             <div class="group-toolbar__stats group-toolbar__stats--head">
-              <strong>{candidateGroups.length}</strong>
+              <strong>{browse?.total || 0}</strong>
               <span>当前结果</span>
             </div>
           </div>
@@ -1725,12 +1502,12 @@
           <div class="sync-stack">
             <div class="sync-proxy-banner">
               <div>
-                <strong>{proxyAvailable ? "已发现可同步的发现源" : "当前使用本地示例市场"}</strong>
+                <strong>{discoverySources.length ? "已发现可同步的发现源" : "服务端发现快照"}</strong>
                 <p>
                   {#if proxyAvailable}
-                    候选分组页可以直接通过本地代理拉取市场发现清单。首次进入时会优先自动加载 market-kit 内建的交易所直连启动数据；后续你也可以切换到 slipstream。
+                    分组、搜索与筛选由服务端执行，每页只加载当前结果及少量市场预览。
                   {:else}
-                    当前还没有连接发现源，所以先展示仓库内置的 mock discovery 数据。
+                    当前没有可同步的发现源；列表读取服务端已有快照。
                   {/if}
                 </p>
               </div>
@@ -1763,8 +1540,8 @@
                   <button class="sync-button" on:click={() => syncDiscoverySource()} disabled={discoveryState === "loading" || !selectedDiscoverySourceId}>
                     {discoveryState === "loading" ? "同步中…" : "同步发现市场"}
                   </button>
-                  <button class="sync-button sync-button--secondary" on:click={resetDiscoveryToMock}>
-                    切回本地示例
+                  <button class="sync-button sync-button--secondary" on:click={refreshCurrentDiscovery}>
+                    刷新当前页
                   </button>
                 </div>
                 <div class={`sync-state sync-state--${discoveryState}`}>
@@ -1830,10 +1607,10 @@
 
             <div class="group-toolbar__footer">
               <div class="group-toolbar__stats">
-                <strong>{candidateGroups.length}</strong>
+                <strong>{browse?.total || 0}</strong>
                 <span>当前结果</span>
-                <span>待复核 {reviewGroupCount}</span>
-                <span>已成组 {readyGroupCount}</span>
+                <span>全局待复核 {reviewGroupCount}</span>
+                <span>本页已成组 {readyGroupCount}</span>
               </div>
               <div class="button-row">
                 <button class="sync-button sync-button--ghost" on:click={resetGroupFilters}>
@@ -1843,7 +1620,7 @@
                   全部收起
                 </button>
                 <button class="sync-button sync-button--secondary" on:click={expandVisibleGroups}>
-                  展开当前结果
+                  展开当前页预览
                 </button>
               </div>
             </div>
@@ -1872,7 +1649,7 @@
                         </div>
                         <div>
                           <span>市场</span>
-                          <strong>{group.markets.length}</strong>
+                          <strong>{browse?.groupCounts?.[group.groupKey] || group.markets.length}</strong>
                         </div>
                         <div>
                           <span>类型</span>
@@ -1915,6 +1692,7 @@
                       </div>
 
                       <div class="group-market-table">
+                        <p>展示本组前 3 个市场。<button class="tiny-button" on:click={() => openAssetDetail(group.canonicalAsset)}>查看此标的全部市场（分页）</button></p>
                         {#each group.markets as market}
                           <div class="group-market-row">
                             <div>
@@ -2162,7 +1940,8 @@
           </div>
 
           <div class="button-row symbol-selection-actions">
-            <button class="sync-button sync-button--secondary" on:click={selectAllSymbolRows}>全选当前结果</button>
+            <button class="sync-button sync-button--secondary" on:click={selectAllSymbolRows}>全选当前页</button>
+            <a class="sync-button sync-button--secondary" href={symbolExportURL} download>下载全部筛选结果</a>
             <button class="sync-button sync-button--ghost" on:click={invertSymbolSelection}>反选</button>
             <button class="sync-button sync-button--ghost" on:click={deselectAllSymbolRows}>取消选择</button>
           </div>
@@ -2501,6 +2280,15 @@
         </article>
       </section>
     {/if}
+    {#if page !== "playground" && page !== "samples" && (browse?.total || 0) > browseLimit}
+      <nav class="panel browse-toolbar" aria-label="列表底部分页">
+        <span>共 {browse.total} 条 · 第 {browsePage} 页</span>
+        <div class="button-row">
+          <button class="sync-button" disabled={browseLoading || browsePage <= 1} on:click={() => { browsePage--; window.scrollTo({ top: 0 }); }}>上一页（底部）</button>
+          <button class="sync-button" disabled={browseLoading || browsePage * browseLimit >= browse.total} on:click={() => { browsePage++; window.scrollTo({ top: 0 }); }}>下一页（底部）</button>
+        </div>
+      </nav>
+    {/if}
   </main>
 
   {#if reassignDialogMarket}
@@ -2601,3 +2389,8 @@
     </div>
   {/if}
 </div>
+
+<style>
+.browse-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.browse-toolbar p { flex-basis: 100%; margin: 0; opacity: .75; }
+</style>

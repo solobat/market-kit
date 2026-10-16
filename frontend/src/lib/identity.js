@@ -550,10 +550,10 @@ export function registryStats(input = registry) {
   };
 }
 
-export function normalizeImportedCases(payload) {
+export function normalizeImportedCases(payload, resolver = resolveIdentity) {
   const rows = extractRows(payload);
   return rows
-    .map((item, index) => normalizeImportedCase(item, index))
+    .map((item, index) => normalizeImportedCase(item, index, resolver))
     .filter(Boolean);
 }
 
@@ -568,7 +568,7 @@ function extractRows(payload) {
   return [];
 }
 
-function normalizeImportedCase(item, index) {
+function normalizeImportedCase(item, index, resolver) {
   if (!item || typeof item !== "object") return null;
 
   const exchange = normalizeExchange(
@@ -637,7 +637,7 @@ function normalizeImportedCase(item, index) {
     productType
   };
 
-  const resolution = resolveIdentity(request);
+  const resolution = resolver(request);
 
   return {
     id: String(item.id || item.caseId || item.case_id || `${source}:${exchange}:${symbol}:${index}`),
