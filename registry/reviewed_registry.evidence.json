@@ -15435,6 +15435,50 @@
       "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
       "reviewedAt": "2026-10-17",
       "note": "Official stock BOSS ZHIPIN, ISIN US48553T1060; unrelated to Brent BZ. Exact-market stock identity only; cross-venue product units remain unverified."
+    },
+    {
+      "key": [
+        "binance",
+        "ANTHROPICUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-17",
+      "source": "https://www.binance.com/en-AU/support/announcement/detail/2b9ff1e1acf8433793bc40c59a0cb852",
+      "supportingSource": "https://docs.entropy.io/market-types/pre-ipo-perpetuals",
+      "note": "Anthropic PBC; Binance estimated 1 billion shares; Entropy $1 price = $1B issuer market cap. Shared pre-IPO underlying, distinct product and comparison keys: IPO conversion and no-IPO settlement differ. io:ANTH/USD is Portfolio-Lens display form, actual quote/settlement USDC. No global ANTH crypto alias; no unverified para:ANTH merge."
+    },
+    {
+      "key": [
+        "binance",
+        "ANTHROPIC/USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-17",
+      "source": "https://www.binance.com/en-AU/support/announcement/detail/2b9ff1e1acf8433793bc40c59a0cb852",
+      "supportingSource": "https://docs.entropy.io/market-types/pre-ipo-perpetuals",
+      "note": "Anthropic PBC; Binance estimated 1 billion shares; Entropy $1 price = $1B issuer market cap. Shared pre-IPO underlying, distinct product and comparison keys: IPO conversion and no-IPO settlement differ. io:ANTH/USD is Portfolio-Lens display form, actual quote/settlement USDC. No global ANTH crypto alias; no unverified para:ANTH merge."
+    },
+    {
+      "key": [
+        "hyperliquid",
+        "io:ANTH",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-17",
+      "source": "https://docs.entropy.io/asset-directory/pre-ipo-assets",
+      "supportingSource": "https://docs.entropy.io/market-types/pre-ipo-perpetuals",
+      "note": "Anthropic PBC; Binance estimated 1 billion shares; Entropy $1 price = $1B issuer market cap. Shared pre-IPO underlying, distinct product and comparison keys: IPO conversion and no-IPO settlement differ. io:ANTH/USD is Portfolio-Lens display form, actual quote/settlement USDC. No global ANTH crypto alias; no unverified para:ANTH merge."
+    },
+    {
+      "key": [
+        "hyperliquid",
+        "io:ANTH/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-17",
+      "source": "https://docs.entropy.io/asset-directory/pre-ipo-assets",
+      "supportingSource": "https://docs.entropy.io/market-types/pre-ipo-perpetuals",
+      "note": "Anthropic PBC; Binance estimated 1 billion shares; Entropy $1 price = $1B issuer market cap. Shared pre-IPO underlying, distinct product and comparison keys: IPO conversion and no-IPO settlement differ. io:ANTH/USD is Portfolio-Lens display form, actual quote/settlement USDC. No global ANTH crypto alias; no unverified para:ANTH merge."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

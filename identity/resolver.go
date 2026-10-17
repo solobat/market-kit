@@ -196,6 +196,11 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTyp
 		marketTypes = []MarketType{MarketTypeSpot, MarketTypePerpetual, MarketTypeFuture}
 	}
 	seen := map[string]bool{}
+	// Separator variants can describe the same venue contract. Collapse only
+	// fully equivalent identities; differing units or product boundaries must
+	// still produce ambiguous candidates. MarketIdentity is comparable, so this
+	// avoids serialization and compares every identity field.
+	seenIdentities := map[MarketIdentity]bool{}
 	for _, marketType := range marketTypes {
 		venueSymbol := resolverVenueSymbol(exchange, rawSymbol, marketType)
 		for _, item := range r.overridesByVenue[resolverVenueKey(exchange, marketType, venueSymbol)] {
@@ -204,7 +209,14 @@ func (r *Resolver) resolveOverrides(exchange string, rawSymbol string, marketTyp
 				continue
 			}
 			seen[key] = true
-			matches = append(matches, r.marketIdentityFromOverride(exchange, item, marketType))
+			candidate := r.marketIdentityFromOverride(exchange, item, marketType)
+			identityKey := candidate
+			identityKey.RawSymbol = ""
+			if seenIdentities[identityKey] {
+				continue
+			}
+			seenIdentities[identityKey] = true
+			matches = append(matches, candidate)
 		}
 	}
 	return matches
