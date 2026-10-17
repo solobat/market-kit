@@ -41,3 +41,29 @@ func TestOfficialReferenceSourcesIncludeEquitiesCommoditiesAndForexWithoutCrypto
 		}
 	}
 }
+
+func TestGRVTOfficialCategoriesBeatGenericCryptoAndKeepRawContract(t *testing.T) {
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		if req.URL.String() != grvtReferenceURL || req.Method != http.MethodPost {
+			t.Fatal(req.URL, req.Method)
+		}
+		return jsonResponse(`{"result":[{"instrument":"ASTS_USDT_Perp","base":"ASTS","quote":"USDT","kind":"PERPETUAL","asset_class":"EQUITY","status":"ACTIVE"},{"instrument":"COPPER_USDT_Perp","base":"COPPER","quote":"USDT","kind":"PERPETUAL","asset_class":"COMMODITY","status":"ACTIVE"},{"instrument":"BTC_USDT_Perp","base":"BTC","quote":"USDT","kind":"PERPETUAL","asset_class":"CRYPTO","status":"ACTIVE"},{"instrument":"FUTURE","base":"X","quote":"USDT","kind":"FUTURE","asset_class":"EQUITY"}]}`), nil
+	})}
+	rows, err := fetchGRVTReference(context.Background(), client)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rows) != 3 || rows[0].Symbol != "ASTS_USDT_Perp" || rows[0].AssetClassHint != "stock" || rows[1].AssetClassHint != "commodity" || rows[2].UnderlyingCategory != "coin" {
+		t.Fatal(rows)
+	}
+	generic := rows[0]
+	generic.AssetClassHint = "crypto"
+	generic.Category = "crypto"
+	generic.SourceID = "slipstream"
+	registry := curation.BuildGeneratedRegistry(append(rows, generic))
+	for _, v := range registry.MarketOverrides {
+		if v.RawSymbol == "ASTS_USDT_Perp" && v.AssetClass != "rwa_stock" {
+			t.Fatal("generic crypto overrode official equity", v)
+		}
+	}
+}

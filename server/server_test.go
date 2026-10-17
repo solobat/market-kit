@@ -870,6 +870,7 @@ func TestHandleDiscoverySyncBuiltInBootstrap(t *testing.T) {
 		client: &http.Client{
 			Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 				payloads := map[string]string{
+					"POST https://market-data.grvt.io/full/v1/all_instruments":                                                       `{"result":[]}`,
 					"GET https://api.starknet.extended.exchange/api/v1/info/markets":                                                 `{"status":"OK","data":[]}`,
 					"GET https://backend-arbitrum.gains.trade/trading-variables":                                                     `{"pairs":[],"groups":[]}`,
 					"GET https://api.popdex.xyz/api/v1/config/symbols?category=Futures":                                              `{"code":"200","data":[]}`,

@@ -67,3 +67,11 @@ test('index digits stay semantic while token unit aliases remain scaled', () => 
   assert.equal(index.assetClass, 'rwa_stock');
   assert.equal(resolve('1000PEPEUSDT').market.canonicalPriceMultiplier, 0.001);
 });
+
+test('XYZ100 is an index name even beside a colliding XYZ stock alias', () => {
+  setRuntimeRegistry({ asset_aliases: [{ canonical: 'XYZ', asset_class: 'rwa_stock', aliases: [], unit_aliases: [{ alias: 'XYZ100', multiplier: 100 }] }, { canonical: 'XYZ100', asset_class: 'rwa_stock', aliases: [] }] });
+  const index = resolve('XYZ100USDT').market;
+  assert.equal(index.baseAsset, 'XYZ100');
+  assert.equal(index.assetClass, 'rwa_stock');
+  assert.ok(!index.unitMultiplier);
+});

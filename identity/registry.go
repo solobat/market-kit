@@ -254,12 +254,17 @@ func (r *Registry) normalizeMarketOverrides(scaledAliases map[string]string) {
 				if item.AssetClass == "" || item.AssetClass == "unknown" {
 					item.AssetClass = target.class
 				}
+				targetID, targetUnderlying := target.assetID, target.underlyingID
+				if item.AssetClass == "crypto" && target.class != "crypto" {
+					targetID = CanonicalAssetID("crypto", target.base)
+					targetUnderlying = targetID
+				}
 				// Only repair inferred ticker IDs, never rewrite an explicit custom product ID.
 				if oldID == "" || oldID == CanonicalAssetID(item.AssetClass, target.alias) || strings.HasPrefix(oldID, "unknown:ticker:") {
-					item.AssetID = target.assetID
+					item.AssetID = targetID
 				}
 				if oldUnderlying == "" || oldUnderlying == CanonicalAssetID(item.AssetClass, target.alias) || strings.HasPrefix(oldUnderlying, "unknown:ticker:") {
-					item.UnderlyingID = target.underlyingID
+					item.UnderlyingID = targetUnderlying
 				}
 				if item.ComparisonKey == "" || item.ComparisonKey == DefaultComparisonKey(oldID, quote) || item.ComparisonKey == DefaultComparisonKey(oldUnderlying, quote) {
 					item.ComparisonKey = DefaultComparisonKey(item.UnderlyingID, quote)
@@ -316,7 +321,7 @@ func normalizeUnitAliasList(canonical string, aliases []AssetUnitAlias) []AssetU
 
 func isNumericIndexSymbol(value string) bool {
 	switch value {
-	case "US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40":
+	case "XYZ100", "US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40":
 		return true
 	}
 	return false

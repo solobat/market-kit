@@ -16,6 +16,7 @@ func TestFetchDefaultBuildsImportEnvelope(t *testing.T) {
 		Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 			key := req.Method + " " + req.URL.String()
 			payloads := map[string]string{
+				"POST " + grvtReferenceURL:                                                              `{"result":[]}`,
 				"GET " + extendedReferenceURL:                                                           `{"status":"OK","data":[]}`,
 				"GET " + gtradeReferenceURL:                                                             `{"pairs":[],"groups":[]}`,
 				"GET https://api.popdex.xyz/api/v1/config/symbols?category=Futures":                     `{"code":"200","data":[]}`,

@@ -14734,6 +14734,708 @@
       ],
       "source": "https://docs.lighter.xyz/trading/real-world-assets-rwas/market-specifications",
       "note": "000660.KS one ordinary share quoted in USD, same exposure unit as XYZ SKHX; not ADR SKHY"
+    },
+    {
+      "key": [
+        "grvt",
+        "ASTS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "AVNT_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "AXS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "AXTI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "BBX_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "BCH_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "BE_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "BRKB_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "BX_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "CBRS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "CC_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "COPPER_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "CRDO_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "CRM_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "CRWD_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "DELL_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "EWZ_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "FLNC_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "GLW_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "GS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "HANMI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "HYUNDAI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "H_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "IREN_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "JPM_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "KODEX200_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "KSTR_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "LGELECTRONICS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "LITE_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "LIT_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "LTC_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "MINIMAX_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "MRNA_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "NAVER_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "NOK_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "NOW_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "NVO_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "ONDS_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "PUMP_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "QNTX_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SAMSUNGEM_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SAMSUNG_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SEI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SKHY_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SMCI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "STRC_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "STRK_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "STXX_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "SUI_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "URNM_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "UVXY_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "V_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "grvt",
+        "W_USDT_Perp",
+        "perpetual"
+      ],
+      "source": "https://market-data.grvt.io/full/v1/all_instruments",
+      "reviewedAt": "2026-10-17",
+      "note": "official category correction; venue-scoped identity; comparison remains unverified",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous"
+    },
+    {
+      "key": [
+        "binance",
+        "1000CATFDUSD",
+        "spot"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "binance",
+        "1000CATUSDC",
+        "spot"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "binance",
+        "1000CATUSDT",
+        "perpetual"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "binance",
+        "1000CATUSDT",
+        "spot"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "bitget",
+        "1000CATUSDT",
+        "perpetual"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "bybit",
+        "1000CATUSDT",
+        "perpetual"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "aster",
+        "1000CATUSDT",
+        "perpetual"
+      ],
+      "source": "identity/registry.go:normalizeMarketOverrides + fresh discovery category metadata",
+      "reviewedAt": "2026-10-17",
+      "note": "scaled crypto inherited stock CAT IDs; preserve units and withhold cross-venue comparison",
+      "scope": "category / inferred-ID consistency only; cross-venue comparison ambiguous",
+      "codeEvidence": "identity/registry.go:normalizeMarketOverrides",
+      "officialReference": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "referenceScope": "Binance official COIN metadata corroborates crypto category; other venues retain their explicit crypto class and unit, with comparison ambiguous."
+    },
+    {
+      "key": [
+        "hyperliquid",
+        "xyz:XYZ100",
+        "perpetual"
+      ],
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/specification-index.md",
+      "reviewedAt": "2026-10-17",
+      "note": "Official equity index; not 100 units of XYZ stock. Preserve raw symbol, USDC, multiplier 1 and independent index ID. No cross-venue index equivalence asserted."
+    },
+    {
+      "key": [
+        "bitget",
+        "RBZUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "reviewedAt": "2026-10-17",
+      "note": "Official stock BOSS ZHIPIN, ISIN US48553T1060; unrelated to Brent BZ. Exact-market stock identity only; cross-venue product units remain unverified."
     }
-  ]
+  ],
+  "lastUpdatedAt": "2026-10-17"
 }

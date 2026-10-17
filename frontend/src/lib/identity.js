@@ -1,6 +1,6 @@
 import baseRegistry from "../../../identity/default_registry.json" with { type: "json" };
 
-const numericIndexSymbols = new Set(["US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40"]);
+const numericIndexSymbols = new Set(["XYZ100", "US100", "US500", "SPX500", "NAS100", "USA30", "JP225", "KR200", "UK100", "EU50", "GER40"]);
 const quoteSuffixes = ["USDT", "USDC", "USD"];
 let registry = normalizeRegistry(baseRegistry);
 let indexedRegistry;

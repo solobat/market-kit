@@ -73,3 +73,45 @@ func TestHynixOrdinaryShareADRAndLeveragedETPNeverMerge(t *testing.T) {
 		t.Fatal("different products merged", xyz, adr, etp)
 	}
 }
+
+func TestScaledCryptoDoesNotInheritCollidingStockIdentity(t *testing.T) {
+	reg := Registry{AssetAliases: []AssetAliasRule{{Canonical: "CAT", AssetClass: "rwa_stock", AssetID: "equity:ticker:cat", UnderlyingID: "equity:ticker:cat", UnitAliases: []AssetUnitAlias{{Alias: "1000CAT", Multiplier: 1000}}}}, MarketOverrides: []MarketOverride{{Exchange: "binance", RawSymbol: "1000CATUSDT", MarketType: "perpetual", CanonicalSymbol: "1000CAT/USDT", AssetClass: "crypto", AssetID: "crypto:ticker:1000cat", UnderlyingID: "crypto:ticker:1000cat", ComparisonKey: "crypto:ticker:1000cat/USDT"}, {Exchange: "test", RawSymbol: "1000CATUSDT", MarketType: "perpetual", CanonicalSymbol: "1000CAT/USDT", AssetClass: "crypto", AssetID: "crypto:custom:cat-product", UnderlyingID: "crypto:custom:cat-underlying", ComparisonKey: "custom-cat"}}}
+	reg.Normalize()
+	reg.Normalize()
+	r := NewResolver(reg)
+	v := r.Resolve(ResolveRequest{Exchange: "binance", Symbol: "1000CATUSDT", MarketTypeHint: "perpetual"}).Market
+	if v == nil || v.BaseAsset != "CAT" || v.AssetID != "crypto:ticker:cat" || v.UnderlyingID != v.AssetID || v.ComparisonKey != "crypto:ticker:cat/USDT" || v.UnitMultiplier != 1000 {
+		t.Fatal(v)
+	}
+	custom := r.Resolve(ResolveRequest{Exchange: "test", Symbol: "1000CATUSDT", MarketTypeHint: "perpetual"}).Market
+	if custom == nil || custom.AssetID != "crypto:custom:cat-product" || custom.UnderlyingID != "crypto:custom:cat-underlying" || custom.ComparisonKey != "custom-cat" {
+		t.Fatal("custom product overwritten", custom)
+	}
+}
+
+func TestXYZ100IndexRetainsNativeNameAndOneIndexUnit(t *testing.T) {
+	reg, err := LoadDefaultRegistry()
+	if err != nil {
+		t.Fatal(err)
+	}
+	reg.AssetAliases = append(reg.AssetAliases, AssetAliasRule{Canonical: "XYZ", AssetClass: "rwa_stock", UnitAliases: []AssetUnitAlias{{Alias: "XYZ100", Multiplier: 100}}})
+	reg.Normalize()
+	reg.Normalize()
+	m := NewResolver(reg).Resolve(ResolveRequest{Exchange: "hyperliquid", Symbol: "xyz:XYZ100", MarketTypeHint: "perpetual"}).Market
+	if m == nil || m.BaseAsset != "XYZ100" || m.AssetID != "equity:index:trade-xyz:xyz100" || m.UnitMultiplier != 1 || m.CanonicalPriceMultiplier != 1 || m.ComparisonStatus != ComparisonAmbiguous {
+		t.Fatal(m)
+	}
+}
+
+func TestBitgetBZStockNeverInheritsBrentCommodityIdentity(t *testing.T) {
+	reg, err := LoadDefaultRegistry()
+	if err != nil {
+		t.Fatal(err)
+	}
+	r := NewResolver(reg)
+	stock := r.Resolve(ResolveRequest{Exchange: "bitget", Symbol: "RBZUSDT", MarketTypeHint: "spot"}).Market
+	oil := r.Resolve(ResolveRequest{Exchange: "hyperliquid", Symbol: "xyz:BRENTOIL", MarketTypeHint: "perpetual"}).Market
+	if stock == nil || oil == nil || stock.AssetClass != "rwa_stock" || stock.AssetID != "equity:isin:us48553t1060" || stock.UnderlyingID == oil.UnderlyingID || stock.ComparisonKey == oil.ComparisonKey || stock.ComparisonStatus != ComparisonAmbiguous {
+		t.Fatal(stock, oil)
+	}
+}

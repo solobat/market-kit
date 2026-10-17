@@ -109,3 +109,47 @@ func fetchGTradeReference(ctx context.Context, client *http.Client) ([]discovery
 	}
 	return out, nil
 }
+
+const grvtReferenceURL = "https://market-data.grvt.io/full/v1/all_instruments"
+
+func fetchGRVTReference(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
+	var response struct {
+		Result []struct {
+			Instrument string `json:"instrument"`
+			Base       string `json:"base"`
+			Quote      string `json:"quote"`
+			Kind       string `json:"kind"`
+			Class      string `json:"asset_class"`
+			Status     string `json:"status"`
+		} `json:"result"`
+	}
+	if err := fetchJSON(ctx, client, http.MethodPost, grvtReferenceURL, map[string]bool{"is_active": true}, &response); err != nil {
+		return nil, err
+	}
+	if response.Result == nil {
+		return nil, fmt.Errorf("GRVT missing instrument metadata")
+	}
+	now := time.Now().UTC()
+	rows := make([]discovery.ImportedMarket, 0, len(response.Result))
+	for _, v := range response.Result {
+		if v.Kind != "PERPETUAL" || v.Instrument == "" || v.Base == "" || v.Quote == "" {
+			continue
+		}
+		hint, underlying := "", ""
+		switch v.Class {
+		case "EQUITY":
+			hint = "stock"
+		case "COMMODITY":
+			hint = "commodity"
+		case "CRYPTO":
+			hint = "crypto"
+			underlying = "coin"
+		}
+		status := "unknown"
+		if v.Status == "ACTIVE" {
+			status = "live"
+		}
+		rows = append(rows, discovery.ImportedMarket{SourceID: BuiltInSourceID, PlatformID: "grvt", Platform: "GRVT", VenueType: "dex", MarketType: "perp", Symbol: v.Instrument, BaseAsset: v.Base, QuoteAsset: v.Quote, AssetClassHint: hint, Category: v.Class, UnderlyingCategory: underlying, Chain: "GRVT L2", Status: status, FirstSeenAt: now, LastSeenAt: now, ExternalURL: "https://grvt.io"})
+	}
+	return rows, nil
+}
