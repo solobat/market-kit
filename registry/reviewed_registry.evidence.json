@@ -15479,6 +15479,1616 @@
       "source": "https://docs.entropy.io/asset-directory/pre-ipo-assets",
       "supportingSource": "https://docs.entropy.io/market-types/pre-ipo-perpetuals",
       "note": "Anthropic PBC; Binance estimated 1 billion shares; Entropy $1 price = $1B issuer market cap. Shared pre-IPO underlying, distinct product and comparison keys: IPO conversion and no-IPO settlement differ. io:ANTH/USD is Portfolio-Lens display form, actual quote/settlement USDC. No global ANTH crypto alias; no unverified para:ANTH merge."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/USD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "USD",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/USD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "USD",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "AUD/USD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "AUD",
+        "to": "USD",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/CAD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "CAD",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "NZD/USD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "NZD",
+        "to": "USD",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "1"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/GBP",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "GBP",
+        "spreadP": "100000000",
+        "groupIndex": "1",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/CNH",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "CNH",
+        "spreadP": "150000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/SGD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "SGD",
+        "spreadP": "100000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/SEK",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "SEK",
+        "spreadP": "150000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/KRW",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "KRW",
+        "spreadP": "200000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/NOK",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "NOK",
+        "spreadP": "200000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/INR",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "INR",
+        "spreadP": "150000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/MXN",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "MXN",
+        "spreadP": "200000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/TWD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "TWD",
+        "spreadP": "150000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/ZAR",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "ZAR",
+        "spreadP": "500000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "USD/BRL",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "USD",
+        "to": "BRL",
+        "spreadP": "150000000",
+        "groupIndex": "9",
+        "feeIndex": "9"
+      },
+      "officialGroup": "forex-exotic",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/AUD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "AUD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/NZD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "NZD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "EUR/CAD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "EUR",
+        "to": "CAD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/AUD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "AUD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/NZD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "NZD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/CAD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "CAD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "GBP/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "GBP",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "AUD/NZD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "AUD",
+        "to": "NZD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "AUD/CAD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "AUD",
+        "to": "CAD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "AUD/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "AUD",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "AUD/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "AUD",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "NZD/CAD",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "NZD",
+        "to": "CAD",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "NZD/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "NZD",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "NZD/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "NZD",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "CAD/CHF",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "CAD",
+        "to": "CHF",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "CAD/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "CAD",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "gtrade",
+        "CHF/JPY",
+        "perpetual"
+      ],
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "reviewedAt": "2026-10-18",
+      "officialPair": {
+        "from": "CHF",
+        "to": "JPY",
+        "spreadP": "100000000",
+        "groupIndex": "8",
+        "feeIndex": "8"
+      },
+      "officialGroup": "forex-minor",
+      "activeCollaterals": [
+        {
+          "collateralIndex": 1,
+          "symbol": "DAI",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 2,
+          "symbol": "WETH",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 3,
+          "symbol": "USDC",
+          "isActive": true
+        },
+        {
+          "collateralIndex": 4,
+          "symbol": "GNS",
+          "isActive": true
+        }
+      ],
+      "note": "Official forex group, not crypto token or stablecoin inventory. No FX class enum: retain unknown and prohibit comparisons; independent currency-pair product ID. Settlement depends on selected collateral; blank must remain unknown after resolver guard deployment."
+    },
+    {
+      "key": [
+        "bitget",
+        "PREOPAIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-18",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "supportingSources": [
+        "https://www.bitget.com/asia/spotlight/ipo-prime",
+        "https://www.bitget.com/asia/support/articles/12560603887172",
+        "https://www.bitget.com/en-CA/support/articles/12560603884442"
+      ],
+      "official": {
+        "symbol": "PREOPAIUSDT",
+        "baseCoin": "preOPAI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "isReality": "no",
+        "fullName": "preOPAI",
+        "isin": null,
+        "status": "online"
+      },
+      "note": "IPO Prime token, not Reality 1:1 stock token or valuation perpetual. Preserve native PRE base and independent product ID; comparison ambiguous. preSPAX rebranded/split 1:5 into preSPCX; no alias to historical units or ordinary equity. SettlementAsset USDT denotes spot trading quote, not guaranteed eventual redemption asset."
+    },
+    {
+      "key": [
+        "bitget",
+        "PRESPCXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-18",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "supportingSources": [
+        "https://www.bitget.com/asia/spotlight/ipo-prime",
+        "https://www.bitget.com/asia/support/articles/12560603887172",
+        "https://www.bitget.com/en-CA/support/articles/12560603884442"
+      ],
+      "official": {
+        "symbol": "PRESPCXUSDT",
+        "baseCoin": "preSPCX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "isReality": "no",
+        "fullName": "preSPAX",
+        "isin": null,
+        "status": "online"
+      },
+      "note": "IPO Prime token, not Reality 1:1 stock token or valuation perpetual. Preserve native PRE base and independent product ID; comparison ambiguous. preSPAX rebranded/split 1:5 into preSPCX; no alias to historical units or ordinary equity. SettlementAsset USDT denotes spot trading quote, not guaranteed eventual redemption asset."
+    },
+    {
+      "key": [
+        "extended",
+        "EUR-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "reviewedAt": "2026-10-18",
+      "official": {
+        "name": "EUR-USD",
+        "assetName": "EUR",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "FX",
+        "type": "PERPETUAL",
+        "description": "Euro",
+        "active": true
+      },
+      "note": "Official RWA/FX product, not crypto. No FX enum: unknown + comparison prohibited. Native reference and collateral names preserved; do not interpret USDJPY/USD as an ordinary currency-pair quotient or merge units across venues."
+    },
+    {
+      "key": [
+        "extended",
+        "USDJPY-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "reviewedAt": "2026-10-18",
+      "official": {
+        "name": "USDJPY-USD",
+        "assetName": "USDJPY",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "FX",
+        "type": "PERPETUAL",
+        "description": "Japanese Yen",
+        "active": true
+      },
+      "note": "Official RWA/FX product, not crypto. No FX enum: unknown + comparison prohibited. Native reference and collateral names preserved; do not interpret USDJPY/USD as an ordinary currency-pair quotient or merge units across venues."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

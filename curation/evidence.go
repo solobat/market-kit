@@ -48,7 +48,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
-	if hasExplicitRWAHint(row) {
+	if isForexMarket(row) || hasExplicitRWAHint(row) {
 		return 5
 	}
 	if hasExplicitCryptoIdentityHint(row) {
@@ -58,4 +58,18 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 		return 1
 	}
 	return 0
+}
+
+// These are currency-pair CFDs, not crypto tokens or stablecoin balances.
+// Keep this venue/metadata scoped; an EUR ticker alone is not sufficient.
+func isForexMarket(row discovery.ImportedMarket) bool {
+	group := strings.ToLower(strings.TrimSpace(row.Category))
+	switch strings.ToLower(strings.TrimSpace(row.PlatformID)) {
+	case "gtrade":
+		return group == "forex" || group == "forex-minor" || group == "forex-exotic"
+	case "extended":
+		return group == "fx"
+	default:
+		return false
+	}
 }

@@ -779,6 +779,13 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 		assetClassHint := ""
 		category := strings.ToLower(strings.TrimSpace(item.Category))
 		tags := []string(nil)
+		// IPO Prime stock tokens are not Reality rTokens. Preserve their native
+		// bases while retaining the official stock category.
+		if strings.EqualFold(strings.TrimSpace(item.SymbolType), "stock") {
+			assetClassHint = "stock"
+			category = "stock"
+			tags = []string{"bitget-stock"}
+		}
 		if isBitgetRealityStock(item.IsReality, item.SymbolType) {
 			base = bitgetRealityUnderlying(base)
 			assetClassHint = "stock"

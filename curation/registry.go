@@ -64,6 +64,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		symbol      string
 		marketType  string
 		directClass string
+		forex       bool
 	}
 
 	assets := map[string]identity.AssetAliasRule{}
@@ -98,23 +99,29 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			}
 		}
 
+		forex := isForexMarket(item)
 		baseClass := classifyGeneratedAsset(item, base)
+		if forex {
+			baseClass = "unknown"
+		}
 		if collisionSet[base] && !hasExplicitCryptoIdentityHint(item) && !hasExplicitRWAHint(item) {
 			baseClass = "unknown"
 		}
-		if !collisionSet[base] {
-			ensureAsset(assets, base, baseClass)
+		if !forex {
+			if !collisionSet[base] {
+				ensureAsset(assets, base, baseClass)
+			}
+			ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
 		}
-		ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
 		candidates = append(candidates, generatedMarketCandidate{
-			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass,
+			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex,
 		})
 	}
 
 	overrides := map[string]identity.MarketOverride{}
 	for _, candidate := range candidates {
 		baseClass := candidate.directClass
-		if !collisionSet[candidate.base] && (baseClass == "" || baseClass == "unknown") {
+		if !candidate.forex && !collisionSet[candidate.base] && (baseClass == "" || baseClass == "unknown") {
 			if asset, ok := assets[candidate.base]; ok {
 				baseClass = asset.AssetClass
 			}
@@ -138,6 +145,25 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ComparisonStatus: comparisonStatus,
 			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
 			SettlementAsset:  candidate.quote,
+		}
+		if candidate.forex {
+			pair := strings.ToLower(candidate.base + "-" + candidate.quote)
+			override.AssetClass = "unknown" // No FX asset-class enum exists yet.
+			override.AssetID = "fx:" + candidate.exchange + ":" + pair
+			override.UnderlyingID = "fx:" + pair
+			override.ComparisonKey = override.AssetID
+			override.ComparisonStatus = identity.ComparisonProhibited
+			override.InstrumentKind = "fx_cfd"
+			override.ContractType = "multi_collateral_cfd"
+			override.SettlementAsset = "" // Depends on the selected collateral, not quote.
+			if candidate.exchange == "extended" {
+				// Extended exposes an FX reference inside a USD-collateral product
+				// (e.g. USDJPY-USD). Do not infer reference units from base/quote.
+				override.UnderlyingID = override.AssetID
+				override.InstrumentKind = "fx_perpetual"
+				override.ContractType = "perpetual"
+				override.SettlementAsset = candidate.quote
+			}
 		}
 		if conflicts[overrideKey(override)] {
 			override.AssetClass = "unknown"
@@ -570,7 +596,7 @@ func shouldInclude(item discovery.ImportedMarket) bool {
 		return false
 	}
 	quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
-	if !stableAssets[quote] {
+	if !stableAssets[quote] && !isForexMarket(item) {
 		return false
 	}
 	marketType := strings.ToLower(strings.TrimSpace(item.MarketType))
@@ -693,6 +719,9 @@ func generatedAssetClassRank(assetClass string) int {
 }
 
 func classifyGeneratedAsset(item discovery.ImportedMarket, asset string) string {
+	if isForexMarket(item) {
+		return "unknown"
+	}
 	asset = strings.ToUpper(strings.TrimSpace(asset))
 	if asset == "" {
 		return ""
