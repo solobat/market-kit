@@ -871,6 +871,7 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 
 	type contract struct {
 		Name         string `json:"name"`
+		ContractType string `json:"contract_type"`
 		QuantoBase   string `json:"quanto_base"`
 		Settle       string `json:"settle"`
 		InDelisting  bool   `json:"in_delisting"`
@@ -934,6 +935,31 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 			ExternalURL:  "https://www.gate.com/futures/" + strings.ToUpper(item.Name),
 			FirstSeenAt:  seenAt,
 			LastSeenAt:   seenAt,
+		}
+		// Gate's stock/index/FX classifications are explicit identity metadata.
+		// Those contracts often omit quanto_base/settle; recover the native pair
+		// only for these typed products. Empty type is not evidence of crypto.
+		switch strings.ToLower(strings.TrimSpace(item.ContractType)) {
+		case "stocks", "indices", "metals", "commodities", "forex":
+			market.Category = strings.ToLower(strings.TrimSpace(item.ContractType))
+			market.Tags = []string{"gate-contract-type:" + market.Category}
+			if split := strings.LastIndex(market.Symbol, "_"); split > 0 {
+				market.BaseAsset = market.Symbol[:split]
+				market.QuoteAsset = market.Symbol[split+1:]
+			}
+			switch market.Category {
+			case "stocks":
+				market.AssetClassHint = "stock"
+			case "metals":
+				// IAU/SLV are ETF contracts, not raw gold/silver units.
+				if market.BaseAsset == "IAU" || market.BaseAsset == "SLV" {
+					market.AssetClassHint = "stock"
+				} else {
+					market.AssetClassHint = "commodity"
+				}
+			case "commodities":
+				market.AssetClassHint = "commodity"
+			}
 		}
 		if discovery.ShouldIgnoreImportedMarket(market) {
 			continue

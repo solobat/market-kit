@@ -17089,6 +17089,2466 @@
         "active": true
       },
       "note": "Official RWA/FX product, not crypto. No FX enum: unknown + comparison prohibited. Native reference and collateral names preserved; do not interpret USDJPY/USD as an ordinary currency-pair quotient or merge units across venues."
+    },
+    {
+      "key": [
+        "gate",
+        "ACCELINK_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ACCELINK_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787121900
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ADI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ADI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1781848800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "AKESO_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "AKESO_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "AMEC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "AMEC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ANDURIL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ANDURIL_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776081600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ANTA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ANTA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "AUS200_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "AUS200_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1770177600
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "AXTI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "AXTI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1780909200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "B200_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "B200_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1788922407
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BEIGENE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BEIGENE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BEN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BEN_USDT",
+        "contract_type": "",
+        "type": "direct",
+        "quanto_multiplier": "100",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1788756311
+      },
+      "reason": "conflicting_stock_category_crypto_identity_no_issuer_proof",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1777006800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BHP_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BHP_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1789027200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BIWIN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BIWIN_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BLUEFOCUS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BLUEFOCUS_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BOE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BOE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BOTZ_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BOTZ_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785225600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BUD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BUD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782972000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "BVOL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BVOL_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785312000
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CAMBRICON_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CAMBRICON_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CATL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CATL_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785740400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CAT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CAT_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1783317600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CBRS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CBRS_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1778825532
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CCTC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CCTC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CITIC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CITIC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CJS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CJS_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CMOC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CMOC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "COP_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "COP_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782280800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "CRDO_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CRDO_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1780909200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "DEEPTECH_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "DEEPTECH_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "DEMINGLI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "DEMINGLI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "DFDVX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "DFDVX_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1751720400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "DSBJ_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "DSBJ_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "EOPTOLINK_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EOPTOLINK_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "EURUSD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EURUSD_USDT",
+        "contract_type": "forex",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "forex_is_not_crypto_or_stable_inventory",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "EVOL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EVOL_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785312000
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "FENGHUA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "FENGHUA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "FII_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "FII_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "FUTUON_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "FUTUON_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1762941600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GBPUSD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GBPUSD_USDT",
+        "contract_type": "forex",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "forex_is_not_crypto_or_stable_inventory",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GEELY_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GEELY_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776060000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GER40_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GER40_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.0001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1772510400
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GGLL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GGLL_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784786400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GVZ_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GVZ_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1773302400
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "H100_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "H100_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1788922345
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HENGRUI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HENGRUI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HHGRACE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HHGRACE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785740400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HK50_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HK50_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HPSP_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HPSP_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782276192
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HSBC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HSBC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1777262400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HSCHKD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HSCHKD_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1770177600
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HTGD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HTGD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HUAGONGTECH_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HUAGONGTECH_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787121941
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "HYGON_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HYGON_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "IEIT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "IEIT_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "INFQ_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "INFQ_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1780293600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "JIO_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "JIO_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1791979457
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "JPN225_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "JPN225_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "JUNZHENG_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "JUNZHENG_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787122019
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "JUSUNG_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "JUSUNG_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782276214
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "KALSHI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "KALSHI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776081600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "KBHLD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "KBHLD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782457200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "KBLAM_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "KBLAM_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782457200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "KIMI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "KIMI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784608054
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "KR200_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "KR200_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "10",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782276103
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "LEN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "LEN_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1791864000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "LETTALL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "LETTALL_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "LITE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "LITE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1770372000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "LONGSYS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "LONGSYS_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "LUXSHARE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "LUXSHARE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "MIDEA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MIDEA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "MINIMAXHKD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MINIMAXHKD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784622600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "MONTAGE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MONTAGE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "MOUTAI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MOUTAI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "MUFG_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MUFG_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784700000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "NAS100_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "NAS100_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.0001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769171676
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "NAURA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "NAURA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "NEURALINK_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "NEURALINK_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784107261
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "PERIC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "PERIC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "POLYMARKET_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "POLYMARKET_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776081600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "PUYA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "PUYA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787121920
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SBP_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SBP_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "10",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SHENHUA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SHENHUA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SHLD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SHLD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1779085800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SHTECH_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SHTECH_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SINOCERA_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SINOCERA_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SKSQUARE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SKSQUARE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1782276162
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SOXX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SOXX_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1781589600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SPX500_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SPX500_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769170664
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SUNAC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SUNAC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "10",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776146400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SUNGROW_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SUNGROW_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785821400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "SYTECH_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SYTECH_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TAIJI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TAIJI_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TENCENTHKD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TENCENTHKD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784622600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TFME_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TFME_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TONGGUAN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TONGGUAN_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787121998
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TQQQX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TQQQX_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1761400670
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TRAHK_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TRAHK_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1778565600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TUNGSTEN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TUNGSTEN_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "TW88_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TW88_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1770177600
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "UK100_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "UK100_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.0001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769170767
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "UNIS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "UNIS_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "US2000_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "US2000_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1770177600
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "US30_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "US30_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.0001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "USDBRL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "USDBRL_USDT",
+        "contract_type": "forex",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1790218800
+      },
+      "reason": "forex_is_not_crypto_or_stable_inventory",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "USDC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "USDC_USDT",
+        "contract_type": "forex",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1678579200
+      },
+      "reason": "forex_is_not_crypto_or_stable_inventory",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "VOLX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "VOLX_USDT",
+        "contract_type": "indices",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1780725600
+      },
+      "reason": "index_reference_requires_independent_units",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "VRT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "VRT_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1777262400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "WANGSU_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "WANGSU_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787121960
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "WUXIAPPTEC_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "WUXIAPPTEC_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XAL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XAL_USDT",
+        "contract_type": "metals",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "official_metal_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XCU_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XCU_USDT",
+        "contract_type": "metals",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "official_metal_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XIAOMIHKD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XIAOMIHKD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784622600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XIECHUANG_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XIECHUANG_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787122054
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XNI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XNI_USDT",
+        "contract_type": "metals",
+        "type": "direct",
+        "quanto_multiplier": "0.0001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "official_metal_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XPB_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XPB_USDT",
+        "contract_type": "metals",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1769500800
+      },
+      "reason": "official_metal_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "XUNCE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "XUNCE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1776060000
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "YANGTZE_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "YANGTZE_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787032800
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "YJTECH_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "YJTECH_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785994200
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "YONGDING_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "YONGDING_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1787122075
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ZHIPUHKD_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ZHIPUHKD_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.001",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1784622600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ZIJINMINING_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ZIJINMINING_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1785740400
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "ZTT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-19",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ZTT_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "1",
+        "status": "trading",
+        "in_delisting": false,
+        "launch_time": 1786080600
+      },
+      "reason": "official_stock_class_or_id",
+      "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

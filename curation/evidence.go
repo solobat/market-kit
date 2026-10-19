@@ -48,7 +48,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
-	if isForexMarket(row) || hasExplicitRWAHint(row) {
+	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
 		return 5
 	}
 	if hasExplicitCryptoIdentityHint(row) {
@@ -69,7 +69,14 @@ func isForexMarket(row discovery.ImportedMarket) bool {
 		return group == "forex" || group == "forex-minor" || group == "forex-exotic"
 	case "extended":
 		return group == "fx"
+	case "gate":
+		return group == "forex"
 	default:
 		return false
 	}
+}
+
+// Gate's indices include volatility benchmarks; do not label every index a stock.
+func isGateIndexMarket(row discovery.ImportedMarket) bool {
+	return strings.EqualFold(strings.TrimSpace(row.PlatformID), "gate") && strings.EqualFold(strings.TrimSpace(row.Category), "indices")
 }
