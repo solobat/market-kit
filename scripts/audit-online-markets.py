@@ -1,14 +1,20 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
+from security_metadata import read_catalog, compare_catalogs
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
 parser.add_argument('--output-dir', required=True)
 parser.add_argument('--api-base', default='https://market.mintoken.xyz/api/v1')
 parser.add_argument('--workers', type=int, default=2, choices=[1,2])
+parser.add_argument('--official-bitget', help='Current official Bitget SPOT catalog JSON; read-only evidence.')
+parser.add_argument('--previous-official-bitget', help='Previous official catalog for security-ID/status drift; never infer ratios.')
 args=parser.parse_args()
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)
 inv=json.load(open(args.inventory));reg=json.load(open(args.registry))
+security_catalog = read_catalog(args.official_bitget) if args.official_bitget else {}
+security_drift = compare_catalogs(security_catalog, read_catalog(args.previous_official_bitget)) if security_catalog and args.previous_official_bitget else {'changes': {}, 'addedSymbols': [], 'absentSymbols': []}
+(ROOT/'security-metadata-drift.json').write_text(json.dumps(security_drift, ensure_ascii=False, indent=2))
 fingerprint=hashlib.sha256(pathlib.Path(args.inventory).read_bytes()+pathlib.Path(args.registry).read_bytes()).hexdigest()
 cache=ROOT/('batches-'+fingerprint[:16]);cache.mkdir(exist_ok=True)
 norm=lambda s: {'perp':'perpetual','swap':'perpetual','linear':'perpetual'}.get(s,s)
@@ -46,6 +52,9 @@ for i,batch in enumerate(batches):
  d=responses[i]
  for j,(k,req) in enumerate(batch):
   result=d.get('results',[None]*len(batch))[j];sources=inventories.get(k,[]);flags=[];m=(result or {}).get('market') or {};base=m.get('baseAsset','');cl=m.get('assetClass','');aid=m.get('assetId','');uid=m.get('underlyingId','')
+  security_changes = security_drift['changes'].get(k[1].upper(), []) if k[0] == 'bitget' and k[2] == 'spot' else []
+  if any(c['kind'] == 'security_identifier_changed' for c in security_changes): flags.append('official_security_identifier_changed')
+  if any(c['kind'] == 'security_identifier_missing' for c in security_changes): flags.append('official_security_identifier_missing')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])
   if m:
@@ -77,7 +86,7 @@ for i,batch in enumerate(batches):
    if re.match(r'^(1000|10000|1000000|1M)[A-Z]',base) and m.get('unitMultiplier',1)==1:flags.append('scaled_name_review')
   if len({str(v.get('chain')) for v in sources if v.get('chain')})>1:flags.append('multiple_chains_single_resolve_key')
   if len({(v['baseAsset'].upper(),v['quoteAsset'].upper(),v.get('assetClass') or v.get('assetClassHint') or '') for v in sources})>1:flags.append('conflicting_source_identity')
-  row={'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
+  row={'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
   summary[k[0]]['markets']+=1;summary[k[0]][(result or {}).get('status','api_error')]+=1
   if flags:summary[k[0]]['flagged']+=1
   for f in set(flags):summary[k[0]][f]+=1

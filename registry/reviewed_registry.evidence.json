@@ -19549,6 +19549,418 @@
       },
       "reason": "official_stock_class_or_id",
       "note": "Venue product identity only; no global class edit or external underlying assertion. Native symbol and base-price unit retained. quanto_multiplier is exchange units per contract lot, not a symbol price multiplier. Indices include volatility references; unknown class does not assert equity. Gate USDC_USDT is explicitly forex, not spot USDC. Empty type does not prove crypto (BEN quarantine)."
+    },
+    {
+      "key": [
+        "gate",
+        "GRAL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "GRAL_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "gate",
+        "NU_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "NU_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "gate",
+        "PBR_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "PBR_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "gate",
+        "VICR_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "VICR_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.01",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "gate",
+        "VIST_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "VIST_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "gate",
+        "YPF_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "YPF_USDT",
+        "contract_type": "stocks",
+        "type": "direct",
+        "quanto_multiplier": "0.1",
+        "status": "trading",
+        "in_delisting": false
+      },
+      "note": "New official stock contract: venue product identity, not ticker-only external join. quanto_multiplier is contract lot size, not symbol price rebase. No ADR/local-share ratio inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "TWTSMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "TWTSMUSDT",
+        "baseCoin": "TWTSM",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "TWDELTAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "TWDELTAUSDT",
+        "baseCoin": "TWDELTA",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "TWASXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "TWASXUSDT",
+        "baseCoin": "TWASX",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "TWUMCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "TWUMCUSDT",
+        "baseCoin": "TWUMC",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.1"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "NANYAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "NANYAUSDT",
+        "baseCoin": "NANYA",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "WINBONDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "WINBONDUSDT",
+        "baseCoin": "WINBOND",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.1"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "YAGEOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "YAGEOUSDT",
+        "baseCoin": "YAGEO",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "WALSINUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603897858",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "WALSINUSDT",
+        "baseCoin": "WALSIN",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "CSTOCKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603898053",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "CSTOCKUSDT",
+        "baseCoin": "CSTOCK",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "MDTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603898053",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "MDTUSDT",
+        "baseCoin": "MDT",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "BPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603898053",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "BPUSDT",
+        "baseCoin": "BP",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "VLOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://www.bitget.com/support/articles/12560603898053",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "VLOUSDT",
+        "baseCoin": "VLO",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Official listing announcement explicitly identifies stock perps. isRwa alone does not prove stock class. Native TW names and venue-scoped products retained: Taiwan common-share reference not merged with US ADR/rtoken. sizeMultiplier is order increment, not price rebase."
+    },
+    {
+      "key": [
+        "bitget",
+        "RNHPUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-20",
+      "source": "https://investors.nhpreit.com/Investors/investor-news/news-details/2026/National-Healthcare-Properties-Announces-Conversion-of-Class-A-Common-Stock-into-Common-Stock/default.aspx",
+      "supportingSource": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RNHPUSDT",
+        "baseCoin": "rNHP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "isReality": "yes",
+        "isin": "US42226B6002",
+        "fullName": "National Healthcare Properties",
+        "status": "online"
+      },
+      "priorOfficialISIN": "US42226B5012",
+      "event": {
+        "kind": "class_a_to_common_conversion",
+        "ratio": 1,
+        "effectiveAt": "2026-10-19T13:30:00Z",
+        "newCUSIP": "42226B600"
+      },
+      "note": "Issuer confirms one-for-one conversion effective Oct19 09:30 ET; new common CUSIP matches current venue ISIN. Not a new 1-for-4 reverse split. Wrapped token product remains distinct; no global NHP/old-ISIN rewrite."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
