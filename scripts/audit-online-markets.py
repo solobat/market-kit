@@ -1,6 +1,6 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
-from security_metadata import read_catalog, compare_catalogs
+from security_metadata import read_catalog, compare_catalogs, extended_categories
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
@@ -9,7 +9,9 @@ parser.add_argument('--api-base', default='https://market.mintoken.xyz/api/v1')
 parser.add_argument('--workers', type=int, default=2, choices=[1,2])
 parser.add_argument('--official-bitget', help='Current official Bitget SPOT catalog JSON; read-only evidence.')
 parser.add_argument('--previous-official-bitget', help='Previous official catalog for security-ID/status drift; never infer ratios.')
+parser.add_argument('--official-extended', help='Official Extended metadata; checks both native and display symbols.')
 args=parser.parse_args()
+extended_classes = extended_categories(args.official_extended) if args.official_extended else {}
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)
 inv=json.load(open(args.inventory));reg=json.load(open(args.registry))
 security_catalog = read_catalog(args.official_bitget) if args.official_bitget else {}
@@ -55,6 +57,7 @@ for i,batch in enumerate(batches):
   security_changes = security_drift['changes'].get(k[1].upper(), []) if k[0] == 'bitget' and k[2] == 'spot' else []
   if any(c['kind'] == 'security_identifier_changed' for c in security_changes): flags.append('official_security_identifier_changed')
   if any(c['kind'] == 'security_identifier_missing' for c in security_changes): flags.append('official_security_identifier_missing')
+  if k[0] == 'extended' and k[2] == 'perpetual' and extended_classes.get(k[1]) and cl != extended_classes[k[1]]: flags.append('official_asset_class_conflict')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])
   if m:

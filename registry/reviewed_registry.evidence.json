@@ -19961,6 +19961,1087 @@
         "newCUSIP": "42226B600"
       },
       "note": "Issuer confirms one-for-one conversion effective Oct19 09:30 ET; new common CUSIP matches current venue ISIN. Not a new 1-for-4 reverse split. Wrapped token product remains distinct; no global NHP/old-ISIN rewrite."
+    },
+    {
+      "key": [
+        "extended",
+        "NOW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "NOW-USD",
+        "assetName": "NOW",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "description": "ServiceNow",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "NOW/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "NOW-USD",
+        "assetName": "NOW",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "description": "ServiceNow",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "VVV-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "VVV-USD",
+        "assetName": "VVV",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "AI",
+        "description": "Venice Token",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "VVV/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "VVV-USD",
+        "assetName": "VVV",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "AI",
+        "description": "Venice Token",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "S-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "S-USD",
+        "assetName": "S",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sonic",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "S/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "S-USD",
+        "assetName": "S",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sonic",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AERO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AERO-USD",
+        "assetName": "AERO",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Aerodrome Finance",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AERO/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AERO-USD",
+        "assetName": "AERO",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Aerodrome Finance",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LIT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LIT-USD",
+        "assetName": "LIT",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Lighter",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LIT/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LIT-USD",
+        "assetName": "LIT",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Lighter",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "TAC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "TAC-USD",
+        "assetName": "TAC",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "TAC Protocol",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "TAC/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "TAC-USD",
+        "assetName": "TAC",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "TAC Protocol",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "STRK-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "STRK-USD",
+        "assetName": "STRK",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L2",
+        "description": "Starknet",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "STRK/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "STRK-USD",
+        "assetName": "STRK",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L2",
+        "description": "Starknet",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BILL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BILL-USD",
+        "assetName": "BILL",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Meme",
+        "description": "Billions Network",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BILL/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BILL-USD",
+        "assetName": "BILL",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Meme",
+        "description": "Billions Network",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "Q-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "Q-USD",
+        "assetName": "Q",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Quack AI",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "Q/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "Q-USD",
+        "assetName": "Q",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Quack AI",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LYTE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LYTE-USD",
+        "assetName": "LYTE",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "ETF/Index",
+        "description": "Roundhill Photonics & Optics ETF",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LYTE/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LYTE-USD",
+        "assetName": "LYTE",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "ETF/Index",
+        "description": "Roundhill Photonics & Optics ETF",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AVNT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AVNT-USD",
+        "assetName": "AVNT",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Avantis",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AVNT/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AVNT-USD",
+        "assetName": "AVNT",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Avantis",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "ENS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "ENS-USD",
+        "assetName": "ENS",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Ethereum Name Service",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "ENS/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "ENS-USD",
+        "assetName": "ENS",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Ethereum Name Service",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "W-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "W-USD",
+        "assetName": "W",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Wormhole",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "W/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "W-USD",
+        "assetName": "W",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Wormhole",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "PUMP-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "PUMP-USD",
+        "assetName": "PUMP",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Pump.fun",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "PUMP/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "PUMP-USD",
+        "assetName": "PUMP",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Pump.fun",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AR-USD",
+        "assetName": "AR",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Arweave",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AR/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AR-USD",
+        "assetName": "AR",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Arweave",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AXS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AXS-USD",
+        "assetName": "AXS",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Axie Infinity",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "AXS/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "AXS-USD",
+        "assetName": "AXS",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Axie Infinity",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "STX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "STX-USD",
+        "assetName": "STX",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L2",
+        "description": "Stacks",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "STX/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "STX-USD",
+        "assetName": "STX",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L2",
+        "description": "Stacks",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "H-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "H-USD",
+        "assetName": "H",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Humanity",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "H/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "H-USD",
+        "assetName": "H",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Infra",
+        "description": "Humanity",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BOT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BOT-USD",
+        "assetName": "BOT",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "description": "RoboStrategy",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BOT/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BOT-USD",
+        "assetName": "BOT",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "description": "RoboStrategy",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "SEI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "SEI-USD",
+        "assetName": "SEI",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sei",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "SEI/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "SEI-USD",
+        "assetName": "SEI",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sei",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "B-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "B-USD",
+        "assetName": "B",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Meme",
+        "description": "BUILDon",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "B/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "B-USD",
+        "assetName": "B",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "Meme",
+        "description": "BUILDon",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "SUI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "SUI-USD",
+        "assetName": "SUI",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sui",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "SUI/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "SUI-USD",
+        "assetName": "SUI",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Sui",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LTC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LTC-USD",
+        "assetName": "LTC",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Litecoin",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "LTC/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "LTC-USD",
+        "assetName": "LTC",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Litecoin",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "DASH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "DASH-USD",
+        "assetName": "DASH",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Dash",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "DASH/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "DASH-USD",
+        "assetName": "DASH",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Dash",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BCH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BCH-USD",
+        "assetName": "BCH",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Bitcoin Cash",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "BCH/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BCH-USD",
+        "assetName": "BCH",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "Bitcoin Cash",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "EWZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "EWZ-USD",
+        "assetName": "EWZ",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "ETF/Index",
+        "description": "iShares MSCI Brazil ETF",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "EWZ/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "EWZ-USD",
+        "assetName": "EWZ",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "ETF/Index",
+        "description": "iShares MSCI Brazil ETF",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "OPEN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "OPEN-USD",
+        "assetName": "OPEN",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "OpenLedger",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "OPEN/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "OPEN-USD",
+        "assetName": "OPEN",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "L1",
+        "description": "OpenLedger",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "CFG-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "CFG-USD",
+        "assetName": "CFG",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Centrifuge",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "extended",
+        "CFG/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "CFG-USD",
+        "assetName": "CFG",
+        "collateralAssetName": "USD",
+        "category": "Crypto",
+        "subCategory": "DeFi",
+        "description": "Centrifuge",
+        "status": "ACTIVE"
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "MPLX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-21",
+      "source": "https://www.gate.com/fr/announcements/article/35422/gate.io-has-added-metaplex-mplx-perpetual-contract",
+      "official": {
+        "name": "MPLX_USDT",
+        "contract_type": "",
+        "quanto_multiplier": "10",
+        "status": "trading",
+        "launch_time": 1711450714
+      },
+      "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

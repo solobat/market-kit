@@ -41,3 +41,22 @@ def compare_catalogs(current, previous):
     return {'changes': changes, 'addedSymbols': sorted(current.keys() - previous.keys()),
             'absentSymbols': sorted(previous.keys() - current.keys()),
             'note': 'Catalog changes do not prove a split, conversion ratio, delisting, or external price equivalence.'}
+
+
+def extended_categories(path):
+    """Index only official perpetual names and their base/quote display variant."""
+    rows = json.loads(Path(path).read_text())['data']
+    result = {}
+    for row in rows:
+        if row.get('type') != 'PERPETUAL':
+            continue
+        category = {'Equity': 'rwa_stock', 'ETF/Index': 'rwa_stock',
+                    'Commodity': 'rwa_commodity'}.get(row.get('subCategory'))
+        if category is None and row.get('category') == 'Crypto':
+            category = 'crypto'
+        if category:
+            for symbol in [row['name'], row['assetName'] + '/' + row['collateralAssetName']]:
+                if symbol in result and result[symbol] != category:
+                    raise ValueError('conflicting official Extended category: ' + symbol)
+                result[symbol] = category
+    return result
