@@ -25,16 +25,20 @@ type ImportEnvelope struct {
 
 // InstrumentMetadata is descriptive venue evidence, not an identity override.
 type InstrumentMetadata struct {
-	NativeQuoteCurrency string          `json:"nativeQuoteCurrency,omitempty"`
-	TradingHours        json.RawMessage `json:"tradingHours,omitempty"`
-	FullName            string          `json:"fullName,omitempty"`
-	DisplayName         string          `json:"displayName,omitempty"`
-	MarketRegion        string          `json:"marketRegion,omitempty"`
-	UnderlyingTicker    string          `json:"underlyingTicker,omitempty"`
-	SymbolType          string          `json:"symbolType,omitempty"`
-	Source              string          `json:"source"`
-	SourceURL           string          `json:"sourceUrl"`
-	ObservedAt          time.Time       `json:"observedAt"`
+	DescriptionSource      string          `json:"descriptionSource,omitempty"`
+	DescriptionSourceURL   string          `json:"descriptionSourceUrl,omitempty"`
+	DescriptionObservedAt  time.Time       `json:"descriptionObservedAt,omitempty"`
+	DescriptionMatchMethod string          `json:"descriptionMatchMethod,omitempty"`
+	NativeQuoteCurrency    string          `json:"nativeQuoteCurrency,omitempty"`
+	TradingHours           json.RawMessage `json:"tradingHours,omitempty"`
+	FullName               string          `json:"fullName,omitempty"`
+	DisplayName            string          `json:"displayName,omitempty"`
+	MarketRegion           string          `json:"marketRegion,omitempty"`
+	UnderlyingTicker       string          `json:"underlyingTicker,omitempty"`
+	SymbolType             string          `json:"symbolType,omitempty"`
+	Source                 string          `json:"source"`
+	SourceURL              string          `json:"sourceUrl"`
+	ObservedAt             time.Time       `json:"observedAt"`
 }
 
 type ImportedMarket struct {

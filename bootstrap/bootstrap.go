@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"sort"
 	"strings"
 	"time"
@@ -293,6 +294,7 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
+			InstrumentMetadata: binanceDescriptionMetadata(item.UnderlyingType, item.BaseAsset, seenAt),
 			SourceID:           BuiltInSourceID,
 			PlatformID:         "binance",
 			Platform:           "Binance",
@@ -613,14 +615,30 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 	}
 	type response struct {
 		Result struct {
-			List []item `json:"list"`
+			List           []item `json:"list"`
+			NextPageCursor string `json:"nextPageCursor"`
 		} `json:"result"`
 	}
 
-	url := fmt.Sprintf("https://api.bybit.com/v5/market/instruments-info?category=%s&limit=1000", category)
+	endpoint := fmt.Sprintf("https://api.bybit.com/v5/market/instruments-info?category=%s&limit=1000", category)
 	var payload response
-	if err := fetchJSON(ctx, client, http.MethodGet, url, nil, &payload); err != nil {
-		return nil, err
+	seenCursors := map[string]bool{}
+	nextURL := endpoint
+	for {
+		var page response
+		if err := fetchJSON(ctx, client, http.MethodGet, nextURL, nil, &page); err != nil {
+			return nil, err
+		}
+		payload.Result.List = append(payload.Result.List, page.Result.List...)
+		cursor := page.Result.NextPageCursor
+		if cursor == "" {
+			break
+		}
+		if seenCursors[cursor] || len(seenCursors) >= 20 {
+			return nil, fmt.Errorf("Bybit repeated or excessive metadata pagination")
+		}
+		seenCursors[cursor] = true
+		nextURL = endpoint + "&cursor=" + url.QueryEscape(cursor)
 	}
 
 	seenAt := time.Now().UTC()
@@ -638,7 +656,7 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 			InstrumentMetadata: &discovery.InstrumentMetadata{
 				FullName: strings.TrimSpace(item.FullName), DisplayName: strings.TrimSpace(item.DisplayName),
 				MarketRegion: strings.TrimSpace(item.MarketRegion), UnderlyingTicker: strings.TrimSpace(item.UnderlyingTicker),
-				SymbolType: strings.TrimSpace(item.SymbolType), Source: "bybit", SourceURL: url, ObservedAt: seenAt,
+				SymbolType: strings.TrimSpace(item.SymbolType), Source: "bybit", SourceURL: endpoint, ObservedAt: seenAt,
 			},
 			SourceID:       BuiltInSourceID,
 			PlatformID:     "bybit",
@@ -1247,4 +1265,18 @@ func normalizeGateTradeStatus(status string) string {
 	default:
 		return "unknown"
 	}
+}
+
+func binanceDescriptionMetadata(underlyingType, base string, observed time.Time) *discovery.InstrumentMetadata {
+	region := map[string]string{"CN_EQUITY": "CN", "HK_EQUITY": "HK", "KR_EQUITY": "KR", "US_EQUITY": "US"}[strings.ToUpper(strings.TrimSpace(underlyingType))]
+	if region == "" {
+		return nil
+	}
+	ticker := ""
+	// Native numeric venue symbols carry an explicit market prefix. Named
+	// tickers rely on an already reviewed underlying ID instead.
+	if discovery.SecurityDescriptionKey(region, base) != "" {
+		ticker = base
+	}
+	return &discovery.InstrumentMetadata{MarketRegion: region, UnderlyingTicker: ticker, Source: "binance", SourceURL: "https://fapi.binance.com/fapi/v1/exchangeInfo", ObservedAt: observed}
 }

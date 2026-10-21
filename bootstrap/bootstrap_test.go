@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/solobat/market-kit/discovery"
 )
@@ -274,5 +275,34 @@ func TestBybitInstrumentMetadataSurvivesImportAndDiscovery(t *testing.T) {
 	meta := groups[0].Markets[0].InstrumentMetadata
 	if meta == nil || meta.FullName != "Breakwave Tanker Shipping ETF" || meta.MarketRegion != "US" || meta.UnderlyingTicker != "BWET" || meta.Source != "bybit" || meta.ObservedAt.IsZero() {
 		t.Fatalf("metadata lost across serialization and normalization: %+v", meta)
+	}
+}
+
+func TestBybitMetadataReadsAllPages(t *testing.T) {
+	calls := 0
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		calls++
+		if req.URL.Query().Get("cursor") == "" {
+			return jsonResponse(`{"result":{"list":[{"symbol":"BTCUSDT","baseCoin":"BTC","quoteCoin":"USDT","status":"Trading"}],"nextPageCursor":"next page"}}`), nil
+		}
+		if req.URL.Query().Get("cursor") != "next page" {
+			t.Fatalf("cursor encoding: %s", req.URL)
+		}
+		return jsonResponse(`{"result":{"list":[{"symbol":"LENOVOUSDT","baseCoin":"LENOVO","quoteCoin":"USDT","status":"Trading","symbolType":"stock","fullName":"Lenovo Group Limited","marketRegion":"HK","underlyingTicker":"992HK"}]}}`), nil
+	})}
+	rows, err := fetchBybitCategory(context.Background(), client, "linear", "perp")
+	if err != nil || len(rows) != 2 || calls != 2 || rows[1].InstrumentMetadata.FullName != "Lenovo Group Limited" {
+		t.Fatalf("pagination lost descriptors: %+v %v calls=%d", rows, err, calls)
+	}
+}
+
+func TestBinanceRegionalSecurityDescription(t *testing.T) {
+	for _, tc := range []struct{ kind, base, region, code string }{
+		{"HK_EQUITY", "HK0992", "HK", "HK0992"}, {"CN_EQUITY", "688825", "CN", "688825"}, {"KR_EQUITY", "KR005930", "KR", "KR005930"}, {"CN_EQUITY", "UNITREE", "CN", ""},
+	} {
+		m := binanceDescriptionMetadata(tc.kind, tc.base, time.Now())
+		if m == nil || m.MarketRegion != tc.region || m.UnderlyingTicker != tc.code {
+			t.Fatalf("%+v -> %+v", tc, m)
+		}
 	}
 }

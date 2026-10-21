@@ -31,6 +31,7 @@ func (a *Aggregator) NormalizeImportedMarkets(items []ImportedMarket) []Candidat
 		}
 		out = append(out, *candidate)
 	}
+	enrichInstrumentDescriptions(out)
 	sort.SliceStable(out, func(i, j int) bool {
 		if out[i].CanonicalSymbol == out[j].CanonicalSymbol {
 			if out[i].Exchange == out[j].Exchange {
