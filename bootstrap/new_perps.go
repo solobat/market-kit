@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -64,9 +65,10 @@ func fetchArcus(ctx context.Context, client *http.Client) ([]discovery.ImportedM
 
 func fetchQfex(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type reference struct {
-		Symbol   string `json:"symbol"`
-		Status   string `json:"status"`
-		Category string `json:"product_category"`
+		TradingHours json.RawMessage `json:"market_hours"`
+		Symbol       string          `json:"symbol"`
+		Status       string          `json:"status"`
+		Category     string          `json:"product_category"`
 	}
 	var refs struct {
 		Data []reference `json:"data"`
@@ -121,7 +123,7 @@ func fetchQfex(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 		case "COMMODITY":
 			hint = "commodity"
 		}
-		rows = append(rows, discovery.ImportedMarket{SourceID: BuiltInSourceID, PlatformID: "qfex", Platform: "QFEX", VenueType: "cex", MarketType: "perp", Symbol: m.Symbol, BaseAsset: strings.ToUpper(m.Base), QuoteAsset: strings.ToUpper(m.Quote), AssetClassHint: hint, Category: ref.Category, Status: status, ExternalURL: "https://www.qfex.com/trade", FirstSeenAt: now, LastSeenAt: now})
+		rows = append(rows, discovery.ImportedMarket{InstrumentMetadata: &discovery.InstrumentMetadata{NativeQuoteCurrency: strings.ToUpper(m.Quote), TradingHours: ref.TradingHours, Source: "qfex", SourceURL: qfexRefdataURL, ObservedAt: now}, SourceID: BuiltInSourceID, PlatformID: "qfex", Platform: "QFEX", VenueType: "cex", MarketType: "perp", Symbol: m.Symbol, BaseAsset: strings.ToUpper(m.Base), QuoteAsset: strings.ToUpper(m.Quote), AssetClassHint: hint, Category: ref.Category, Status: status, ExternalURL: "https://www.qfex.com/trade", FirstSeenAt: now, LastSeenAt: now})
 	}
 	return rows, nil
 }

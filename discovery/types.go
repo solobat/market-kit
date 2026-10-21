@@ -23,7 +23,23 @@ type ImportEnvelope struct {
 	Items       []ImportedMarket `json:"items"`
 }
 
+// InstrumentMetadata is descriptive venue evidence, not an identity override.
+type InstrumentMetadata struct {
+	NativeQuoteCurrency string          `json:"nativeQuoteCurrency,omitempty"`
+	TradingHours        json.RawMessage `json:"tradingHours,omitempty"`
+	FullName            string          `json:"fullName,omitempty"`
+	DisplayName         string          `json:"displayName,omitempty"`
+	MarketRegion        string          `json:"marketRegion,omitempty"`
+	UnderlyingTicker    string          `json:"underlyingTicker,omitempty"`
+	SymbolType          string          `json:"symbolType,omitempty"`
+	Source              string          `json:"source"`
+	SourceURL           string          `json:"sourceUrl"`
+	ObservedAt          time.Time       `json:"observedAt"`
+}
+
 type ImportedMarket struct {
+	InstrumentMetadata *InstrumentMetadata `json:"instrumentMetadata,omitempty"`
+
 	SourceID           string    `json:"sourceId"`
 	PlatformID         string    `json:"platformId"`
 	Platform           string    `json:"platform"`
@@ -49,6 +65,8 @@ type ImportedMarket struct {
 
 func (market *ImportedMarket) UnmarshalJSON(payload []byte) error {
 	type importedMarketJSON struct {
+		InstrumentMetadata *InstrumentMetadata `json:"instrumentMetadata,omitempty"`
+
 		SourceID           string    `json:"sourceId"`
 		PlatformID         string    `json:"platformId"`
 		Platform           string    `json:"platform"`
@@ -89,6 +107,7 @@ func (market *ImportedMarket) UnmarshalJSON(payload []byte) error {
 	preDelisting = hasMarketFlag(flags, MarketFlagPreDelisting)
 
 	*market = ImportedMarket{
+		InstrumentMetadata: raw.InstrumentMetadata,
 		SourceID:           raw.SourceID,
 		PlatformID:         raw.PlatformID,
 		Platform:           raw.Platform,
@@ -115,6 +134,8 @@ func (market *ImportedMarket) UnmarshalJSON(payload []byte) error {
 }
 
 type CandidateMarket struct {
+	InstrumentMetadata *InstrumentMetadata `json:"instrumentMetadata,omitempty"`
+
 	SourceID         string                    `json:"sourceId"`
 	PlatformID       string                    `json:"platformId"`
 	Platform         string                    `json:"platform"`

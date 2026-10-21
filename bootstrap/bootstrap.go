@@ -597,15 +597,19 @@ func fetchBybit(ctx context.Context, client *http.Client) ([]discovery.ImportedM
 
 func fetchBybitCategory(ctx context.Context, client *http.Client, category, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
-		Symbol       string `json:"symbol"`
-		Status       string `json:"status"`
-		BaseCoin     string `json:"baseCoin"`
-		QuoteCoin    string `json:"quoteCoin"`
-		SymbolType   string `json:"symbolType"`
-		ST           any    `json:"st"`
-		IsST         any    `json:"isST"`
-		PreDelisting any    `json:"preDelisting"`
-		InDelisting  any    `json:"in_delisting"`
+		FullName         string `json:"fullName"`
+		DisplayName      string `json:"displayName"`
+		MarketRegion     string `json:"marketRegion"`
+		UnderlyingTicker string `json:"underlyingTicker"`
+		Symbol           string `json:"symbol"`
+		Status           string `json:"status"`
+		BaseCoin         string `json:"baseCoin"`
+		QuoteCoin        string `json:"quoteCoin"`
+		SymbolType       string `json:"symbolType"`
+		ST               any    `json:"st"`
+		IsST             any    `json:"isST"`
+		PreDelisting     any    `json:"preDelisting"`
+		InDelisting      any    `json:"in_delisting"`
 	}
 	type response struct {
 		Result struct {
@@ -631,6 +635,11 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
+			InstrumentMetadata: &discovery.InstrumentMetadata{
+				FullName: strings.TrimSpace(item.FullName), DisplayName: strings.TrimSpace(item.DisplayName),
+				MarketRegion: strings.TrimSpace(item.MarketRegion), UnderlyingTicker: strings.TrimSpace(item.UnderlyingTicker),
+				SymbolType: strings.TrimSpace(item.SymbolType), Source: "bybit", SourceURL: url, ObservedAt: seenAt,
+			},
 			SourceID:       BuiltInSourceID,
 			PlatformID:     "bybit",
 			Platform:       "Bybit",
@@ -657,7 +666,7 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 func bybitAssetClassification(symbolType string) (assetClassHint string, tags []string) {
 	symbolType = strings.ToLower(strings.TrimSpace(symbolType))
 	switch symbolType {
-	case "stock":
+	case "stock", "etf":
 		return "stock", []string{"bybit-stock"}
 	default:
 		return "", nil

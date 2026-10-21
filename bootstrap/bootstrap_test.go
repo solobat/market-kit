@@ -3,6 +3,7 @@ package bootstrap
 import (
 	"context"
 	"encoding/json"
+	"github.com/solobat/market-kit/identity"
 	"io"
 	"net/http"
 	"strings"
@@ -245,4 +246,33 @@ func containsString(items []string, target string) bool {
 		}
 	}
 	return false
+}
+
+func TestBybitInstrumentMetadataSurvivesImportAndDiscovery(t *testing.T) {
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(`{"result":{"list":[{"symbol":"BWETUSDT","baseCoin":"BWET","quoteCoin":"USDT","status":"Trading","symbolType":"ETF","fullName":"Breakwave Tanker Shipping ETF","displayName":"BWETUSDT","marketRegion":"US","underlyingTicker":"BWET"}]}}`))}, nil
+	})}
+	rows, err := fetchBybitCategory(context.Background(), client, "linear", "perp")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rows) != 1 || rows[0].AssetClassHint != "stock" {
+		t.Fatalf("ETF classification lost: %+v", rows)
+	}
+	encoded, err := json.Marshal(rows)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var restored []discovery.ImportedMarket
+	if err := json.Unmarshal(encoded, &restored); err != nil {
+		t.Fatal(err)
+	}
+	groups := discovery.NewAggregator(identity.Registry{}).BuildAssetGroups(restored)
+	if len(groups) != 1 || len(groups[0].Markets) != 1 {
+		t.Fatalf("unexpected groups: %+v", groups)
+	}
+	meta := groups[0].Markets[0].InstrumentMetadata
+	if meta == nil || meta.FullName != "Breakwave Tanker Shipping ETF" || meta.MarketRegion != "US" || meta.UnderlyingTicker != "BWET" || meta.Source != "bybit" || meta.ObservedAt.IsZero() {
+		t.Fatalf("metadata lost across serialization and normalization: %+v", meta)
+	}
 }

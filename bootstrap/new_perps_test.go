@@ -15,7 +15,7 @@ func TestNewPerpInventoryAndETFIdentity(t *testing.T) {
 		case arcusMarketsURL:
 			return jsonResponse(`{"markets":[{"marketDisplayName":"USO-USD","baseAsset":"USO","quoteAsset":"USD","type":"PERPETUAL","category":"COMMODITIES","status":"ONLINE"},{"marketDisplayName":"GLD-USD","baseAsset":"GLD","quoteAsset":"USD","type":"PERPETUAL","category":"COMMODITIES","status":"OFFLINE"},{"marketDisplayName":"BTC-USD","baseAsset":"BTC","quoteAsset":"USD","type":"SPOT"}]}`), nil
 		case qfexRefdataURL:
-			return jsonResponse(`{"data":[{"symbol":"CL-USD","status":"ACTIVE","product_category":"COMMODITY"},{"symbol":"AAPL-EUR","status":"INACTIVE","product_category":"EQUITY"}]}`), nil
+			return jsonResponse(`{"data":[{"symbol":"CL-USD","status":"ACTIVE","product_category":"COMMODITY"},{"symbol":"AAPL-EUR","status":"INACTIVE","product_category":"EQUITY","market_hours":{"tz":"Europe/Paris","monday":[{"session":"open","open":"09:00:00","close":"17:30:00"}]}}]}`), nil
 		case qfexContractsURL:
 			return jsonResponse(`{"data":[{"ticker_id":"CL-USD","base_currency":"CL","target_currency":"USD","product_type":"Perpetual"},{"ticker_id":"AAPL-EUR","base_currency":"AAPL","target_currency":"EUR","product_type":"Perpetual"}]}`), nil
 		default:
@@ -41,6 +41,11 @@ func TestNewPerpInventoryAndETFIdentity(t *testing.T) {
 		}
 		if row.Symbol == "GLD-USD" && row.Status != "paused" {
 			t.Fatal("offline market marked live")
+		}
+		if row.Symbol == "AAPL-EUR" {
+			if row.InstrumentMetadata == nil || row.InstrumentMetadata.NativeQuoteCurrency != "EUR" || row.InstrumentMetadata.Source != "qfex" || !strings.Contains(string(row.InstrumentMetadata.TradingHours), "Europe/Paris") {
+				t.Fatalf("QFEX original currency/session evidence lost: %+v", row.InstrumentMetadata)
+			}
 		}
 		if row.Symbol == "AAPL-EUR" && row.QuoteAsset != "EUR" {
 			t.Fatal("native quote lost")
