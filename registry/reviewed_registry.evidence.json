@@ -21042,6 +21042,206 @@
         "launch_time": 1711450714
       },
       "note": "Official venue identity/category, exact market and equivalent separator variants only. Venue-scoped comparison remains ambiguous; no global ticker rewrite or external equivalence inferred. Lot size is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "FASTRETAILING_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "supportingSource": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "FASTRETAILING_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.01",
+        "status": "trading"
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "gate",
+        "IBKR_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "supportingSource": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "IBKR_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "status": "trading"
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "gate",
+        "TAIYOYUDEN_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "supportingSource": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TAIYOYUDEN_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "status": "trading"
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "gate",
+        "VLO_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "supportingSource": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "VLO_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.01",
+        "status": "trading"
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "ABBVUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898430",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "ABBVUSDT",
+        "baseCoin": "ABBV",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "EBAYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898430",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "EBAYUSDT",
+        "baseCoin": "EBAY",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "ELICEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898332",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "ELICEUSDT",
+        "baseCoin": "ELICE",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "HLTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898430",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "HLTUSDT",
+        "baseCoin": "HLT",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "IBKRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898430",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "IBKRUSDT",
+        "baseCoin": "IBKR",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "MSCIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-22",
+      "source": "https://www.bitget.com/support/articles/12560603898430",
+      "supportingSource": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "MSCIUSDT",
+        "baseCoin": "MSCI",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
