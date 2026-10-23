@@ -21242,6 +21242,131 @@
         ]
       },
       "note": "Explicit venue stock product. Taiwan/Japan/Korea/native ordinary shares, ADRs and wrapped stocks are not merged. Comparison remains ambiguous pending independent units/issuer verification. Lot/order size is not price multiplier. Bitget stock class confirmed by listing announcement, not isRwa alone."
+    },
+    {
+      "key": [
+        "bitget",
+        "DHRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://www.bitget.com/support/articles/12560603898581",
+      "official": {
+        "symbol": "DHRUSDT",
+        "baseCoin": "DHR",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Explicit venue product; comparison ambiguous pending independently verified cross-venue contract units. Bitget announcement identifies TSTOCK as AT&T, not crypto T. No global T alias/class rewrite. Size increment is not price multiplier; derivative not a direct common-share holding."
+    },
+    {
+      "key": [
+        "bitget",
+        "TSTOCKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://www.bitget.com/support/articles/12560603898581",
+      "official": {
+        "symbol": "TSTOCKUSDT",
+        "baseCoin": "TSTOCK",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "sizeMultiplier": "0.01"
+      },
+      "note": "Explicit venue product; comparison ambiguous pending independently verified cross-venue contract units. Bitget announcement identifies TSTOCK as AT&T, not crypto T. No global T alias/class rewrite. Size increment is not price multiplier; derivative not a direct common-share holding."
+    },
+    {
+      "key": [
+        "bybit",
+        "LMTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=LMTUSDT",
+      "official": {
+        "symbol": "LMTUSDT",
+        "baseCoin": "LMT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "fullName": "Lockheed Martin Corp",
+        "marketRegion": "US",
+        "underlyingTicker": "LMT"
+      },
+      "note": "Explicit venue product; comparison ambiguous pending independently verified cross-venue contract units. Bitget announcement identifies TSTOCK as AT&T, not crypto T. No global T alias/class rewrite. Size increment is not price multiplier; derivative not a direct common-share holding."
+    },
+    {
+      "key": [
+        "bybit",
+        "MXLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=MXLUSDT",
+      "official": {
+        "symbol": "MXLUSDT",
+        "baseCoin": "MXL",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "fullName": "Maxlinear Inc",
+        "marketRegion": "US",
+        "underlyingTicker": "MXL"
+      },
+      "note": "Explicit venue product; comparison ambiguous pending independently verified cross-venue contract units. Bitget announcement identifies TSTOCK as AT&T, not crypto T. No global T alias/class rewrite. Size increment is not price multiplier; derivative not a direct common-share holding."
+    },
+    {
+      "key": [
+        "bybit",
+        "PGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=PGUSDT",
+      "official": {
+        "symbol": "PGUSDT",
+        "baseCoin": "PG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "fullName": "Procter Gamble Co",
+        "marketRegion": "US",
+        "underlyingTicker": "PG"
+      },
+      "note": "Explicit venue product; comparison ambiguous pending independently verified cross-venue contract units. Bitget announcement identifies TSTOCK as AT&T, not crypto T. No global T alias/class rewrite. Size increment is not price multiplier; derivative not a direct common-share holding."
+    },
+    {
+      "key": [
+        "bitget",
+        "RT1USDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-23",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RT1USDT",
+        "baseCoin": "RT1",
+        "quoteCoin": "USDT",
+        "symbolType": "crypto",
+        "isin": null,
+        "isReality": "no",
+        "fullName": "Real Token",
+        "status": "online"
+      },
+      "note": "Official symbolType crypto with no ISIN; RT1 is not classified from r-prefix. Venue-specific identity only; chain/contract equivalence not inferred. Bitget listing12560603898448 identifies Real Token, but article-body retrieval unavailable in this run."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
