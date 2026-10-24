@@ -277,7 +277,8 @@ func (r *Resolver) marketIdentityFromOverride(exchange string, override MarketOv
 	if identity.InstrumentKind == "" {
 		identity.InstrumentKind = DefaultInstrumentKind(identity.MarketType, identity.AssetClass)
 	}
-	if identity.SettlementAsset == "" && identity.ContractType != "multi_collateral_cfd" {
+	if identity.SettlementAsset == "" && identity.ContractType != "multi_collateral_cfd" &&
+		identity.ContractType != "dated_future_unverified" && identity.ContractType != "linear_futures" && identity.ContractType != "inverse_futures" {
 		identity.SettlementAsset = identity.QuoteAsset
 	}
 	identity.ComparisonStatus = NormalizeComparisonStatus(identity.ComparisonStatus)

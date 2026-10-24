@@ -32,7 +32,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 		if newRank < oldRank {
 			continue
 		}
-		same := strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
+		same := sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
 		if !same {
 			conflicts[key] = true
 		}
@@ -48,6 +48,9 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
+	if strings.EqualFold(row.PlatformID, "bybit") && isBybitFutureMetadata(row.InstrumentMetadata) {
+		return 6
+	}
 	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
 		return 5
 	}

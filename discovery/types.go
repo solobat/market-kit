@@ -23,8 +23,12 @@ type ImportEnvelope struct {
 	Items       []ImportedMarket `json:"items"`
 }
 
-// InstrumentMetadata is descriptive venue evidence, not an identity override.
+// InstrumentMetadata carries native venue evidence, not a cross-venue alias.
+// Contract type, settlement and expiry may constrain a dated product identity.
 type InstrumentMetadata struct {
+	ContractType           string          `json:"contractType,omitempty"`
+	SettlementAsset        string          `json:"settlementAsset,omitempty"`
+	ExpiryAtMs             int64           `json:"expiryAtMs,omitempty"`
 	DescriptionSource      string          `json:"descriptionSource,omitempty"`
 	DescriptionSourceURL   string          `json:"descriptionSourceUrl,omitempty"`
 	DescriptionObservedAt  time.Time       `json:"descriptionObservedAt,omitempty"`

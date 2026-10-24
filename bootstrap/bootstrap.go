@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -599,6 +600,9 @@ func fetchBybit(ctx context.Context, client *http.Client) ([]discovery.ImportedM
 
 func fetchBybitCategory(ctx context.Context, client *http.Client, category, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
+		ContractType     string `json:"contractType"`
+		DeliveryTime     string `json:"deliveryTime"`
+		SettleCoin       string `json:"settleCoin"`
 		FullName         string `json:"fullName"`
 		DisplayName      string `json:"displayName"`
 		MarketRegion     string `json:"marketRegion"`
@@ -650,10 +654,17 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 			base, quote = splitSymbol(item.Symbol)
 		}
 		assetClassHint, tags := bybitAssetClassification(item.SymbolType)
+		actualMarketType := marketType
+		expiry, _ := strconv.ParseInt(item.DeliveryTime, 10, 64)
+		if strings.EqualFold(item.ContractType, "LinearFutures") || strings.EqualFold(item.ContractType, "InverseFutures") {
+			actualMarketType = "future"
+		}
+
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
 			InstrumentMetadata: &discovery.InstrumentMetadata{
+				ContractType: strings.TrimSpace(item.ContractType), SettlementAsset: strings.TrimSpace(item.SettleCoin), ExpiryAtMs: expiry,
 				FullName: strings.TrimSpace(item.FullName), DisplayName: strings.TrimSpace(item.DisplayName),
 				MarketRegion: strings.TrimSpace(item.MarketRegion), UnderlyingTicker: strings.TrimSpace(item.UnderlyingTicker),
 				SymbolType: strings.TrimSpace(item.SymbolType), Source: "bybit", SourceURL: endpoint, ObservedAt: seenAt,
@@ -662,7 +673,7 @@ func fetchBybitCategory(ctx context.Context, client *http.Client, category, mark
 			PlatformID:     "bybit",
 			Platform:       "Bybit",
 			VenueType:      "cex",
-			MarketType:     marketType,
+			MarketType:     actualMarketType,
 			Symbol:         strings.TrimSpace(item.Symbol),
 			BaseAsset:      base,
 			QuoteAsset:     quote,

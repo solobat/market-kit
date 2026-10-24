@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 6
+const GeneratedRegistryVersion = 7
 
 var (
 	stableAssets = map[string]bool{
@@ -58,6 +58,7 @@ type SuspiciousCryptoCandidate struct {
 func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry {
 	items, conflicts := selectMarketIdentityEvidence(items)
 	type generatedMarketCandidate struct {
+		metadata    *discovery.InstrumentMetadata
 		exchange    string
 		base        string
 		quote       string
@@ -116,7 +117,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
 		}
 		candidates = append(candidates, generatedMarketCandidate{
-			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex, gateIndex: gateIndex,
+			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex, gateIndex: gateIndex, metadata: item.InstrumentMetadata,
 		})
 	}
 
@@ -148,6 +149,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
 			SettlementAsset:  candidate.quote,
 		}
+		guardBybitDatedFuture(&override, candidate.metadata)
 		if candidate.forex {
 			pair := strings.ToLower(candidate.base + "-" + candidate.quote)
 			override.AssetClass = "unknown" // No FX asset-class enum exists yet.
@@ -182,6 +184,12 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.UnderlyingID = override.AssetID
 			override.ComparisonKey = ""
 			override.ComparisonStatus = identity.ComparisonAmbiguous
+			if override.InstrumentKind == "future" {
+				override.ComparisonStatus = identity.ComparisonProhibited
+				override.ContractType = "dated_future_unverified"
+				override.ExpiryAtMs = 0
+				override.SettlementAsset = ""
+			}
 		}
 		overrides[overrideKey(override)] = override
 	}
@@ -451,6 +459,10 @@ func backfillGeneratedRegistryIdentities(generated identity.Registry, reference 
 
 	for idx := range generated.MarketOverrides {
 		override := &generated.MarketOverrides[idx]
+		// Dated-product boundaries must never be filled from a generic token alias.
+		if override.Exchange == "bybit" && override.InstrumentKind == "future" {
+			continue
+		}
 		base, quote := splitGeneratedCanonicalSymbol(override.CanonicalSymbol)
 		if base == "" || quote == "" {
 			continue
@@ -558,10 +570,19 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 	out := identity.Registry{
 		GeneratedVersion: existing.GeneratedVersion,
 		ExchangeAliases:  existing.ExchangeAliases,
-		MarketOverrides:  existing.MarketOverrides,
+		MarketOverrides:  append([]identity.MarketOverride(nil), existing.MarketOverrides...),
 		AssetAliases:     make([]identity.AssetAliasRule, 0, len(existing.AssetAliases)),
 		AssetCollisions:  collisionRegistry.AssetCollisions,
 	}
+	// Non-pruning syncs retain historical overrides. Quarantine stale dated
+	// contracts even when the current catalog no longer includes them.
+	for i := range out.MarketOverrides {
+		rule := &out.MarketOverrides[i]
+		if rule.Exchange == "bybit" && bybitDatedSuffix.MatchString(strings.ToUpper(rule.RawSymbol)) && (rule.InstrumentKind != "future" || rule.ComparisonStatus == identity.ComparisonEligible) {
+			guardBybitDatedFuture(rule, nil)
+		}
+	}
+
 	for _, item := range existing.AssetAliases {
 		if collisions[item.Canonical] {
 			continue
@@ -611,7 +632,8 @@ func shouldInclude(item discovery.ImportedMarket) bool {
 		return false
 	}
 	marketType := strings.ToLower(strings.TrimSpace(item.MarketType))
-	return marketType == "spot" || marketType == "perp" || marketType == "perpetual"
+	return marketType == "spot" || marketType == "perp" || marketType == "perpetual" ||
+		(marketType == "future" && strings.EqualFold(item.PlatformID, "bybit"))
 }
 
 func normalizeGeneratedMarketType(value string) string {

@@ -21367,6 +21367,1692 @@
         "status": "online"
       },
       "note": "Official symbolType crypto with no ISIN; RT1 is not classified from r-prefix. Venue-specific identity only; chain/contract equivalence not inferred. Bitget listing12560603898448 identifies Real Token, but article-body retrieval unavailable in this run."
+    },
+    {
+      "key": [
+        "gate",
+        "DHR_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "DHR_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "isRwa": null,
+        "symbolType": null,
+        "quanto_multiplier": "0.01",
+        "sizeMultiplier": null,
+        "supportMarginCoins": null
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "HLT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "HLT_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "isRwa": null,
+        "symbolType": null,
+        "quanto_multiplier": "0.01",
+        "sizeMultiplier": null,
+        "supportMarginCoins": null
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "MDT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MDT_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "isRwa": null,
+        "symbolType": null,
+        "quanto_multiplier": "0.01",
+        "sizeMultiplier": null,
+        "supportMarginCoins": null
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "MSCI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MSCI_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "isRwa": null,
+        "symbolType": null,
+        "quanto_multiplier": "0.01",
+        "sizeMultiplier": null,
+        "supportMarginCoins": null
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "MXL_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "MXL_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "isRwa": null,
+        "symbolType": null,
+        "quanto_multiplier": "0.1",
+        "sizeMultiplier": null,
+        "supportMarginCoins": null
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "bitget",
+        "CSXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://www.bitget.com/support/articles/12560603898699",
+      "official": {
+        "name": null,
+        "symbol": "CSXUSDT",
+        "contract_type": null,
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "quanto_multiplier": null,
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "bitget",
+        "PGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://www.bitget.com/support/articles/12560603898699",
+      "official": {
+        "name": null,
+        "symbol": "PGUSDT",
+        "contract_type": null,
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "quanto_multiplier": null,
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "bitget",
+        "SPOTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://www.bitget.com/support/articles/12560603898699",
+      "official": {
+        "name": null,
+        "symbol": "SPOTUSDT",
+        "contract_type": null,
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "quanto_multiplier": null,
+        "sizeMultiplier": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Exact venue stock product; ambiguous cross-venue units. Bitget stock announcement independently confirms stocks; isRwa alone is insufficient. Preserve SPOT raw symbol (Spotify) and MDT venue boundary. Contract/order lot is not price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-24SEP27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-24SEP27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1821772800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-24SEP27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-24SEP27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1821772800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-25DEC26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-25DEC26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1798185600000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-25DEC26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-25DEC26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1798185600000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-25JUN27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-25JUN27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1813910400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-25JUN27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-25JUN27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1813910400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-26MAR27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-26MAR27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1806048000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-26MAR27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-26MAR27",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1806048000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-24SEP27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-24SEP27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1821772800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-24SEP27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-24SEP27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1821772800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-25DEC26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-25DEC26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1798185600000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-25DEC26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-25DEC26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1798185600000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-25JUN27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-25JUN27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1813910400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-25JUN27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-25JUN27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1813910400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-26MAR27",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-26MAR27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1806048000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-26MAR27",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-26MAR27",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1806048000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-06NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793952000000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-13NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1794556800000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-27NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-27NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-27NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795766400000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-30OCT26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-10-24",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1793347200000",
+        "status": "Trading"
+      },
+      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
