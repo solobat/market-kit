@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 7
+const GeneratedRegistryVersion = 8
 
 var (
 	stableAssets = map[string]bool{
@@ -89,6 +89,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
 		symbol := strings.TrimSpace(item.Symbol)
 		marketType := normalizeGeneratedMarketType(item.MarketType)
+		delisted := exchange == "hyperliquid" && item.InstrumentMetadata != nil && item.InstrumentMetadata.Source == "hyperliquid" && item.InstrumentMetadata.IsDelisted
 
 		if exchange == "" || base == "" || quote == "" || symbol == "" || marketType == "" {
 			continue
@@ -97,7 +98,9 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		if exchange == "hyperliquid" && marketType == "perpetual" {
 			if target, ok := hyperliquidAliases[strings.ToUpper(strings.TrimSpace(symbol))]; ok {
 				base = target.Base
-				ensureAsset(assets, base, target.AssetClass)
+				if !delisted {
+					ensureAsset(assets, base, target.AssetClass)
+				}
 			}
 		}
 
@@ -111,7 +114,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			baseClass = "unknown"
 		}
 		if !forex && !gateIndex {
-			if !collisionSet[base] {
+			if !collisionSet[base] && !delisted {
 				ensureAsset(assets, base, baseClass)
 			}
 			ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
@@ -150,6 +153,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			SettlementAsset:  candidate.quote,
 		}
 		guardBybitDatedFuture(&override, candidate.metadata)
+		guardHyperliquidDelisted(&override, candidate.metadata)
 		if candidate.forex {
 			pair := strings.ToLower(candidate.base + "-" + candidate.quote)
 			override.AssetClass = "unknown" // No FX asset-class enum exists yet.

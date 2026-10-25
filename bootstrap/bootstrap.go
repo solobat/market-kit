@@ -1009,7 +1009,8 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 
 func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.ImportedMarket, error) {
 	type market struct {
-		Name string `json:"name"`
+		Name       string `json:"name"`
+		IsDelisted bool   `json:"isDelisted"`
 	}
 	type response struct {
 		Universe []market `json:"universe"`
@@ -1033,19 +1034,20 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 		}
 		seen[symbol] = true
 		out = append(out, discovery.ImportedMarket{
-			SourceID:    BuiltInSourceID,
-			PlatformID:  "hyperliquid",
-			Platform:    "Hyperliquid",
-			VenueType:   "dex",
-			MarketType:  "perp",
-			Symbol:      symbol,
-			BaseAsset:   symbol,
-			QuoteAsset:  "USDC",
-			Chain:       "Hyperliquid L1",
-			Status:      "live",
-			ExternalURL: "https://app.hyperliquid.xyz/trade/" + symbol,
-			FirstSeenAt: seenAt,
-			LastSeenAt:  seenAt,
+			InstrumentMetadata: &discovery.InstrumentMetadata{Source: "hyperliquid", SourceURL: "https://api.hyperliquid.xyz/info", ObservedAt: seenAt, IsDelisted: item.IsDelisted},
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "hyperliquid",
+			Platform:           "Hyperliquid",
+			VenueType:          "dex",
+			MarketType:         "perp",
+			Symbol:             symbol,
+			BaseAsset:          symbol,
+			QuoteAsset:         "USDC",
+			Chain:              "Hyperliquid L1",
+			Status:             hyperliquidMarketStatus(item.IsDelisted),
+			ExternalURL:        "https://app.hyperliquid.xyz/trade/" + symbol,
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
 		})
 	}
 
@@ -1084,19 +1086,20 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 			}
 			seen[symbol] = true
 			out = append(out, discovery.ImportedMarket{
-				SourceID:    BuiltInSourceID,
-				PlatformID:  "hyperliquid",
-				Platform:    "Hyperliquid",
-				VenueType:   "dex",
-				MarketType:  "perp",
-				Symbol:      symbol,
-				BaseAsset:   base,
-				QuoteAsset:  "USDC",
-				Chain:       "Hyperliquid L1",
-				Status:      "live",
-				ExternalURL: "https://app.hyperliquid.xyz/trade/" + symbol,
-				FirstSeenAt: seenAt,
-				LastSeenAt:  seenAt,
+				InstrumentMetadata: &discovery.InstrumentMetadata{Source: "hyperliquid", SourceURL: "https://api.hyperliquid.xyz/info", ObservedAt: seenAt, IsDelisted: item.IsDelisted},
+				SourceID:           BuiltInSourceID,
+				PlatformID:         "hyperliquid",
+				Platform:           "Hyperliquid",
+				VenueType:          "dex",
+				MarketType:         "perp",
+				Symbol:             symbol,
+				BaseAsset:          base,
+				QuoteAsset:         "USDC",
+				Chain:              "Hyperliquid L1",
+				Status:             hyperliquidMarketStatus(item.IsDelisted),
+				ExternalURL:        "https://app.hyperliquid.xyz/trade/" + symbol,
+				FirstSeenAt:        seenAt,
+				LastSeenAt:         seenAt,
 			})
 		}
 	}
@@ -1290,4 +1293,11 @@ func binanceDescriptionMetadata(underlyingType, base string, observed time.Time)
 		ticker = base
 	}
 	return &discovery.InstrumentMetadata{MarketRegion: region, UnderlyingTicker: ticker, Source: "binance", SourceURL: "https://fapi.binance.com/fapi/v1/exchangeInfo", ObservedAt: observed}
+}
+
+func hyperliquidMarketStatus(isDelisted bool) string {
+	if isDelisted {
+		return "delisted"
+	}
+	return "live"
 }

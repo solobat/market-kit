@@ -412,6 +412,19 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidWTIMarkets(t *testing
 			BaseAsset:  "CL",
 			QuoteAsset: "USDT",
 		}})
+		if market.Symbol == "cash:WTI" {
+			if len(groups) != 2 {
+				t.Fatalf("officially inactive cash WTI must remain separate: %+v", groups)
+			}
+			for _, group := range groups {
+				for _, row := range group.Markets {
+					if row.RawSymbol == "cash:WTI" && row.ComparisonStatus != identity.ComparisonProhibited {
+						t.Fatalf("inactive contract remains comparable: %+v", row)
+					}
+				}
+			}
+			continue
+		}
 		if market.Symbol == "WTIOIL/USDH" {
 			if len(groups) != 2 {
 				t.Fatalf("USDH must remain distinct from USDT: %+v", groups)
