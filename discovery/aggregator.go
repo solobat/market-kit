@@ -232,6 +232,16 @@ func (a *Aggregator) normalizeImportedMarket(item ImportedMarket) *CandidateMark
 		FirstSeenAt:        item.FirstSeenAt,
 		LastSeenAt:         item.LastSeenAt,
 	}
+	if issuer, ok := OfficialPreIPOIssuer(item); ok {
+		candidate.BaseAsset = issuer
+		candidate.CanonicalSymbol = issuer + "/" + quote
+		candidate.AssetClass = "rwa_stock"
+		candidate.UnderlyingID = "equity:private:" + strings.ToLower(issuer)
+		candidate.AssetID = candidate.UnderlyingID + ":" + exchange + ":" + strings.ToLower(rawSymbol)
+		candidate.ComparisonKey = candidate.AssetID + "/" + quote
+		candidate.ComparisonStatus = identity.ComparisonAmbiguous
+		candidate.Evidence = append(candidate.Evidence, "issuer identified by official pre-IPO contract directory; contract units require review")
+	}
 	return &candidate
 }
 

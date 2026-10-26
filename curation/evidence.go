@@ -48,6 +48,9 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
+	if _, ok := discovery.OfficialPreIPOIssuer(row); ok {
+		return 6
+	}
 	if strings.EqualFold(row.PlatformID, "hyperliquid") && row.InstrumentMetadata != nil && row.InstrumentMetadata.Source == "hyperliquid" && row.InstrumentMetadata.IsDelisted {
 		return 7
 	}

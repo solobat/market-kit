@@ -86,6 +86,10 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 
 		exchange := strings.ToLower(strings.TrimSpace(item.PlatformID))
 		base := strings.ToUpper(strings.TrimSpace(item.BaseAsset))
+		if issuer, ok := discovery.OfficialPreIPOIssuer(item); ok {
+			base = issuer
+			item.AssetClass = "rwa_stock"
+		}
 		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
 		symbol := strings.TrimSpace(item.Symbol)
 		marketType := normalizeGeneratedMarketType(item.MarketType)
@@ -151,6 +155,12 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ComparisonStatus: comparisonStatus,
 			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
 			SettlementAsset:  candidate.quote,
+		}
+		if issuer, ok := discovery.OfficialPreIPOIssuer(discovery.ImportedMarket{PlatformID: candidate.exchange, Symbol: candidate.symbol, InstrumentMetadata: candidate.metadata}); ok {
+			override.UnderlyingID = "equity:private:" + strings.ToLower(issuer)
+			override.AssetID = override.UnderlyingID + ":" + candidate.exchange + ":" + strings.ToLower(candidate.symbol)
+			override.ComparisonKey = override.AssetID + "/" + candidate.quote
+			override.ComparisonStatus = identity.ComparisonAmbiguous
 		}
 		guardBybitDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)

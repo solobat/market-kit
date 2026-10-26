@@ -1103,6 +1103,7 @@ func fetchHyperliquid(ctx context.Context, client *http.Client) ([]discovery.Imp
 			})
 		}
 	}
+	enrichXYZPreIPO(ctx, client, out)
 	return out, nil
 }
 
