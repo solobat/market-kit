@@ -62,3 +62,14 @@ func DefaultInstrumentKind(marketType MarketType, assetClass string) string {
 		return "unknown"
 	}
 }
+
+// DefaultSettlementAsset preserves unknown collateral for contract types whose
+// reference quote is not proof of settlement. Explicit venue evidence wins.
+func DefaultSettlementAsset(contractType, quote string) string {
+	switch strings.ToLower(strings.TrimSpace(contractType)) {
+	case "multi_collateral_cfd", "dated_future_unverified", "linear_futures", "inverse_futures":
+		return ""
+	default:
+		return quote
+	}
+}

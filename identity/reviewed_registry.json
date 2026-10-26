@@ -26151,6 +26151,20 @@
     },
     {
       "exchange": "gtrade",
+      "raw_symbol": "DAR/USD",
+      "market_type": "perpetual",
+      "canonical_symbol": "DAR/USD",
+      "asset_class": "crypto",
+      "asset_id": "crypto:gtrade:dar",
+      "underlying_id": "crypto:gtrade:dar",
+      "comparison_key": "crypto:gtrade:dar/USD",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "crypto_cfd",
+      "contract_type": "multi_collateral_cfd",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "gtrade",
       "raw_symbol": "EUR/AUD",
       "market_type": "perpetual",
       "canonical_symbol": "EUR/AUD",

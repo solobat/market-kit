@@ -405,7 +405,7 @@ func normalizeRegistryOverrideRequest(req registryOverrideRequest) (identity.Mar
 			req.InstrumentKind = identity.DefaultInstrumentKind(identity.MarketType(marketType), class)
 		}
 		if strings.TrimSpace(req.SettlementAsset) == "" {
-			req.SettlementAsset = quote
+			req.SettlementAsset = identity.DefaultSettlementAsset(req.ContractType, quote)
 		}
 	}
 	comparisonStatus := identity.ComparisonStatus("")

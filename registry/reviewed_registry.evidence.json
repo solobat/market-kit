@@ -28923,6 +28923,30 @@
         }
       },
       "note": "Official isDelisted true. Retain contract in inventory but prohibit comparisons; not proof of issuer/underlying or a rename. Preserve existing multiplier and quote/settlement; no conversion to ordinary share/ADR/leveraged ETF. io:SKHX issuer is unverified, so use an unknown scoped product instead of generic stock identity."
+    },
+    {
+      "key": [
+        "gtrade",
+        "DAR/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-26",
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "official": {
+        "pair": {
+          "from": "DAR",
+          "to": "USD",
+          "spreadP": "0",
+          "groupIndex": "10",
+          "feeIndex": "0"
+        },
+        "group": {
+          "name": "altcoins",
+          "minLeverage": "1100",
+          "maxLeverage": "150000"
+        }
+      },
+      "note": "Official group altcoins is explicit crypto evidence for this exact gTrade pair, not the homonymous equity DAR. Venue product remains ambiguous for external comparisons. USD is reference quote, not proof of one settlement collateral; multi-collateral settlement remains unknown. Do not globally reclassify DAR or alias it to D/any renamed token without issuer/contract evidence."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
