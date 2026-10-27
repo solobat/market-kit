@@ -30390,6 +30390,21 @@
       "settlement_asset": "USDC"
     },
     {
+      "exchange": "qfex",
+      "raw_symbol": "YUBICO-SEK",
+      "market_type": "perpetual",
+      "canonical_symbol": "YUBICO/SEK",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:product:qfex:yubico-sek",
+      "underlying_id": "equity:ticker:yubico",
+      "comparison_key": "equity:product:qfex:yubico-sek/SEK",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "linear_perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
       "exchange": "variational",
       "raw_symbol": "1000000MOG",
       "market_type": "perpetual",

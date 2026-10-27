@@ -28947,6 +28947,25 @@
         }
       },
       "note": "Official group altcoins is explicit crypto evidence for this exact gTrade pair, not the homonymous equity DAR. Venue product remains ambiguous for external comparisons. USD is reference quote, not proof of one settlement collateral; multi-collateral settlement remains unknown. Do not globally reclassify DAR or alias it to D/any renamed token without issuer/contract evidence."
+    },
+    {
+      "key": [
+        "qfex",
+        "YUBICO-SEK",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-27",
+      "source": "https://api.qfex.com/refdata",
+      "observedAt": "2026-10-27T01:01:17.955581+00:00",
+      "official": {
+        "symbol": "YUBICO-SEK",
+        "base_asset": "YUBICO",
+        "quote_asset": "SEK",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official EQUITY category and explicit USDC margin. Preserve native SEK quote, scoped venue product and ambiguous comparison; no ISIN or external stock equivalence inferred. Non-stable quote is currently excluded by generic curation; reviewed exact override avoids broadening quote eligibility."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
