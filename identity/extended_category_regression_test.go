@@ -8,7 +8,7 @@ func TestReviewedExtendedCategoryVariantsAndMetaplexCollision(t *testing.T) {
 		t.Fatal(err)
 	}
 	resolver := NewResolver(registry)
-	for _, pair := range []struct{ base, class string }{{"NOW", "rwa_stock"}, {"LYTE", "rwa_stock"}, {"BILL", "crypto"}, {"SUI", "crypto"}} {
+	for _, pair := range []struct{ base, class string }{{"ANTHROP", "rwa_stock"}, {"JIO", "rwa_stock"}, {"NOW", "rwa_stock"}, {"LYTE", "rwa_stock"}, {"BILL", "crypto"}, {"SUI", "crypto"}} {
 		var first *MarketIdentity
 		for _, separator := range []string{"-", "/"} {
 			result := resolver.Resolve(ResolveRequest{Exchange: "extended", Symbol: pair.base + separator + "USD", MarketTypeHint: "perpetual"})

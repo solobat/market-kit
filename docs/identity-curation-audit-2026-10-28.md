@@ -1,0 +1,25 @@
+# Market identity audit — 2026-10-28 (Beijing)
+
+Covered **20,176 market keys /20 platforms**, 21,618 evidence rows. Full discovery/registry union,plus official Extended416 perpetuals,all493 gTrade pairs,GRVT184,GMX126 pools,Gate1066 contracts and40 Bybit dated futures. All81 resolve batches succeeded(max250,at most2 concurrent). Every key has a disposition with raw source/chain evidence. Initial states:{'resolved': 18962, 'unresolved': 1091, 'ambiguous': 123}. Structural resolution does not independently certify cross-venue execution equivalence.
+
+All14 main requests succeeded. Fresh inventory cached2026-10-28T00:56:11.823862914Z,no cache error;online commit4e897dd,schema8,2254 reviewed rules. Yesterday's YUBICO rule deployed. Initial619 audited rules and39 unknown-settlement guards passed. Union delta31 added,0 absent;historical registry entries are retained. Official Bitget/Bybit/Hyperliquid supplementary catalogs also fetched successfully with URL/time records. No stale payload substituted for a failed fetch.
+
+## Executed repairs (11 exact rules)
+
+- Gate AXP_USDT,CSX_USDT,EIDO_USDT,EQT_USDT,TTMI_USDT: official contract_type stocks. Preserved stock class,scoped each venue product and comparison key,ambiguous external comparison,USDT settlement. Contract quanto lot is not a canonical price multiplier. No global ticker reclassification.
+- Bitget RMSGKUSDT added and RMSGSUSDT absent in official spot catalog. Both dated snapshots carry ISIN US55825T1034,name Madison Square Garden Sports Corp.,same launchTime. Corrected both exact market rules to separate rtoken product IDs,shared ISIN underlying and ambiguous comparison. Preserve raw symbols/canonical display MSGK versus MSGS. No global rename alias,conversion ratio,delisting date or token transfer equivalence inferred. Historical RMSGS no longer auto-joins underlying stock by generic ticker.
+- Extended JIO-USD and JIO/USD: official RWA /Pre-market /Jio Platforms Limited. Native spelling initially stock,display spelling incorrectly crypto. Both now resolve to a shared scoped private Jio Platforms venue product,private issuer underlying and ambiguous comparison. Extended ANTHROP-USD and ANTHROP/USD were also crypto despite official Anthropic (pre-IPO) metadata. Both now map to Anthropic private issuer,with Extended specific product ID/comparison key and ambiguous status;not automatically joined to io:ANTH or para:ANTH. Native reference USD retained. No merge with same-name crypto. Official premarket RWA classification now covered in read-only audit helper;crypto premarket remains crypto. Exact reviewed rules avoid broader runtime identity inference.
+
+All writes compact=1,strict prewrite comparison,immediate readback. Three batches(7+2+2),no repeated rewrite loop. Before/after artifacts stored in first-online-write.json,jio-online-write.json,anthrop-online-write.json;online-write.json is a combined expected-rule manifest at latest write time. Final **630 audited rules** passed resolve after a successful auto-sync whose start exceeded the latest write;asset endpoint readbacks retained separately. No sync overwrites observed.
+
+## Official status changes and evidence limits
+
+Hyperliquid isDelisted disappeared from io:NVDA,para:ANTH,xyz:NIFTY,xyz:RELIANCE;official inactive count206→202. Omission reverses the collector's inactive flag,not independent proof of contract units/issuer or execution comparability. Existing manual product quarantines remain prohibited and passed readback. Preserve these four as reactivation review leads;do not automatically enable them or merge para:ANTH with user-confirmed io:ANTH.
+
+Bitget HONHAI/MEDIATEK new perpetuals remain unknown/ambiguous: isRwa alone is insufficient stock identity proof. Bitget AL,RBUUU,XRPRLUSD status changes captured;not identity events. Official Bybit adds EIDO/EQT/STM,removes VELODROME;40 dated futures metadata unchanged. Official Gate stock additions handled above;official Hyperliquid adds XTEN. New Extended assets checked for class and separator differences;JIO and ANTHROP mismatches fixed. New chain wrappers and historical r-prefixed aliases remain evidence tasks. Placeholder consumer-feedback endpoints remain a coverage gap;no live consumer feedback claimed.
+
+## Validation and publication
+
+Relevant identity/curation/server Go tests,Python audit tests,server build and diff whitespace check passed. Regression covers JIO native/display identity and RWA premarket vs crypto premarket categories. No hot ingest algorithm,frequency,buffering or publish policy changed;no production CPU/freshness improvement claimed. Runtime resolver data change uses existing lookup path. Local reviewed data/evidence/helper/regression/report committed;no push,deploy or restart performed.
+
+Sources: [Gate official contracts](https://api.gateio.ws/api/v4/futures/usdt/contracts),[Bitget official instruments](https://api.bitget.com/api/v3/market/instruments?category=SPOT),[Extended official markets](https://api.starknet.extended.exchange/api/v1/info/markets),[Hyperliquid metadata](https://api.hyperliquid.xyz/info). Full fetch URL/time manifest and per-key dispositions retained locally.

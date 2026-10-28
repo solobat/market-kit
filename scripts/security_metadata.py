@@ -52,6 +52,8 @@ def extended_categories(path):
             continue
         category = {'Equity': 'rwa_stock', 'ETF/Index': 'rwa_stock',
                     'Commodity': 'rwa_commodity'}.get(row.get('subCategory'))
+        if category is None and row.get('category') == 'RWA' and row.get('subCategory') == 'Pre-market':
+            category = 'rwa_stock'
         if category is None and row.get('category') == 'Crypto':
             category = 'crypto'
         if category:

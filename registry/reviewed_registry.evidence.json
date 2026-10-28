@@ -28966,6 +28966,198 @@
         "status": "ACTIVE"
       },
       "note": "Official EQUITY category and explicit USDC margin. Preserve native SEK quote, scoped venue product and ambiguous comparison; no ISIN or external stock equivalence inferred. Non-stable quote is currently excluded by generic curation; reviewed exact override avoids broadening quote eligibility."
+    },
+    {
+      "key": [
+        "gate",
+        "AXP_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "AXP_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.01",
+        "in_delisting": false
+      },
+      "note": "Official stock class; scope venue product until units/issuer are independently verified. Quanto multiplier is lot size, not canonical price ratio."
+    },
+    {
+      "key": [
+        "gate",
+        "CSX_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "CSX_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "in_delisting": false
+      },
+      "note": "Official stock class; scope venue product until units/issuer are independently verified. Quanto multiplier is lot size, not canonical price ratio."
+    },
+    {
+      "key": [
+        "gate",
+        "EIDO_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EIDO_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "in_delisting": false
+      },
+      "note": "Official stock class; scope venue product until units/issuer are independently verified. Quanto multiplier is lot size, not canonical price ratio."
+    },
+    {
+      "key": [
+        "gate",
+        "EQT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EQT_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "in_delisting": false
+      },
+      "note": "Official stock class; scope venue product until units/issuer are independently verified. Quanto multiplier is lot size, not canonical price ratio."
+    },
+    {
+      "key": [
+        "gate",
+        "TTMI_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "TTMI_USDT",
+        "contract_type": "stocks",
+        "quanto_multiplier": "0.1",
+        "in_delisting": false
+      },
+      "note": "Official stock class; scope venue product until units/issuer are independently verified. Quanto multiplier is lot size, not canonical price ratio."
+    },
+    {
+      "key": [
+        "bitget",
+        "RMSGSUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "observedDate": "2026-10-27",
+        "symbol": "RMSGSUSDT",
+        "baseCoin": "rMSGS",
+        "quoteCoin": "USDT",
+        "isin": "US55825T1034",
+        "fullName": "Madison Square Garden Sports Corp.",
+        "status": "online",
+        "launchTime": "1792464956154"
+      },
+      "note": "Official catalog symbol transition has same ISIN/name/launchTime. Preserve both exact symbols as separate venue products, shared issuer identifier, ambiguous comparison. No exchange conversion ratio, delisting event, global alias or transfer equivalence inferred. Old symbol absent today is historical evidence only."
+    },
+    {
+      "key": [
+        "bitget",
+        "RMSGKUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "observedDate": "2026-10-28",
+        "symbol": "RMSGKUSDT",
+        "baseCoin": "rMSGK",
+        "quoteCoin": "USDT",
+        "isin": "US55825T1034",
+        "fullName": "Madison Square Garden Sports Corp.",
+        "status": "online",
+        "launchTime": "1792464956154"
+      },
+      "note": "Official catalog symbol transition has same ISIN/name/launchTime. Preserve both exact symbols as separate venue products, shared issuer identifier, ambiguous comparison. No exchange conversion ratio, delisting event, global alias or transfer equivalence inferred. Old symbol absent today is historical evidence only."
+    },
+    {
+      "key": [
+        "extended",
+        "JIO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "JIO-USD",
+        "assetName": "JIO",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Pre-market",
+        "description": "Jio Platforms Limited"
+      },
+      "note": "Explicit official RWA Pre-market description identifies Jio Platforms. Native and display spellings share exact venue product; retain private issuer underlying and ambiguous comparison. No crypto ticker collision merge or listing conversion assumption."
+    },
+    {
+      "key": [
+        "extended",
+        "JIO/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "JIO-USD",
+        "assetName": "JIO",
+        "collateralAssetName": "USD",
+        "category": "RWA",
+        "subCategory": "Pre-market",
+        "description": "Jio Platforms Limited"
+      },
+      "note": "Explicit official RWA Pre-market description identifies Jio Platforms. Native and display spellings share exact venue product; retain private issuer underlying and ambiguous comparison. No crypto ticker collision merge or listing conversion assumption."
+    },
+    {
+      "key": [
+        "extended",
+        "ANTHROP-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "ANTHROP-USD",
+        "assetName": "ANTHROP",
+        "category": "RWA",
+        "subCategory": "Pre-market",
+        "description": "Anthropic (pre-IPO)",
+        "collateralAssetName": "USD"
+      },
+      "note": "Official Anthropic pre-IPO issuer evidence, not crypto ANTHROP. Native and display spellings share exact venue product. Underlying issuer matches other reviewed Anthropic products but comparison key remains Extended specific and ambiguous; no lifecycle/unit equivalence to io:ANTH or para:ANTH inferred."
+    },
+    {
+      "key": [
+        "extended",
+        "ANTHROP/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-28",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "ANTHROP-USD",
+        "assetName": "ANTHROP",
+        "category": "RWA",
+        "subCategory": "Pre-market",
+        "description": "Anthropic (pre-IPO)",
+        "collateralAssetName": "USD"
+      },
+      "note": "Official Anthropic pre-IPO issuer evidence, not crypto ANTHROP. Native and display spellings share exact venue product. Underlying issuer matches other reviewed Anthropic products but comparison key remains Extended specific and ambiguous; no lifecycle/unit equivalence to io:ANTH or para:ANTH inferred."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
