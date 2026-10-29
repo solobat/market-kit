@@ -29158,6 +29158,4339 @@
         "collateralAssetName": "USD"
       },
       "note": "Official Anthropic pre-IPO issuer evidence, not crypto ANTHROP. Native and display spellings share exact venue product. Underlying issuer matches other reviewed Anthropic products but comparison key remains Extended specific and ambiguous; no lifecycle/unit equivalence to io:ANTH or para:ANTH inferred."
+    },
+    {
+      "key": [
+        "qfex",
+        "AAOI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AAOI-USD",
+        "base_asset": "AAOI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AAPL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AAPL-USD",
+        "base_asset": "AAPL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ABCL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ABCL-USD",
+        "base_asset": "ABCL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ABSI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ABSI-USD",
+        "base_asset": "ABSI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ABVX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ABVX-USD",
+        "base_asset": "ABVX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ADEA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ADEA-USD",
+        "base_asset": "ADEA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AEHR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AEHR-USD",
+        "base_asset": "AEHR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AKAM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AKAM-USD",
+        "base_asset": "AKAM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ALAB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ALAB-USD",
+        "base_asset": "ALAB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ALNT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ALNT-USD",
+        "base_asset": "ALNT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AMC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AMC-USD",
+        "base_asset": "AMC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AMD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AMD-USD",
+        "base_asset": "AMD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AMZN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AMZN-USD",
+        "base_asset": "AMZN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ANTHROPIC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ANTHROPIC-USD",
+        "base_asset": "ANTHROPIC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ARM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ARM-USD",
+        "base_asset": "ARM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ASST-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ASST-USD",
+        "base_asset": "ASST",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ASTS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ASTS-USD",
+        "base_asset": "ASTS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AVGO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AVGO-USD",
+        "base_asset": "AVGO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "AXTI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "AXTI-USD",
+        "base_asset": "AXTI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "B-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "B-USD",
+        "base_asset": "B",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BA-USD",
+        "base_asset": "BA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BABA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BABA-USD",
+        "base_asset": "BABA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BB-USD",
+        "base_asset": "BB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BE-USD",
+        "base_asset": "BE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BEAM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BEAM-USD",
+        "base_asset": "BEAM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BFLY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BFLY-USD",
+        "base_asset": "BFLY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BITU-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BITU-USD",
+        "base_asset": "BITU",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BMNR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BMNR-USD",
+        "base_asset": "BMNR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BNC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BNC-USD",
+        "base_asset": "BNC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BOT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BOT-USD",
+        "base_asset": "BOT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BRK.B-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BRK.B-USD",
+        "base_asset": "BRK.B",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BUG-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BUG-USD",
+        "base_asset": "BUG",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BWET-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BWET-USD",
+        "base_asset": "BWET",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "BX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BX-USD",
+        "base_asset": "BX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CAT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CAT-USD",
+        "base_asset": "CAT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CBRS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CBRS-USD",
+        "base_asset": "CBRS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CCJ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CCJ-USD",
+        "base_asset": "CCJ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CCXI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CCXI-USD",
+        "base_asset": "CCXI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CGNX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CGNX-USD",
+        "base_asset": "CGNX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CHYM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CHYM-USD",
+        "base_asset": "CHYM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CIEN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CIEN-USD",
+        "base_asset": "CIEN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CIFR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CIFR-USD",
+        "base_asset": "CIFR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CL-USD",
+        "base_asset": "CL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "COHR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "COHR-USD",
+        "base_asset": "COHR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "COIN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "COIN-USD",
+        "base_asset": "COIN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "COPPER-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "COPPER-USD",
+        "base_asset": "COPPER",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "COPX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "COPX-USD",
+        "base_asset": "COPX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "COST-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "COST-USD",
+        "base_asset": "COST",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRCL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRCL-USD",
+        "base_asset": "CRCL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRDO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRDO-USD",
+        "base_asset": "CRDO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRM-USD",
+        "base_asset": "CRM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRML-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRML-USD",
+        "base_asset": "CRML",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRON-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRON-USD",
+        "base_asset": "CRON",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRWD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRWD-USD",
+        "base_asset": "CRWD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CRWV-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CRWV-USD",
+        "base_asset": "CRWV",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CVNA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CVNA-USD",
+        "base_asset": "CVNA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CXMT-CNY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CXMT-CNY",
+        "base_asset": "CXMT",
+        "quote_asset": "CNY",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "CYPH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "CYPH-USD",
+        "base_asset": "CYPH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DELL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DELL-USD",
+        "base_asset": "DELL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DFTX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DFTX-USD",
+        "base_asset": "DFTX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DGXX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DGXX-USD",
+        "base_asset": "DGXX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DJT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DJT-USD",
+        "base_asset": "DJT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DLR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DLR-USD",
+        "base_asset": "DLR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DRAM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DRAM-USD",
+        "base_asset": "DRAM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DUOL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DUOL-USD",
+        "base_asset": "DUOL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "DXYZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "DXYZ-USD",
+        "base_asset": "DXYZ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "EBAY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "EBAY-USD",
+        "base_asset": "EBAY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "EQIX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "EQIX-USD",
+        "base_asset": "EQIX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "EWZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "EWZ-USD",
+        "base_asset": "EWZ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "FCEL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "FCEL-USD",
+        "base_asset": "FCEL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "FLEX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "FLEX-USD",
+        "base_asset": "FLEX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "FSLY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "FSLY-USD",
+        "base_asset": "FSLY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "FWDI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "FWDI-USD",
+        "base_asset": "FWDI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "FXF-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "FXF-USD",
+        "base_asset": "FXF",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GD-USD",
+        "base_asset": "GD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GLW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GLW-USD",
+        "base_asset": "GLW",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GLXY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GLXY-USD",
+        "base_asset": "GLXY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GME-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GME-USD",
+        "base_asset": "GME",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GNRC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GNRC-USD",
+        "base_asset": "GNRC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GOLD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GOLD-USD",
+        "base_asset": "GOLD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GOOGL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GOOGL-USD",
+        "base_asset": "GOOGL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GPRO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GPRO-USD",
+        "base_asset": "GPRO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GRAB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GRAB-USD",
+        "base_asset": "GRAB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GRND-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GRND-USD",
+        "base_asset": "GRND",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "GS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "GS-USD",
+        "base_asset": "GS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HIMS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HIMS-USD",
+        "base_asset": "HIMS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HOOD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HOOD-USD",
+        "base_asset": "HOOD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HPE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HPE-USD",
+        "base_asset": "HPE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HSAI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HSAI-USD",
+        "base_asset": "HSAI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HSI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HSI-USD",
+        "base_asset": "HSI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HUBS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HUBS-USD",
+        "base_asset": "HUBS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HUT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HUT-USD",
+        "base_asset": "HUT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "HYUNDAI-KRW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "HYUNDAI-KRW",
+        "base_asset": "HYUNDAI",
+        "quote_asset": "KRW",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IBIT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IBIT-USD",
+        "base_asset": "IBIT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IBM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IBM-USD",
+        "base_asset": "IBM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IBRX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IBRX-USD",
+        "base_asset": "IBRX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IGV-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IGV-USD",
+        "base_asset": "IGV",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ILMN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ILMN-USD",
+        "base_asset": "ILMN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IMTX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IMTX-USD",
+        "base_asset": "IMTX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "INTC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "INTC-USD",
+        "base_asset": "INTC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IONQ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IONQ-USD",
+        "base_asset": "IONQ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IOVA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IOVA-USD",
+        "base_asset": "IOVA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "IREN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "IREN-USD",
+        "base_asset": "IREN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "JBL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "JBL-USD",
+        "base_asset": "JBL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "JPM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "JPM-USD",
+        "base_asset": "JPM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "KEEL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "KEEL-USD",
+        "base_asset": "KEEL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "KIOXIA-JPY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "KIOXIA-JPY",
+        "base_asset": "KIOXIA",
+        "quote_asset": "JPY",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "KOSPI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "KOSPI-USD",
+        "base_asset": "KOSPI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LITE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LITE-USD",
+        "base_asset": "LITE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LITS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LITS-USD",
+        "base_asset": "LITS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LLY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LLY-USD",
+        "base_asset": "LLY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LMT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LMT-USD",
+        "base_asset": "LMT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LPTH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LPTH-USD",
+        "base_asset": "LPTH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LRCX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LRCX-USD",
+        "base_asset": "LRCX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LSCC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LSCC-USD",
+        "base_asset": "LSCC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LULU-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LULU-USD",
+        "base_asset": "LULU",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "LUNR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "LUNR-USD",
+        "base_asset": "LUNR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MCD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MCD-USD",
+        "base_asset": "MCD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MDT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MDT-USD",
+        "base_asset": "MDT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "META-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "META-USD",
+        "base_asset": "META",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MITK-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MITK-USD",
+        "base_asset": "MITK",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MMED-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MMED-USD",
+        "base_asset": "MMED",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MRNA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MRNA-USD",
+        "base_asset": "MRNA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MRVL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MRVL-USD",
+        "base_asset": "MRVL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MSFT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MSFT-USD",
+        "base_asset": "MSFT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MSTR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MSTR-USD",
+        "base_asset": "MSTR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MTCH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MTCH-USD",
+        "base_asset": "MTCH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MU-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MU-USD",
+        "base_asset": "MU",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MX-USD",
+        "base_asset": "MX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "MXL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "MXL-USD",
+        "base_asset": "MXL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NATGAS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NATGAS-USD",
+        "base_asset": "NATGAS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NBIS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NBIS-USD",
+        "base_asset": "NBIS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NBR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NBR-USD",
+        "base_asset": "NBR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NCLD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NCLD-USD",
+        "base_asset": "NCLD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NEM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NEM-USD",
+        "base_asset": "NEM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NET-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NET-USD",
+        "base_asset": "NET",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NFLX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NFLX-USD",
+        "base_asset": "NFLX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NIFTY-INR",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NIFTY-INR",
+        "base_asset": "NIFTY",
+        "quote_asset": "INR",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NIKKEI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NIKKEI-USD",
+        "base_asset": "NIKKEI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NKE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NKE-USD",
+        "base_asset": "NKE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NOC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NOC-USD",
+        "base_asset": "NOC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NOW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NOW-USD",
+        "base_asset": "NOW",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NU-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NU-USD",
+        "base_asset": "NU",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NUAI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NUAI-USD",
+        "base_asset": "NUAI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NVDA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NVDA-USD",
+        "base_asset": "NVDA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NVO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NVO-USD",
+        "base_asset": "NVO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "NVTS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "NVTS-USD",
+        "base_asset": "NVTS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "OPENAI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "OPENAI-USD",
+        "base_asset": "OPENAI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ORCL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ORCL-USD",
+        "base_asset": "ORCL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "OURA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "OURA-USD",
+        "base_asset": "OURA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "OUST-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "OUST-USD",
+        "base_asset": "OUST",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PANW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PANW-USD",
+        "base_asset": "PANW",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PAYP-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PAYP-USD",
+        "base_asset": "PAYP",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PENG-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PENG-USD",
+        "base_asset": "PENG",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PL-USD",
+        "base_asset": "PL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PLTR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PLTR-USD",
+        "base_asset": "PLTR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PLUG-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PLUG-USD",
+        "base_asset": "PLUG",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PRE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PRE-USD",
+        "base_asset": "PRE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PRLB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PRLB-USD",
+        "base_asset": "PRLB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PRME-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PRME-USD",
+        "base_asset": "PRME",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PSNL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PSNL-USD",
+        "base_asset": "PSNL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "PURR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "PURR-USD",
+        "base_asset": "PURR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "QCOM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "QCOM-USD",
+        "base_asset": "QCOM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "QNT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "QNT-USD",
+        "base_asset": "QNT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "QURE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "QURE-USD",
+        "base_asset": "QURE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RCAT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RCAT-USD",
+        "base_asset": "RCAT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RDCM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RDCM-USD",
+        "base_asset": "RDCM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RDDT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RDDT-USD",
+        "base_asset": "RDDT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RDW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RDW-USD",
+        "base_asset": "RDW",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RIOT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RIOT-USD",
+        "base_asset": "RIOT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RKLB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RKLB-USD",
+        "base_asset": "RKLB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RSP-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RSP-USD",
+        "base_asset": "RSP",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RTX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RTX-USD",
+        "base_asset": "RTX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "RVMD-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "RVMD-USD",
+        "base_asset": "RVMD",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SAMSUNG-KRW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SAMSUNG-KRW",
+        "base_asset": "SAMSUNG",
+        "quote_asset": "KRW",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SBET-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SBET-USD",
+        "base_asset": "SBET",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SDEV-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SDEV-USD",
+        "base_asset": "SDEV",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SECZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SECZ-USD",
+        "base_asset": "SECZ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SERV-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SERV-USD",
+        "base_asset": "SERV",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SHAZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SHAZ-USD",
+        "base_asset": "SHAZ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SILVER-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SILVER-USD",
+        "base_asset": "SILVER",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SIVE-SEK",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SIVE-SEK",
+        "base_asset": "SIVE",
+        "quote_asset": "SEK",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SKHY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SKHY-USD",
+        "base_asset": "SKHY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SKHYNIX-KRW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SKHYNIX-KRW",
+        "base_asset": "SKHYNIX",
+        "quote_asset": "KRW",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SKM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SKM-USD",
+        "base_asset": "SKM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SMCI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SMCI-USD",
+        "base_asset": "SMCI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SMH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SMH-USD",
+        "base_asset": "SMH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SNDK-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SNDK-USD",
+        "base_asset": "SNDK",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SNOW-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SNOW-USD",
+        "base_asset": "SNOW",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SOFTBANK-JPY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SOFTBANK-JPY",
+        "base_asset": "SOFTBANK",
+        "quote_asset": "JPY",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SOXL-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SOXL-USD",
+        "base_asset": "SOXL",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SOXS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SOXS-USD",
+        "base_asset": "SOXS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SPCE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SPCE-USD",
+        "base_asset": "SPCE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SPCX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SPCX-USD",
+        "base_asset": "SPCX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SPRB-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SPRB-USD",
+        "base_asset": "SPRB",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "STRC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "STRC-USD",
+        "base_asset": "STRC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SUIG-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SUIG-USD",
+        "base_asset": "SUIG",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "SVRN-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "SVRN-USD",
+        "base_asset": "SVRN",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TAIEX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TAIEX-USD",
+        "base_asset": "TAIEX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TE-USD",
+        "base_asset": "TE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TEM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TEM-USD",
+        "base_asset": "TEM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TJX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TJX-USD",
+        "base_asset": "TJX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TLT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TLT-USD",
+        "base_asset": "TLT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TMDX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TMDX-USD",
+        "base_asset": "TMDX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TMO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TMO-USD",
+        "base_asset": "TMO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TSLA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TSLA-USD",
+        "base_asset": "TSLA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "TTWO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "TTWO-USD",
+        "base_asset": "TTWO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "UBER-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "UBER-USD",
+        "base_asset": "UBER",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "UNH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "UNH-USD",
+        "base_asset": "UNH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "UNITREE-CNY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "UNITREE-CNY",
+        "base_asset": "UNITREE",
+        "quote_asset": "CNY",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "URANIUM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "URANIUM-USD",
+        "base_asset": "URANIUM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "COMMODITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "US100-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "US100-USD",
+        "base_asset": "US100",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "US500-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "US500-USD",
+        "base_asset": "US500",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "USDE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "USDE-USD",
+        "base_asset": "USDE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "UUUU-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "UUUU-USD",
+        "base_asset": "UUUU",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "UVXY-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "UVXY-USD",
+        "base_asset": "UVXY",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "VCX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "VCX-USD",
+        "base_asset": "VCX",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "VLO-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "VLO-USD",
+        "base_asset": "VLO",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "VST-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "VST-USD",
+        "base_asset": "VST",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WDC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WDC-USD",
+        "base_asset": "WDC",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WMT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WMT-USD",
+        "base_asset": "WMT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WOLF-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WOLF-USD",
+        "base_asset": "WOLF",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WPM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WPM-USD",
+        "base_asset": "WPM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WULF-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WULF-USD",
+        "base_asset": "WULF",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "WYFI-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "WYFI-USD",
+        "base_asset": "WYFI",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "XLE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "XLE-USD",
+        "base_asset": "XLE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "XLF-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "XLF-USD",
+        "base_asset": "XLF",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "INDEX",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "XMTR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "XMTR-USD",
+        "base_asset": "XMTR",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "XOM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "XOM-USD",
+        "base_asset": "XOM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ZBRA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ZBRA-USD",
+        "base_asset": "ZBRA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ZM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ZM-USD",
+        "base_asset": "ZM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ZROZ-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ZROZ-USD",
+        "base_asset": "ZROZ",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "qfex",
+        "ZS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ZS-USD",
+        "base_asset": "ZS",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY",
+        "status": "ACTIVE"
+      },
+      "note": "Official margin_asset is settlement, not native quote. Preserve existing product/underlying/comparison identity and native quote;no new cross-venue joins. NIFTY index uses unknown enum class with scoped index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "bitget",
+        "CLSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899056",
+      "official": {
+        "api": {
+          "symbol": "CLSUSDT",
+          "isRwa": "YES",
+          "symbolType": "perpetual",
+          "supportMarginCoins": [
+            "USDT"
+          ]
+        },
+        "announcementIndexedEvidence": "Official support search result states all five listed as stock perpetuals on 2026-10-28 (UTC+8). Direct article fetch403;full article unavailable."
+      },
+      "note": "Official indexed stock listing announcement plus exact API contract metadata confirms stock class. isRwa alone not used;scoped venue products retain ambiguous external units. DASHSTOCK is not DASH crypto alias;NU not globally reclassified."
+    },
+    {
+      "key": [
+        "bitget",
+        "DASHSTOCKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899056",
+      "official": {
+        "api": {
+          "symbol": "DASHSTOCKUSDT",
+          "isRwa": "YES",
+          "symbolType": "perpetual",
+          "supportMarginCoins": [
+            "USDT"
+          ]
+        },
+        "announcementIndexedEvidence": "Official support search result states all five listed as stock perpetuals on 2026-10-28 (UTC+8). Direct article fetch403;full article unavailable."
+      },
+      "note": "Official indexed stock listing announcement plus exact API contract metadata confirms stock class. isRwa alone not used;scoped venue products retain ambiguous external units. DASHSTOCK is not DASH crypto alias;NU not globally reclassified."
+    },
+    {
+      "key": [
+        "bitget",
+        "ITUBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899056",
+      "official": {
+        "api": {
+          "symbol": "ITUBUSDT",
+          "isRwa": "YES",
+          "symbolType": "perpetual",
+          "supportMarginCoins": [
+            "USDT"
+          ]
+        },
+        "announcementIndexedEvidence": "Official support search result states all five listed as stock perpetuals on 2026-10-28 (UTC+8). Direct article fetch403;full article unavailable."
+      },
+      "note": "Official indexed stock listing announcement plus exact API contract metadata confirms stock class. isRwa alone not used;scoped venue products retain ambiguous external units. DASHSTOCK is not DASH crypto alias;NU not globally reclassified."
+    },
+    {
+      "key": [
+        "bitget",
+        "NUUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899056",
+      "official": {
+        "api": {
+          "symbol": "NUUSDT",
+          "isRwa": "YES",
+          "symbolType": "perpetual",
+          "supportMarginCoins": [
+            "USDT"
+          ]
+        },
+        "announcementIndexedEvidence": "Official support search result states all five listed as stock perpetuals on 2026-10-28 (UTC+8). Direct article fetch403;full article unavailable."
+      },
+      "note": "Official indexed stock listing announcement plus exact API contract metadata confirms stock class. isRwa alone not used;scoped venue products retain ambiguous external units. DASHSTOCK is not DASH crypto alias;NU not globally reclassified."
+    },
+    {
+      "key": [
+        "bitget",
+        "PBRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899056",
+      "official": {
+        "api": {
+          "symbol": "PBRUSDT",
+          "isRwa": "YES",
+          "symbolType": "perpetual",
+          "supportMarginCoins": [
+            "USDT"
+          ]
+        },
+        "announcementIndexedEvidence": "Official support search result states all five listed as stock perpetuals on 2026-10-28 (UTC+8). Direct article fetch403;full article unavailable."
+      },
+      "note": "Official indexed stock listing announcement plus exact API contract metadata confirms stock class. isRwa alone not used;scoped venue products retain ambiguous external units. DASHSTOCK is not DASH crypto alias;NU not globally reclassified."
+    },
+    {
+      "key": [
+        "extended",
+        "BR-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BR-USD",
+        "assetName": "BR",
+        "category": "Crypto",
+        "description": "Bedrock",
+        "collateralAssetName": "USD"
+      },
+      "note": "Official Bedrock crypto category for both native and display spelling;do not infer token address or cross-venue comparability."
+    },
+    {
+      "key": [
+        "extended",
+        "BR/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-29",
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "official": {
+        "name": "BR-USD",
+        "assetName": "BR",
+        "category": "Crypto",
+        "description": "Bedrock",
+        "collateralAssetName": "USD"
+      },
+      "note": "Official Bedrock crypto category for both native and display spelling;do not infer token address or cross-venue comparability."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

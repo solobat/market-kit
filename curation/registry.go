@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 8
+const GeneratedRegistryVersion = 9
 
 var (
 	stableAssets = map[string]bool{
@@ -162,6 +162,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.ComparisonKey = override.AssetID + "/" + candidate.quote
 			override.ComparisonStatus = identity.ComparisonAmbiguous
 		}
+
 		guardBybitDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)
 		if candidate.forex {
@@ -191,6 +192,10 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.ComparisonStatus = identity.ComparisonAmbiguous
 			override.InstrumentKind = "index_perpetual"
 			override.ContractType = "indices"
+		}
+		// QFEX reference currency and margin currency are independent.
+		if candidate.exchange == "qfex" && candidate.metadata != nil && candidate.metadata.Source == "qfex" && strings.TrimSpace(candidate.metadata.SettlementAsset) != "" {
+			override.SettlementAsset = strings.ToUpper(strings.TrimSpace(candidate.metadata.SettlementAsset))
 		}
 		if conflicts[overrideKey(override)] {
 			override.AssetClass = "unknown"
