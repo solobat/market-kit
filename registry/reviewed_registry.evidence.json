@@ -33491,6 +33491,97 @@
         "collateralAssetName": "USD"
       },
       "note": "Official Bedrock crypto category for both native and display spelling;do not infer token address or cross-venue comparability."
+    },
+    {
+      "key": [
+        "bitget",
+        "EWZSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-30",
+      "source": "https://www.bitget.com/support/articles/12560603899143",
+      "official": {
+        "symbol": "EWZSUSDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "announcementEvidence": "Official support index and article search excerpt identify these three as stock perpetuals listed2026-10-29 UTC+8.",
+      "note": "Exact API metadata plus official stock listing category. Scoped venue product with ambiguous comparison;no issuer/ETF unit equivalence inferred. EWZS is not an alias of EWZ. No global class or symbol alias changes."
+    },
+    {
+      "key": [
+        "bitget",
+        "FTNTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-30",
+      "source": "https://www.bitget.com/support/articles/12560603899143",
+      "official": {
+        "symbol": "FTNTUSDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "announcementEvidence": "Official support index and article search excerpt identify these three as stock perpetuals listed2026-10-29 UTC+8.",
+      "note": "Exact API metadata plus official stock listing category. Scoped venue product with ambiguous comparison;no issuer/ETF unit equivalence inferred. EWZS is not an alias of EWZ. No global class or symbol alias changes."
+    },
+    {
+      "key": [
+        "bitget",
+        "PFEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-30",
+      "source": "https://www.bitget.com/support/articles/12560603899143",
+      "official": {
+        "symbol": "PFEUSDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "announcementEvidence": "Official support index and article search excerpt identify these three as stock perpetuals listed2026-10-29 UTC+8.",
+      "note": "Exact API metadata plus official stock listing category. Scoped venue product with ambiguous comparison;no issuer/ETF unit equivalence inferred. EWZS is not an alias of EWZ. No global class or symbol alias changes."
+    },
+    {
+      "key": [
+        "qfex",
+        "BRENT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-30",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "BRENT-USD",
+        "product_category": "COMMODITY",
+        "base_asset": "BRENT",
+        "quote_asset": "USD",
+        "margin_asset": "USDC"
+      },
+      "note": "Official commodity contract,USD reference quote,USDC margin. Scoped venue product and ambiguous cross-venue units;no underlying futures roll or barrel unit equivalence inferred."
+    },
+    {
+      "key": [
+        "hyperliquid",
+        "xyz:ICE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-30",
+      "source": "https://api.hyperliquid.xyz/info",
+      "official": {
+        "request": {
+          "type": "meta",
+          "dex": "xyz"
+        },
+        "name": "xyz:ICE"
+      },
+      "note": "Official meta proves raw market exists but carries no issuer/asset-class evidence. Current generic crypto:ticker:ice assignment is not independently verified. Quarantine exact venue identity as unknown/ambiguous;no stock or crypto issuer asserted. Official docs directory retrieval403;restore only after product evidence,not name or price similarity."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
