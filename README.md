@@ -31,6 +31,8 @@ The resolver also returns:
 - `registryVersion`: the generated registry revision used for the decision
 - `instrumentKind`, `contractType`, `settlementAsset`, and `expiryAtMs`: product-level boundaries used to keep incompatible contracts apart
 
+Native Gate stock and Bybit stock/ETF perpetual metadata establish venue product identities, with ambiguous cross-venue comparisons until reviewed rules verify shared units. A dated Bybit symbol without an exact rule for the requested market type returns unresolved instead of treating the date suffix as a quote currency.
+
 The registry records ticker collisions across asset classes. A market with an explicit override can still resolve to its own identity, while an unregistered venue using a colliding ticker fails closed as `ambiguous`.
 
 For example, Binance crypto `ONUSDT` and Bybit stock `ONUSDT` keep the same display symbol but receive different `assetId`, `underlyingId`, and `comparisonKey` values.

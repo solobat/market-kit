@@ -89,3 +89,15 @@ func isForexMarket(row discovery.ImportedMarket) bool {
 func isGateIndexMarket(row discovery.ImportedMarket) bool {
 	return strings.EqualFold(strings.TrimSpace(row.PlatformID), "gate") && strings.EqualFold(strings.TrimSpace(row.Category), "indices")
 }
+
+// Only native venue categories qualify; a downstream stock hint is insufficient.
+func isVenueStockPerpetual(row discovery.ImportedMarket) bool {
+	if normalizeGeneratedMarketType(row.MarketType) != "perpetual" {
+		return false
+	}
+	if strings.EqualFold(row.PlatformID, "gate") {
+		return strings.EqualFold(strings.TrimSpace(row.Category), "stocks")
+	}
+	m := row.InstrumentMetadata
+	return strings.EqualFold(row.PlatformID, "bybit") && m != nil && m.Source == "bybit" && m.ContractType == "LinearPerpetual" && (strings.EqualFold(m.SymbolType, "stock") || strings.EqualFold(m.SymbolType, "ETF"))
+}

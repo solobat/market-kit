@@ -75,6 +75,11 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 		}
 	}
 
+	// A dated contract without an exact identity must not become BASE/date-token.
+	if exchange == "bybit" && bybitDatedSymbol(rawSymbol) {
+		return ResolveResult{Status: ResolveUnresolved, Reason: "dated Bybit contract requires an explicit identity for the requested market type"}
+	}
+
 	marketType, confident := inferMarketType(exchange, rawSymbol, req.MarketTypeHint, req.InstType, req.ProductType)
 	if marketType == MarketTypeUnknown {
 		return ResolveResult{
@@ -581,4 +586,26 @@ func firstNonEmpty(values ...string) string {
 		}
 	}
 	return ""
+}
+
+// Fixed-size suffix check only; no per-request regular expression or expiry inference.
+func bybitDatedSymbol(symbol string) bool {
+	if len(symbol) <= 8 {
+		return false
+	}
+	s := symbol[len(symbol)-8:]
+	if s[0] != '-' {
+		return false
+	}
+	for _, i := range []int{1, 2, 6, 7} {
+		if s[i] < '0' || s[i] > '9' {
+			return false
+		}
+	}
+	for i := 3; i <= 5; i++ {
+		if !((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')) {
+			return false
+		}
+	}
+	return true
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 9
+const GeneratedRegistryVersion = 10
 
 var (
 	stableAssets = map[string]bool{
@@ -67,6 +67,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		directClass string
 		forex       bool
 		gateIndex   bool
+		venueStock  bool
 	}
 
 	assets := map[string]identity.AssetAliasRule{}
@@ -124,7 +125,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
 		}
 		candidates = append(candidates, generatedMarketCandidate{
-			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex, gateIndex: gateIndex, metadata: item.InstrumentMetadata,
+			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex, gateIndex: gateIndex, venueStock: isVenueStockPerpetual(item), metadata: item.InstrumentMetadata,
 		})
 	}
 
@@ -163,6 +164,19 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.ComparisonStatus = identity.ComparisonAmbiguous
 		}
 
+		// Native stock/ETF category proves a venue product, not cross-venue units.
+		if candidate.venueStock {
+			override.AssetClass = "rwa_stock"
+			override.AssetID = "equity:" + candidate.exchange + ":perpetual:" + strings.ToLower(candidate.symbol)
+			override.UnderlyingID = override.AssetID
+			override.ComparisonKey = override.AssetID + "/" + candidate.quote
+			override.ComparisonStatus = identity.ComparisonAmbiguous
+			override.InstrumentKind = "equity_perpetual"
+			override.ContractType = "linear_perpetual"
+			if candidate.exchange == "gate" {
+				override.ContractType = "stocks"
+			}
+		}
 		guardBybitDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)
 		if candidate.forex {

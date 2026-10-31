@@ -33582,6 +33582,376 @@
         "name": "xyz:ICE"
       },
       "note": "Official meta proves raw market exists but carries no issuer/asset-class evidence. Current generic crypto:ticker:ice assignment is not independently verified. Quarantine exact venue identity as unknown/ambiguous;no stock or crypto issuer asserted. Official docs directory retrieval403;restore only after product evidence,not name or price similarity."
+    },
+    {
+      "key": [
+        "gate",
+        "BIDU_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "BIDU_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "symbolType": null,
+        "contractType": null,
+        "settleCoin": null,
+        "quanto_multiplier": "0.1"
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "EWZS_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "EWZS_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "symbolType": null,
+        "contractType": null,
+        "settleCoin": null,
+        "quanto_multiplier": "0.1"
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "FTNT_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "FTNT_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "symbolType": null,
+        "contractType": null,
+        "settleCoin": null,
+        "quanto_multiplier": "0.01"
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "ITUB_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "ITUB_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "symbolType": null,
+        "contractType": null,
+        "settleCoin": null,
+        "quanto_multiplier": "1"
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "gate",
+        "SMR_USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "official": {
+        "name": "SMR_USDT",
+        "symbol": null,
+        "contract_type": "stocks",
+        "symbolType": null,
+        "contractType": null,
+        "settleCoin": null,
+        "quanto_multiplier": "1"
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "BKNGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "BKNGUSDT",
+        "contract_type": null,
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "EWZSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "EWZSUSDT",
+        "contract_type": null,
+        "symbolType": "ETF",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "OXYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "OXYUSDT",
+        "contract_type": null,
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "SMRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "SMRUSDT",
+        "contract_type": null,
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "XLIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "XLIUSDT",
+        "contract_type": null,
+        "symbolType": "ETF",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "bybit",
+        "XPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "name": null,
+        "symbol": "XPUSDT",
+        "contract_type": null,
+        "symbolType": "stock",
+        "contractType": "LinearPerpetual",
+        "settleCoin": "USDT",
+        "quanto_multiplier": null
+      },
+      "note": "Native stock/ETF evidence proves class,not cross-venue units. Preserve scoped venue product and ambiguous comparison. EWZS not aliased to EWZ;XP not globally recategorized. Quanto multiplier is lot size,not canonical price multiplier."
+    },
+    {
+      "key": [
+        "qfex",
+        "ICE-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.qfex.com/refdata",
+      "official": {
+        "symbol": "ICE-USD",
+        "base_asset": "ICE",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "product_category": "EQUITY"
+      },
+      "note": "Official equity with USD reference and USDC margin. Scoped QFEX product;does not independently identify Hyperliquid xyz:ICE. Do not restore its quarantine from shared ticker alone."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "BTCUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "DOGEUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "ETHUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "HYPEUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "MNTUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "SOLUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XAUTUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-20NOV26",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-10-31",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "official": {
+        "symbol": "XRPUSDT-20NOV26",
+        "contractType": "LinearFutures",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "deliveryTime": "1795161600000"
+      },
+      "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
