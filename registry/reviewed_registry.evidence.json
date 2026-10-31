@@ -33952,6 +33952,26 @@
         "deliveryTime": "1795161600000"
       },
       "note": "Wrong perpetual hint for actual dated future. Exact manual prohibition prevents fallback interpreting20NOV26 as quote/settlement. Official future type,settlement andexpiry retained;actual future key remains independent ambiguous product. No guessed expiry from symbol."
+    },
+    {
+      "key": [
+        "variational",
+        "Q",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-10-31",
+      "note": "Official ticker Q, name Quack AI; hourly linear perpetual quoted in USDC. Exact market identity; separate from Bitget RQUSDT equity."
+    },
+    {
+      "key": [
+        "bybit",
+        "QUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=QUSDT",
+      "observedAt": "2026-10-31",
+      "note": "Official fullName quack-ai, baseCoin Q, quoteCoin/settleCoin USDT, contractType LinearPerpetual. Same Quack AI as official Variational Q listing; no global Q reclassification."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

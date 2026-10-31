@@ -58,16 +58,17 @@ type SuspiciousCryptoCandidate struct {
 func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry {
 	items, conflicts := selectMarketIdentityEvidence(items)
 	type generatedMarketCandidate struct {
-		metadata    *discovery.InstrumentMetadata
-		exchange    string
-		base        string
-		quote       string
-		symbol      string
-		marketType  string
-		directClass string
-		forex       bool
-		gateIndex   bool
-		venueStock  bool
+		metadata      *discovery.InstrumentMetadata
+		exchange      string
+		base          string
+		quote         string
+		symbol        string
+		marketType    string
+		directClass   string
+		classEvidence string
+		forex         bool
+		gateIndex     bool
+		venueStock    bool
 	}
 
 	assets := map[string]identity.AssetAliasRule{}
@@ -124,8 +125,14 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			}
 			ensureAsset(assets, quote, classifyGeneratedAsset(item, quote))
 		}
+		classEvidence := ""
+		if baseClass == "crypto" && hasExplicitCryptoIdentityHint(item) {
+			classEvidence = "explicit_crypto"
+		} else if hasExplicitRWAHint(item) {
+			classEvidence = "explicit_rwa"
+		}
 		candidates = append(candidates, generatedMarketCandidate{
-			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, forex: forex, gateIndex: gateIndex, venueStock: isVenueStockPerpetual(item), metadata: item.InstrumentMetadata,
+			exchange: exchange, base: base, quote: quote, symbol: symbol, marketType: marketType, directClass: baseClass, classEvidence: classEvidence, forex: forex, gateIndex: gateIndex, venueStock: isVenueStockPerpetual(item), metadata: item.InstrumentMetadata,
 		})
 	}
 
@@ -145,17 +152,18 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		}
 
 		override := identity.MarketOverride{
-			Exchange:         candidate.exchange,
-			RawSymbol:        candidate.symbol,
-			MarketType:       candidate.marketType,
-			CanonicalSymbol:  candidate.base + "/" + candidate.quote,
-			AssetClass:       baseClass,
-			AssetID:          assetID,
-			UnderlyingID:     assetID,
-			ComparisonKey:    comparisonKey,
-			ComparisonStatus: comparisonStatus,
-			InstrumentKind:   identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
-			SettlementAsset:  candidate.quote,
+			ClassificationEvidence: candidate.classEvidence,
+			Exchange:               candidate.exchange,
+			RawSymbol:              candidate.symbol,
+			MarketType:             candidate.marketType,
+			CanonicalSymbol:        candidate.base + "/" + candidate.quote,
+			AssetClass:             baseClass,
+			AssetID:                assetID,
+			UnderlyingID:           assetID,
+			ComparisonKey:          comparisonKey,
+			ComparisonStatus:       comparisonStatus,
+			InstrumentKind:         identity.DefaultInstrumentKind(identity.MarketType(candidate.marketType), baseClass),
+			SettlementAsset:        candidate.quote,
 		}
 		if issuer, ok := discovery.OfficialPreIPOIssuer(discovery.ImportedMarket{PlatformID: candidate.exchange, Symbol: candidate.symbol, InstrumentMetadata: candidate.metadata}); ok {
 			override.UnderlyingID = "equity:private:" + strings.ToLower(issuer)
@@ -212,6 +220,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.SettlementAsset = strings.ToUpper(strings.TrimSpace(candidate.metadata.SettlementAsset))
 		}
 		if conflicts[overrideKey(override)] {
+			override.ClassificationEvidence = "conflict"
 			override.AssetClass = "unknown"
 			override.AssetID = identity.CanonicalAssetID("unknown", candidate.base)
 			override.UnderlyingID = override.AssetID
@@ -468,6 +477,7 @@ func MergeGeneratedRegistry(existing identity.Registry, generated identity.Regis
 		generated.GeneratedVersion = GeneratedRegistryVersion
 		return generated
 	}
+	generated = reconcileGeneratedClassification(existing, generated)
 	existing = sanitizeExistingGeneratedRegistry(existing, generated)
 	generated = backfillGeneratedRegistryIdentities(generated, existing.Merge(generated))
 	merged := existing.Merge(generated)
@@ -493,7 +503,7 @@ func backfillGeneratedRegistryIdentities(generated identity.Registry, reference 
 	for idx := range generated.MarketOverrides {
 		override := &generated.MarketOverrides[idx]
 		// Dated-product boundaries must never be filled from a generic token alias.
-		if override.Exchange == "bybit" && override.InstrumentKind == "future" {
+		if override.ClassificationEvidence == "conflict" || (override.Exchange == "bybit" && override.InstrumentKind == "future") {
 			continue
 		}
 		base, quote := splitGeneratedCanonicalSymbol(override.CanonicalSymbol)

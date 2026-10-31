@@ -96,21 +96,23 @@ type AssetAliasRule struct {
 }
 
 type MarketOverride struct {
-	Exchange         string           `json:"exchange"`
-	RawSymbol        string           `json:"raw_symbol"`
-	MarketType       string           `json:"market_type"`
-	CanonicalSymbol  string           `json:"canonical_symbol"`
-	AssetClass       string           `json:"asset_class,omitempty"`
-	AssetID          string           `json:"asset_id,omitempty"`
-	UnderlyingID     string           `json:"underlying_id,omitempty"`
-	ComparisonKey    string           `json:"comparison_key,omitempty"`
-	ComparisonStatus ComparisonStatus `json:"comparison_status,omitempty"`
-	InstrumentKind   string           `json:"instrument_kind,omitempty"`
-	ContractType     string           `json:"contract_type,omitempty"`
-	SettlementAsset  string           `json:"settlement_asset,omitempty"`
-	ExpiryAtMs       int64            `json:"expiry_at_ms,omitempty"`
-	UnitAlias        string           `json:"unit_alias,omitempty"`
-	UnitMultiplier   float64          `json:"unit_multiplier,omitempty"`
+	// ClassificationEvidence records market-scoped evidence for discovery merges.
+	ClassificationEvidence string           `json:"classification_evidence,omitempty"`
+	Exchange               string           `json:"exchange"`
+	RawSymbol              string           `json:"raw_symbol"`
+	MarketType             string           `json:"market_type"`
+	CanonicalSymbol        string           `json:"canonical_symbol"`
+	AssetClass             string           `json:"asset_class,omitempty"`
+	AssetID                string           `json:"asset_id,omitempty"`
+	UnderlyingID           string           `json:"underlying_id,omitempty"`
+	ComparisonKey          string           `json:"comparison_key,omitempty"`
+	ComparisonStatus       ComparisonStatus `json:"comparison_status,omitempty"`
+	InstrumentKind         string           `json:"instrument_kind,omitempty"`
+	ContractType           string           `json:"contract_type,omitempty"`
+	SettlementAsset        string           `json:"settlement_asset,omitempty"`
+	ExpiryAtMs             int64            `json:"expiry_at_ms,omitempty"`
+	UnitAlias              string           `json:"unit_alias,omitempty"`
+	UnitMultiplier         float64          `json:"unit_multiplier,omitempty"`
 }
 
 func (r Registry) Merge(other Registry) Registry {

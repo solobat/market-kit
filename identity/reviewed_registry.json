@@ -34365,6 +34365,32 @@
       "settlement_asset": "USDC",
       "unit_alias": "1000PEPE",
       "unit_multiplier": 1000
+    },
+    {
+      "exchange": "variational",
+      "raw_symbol": "Q",
+      "market_type": "perpetual",
+      "canonical_symbol": "Q/USDC",
+      "asset_class": "crypto",
+      "asset_id": "crypto:ticker:q",
+      "underlying_id": "crypto:ticker:q",
+      "comparison_key": "crypto:ticker:q/USDC",
+      "comparison_status": "eligible",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDC"
+    },
+    {
+      "exchange": "bybit",
+      "raw_symbol": "QUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "Q/USDT",
+      "asset_class": "crypto",
+      "asset_id": "crypto:ticker:q",
+      "underlying_id": "crypto:ticker:q",
+      "comparison_key": "crypto:ticker:q/USDT",
+      "comparison_status": "eligible",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDT"
     }
   ],
   "asset_collisions": []
