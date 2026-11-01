@@ -62,3 +62,33 @@ def extended_categories(path):
                     raise ValueError('conflicting official Extended category: ' + symbol)
                 result[symbol] = category
     return result
+
+
+def variational_name_hints(path):
+    """Conservative name-based review leads, never trading identities or unit ratios."""
+    import re
+    rows = json.loads(Path(path).read_text())['listings']
+    result = {}
+    companies = {'CVNA': 'Carvana Co.', 'JPM': 'JPMorgan Chase & Co.',
+                 'BSP': 'Bending Spoons S.p.A.', 'NOK': 'Nokia Oyj', 'NVO': 'Novo Nordisk A/S'}
+    commodities = {'Swap on Brent Crude Oil', 'Swap on Cocoa', 'Swap on Gold Spot',
+                   'Swap on Silver Spot', 'Swap on WTI Crude Oil', 'Swap on Copper Spot',
+                   'Swap on Heating Oil', 'Swap on Gasoline', 'Copper'}
+    indices = {'Swap on US Non-Financial 100', 'Swap on China Index', 'Swap on US 500',
+               'Swap on Dollar Index', 'Swap on FANG+ Index', 'Swap on Taiwan Index',
+               'Swap on US2K Spot', 'Swap on Volatility Index', 'Swap on US30 Spot',
+               'Swap on US MidCap Spot'}
+    for row in rows:
+        symbol, name = row['ticker'], row['name']
+        if not symbol or symbol in result:
+            raise ValueError('missing/duplicate Variational ticker: ' + symbol)
+        kind = None
+        if name in commodities:
+            kind = 'commodity'
+        elif name in indices:
+            kind = 'index'
+        elif companies.get(symbol) == name or re.search(r'\b(Inc\.?|Corp\.?|Corporation|Holdings|ETF|PLC|Ltd\.?|Limited|Company|Incorporated)\b', name, re.I):
+            kind = 'stock'
+        result[symbol] = {'name': name, 'kind': kind,
+                          'note': 'Name is a review lead; no issuer address, share class, ratio or cross-venue comparability inferred.'}
+    return result

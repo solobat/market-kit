@@ -1,6 +1,6 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
-from security_metadata import read_catalog, compare_catalogs, extended_categories
+from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
@@ -10,7 +10,9 @@ parser.add_argument('--workers', type=int, default=2, choices=[1,2])
 parser.add_argument('--official-bitget', help='Current official Bitget SPOT catalog JSON; read-only evidence.')
 parser.add_argument('--previous-official-bitget', help='Previous official catalog for security-ID/status drift; never infer ratios.')
 parser.add_argument('--official-extended', help='Official Extended metadata; checks both native and display symbols.')
+parser.add_argument('--official-variational', help='Official stats listing names; review hints only, never automatic joins.')
 args=parser.parse_args()
+variational_hints = variational_name_hints(args.official_variational) if args.official_variational else {}
 extended_classes = extended_categories(args.official_extended) if args.official_extended else {}
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)
 inv=json.load(open(args.inventory));reg=json.load(open(args.registry))
@@ -58,6 +60,9 @@ for i,batch in enumerate(batches):
   if any(c['kind'] == 'security_identifier_changed' for c in security_changes): flags.append('official_security_identifier_changed')
   if any(c['kind'] == 'security_identifier_missing' for c in security_changes): flags.append('official_security_identifier_missing')
   if k[0] == 'extended' and k[2] == 'perpetual' and extended_classes.get(k[1]) and cl != extended_classes[k[1]]: flags.append('official_asset_class_conflict')
+  vh = variational_hints.get(k[1], {}) if k[0] == 'variational' else {}
+  expected_hint_class = {'stock': 'rwa_stock', 'commodity': 'rwa_commodity', 'index': 'unknown'}.get(vh.get('kind'))
+  if expected_hint_class and cl != expected_hint_class: flags.append('official_variational_name_class_review')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])
   if m:
@@ -89,7 +94,7 @@ for i,batch in enumerate(batches):
    if re.match(r'^(1000|10000|1000000|1M)[A-Z]',base) and m.get('unitMultiplier',1)==1:flags.append('scaled_name_review')
   if len({str(v.get('chain')) for v in sources if v.get('chain')})>1:flags.append('multiple_chains_single_resolve_key')
   if len({(v['baseAsset'].upper(),v['quoteAsset'].upper(),v.get('assetClass') or v.get('assetClassHint') or '') for v in sources})>1:flags.append('conflicting_source_identity')
-  row={'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
+  row={'officialVariationalNameHint':vh,'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
   summary[k[0]]['markets']+=1;summary[k[0]][(result or {}).get('status','api_error')]+=1
   if flags:summary[k[0]]['flagged']+=1
   for f in set(flags):summary[k[0]][f]+=1

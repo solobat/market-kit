@@ -1,0 +1,33 @@
+# Market identity audit — 2026-11-01 (Beijing)
+
+Covered **20,227 market keys /20 platforms**,21,780 evidence rows. Discovery+registry union supplemented by official Extended416 perpetuals,all493 gTrade pairs,GRVT184,GMX126 pools,Gate1070 contracts,40 Bybit dated futures. All81 resolve batches succeeded(max250,at most2 concurrent). Every key has a disposition,raw source/chain evidence and final result. Initial states:{'resolved': 19031, 'unresolved': 1073, 'ambiguous': 123}. Resolution and name-class checks are not independent execution-comparability certification.
+
+All14 primary fetches succeeded,inventory cached2026-11-01T01:04:11.400354182Z,no cache error. Official Bitget spot/futures,Gate,Bybit,Hyperliquid all11 catalogs show no identity/instrument/status additions,absences or changes vs yesterday. Eight added union keys are yesterday's wrong-perpetual-hint prohibitions now in registry;not eight new perpetuals. Six absent snapshot keys are coverage delta,not confirmed delisting. No historical deletion.
+
+Online now **4efa310/schema10/2531 reviewed rules**. Prior stock scoping,Bybit dated fallback and QFEX margin fixes deployed.895 historical rules and39 blank-settlement guards passed initial readback. Deployment probes verified unregistered dated wrong-hint request returns unresolved,no fake quote;Quack Q crypto legs remain eligible and same-name Bitget stock separate. These read-only probes make no trades or fake history. User's classification-evidence changes were read and preserved;no tracked preexisting edits existed.
+
+## New official source coverage and84 exact rules
+
+Variational official `/metadata/stats` initially returned403 to default urllib request. One retry with standard Accept JSON and identifying User-Agent succeeded(294177 bytes). Raw response and both outcomes retained;no access failure masked. All **581 official listings** match581 Variational keys in union. Native names revealed crypto fallback for companies,ETFs,index swaps andcommodity swaps. The earlier registry-only AMC/BAC and CVNA/ZCSH/MDB proof gaps can now be resolved from native company/ETF names;not price similarity.
+
+Reviewed **65 company/ETF products**,including AMC Entertainment,Bank of America,Carvana,MongoDB,Grayscale Zcash ETF,SK hynix,Seagate,TZA/TMF and named private/common-stock products. All receive scoped equity:variational:perpetual IDs and ambiguous comparison. Native names establish product class,not share class,ISIN,ADR ratio,token address or external execution equivalence. SKHY not joined to ADR/Korean ordinary stock;ZCSH ETF not merged with crypto ZEC;STXX not crypto STX. TZA/TMF retain leveraged-ETP kind;3X is exposure design,not a price/unit multiplier(unit1 preserves native quote).
+
+Reviewed **10 named index swaps** with index:variational IDs,unknown asset-class enum(no index enum),index_swap kind and ambiguous comparison. US100S is index exposure,not100x coin. Reviewed **8 explicitly named commodity swaps** with scoped commodity IDs and ambiguous comparison;no barrel,roll,metal-unit or underlying-future conversion inferred.
+
+**COPPER** only has official name Copper,no product-category/spec proof. Initial batch assigned commodity class too strongly from that name;one corrective exact write restored unknown scoped product/perpetual,ambiguous comparison. Initial and corrected payloads retained. It stays separate from explicit COPPP Swap on Copper Spot. No physical-metal identity asserted. Final84 unique changes comprise83 class/boundary repairs plus1 conservative product quarantine.
+
+All raw symbols and native USDC references retained. Product/underlying/comparison IDs venue scoped;no global asset/symbol class changes. Global canonical asset metadata may retain homonymous crypto aliases;exact market resolve is the authoritative product boundary,not canonicalSymbol alone.
+
+One84 batch plus one corrective COPPER write,compact=1,strict prewrite equality,immediate readback. Initial batch and corrective payloads saved separately;online-write.json is combined final84-rule expected manifest at latest write.895 prior+84=**979 audited rules** passed after a new successful sync whose start exceeded final write2026-11-01T01:10:56.624730Z. No sync overwrite/rewrite loop. Nine asset endpoint readbacks retained separately.
+
+## Audit improvement and limits
+
+Read-only audit accepts `--official-variational` saved stats JSON,retains names for all581 keys and flags conservative company/ETF/index/commodity review hints. Hints never mutate runtime identity,guess leverage units or certify cross-platform joins. Initial cached resolver responses were reused solely to add flags to the same saved snapshot;final changed rules were freshly reread.84 initial review flags retained for before/after evidence. Name hints alone remain insufficient for COPPER and other unsupported products. README documents option and public API headers.
+
+After repairs,236 QFEX settlement checks and745 Extended category checks passed. Official named-product class hints pass except intentionally unknown COPPER. All208 official Hyperliquid inactive flags unchanged;four previous reactivation leads remain prohibited pending issuer/units. XYZ ICE still unknown/ambiguous;QFEX equity ICE cannot establish its identity. Historical wrappers,retained r-prefixed aliases and placeholder live feedback endpoints remain open. Name inspection does not independently certify all581 crypto token contracts or execution comparability.
+
+## Validation /publication
+
+identity/curation/server regression suites passed,5 Python tests passed,server build and diff check passed. New tests separate Zcash from Grayscale ETF,US100 index from scaled crypto,commodity swap from Adventure Gold,and3X design from unit multiplier. No production runtime source/hot-path/cadence/buffering/drop/freshness change today;Python audit is batch/read-only. No production CPU improvement claimed;no duplicate runtime profiling for data-only changes. No push/deploy/restart or sync-setting change performed. New reviewed data awaits optional deployment for embedded fallback,while online manual fixes are already durable.
+
+Sources: [Variational official stats](https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats),[QFEX official refdata](https://api.qfex.com/refdata),[Extended official catalog](https://api.starknet.extended.exchange/api/v1/info/markets),[Bybit official catalog](https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000),[Hyperliquid official metadata](https://api.hyperliquid.xyz/info). Raw fetch outcomes,observed times,per-key results and before/after payloads kept locally without credentials.

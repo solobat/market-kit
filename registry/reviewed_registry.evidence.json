@@ -33972,6 +33972,1350 @@
       "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=QUSDT",
       "observedAt": "2026-10-31",
       "note": "Official fullName quack-ai, baseCoin Q, quoteCoin/settleCoin USDT, contractType LinearPerpetual. Same Quack AI as official Variational Q listing; no global Q reclassification."
+    },
+    {
+      "key": [
+        "variational",
+        "TXN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TXN",
+        "name": "Texas Instruments Incorporated",
+        "quotesUpdatedAt": "2026-11-01T01:06:04.194366614Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "FLNC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "FLNC",
+        "name": "Fluence Energy, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:21.897713374Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CRWD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CRWD",
+        "name": "CrowdStrike Holdings, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:46.444365051Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "TTWO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TTWO",
+        "name": "Take-Two Interactive Software, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:48.005682526Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "URNM",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "URNM",
+        "name": "Sprott Uranium Miners ETF",
+        "quotesUpdatedAt": "2026-11-01T01:06:06.692320275Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "JPM",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "JPM",
+        "name": "JPMorgan Chase & Co.",
+        "quotesUpdatedAt": "2026-11-01T01:05:32.531924432Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ZM",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ZM",
+        "name": "Zoom Communications, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:44.159145573Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "TZA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TZA",
+        "name": "Direxion Daily Small Cap Bear 3X ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:54.843603764Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "GPRO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "GPRO",
+        "name": "GoPro, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:31.765747929Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "RIVN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "RIVN",
+        "name": "Rivian Automotive, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:06:00.903313656Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "DELL",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "DELL",
+        "name": "Dell Technologies Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:54.031350588Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "DKNG",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "DKNG",
+        "name": "DraftKings Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:46.447328754Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CVNA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CVNA",
+        "name": "Carvana Co.",
+        "quotesUpdatedAt": "2026-11-01T01:05:17.770954316Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BE",
+        "name": "Bloom Energy Corporation",
+        "quotesUpdatedAt": "2026-11-01T01:05:16.501820670Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "VISA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "VISA",
+        "name": "Visa Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:38.530058073Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "LITE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "LITE",
+        "name": "Lumentum Holdings Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:45.780566870Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SHAZ",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SHAZ",
+        "name": "SharonAI Holdings, Inc. Class A Common Stock",
+        "quotesUpdatedAt": "2026-11-01T01:05:39.061104164Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SNOW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SNOW",
+        "name": "Snowflake Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:40.217448034Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "NOK",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "NOK",
+        "name": "Nokia Oyj",
+        "quotesUpdatedAt": "2026-11-01T01:06:05.848075884Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "EBAY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "EBAY",
+        "name": "eBay Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:06:07.283691299Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BBX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BBX",
+        "name": "BlackBerry Limited",
+        "quotesUpdatedAt": "2026-11-01T01:05:43.409398076Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "STXX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "STXX",
+        "name": "Seagate Technology Holdings plc",
+        "quotesUpdatedAt": "2026-11-01T01:05:55.402907254Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BX",
+        "name": "Blackstone Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:17.800635232Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "WEN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "WEN",
+        "name": "The Wendy's Company",
+        "quotesUpdatedAt": "2026-11-01T01:05:35.694650684Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "KO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "KO",
+        "name": "The Coca-Cola Company",
+        "quotesUpdatedAt": "2026-11-01T01:05:59.910544320Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "QNTX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "QNTX",
+        "name": "Quantinuum Inc. Class A Common Stock",
+        "quotesUpdatedAt": "2026-11-01T01:05:39.240327215Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SONY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SONY",
+        "name": "Sony Group Corporation",
+        "quotesUpdatedAt": "2026-11-01T01:05:52.875209429Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CAT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CAT",
+        "name": "Caterpillar Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:26.466932507Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "UVXY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "UVXY",
+        "name": "ProShares - Ultra VIX Short-Term Futures ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:45.250825450Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "FWDI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "FWDI",
+        "name": "Forward Industries, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:16.872190665Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "EWZ",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "EWZ",
+        "name": "iShares MSCI Brazil ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:19.937997169Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BSP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BSP",
+        "name": "Bending Spoons S.p.A.",
+        "quotesUpdatedAt": "2026-11-01T01:05:50.818229143Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "TER",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TER",
+        "name": "Teradyne, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:35.133734494Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BOT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BOT",
+        "name": "RoboStrategy, Inc. Common Stock",
+        "quotesUpdatedAt": "2026-11-01T01:05:31.132732111Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "HPE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "HPE",
+        "name": "Hewlett Packard Enterprise Company",
+        "quotesUpdatedAt": "2026-11-01T01:05:24.908135040Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CBRS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CBRS",
+        "name": "Cerebras Systems Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:06:06.658087226Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "IBKR",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "IBKR",
+        "name": "Interactive Brokers Group, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:47.893257624Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "NVO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "NVO",
+        "name": "Novo Nordisk A/S",
+        "quotesUpdatedAt": "2026-11-01T01:05:59.749256122Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "MRNA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "MRNA",
+        "name": "Moderna, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:15.768962729Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SHOP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SHOP",
+        "name": "Shopify Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:55.548773861Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ALAB",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ALAB",
+        "name": "Astera Labs, Inc. Common Stock",
+        "quotesUpdatedAt": "2026-11-01T01:05:58.274505062Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CRM",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CRM",
+        "name": "Salesforce, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:46.525382746Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SMCI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SMCI",
+        "name": "Super Micro Computer, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:59.403733357Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BRKB",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BRKB",
+        "name": "Berkshire Hathaway Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:06:03.404108376Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "XBI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "XBI",
+        "name": "State Street SPDR S&P Biotech ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:29.930344322Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "DJT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "DJT",
+        "name": "Trump Media & Technology Group Corp.",
+        "quotesUpdatedAt": "2026-11-01T01:05:55.330318826Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ONDS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ONDS",
+        "name": "Ondas Holdings Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:36.479401693Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "NOW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "NOW",
+        "name": "ServiceNow, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:39.544460692Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "AMC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "AMC",
+        "name": "AMC Entertainment Holdings, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:57.898601697Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BAC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BAC",
+        "name": "Bank of America Corporation",
+        "quotesUpdatedAt": "2026-11-01T01:06:03.544906626Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "STRC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "STRC",
+        "name": "Strategy Inc",
+        "quotesUpdatedAt": "2026-11-01T01:06:05.981072748Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SOFI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SOFI",
+        "name": "SoFi Technologies, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:45.790849956Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ZCSH",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ZCSH",
+        "name": "Grayscale Zcash ETF",
+        "quotesUpdatedAt": "2026-11-01T01:06:03.167860697Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CIEN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CIEN",
+        "name": "Ciena Corporation",
+        "quotesUpdatedAt": "2026-11-01T01:05:46.580891712Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "TMF",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TMF",
+        "name": "Direxion Daily 20+ Year Treasury Bull 3X ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:26.057457384Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "BNC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "BNC",
+        "name": "CEA Industries Inc. Common Stock",
+        "quotesUpdatedAt": "2026-11-01T01:05:33.941336235Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "MDB",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "MDB",
+        "name": "MongoDB, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:24.608193794Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "GLW",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "GLW",
+        "name": "Corning Inc",
+        "quotesUpdatedAt": "2026-11-01T01:05:57.814302337Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "PENG",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "PENG",
+        "name": "Penguin Solutions, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:56.278222207Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "KSTR",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "KSTR",
+        "name": "KraneShares SSE STAR Market 50 Index ETF",
+        "quotesUpdatedAt": "2026-11-01T01:05:19.517799706Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CRDO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CRDO",
+        "name": "Credo Technology Group Holding Ltd",
+        "quotesUpdatedAt": "2026-11-01T01:06:03.410515430Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "IREN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "IREN",
+        "name": "IREN Limited",
+        "quotesUpdatedAt": "2026-11-01T01:05:53.049891757Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "SKHY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "SKHY",
+        "name": "SK hynix Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:51.325753052Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ADBE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ADBE",
+        "name": "Adobe Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:05:49.560390705Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "ASTS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "ASTS",
+        "name": "AST SpaceMobile, Inc.",
+        "quotesUpdatedAt": "2026-11-01T01:06:00.094054738Z"
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "US100S",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "US100S",
+        "name": "Swap on US Non-Financial 100",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "CNA50S",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "CNA50S",
+        "name": "Swap on China Index",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "US500S",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "US500S",
+        "name": "Swap on US 500",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "DXIP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "DXIP",
+        "name": "Swap on Dollar Index",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "USFNGS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "USFNGS",
+        "name": "Swap on FANG+ Index",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "TWIS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "TWIS",
+        "name": "Swap on Taiwan Index",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "US2KS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "US2KS",
+        "name": "Swap on US2K Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "VXIP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "VXIP",
+        "name": "Swap on Volatility Index",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "US30S",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "US30S",
+        "name": "Swap on US30 Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "US400S",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "US400S",
+        "name": "Swap on US MidCap Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "UKOILP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "UKOILP",
+        "name": "Swap on Brent Crude Oil",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "COCOAP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "COCOAP",
+        "name": "Swap on Cocoa",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "XAUS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "XAUS",
+        "name": "Swap on Gold Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "XAGS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "XAGS",
+        "name": "Swap on Silver Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "USOILP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "USOILP",
+        "name": "Swap on WTI Crude Oil",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "COPPER",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "COPPER",
+        "name": "Copper",
+        "quotesUpdatedAt": "2026-11-01T01:05:25.475406717Z"
+      },
+      "note": "Official name Copper alone lacks product category/specification and is insufficient proof of physical-metal identity. Keep unknown scoped product and ambiguous comparison,USDC quote/settlement retained from existing market. Do not merge with COPPP Swap on Copper Spot or infer units."
+    },
+    {
+      "key": [
+        "variational",
+        "COPPP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "COPPP",
+        "name": "Swap on Copper Spot",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "HOILP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "HOILP",
+        "name": "Swap on Heating Oil",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "variational",
+        "GASOLP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-01",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "observedAt": "2026-11-01T01:06:17.354668+00:00",
+      "official": {
+        "ticker": "GASOLP",
+        "name": "Swap on Gasoline",
+        "quotesUpdatedAt": null
+      },
+      "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
