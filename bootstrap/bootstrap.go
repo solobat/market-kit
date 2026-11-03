@@ -77,6 +77,7 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 
 	items := make([]discovery.ImportedMarket, 0, 2048)
 	var failed []string
+	var failedSources []string
 	for _, source := range collectors() {
 		if !source.enabled {
 			continue
@@ -89,6 +90,7 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 			if len(selected) > 0 {
 				return discovery.ImportEnvelope{}, fmt.Errorf("%s: %w", source.id, err)
 			}
+			failedSources = append(failedSources, source.id)
 			failed = append(failed, fmt.Sprintf("%s: %v", source.id, err))
 			continue
 		}
@@ -109,9 +111,10 @@ func Fetch(ctx context.Context, client *http.Client, sourceIDs []string) (discov
 	})
 
 	return discovery.ImportEnvelope{
-		Source:      discovery.SourceKindBootstrap,
-		GeneratedAt: time.Now().UTC(),
-		Items:       items,
+		FailedSources: failedSources,
+		Source:        discovery.SourceKindBootstrap,
+		GeneratedAt:   time.Now().UTC(),
+		Items:         items,
 	}, nil
 }
 

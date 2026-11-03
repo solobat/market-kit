@@ -92,3 +92,21 @@ def variational_name_hints(path):
         result[symbol] = {'name': name, 'kind': kind,
                           'note': 'Name is a review lead; no issuer address, share class, ratio or cross-venue comparability inferred.'}
     return result
+
+
+def native_market_statuses(aster_path=None, lighter_path=None):
+    """Native status evidence only; never map aliases or infer delisting history."""
+    result = {}
+    if aster_path:
+        for row in json.loads(Path(aster_path).read_text())['symbols']:
+            if row.get('contractType') == 'PERPETUAL':
+                result[('aster', row['symbol'], 'perpetual')] = {
+                    'status': row.get('status'), 'inactive': row.get('status') == 'SETTLING'}
+    if lighter_path:
+        for row in json.loads(Path(lighter_path).read_text())['order_books']:
+            if row.get('market_type') in ('perp', 'spot'):
+                kind = 'perpetual' if row['market_type'] == 'perp' else 'spot'
+                result[('lighter', row['symbol'], kind)] = {
+                    'status': row.get('status'), 'marketId': row.get('market_id'),
+                    'inactive': row.get('status') == 'inactive'}
+    return result

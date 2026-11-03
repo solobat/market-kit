@@ -19,26 +19,27 @@ import (
 )
 
 type AutoSyncStatus struct {
-	ManualOverrideCount      int                                  `json:"manualOverrideCount"`
-	ReviewedOverrideCount    int                                  `json:"reviewedOverrideCount"`
-	ManualPath               string                               `json:"manualPath,omitempty"`
-	Enabled                  bool                                 `json:"enabled"`
-	Interval                 string                               `json:"interval,omitempty"`
-	RuntimePath              string                               `json:"runtimePath,omitempty"`
-	RuntimeGeneratedVersion  int                                  `json:"runtimeGeneratedVersion,omitempty"`
-	RequiredGeneratedVersion int                                  `json:"requiredGeneratedVersion,omitempty"`
-	ConfiguredSourceID       string                               `json:"configuredSourceId,omitempty"`
-	SourceID                 string                               `json:"sourceId,omitempty"`
-	LastStartedAt            time.Time                            `json:"lastStartedAt,omitempty"`
-	LastFinishedAt           time.Time                            `json:"lastFinishedAt,omitempty"`
-	LastError                string                               `json:"lastError,omitempty"`
-	LastDiscoveryItems       int                                  `json:"lastDiscoveryItems,omitempty"`
-	LastGeneratedAssets      int                                  `json:"lastGeneratedAssets,omitempty"`
-	LastGeneratedOverrides   int                                  `json:"lastGeneratedOverrides,omitempty"`
-	RuntimeAssets            int                                  `json:"runtimeAssets,omitempty"`
-	RuntimeOverrides         int                                  `json:"runtimeOverrides,omitempty"`
-	SuspiciousCryptoCount    int                                  `json:"suspiciousCryptoCount,omitempty"`
-	SuspiciousCryptoAssets   []curation.SuspiciousCryptoCandidate `json:"suspiciousCryptoAssets,omitempty"`
+	LastDiscoveryFailedSources []string                             `json:"lastDiscoveryFailedSources,omitempty"`
+	ManualOverrideCount        int                                  `json:"manualOverrideCount"`
+	ReviewedOverrideCount      int                                  `json:"reviewedOverrideCount"`
+	ManualPath                 string                               `json:"manualPath,omitempty"`
+	Enabled                    bool                                 `json:"enabled"`
+	Interval                   string                               `json:"interval,omitempty"`
+	RuntimePath                string                               `json:"runtimePath,omitempty"`
+	RuntimeGeneratedVersion    int                                  `json:"runtimeGeneratedVersion,omitempty"`
+	RequiredGeneratedVersion   int                                  `json:"requiredGeneratedVersion,omitempty"`
+	ConfiguredSourceID         string                               `json:"configuredSourceId,omitempty"`
+	SourceID                   string                               `json:"sourceId,omitempty"`
+	LastStartedAt              time.Time                            `json:"lastStartedAt,omitempty"`
+	LastFinishedAt             time.Time                            `json:"lastFinishedAt,omitempty"`
+	LastError                  string                               `json:"lastError,omitempty"`
+	LastDiscoveryItems         int                                  `json:"lastDiscoveryItems,omitempty"`
+	LastGeneratedAssets        int                                  `json:"lastGeneratedAssets,omitempty"`
+	LastGeneratedOverrides     int                                  `json:"lastGeneratedOverrides,omitempty"`
+	RuntimeAssets              int                                  `json:"runtimeAssets,omitempty"`
+	RuntimeOverrides           int                                  `json:"runtimeOverrides,omitempty"`
+	SuspiciousCryptoCount      int                                  `json:"suspiciousCryptoCount,omitempty"`
+	SuspiciousCryptoAssets     []curation.SuspiciousCryptoCandidate `json:"suspiciousCryptoAssets,omitempty"`
 }
 
 type runtimeRegistryLoadResult struct {
@@ -125,6 +126,7 @@ func (a *App) handleAutoSync(w http.ResponseWriter, r *http.Request) {
 func (a *App) currentAutoSyncStatus() AutoSyncStatus {
 	a.mu.RLock()
 	status := a.autoSyncStatus
+	status.LastDiscoveryFailedSources = append([]string(nil), status.LastDiscoveryFailedSources...)
 	a.mu.RUnlock()
 	return status
 }
@@ -264,6 +266,7 @@ func (a *App) runAutoSyncOnce(ctx context.Context) error {
 		status.LastFinishedAt = finishedAt
 		status.LastError = ""
 		status.LastDiscoveryItems = len(envelope.Items)
+		status.LastDiscoveryFailedSources = append([]string(nil), envelope.FailedSources...)
 		status.LastGeneratedAssets = len(next.AssetAliases)
 		status.LastGeneratedOverrides = len(next.MarketOverrides)
 		status.RuntimeGeneratedVersion = next.GeneratedVersion

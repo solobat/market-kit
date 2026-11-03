@@ -877,13 +877,18 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 
 	successful := 0
 	failed := make([]string, 0)
+	failedSources := make([]string, 0)
 	for index, source := range sources {
 		result := fetched[index]
 		if result.err != nil {
+			failedSources = append(failedSources, source.ID)
 			failed = append(failed, result.err.Error())
 			continue
 		}
 		successful++
+		for _, id := range result.payload.FailedSources {
+			failedSources = append(failedSources, source.ID+":"+id)
+		}
 		if result.payload.GeneratedAt.After(latestGeneratedAt) {
 			latestGeneratedAt = result.payload.GeneratedAt
 		}
@@ -907,9 +912,10 @@ func (a *App) fetchDiscoveryLookupEnvelope(ctx context.Context, sourceID string)
 		latestGeneratedAt = time.Now().UTC()
 	}
 	return sources, discovery.ImportEnvelope{
-		Source:      discovery.SourceKind("market-kit-all"),
-		GeneratedAt: latestGeneratedAt,
-		Items:       items,
+		FailedSources: failedSources,
+		Source:        discovery.SourceKind("market-kit-all"),
+		GeneratedAt:   latestGeneratedAt,
+		Items:         items,
 	}, nil
 }
 

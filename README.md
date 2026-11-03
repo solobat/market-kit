@@ -259,6 +259,8 @@ MARKET_KIT_ADMIN_CODE=replace-me
 ```
 
 With auto-sync enabled, `market-kit` periodically pulls the configured slipstream discovery export, generates a dynamic registry layer, hot-swaps the runtime resolver, and writes that dynamic layer to `MARKET_KIT_RUNTIME_REGISTRY_PATH`.
+
+Partial refreshes retain successful rows and expose failed collector/source identifiers in discovery `payload.failedSources`; auto-sync status reports `lastDiscoveryFailedSources` for its last accepted input. These optional fields contain identifiers only, not upstream diagnostics. An empty `cacheError` indicates no total refresh failure, not proof that every collector succeeded; the read-only audit retains reported failures in its summary.
 When `MARKET_KIT_ADMIN_CODE` is set, expensive manual sync and runtime registry mutation endpoints require `X-Market-Kit-Admin-Code` or `Authorization: Bearer <code>`.
 
 Even without any remote config, the server now exposes a built-in discovery source:
@@ -827,3 +829,5 @@ For the version-6 identity fixes, official metadata coverage, reviewed rule evid
 ### Pre-IPO issuer discovery
 
 The Hyperliquid bootstrap reads the official XYZ pre-IPO specification directory when XYZ markets are present. Live table rows that explicitly describe shares of one issuer enrich the exact venue/contract with issuer evidence; the ticker itself is never treated as a global issuer alias. Discovery and generated registry construction retain a venue-specific product ID and `comparisonStatus=ambiguous`: identifying the company does not establish equivalent contract units. Regression tests include a previously unknown `xyz:FUTUREAI` ticker describing OpenAI shares, stale crypto overrides, converted rows, and cross-venue isolation. The directory request runs only at existing bootstrap cadence, adds at most one bounded HTTP read, and does not add realtime subscriptions. Deploy the server binary to enable this adapter online; API identity corrections do not deploy code.
+
+For missing discovery platforms, retain fresh official Aster exchangeInfo, Lighter orderBooks and Backpack markets snapshots. The read-only audit accepts `--official-aster` and `--official-lighter` to flag native inactive products still allowed to compare. These flags do not establish a past delisting event, issuer, consumer-symbol alias or contract unit; restored active status requires separate identity review.

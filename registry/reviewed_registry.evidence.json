@@ -35316,6 +35316,1349 @@
         "quotesUpdatedAt": null
       },
       "note": "Official native product name confirms company/ETF or named index/commodity swap. Scope venue product and underlying,ambiguous comparison;no global symbol class edit,share-class/ISIN/ADR/roll/settlement-event inference. Reference 3X is leverage design,not unit or price multiplier. SKHY not joined to ADR/Korean ordinary share;ZCSH ETF not crypto ZEC;STXX not STX token. Index uses unknown enum class with explicit index identity because no index asset-class enum exists."
+    },
+    {
+      "key": [
+        "bitget",
+        "LNGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899410",
+      "official": {
+        "issuerName": "Cheniere Energy, Inc.",
+        "listingDateUTC8": "2026-11-02",
+        "symbol": "LNGUSDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Official stock listing identifies issuer,not commodity LNG or a homonymous crypto MO. Scope exact venue product and ambiguous comparison;no global class/alias change or cross-venue share-unit equivalence inferred. isRwa alone not used."
+    },
+    {
+      "key": [
+        "bitget",
+        "MOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://www.bitgetapp.com/support/articles/12560603899410",
+      "official": {
+        "issuerName": "Altria Group, Inc.",
+        "listingDateUTC8": "2026-11-02",
+        "symbol": "MOUSDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Official stock listing identifies issuer,not commodity LNG or a homonymous crypto MO. Scope exact venue product and ambiguous comparison;no global class/alias change or cross-venue share-unit equivalence inferred. isRwa alone not used."
+    },
+    {
+      "key": [
+        "aster",
+        "TONUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TONUSDT",
+        "baseAsset": "TON",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "MITOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MITOUSDT",
+        "baseAsset": "MITO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PTBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PTBUSDT",
+        "baseAsset": "PTB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "AVLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AVLUSDT",
+        "baseAsset": "AVL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "IRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IRUSDT",
+        "baseAsset": "IR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "IPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IPUSDT",
+        "baseAsset": "IP",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "VELOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VELOUSDT",
+        "baseAsset": "VELO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "STGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STGUSDT",
+        "baseAsset": "STG",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PENGUINUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PENGUINUSDT",
+        "baseAsset": "PENGUIN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PROMPTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PROMPTUSDT",
+        "baseAsset": "PROMPT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "ACXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ACXUSDT",
+        "baseAsset": "ACX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "COSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "COSUSDT",
+        "baseAsset": "COS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PUMPBTCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PUMPBTCUSDT",
+        "baseAsset": "PUMPBTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "DUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DUSDT",
+        "baseAsset": "D",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "BAYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BAYUSDT",
+        "baseAsset": "BAY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PDDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PDDUSDT",
+        "baseAsset": "PDD",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 1,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "BIRDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BIRDUSDT",
+        "baseAsset": "BIRD",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 1,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "1000SATSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000SATSUSDT",
+        "baseAsset": "1000SATS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "HIGHUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HIGHUSDT",
+        "baseAsset": "HIGH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "CARUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "CARUSDT",
+        "baseAsset": "CAR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 1,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "1000WOJAKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000WOJAKUSDT",
+        "baseAsset": "1000WOJAK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "XCNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "XCNUSDT",
+        "baseAsset": "XCN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "BLENDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BLENDUSDT",
+        "baseAsset": "BLEND",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "B3USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "B3USDT",
+        "baseAsset": "B3",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "TROLLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TROLLUSDT",
+        "baseAsset": "TROLL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "STORJUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STORJUSDT",
+        "baseAsset": "STORJ",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "1000NEXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000NEXUSDT",
+        "baseAsset": "1000NEX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "RAILUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RAILUSDT",
+        "baseAsset": "RAIL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "RTXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RTXUSDT",
+        "baseAsset": "RTX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "VANRYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VANRYUSDT",
+        "baseAsset": "VANRY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "NESUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NESUSDT",
+        "baseAsset": "NES",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "STONKBROKERUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STONKBROKERUSDT",
+        "baseAsset": "STONKBROKER",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "AIW3USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AIW3USDT",
+        "baseAsset": "AIW3",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "STONKSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STONKSUSDT",
+        "baseAsset": "STONKS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "MEMESTOCKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MEMESTOCKUSDT",
+        "baseAsset": "MEMESTOCK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "B-MONEYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "B-MONEYUSDT",
+        "baseAsset": "B-MONEY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "BENUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BENUSDT",
+        "baseAsset": "BEN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "BUILDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BUILDUSDT",
+        "baseAsset": "BUILD",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PAPERUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PAPERUSDT",
+        "baseAsset": "PAPER",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "SKHYNIX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "SKHYNIX",
+        "market_id": 143,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "BOTZ",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "BOTZ",
+        "market_id": 154,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "URA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "URA",
+        "market_id": 150,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "DUSK",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "DUSK",
+        "market_id": 125,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "PIPPIN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "PIPPIN",
+        "market_id": 135,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "SAMSUNG",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "SAMSUNG",
+        "market_id": 140,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "PROVE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "PROVE",
+        "market_id": 57,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "ADI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "ADI",
+        "market_id": 213,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "WHEAT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "WHEAT",
+        "market_id": 170,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "DIA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "DIA",
+        "market_id": 152,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "EDGE",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "EDGE",
+        "market_id": 157,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "AI16Z",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "AI16Z",
+        "market_id": 22,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "SPACEX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "SPACEX",
+        "market_id": 173,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "MAGS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "MAGS",
+        "market_id": 155,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "BIRB",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "BIRB",
+        "market_id": 133,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "YZY",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "YZY",
+        "market_id": 70,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "HYUNDAI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "HYUNDAI",
+        "market_id": 141,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "SOXX",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "SOXX",
+        "market_id": 169,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "KRCOMP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "KRCOMP",
+        "market_id": 142,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "HANMI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "HANMI",
+        "market_id": 148,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "LAUNCHCOIN",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "LAUNCHCOIN",
+        "market_id": 54,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "lighter",
+        "1000TOSHI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-03",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "1000TOSHI",
+        "market_id": 81,
+        "market_type": "perp",
+        "status": "inactive",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

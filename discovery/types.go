@@ -18,9 +18,11 @@ const (
 )
 
 type ImportEnvelope struct {
-	Source      SourceKind       `json:"source"`
-	GeneratedAt time.Time        `json:"generatedAt"`
-	Items       []ImportedMarket `json:"items"`
+	// FailedSources identifies partial collection gaps without exposing upstream diagnostics.
+	FailedSources []string         `json:"failedSources,omitempty"`
+	Source        SourceKind       `json:"source"`
+	GeneratedAt   time.Time        `json:"generatedAt"`
+	Items         []ImportedMarket `json:"items"`
 }
 
 // InstrumentMetadata carries native venue evidence, not a cross-venue alias.

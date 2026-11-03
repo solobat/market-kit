@@ -1,6 +1,6 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
-from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints
+from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints, native_market_statuses
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
@@ -11,7 +11,10 @@ parser.add_argument('--official-bitget', help='Current official Bitget SPOT cata
 parser.add_argument('--previous-official-bitget', help='Previous official catalog for security-ID/status drift; never infer ratios.')
 parser.add_argument('--official-extended', help='Official Extended metadata; checks both native and display symbols.')
 parser.add_argument('--official-variational', help='Official stats listing names; review hints only, never automatic joins.')
+parser.add_argument('--official-aster', help='Saved current official Aster exchangeInfo; status review only.')
+parser.add_argument('--official-lighter', help='Saved current official Lighter orderBooks; exact native keys only.')
 args=parser.parse_args()
+native_statuses = native_market_statuses(args.official_aster, args.official_lighter)
 variational_hints = variational_name_hints(args.official_variational) if args.official_variational else {}
 extended_classes = extended_categories(args.official_extended) if args.official_extended else {}
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)
@@ -63,6 +66,8 @@ for i,batch in enumerate(batches):
   vh = variational_hints.get(k[1], {}) if k[0] == 'variational' else {}
   expected_hint_class = {'stock': 'rwa_stock', 'commodity': 'rwa_commodity', 'index': 'unknown'}.get(vh.get('kind'))
   if expected_hint_class and cl != expected_hint_class: flags.append('official_variational_name_class_review')
+  native_status = native_statuses.get(k, {})
+  if m and native_status.get('inactive') and m.get('comparisonStatus') != 'prohibited': flags.append('official_native_inactive_comparison_review')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])
   if m:
@@ -94,7 +99,7 @@ for i,batch in enumerate(batches):
    if re.match(r'^(1000|10000|1000000|1M)[A-Z]',base) and m.get('unitMultiplier',1)==1:flags.append('scaled_name_review')
   if len({str(v.get('chain')) for v in sources if v.get('chain')})>1:flags.append('multiple_chains_single_resolve_key')
   if len({(v['baseAsset'].upper(),v['quoteAsset'].upper(),v.get('assetClass') or v.get('assetClassHint') or '') for v in sources})>1:flags.append('conflicting_source_identity')
-  row={'officialVariationalNameHint':vh,'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
+  row={'officialNativeStatus':native_status,'officialVariationalNameHint':vh,'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
   summary[k[0]]['markets']+=1;summary[k[0]][(result or {}).get('status','api_error')]+=1
   if flags:summary[k[0]]['flagged']+=1
   for f in set(flags):summary[k[0]][f]+=1
@@ -109,5 +114,5 @@ asset_issues=[]
 for a in reg['asset_aliases']:
  prefix={'crypto':'crypto:','rwa_stock':'equity:','rwa_commodity':'commodity:','fiat_stable':'fiat:'}.get(a['asset_class'])
  if prefix and a.get('asset_id') and not a['asset_id'].startswith(prefix):asset_issues.append(a)
-out={'inputFingerprint':fingerprint,'startedFromInventoryAt':inv['cachedAt'],'generatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'inventoryRows':len(inv['payload']['items']),'marketCount':len(rows),'platformCount':len(summary),'platforms':dict(summary),'flagCounts':dict(collections.Counter(f for r in rows for f in r['flags'])),'fragmentedFamilies':fragmented,'assetClassIdMismatches':asset_issues,'rows':rows}
+out={'reportedFailedDiscoverySources':inv['payload'].get('failedSources',[]),'inputFingerprint':fingerprint,'startedFromInventoryAt':inv['cachedAt'],'generatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'inventoryRows':len(inv['payload']['items']),'marketCount':len(rows),'platformCount':len(summary),'platforms':dict(summary),'flagCounts':dict(collections.Counter(f for r in rows for f in r['flags'])),'fragmentedFamilies':fragmented,'assetClassIdMismatches':asset_issues,'rows':rows}
 (ROOT/'audit.json').write_text(json.dumps(out,ensure_ascii=False,indent=2));print(json.dumps({k:v for k,v in out.items() if k not in ['rows','fragmentedFamilies','assetClassIdMismatches']},ensure_ascii=False),flush=True)
