@@ -36659,6 +36659,100 @@
         "market_deployer": "lighter"
       },
       "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "MAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "Official Bitget isRwa YES proves RWA product, not cross-venue share units or issuer by ticker alone; venue scope retained."
+    },
+    {
+      "key": [
+        "bybit",
+        "USDBRLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Official Bybit symbolType forex, fullName US Dollar to Brazil Real, LinearPerpetual, settleCoin USDT. Not an equity or stablecoin balance; prohibit automatic cross-venue comparisons."
+    },
+    {
+      "key": [
+        "aster",
+        "SHROOMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SHROOMUSDT",
+        "baseAsset": "SHROOM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "PAIRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PAIRUSDT",
+        "baseAsset": "PAIR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "MAXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MAXUSDT",
+        "baseAsset": "MAX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingType": "COIN",
+        "symbolType": 0,
+        "name": "",
+        "status": "SETTLING"
+      },
+      "note": "Official native status SETTLING/inactive. Scope exact historical/inactive venue product and prohibit comparison;not proof of a historical delisting event/date or issuer identity. Retain existing class/underlying/reference units without certifying them;no new crypto/stock equivalence or multiplier inference. Require official active status AND identity/unit review before restoring comparisons. Native/consumer aliases are not inferred."
+    },
+    {
+      "key": [
+        "variational",
+        "EIDO",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-04",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "officialName": "iShares MSCI Indonesia ETF",
+      "note": "Native full name supports ETF classification; no issuer/share unit equivalence or cross-venue join inferred. Exact venue product scoped ambiguous."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

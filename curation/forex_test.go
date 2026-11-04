@@ -33,3 +33,30 @@ func TestExtendedFXRetainsReferenceAndCollateralBoundaries(t *testing.T) {
 		t.Fatal(got)
 	}
 }
+
+func TestBybitNativeForexOutranksGenericStock(t *testing.T) {
+	official := discovery.ImportedMarket{SourceID: "native", PlatformID: "bybit", VenueType: "cex", MarketType: "perpetual", Symbol: "USDBRLUSDT", BaseAsset: "USDBRL", QuoteAsset: "USDT", InstrumentMetadata: &discovery.InstrumentMetadata{Source: "bybit", SymbolType: "forex", ContractType: "LinearPerpetual", SettlementAsset: "USDT"}}
+	generic := official
+	generic.SourceID = "consumer"
+	generic.InstrumentMetadata = nil
+	generic.AssetClassHint = "stock"
+	for _, rows := range [][]discovery.ImportedMarket{{official, generic}, {generic, official}} {
+		reg := BuildGeneratedRegistry(rows)
+		got := identity.NewResolver(reg).Resolve(identity.ResolveRequest{Exchange: "bybit", Symbol: "USDBRLUSDT", MarketTypeHint: "perpetual"}).Market
+		if got == nil || got.AssetClass != "unknown" || got.InstrumentKind != "fx_perpetual" || got.ComparisonStatus != identity.ComparisonProhibited || got.SettlementAsset != "USDT" {
+			t.Fatalf("FX identity: %+v", got)
+		}
+		if len(reg.AssetAliases) != 0 {
+			t.Fatal("FX emitted global aliases", reg.AssetAliases)
+		}
+	}
+	for _, mutate := range []func(*discovery.ImportedMarket){func(r *discovery.ImportedMarket) { r.InstrumentMetadata.Source = "consumer" }, func(r *discovery.ImportedMarket) { r.InstrumentMetadata.ContractType = "LinearFutures" }, func(r *discovery.ImportedMarket) { r.MarketType = "spot" }} {
+		row := official
+		meta := *official.InstrumentMetadata
+		row.InstrumentMetadata = &meta
+		mutate(&row)
+		if isForexMarket(row) {
+			t.Fatal("unverified metadata treated as native FX", row)
+		}
+	}
+}

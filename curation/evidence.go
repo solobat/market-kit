@@ -57,6 +57,9 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 	if strings.EqualFold(row.PlatformID, "bybit") && isBybitFutureMetadata(row.InstrumentMetadata) {
 		return 6
 	}
+	if strings.EqualFold(row.PlatformID, "bybit") && isForexMarket(row) {
+		return 6
+	}
 	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
 		return 5
 	}
@@ -76,6 +79,9 @@ func isForexMarket(row discovery.ImportedMarket) bool {
 	switch strings.ToLower(strings.TrimSpace(row.PlatformID)) {
 	case "gtrade":
 		return group == "forex" || group == "forex-minor" || group == "forex-exotic"
+	case "bybit":
+		m := row.InstrumentMetadata
+		return normalizeGeneratedMarketType(row.MarketType) == "perpetual" && m != nil && m.Source == "bybit" && strings.EqualFold(m.ContractType, "LinearPerpetual") && strings.EqualFold(m.SymbolType, "forex")
 	case "extended":
 		return group == "fx"
 	case "gate":

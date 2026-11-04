@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 10
+const GeneratedRegistryVersion = 11
 
 var (
 	stableAssets = map[string]bool{
