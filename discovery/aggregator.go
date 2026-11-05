@@ -59,7 +59,26 @@ func (a *Aggregator) BuildAssetGroups(items []ImportedMarket) []AssetCandidateGr
 
 	out := make([]AssetCandidateGroup, 0, len(keys))
 	for _, key := range keys {
-		out = append(out, summarizeGroup(key, grouped[key]))
+		markets := grouped[key]
+		classes := map[string][]CandidateMarket{}
+		for _, market := range markets {
+			classes[market.AssetClass] = append(classes[market.AssetClass], market)
+		}
+		if len(classes) == 1 {
+			out = append(out, summarizeGroup(key, markets))
+			continue
+		}
+		// A shared ticker does not make a stock and a crypto token one asset.
+		classKeys := make([]string, 0, len(classes))
+		for class := range classes {
+			classKeys = append(classKeys, class)
+		}
+		sort.Strings(classKeys)
+		for _, class := range classKeys {
+			group := summarizeGroup(key, classes[class])
+			group.GroupKey = key + "|" + class
+			out = append(out, group)
+		}
 	}
 	return out
 }

@@ -66,14 +66,16 @@ func TestBuildAssetGroupsSurfacesCrossClassTickerCollisionForReview(t *testing.T
 		{PlatformID: "binance", VenueType: "cex", MarketType: "perpetual", Symbol: "ONUSDT", BaseAsset: "ON", QuoteAsset: "USDT"},
 		{PlatformID: "bybit", VenueType: "cex", MarketType: "perpetual", Symbol: "ONUSDT", BaseAsset: "ON", QuoteAsset: "USDT"},
 	})
-	if len(groups) != 1 || groups[0].GroupKey != "ON/USDT" {
-		t.Fatalf("collision review must preserve the legacy display group, got %+v", groups)
+	if len(groups) != 2 {
+		t.Fatalf("cross-class ticker collision must produce separate groups: %+v", groups)
 	}
-	if !groups[0].NeedsReview || groups[0].ComparisonKey != "" {
-		t.Fatalf("mixed comparison identities must not expose one automatable group key: %+v", groups[0])
+	if groups[0].GroupKey == groups[1].GroupKey || groups[0].AssetClass == groups[1].AssetClass {
+		t.Fatalf("different asset classes must have distinct group identities: %+v", groups)
 	}
-	if groups[0].Markets[0].ComparisonKey == groups[0].Markets[1].ComparisonKey {
-		t.Fatalf("market-level identities must remain distinct: %+v", groups[0].Markets)
+	for _, group := range groups {
+		if len(group.Markets) != 1 || group.ComparisonKey == "" {
+			t.Fatalf("each explicit identity must retain its comparison key: %+v", group)
+		}
 	}
 }
 
@@ -502,5 +504,43 @@ func TestBuildAssetGroupsUsesExplicitOverrideForHyperliquidCommodityAliasMarkets
 			}
 
 		})
+	}
+}
+
+func TestCATStockAnd1000CATCryptoStayInSeparateGroups(t *testing.T) {
+	registry, err := identity.LoadDefaultRegistry()
+	if err != nil {
+		t.Fatal(err)
+	}
+	groups := NewAggregator(registry).BuildAssetGroups([]ImportedMarket{
+		{PlatformID: "binance", MarketType: "perpetual", Symbol: "1000CATUSDT", BaseAsset: "1000CAT", QuoteAsset: "USDT"},
+		{PlatformID: "qfex", MarketType: "perpetual", Symbol: "CAT-USD", BaseAsset: "CAT", QuoteAsset: "USD"},
+		{PlatformID: "variational", MarketType: "perpetual", Symbol: "CAT", BaseAsset: "CAT", QuoteAsset: "USDC"},
+	})
+	resolved := identity.NewResolver(registry).Resolve(identity.ResolveRequest{Exchange: "binance", Symbol: "1000CATUSDT", MarketTypeHint: "perpetual"})
+	if resolved.Market == nil || resolved.Market.UnitMultiplier != 1000 {
+		t.Fatalf("lost scaled crypto unit: %+v", resolved)
+	}
+	stock, crypto := 0, 0
+	for _, group := range groups {
+		for _, market := range group.Markets {
+			if market.AssetClass != group.AssetClass {
+				t.Fatalf("mixed asset classes: %+v", group)
+			}
+			if market.RawSymbol == "1000CATUSDT" {
+				crypto++
+				if group.AssetClass != "crypto" || market.AssetID != "crypto:ticker:cat" {
+					t.Fatalf("lost crypto identity or scaled unit: %+v", market)
+				}
+			} else {
+				stock++
+				if group.AssetClass != "rwa_stock" || !strings.HasPrefix(market.AssetID, "equity:") {
+					t.Fatalf("lost stock identity: %+v", market)
+				}
+			}
+		}
+	}
+	if stock != 2 || crypto != 1 {
+		t.Fatalf("missing CAT markets: %+v", groups)
 	}
 }
