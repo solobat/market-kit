@@ -28,6 +28,7 @@ type ImportEnvelope struct {
 // InstrumentMetadata carries native venue evidence, not a cross-venue alias.
 // Contract type, settlement and expiry may constrain a dated product identity.
 type InstrumentMetadata struct {
+	IsReality              bool            `json:"isReality,omitempty"`
 	PreIPOIssuer           string          `json:"preIpoIssuer,omitempty"`
 	PreIPOEvidenceURL      string          `json:"preIpoEvidenceUrl,omitempty"`
 	IsDelisted             bool            `json:"isDelisted,omitempty"`

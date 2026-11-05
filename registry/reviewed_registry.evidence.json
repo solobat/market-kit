@@ -36753,6 +36753,1869 @@
       "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
       "officialName": "iShares MSCI Indonesia ETF",
       "note": "Native full name supports ETF classification; no issuer/share unit equivalence or cross-venue join inferred. Exact venue product scoped ambiguous."
+    },
+    {
+      "key": [
+        "bitget",
+        "RCATUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCATUSDT",
+        "baseCoin": "rCAT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Caterpillar",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RUNPUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RUNPUSDT",
+        "baseCoin": "rUNP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Union Pacific",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSPGIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSPGIUSDT",
+        "baseCoin": "rSPGI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "S&P Global",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RGOOGUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RGOOGUSDT",
+        "baseCoin": "rGOOG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Alphabet-C",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSPIRUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSPIRUSDT",
+        "baseCoin": "rSPIR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Spire Global",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RARQQUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RARQQUSDT",
+        "baseCoin": "rARQQ",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Arqit Quantum",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RAGPUUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RAGPUUSDT",
+        "baseCoin": "rAGPU",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Axe Compute",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCYPHUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCYPHUSDT",
+        "baseCoin": "rCYPH",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Cypherpunk Technologies",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RVYLRUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RVYLRUSDT",
+        "baseCoin": "rVYLR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Vylor Inc",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RUVIXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RUVIXUSDT",
+        "baseCoin": "rUVIX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "2x Long VIX Futures ETF",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RBUDUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RBUDUSDT",
+        "baseCoin": "rBUD",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Anheuser-Busch Inbev",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMUFGUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMUFGUSDT",
+        "baseCoin": "rMUFG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Mitsubishi UFJ Financial Group",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RGGLLUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RGGLLUSDT",
+        "baseCoin": "rGGLL",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Direxion Daily GOOGL Bull 2X Shares",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDFENUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDFENUSDT",
+        "baseCoin": "rDFEN",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Direxion Daily Aerospace & Defense Bull 3X Shares ETF",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RTBTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTBTUSDT",
+        "baseCoin": "rTBT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "ProShares UltraShort 20+ Year Treasury",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "REWHUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "REWHUSDT",
+        "baseCoin": "rEWH",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "iShares MSCI Hong Kong ETF",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSNYUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSNYUSDT",
+        "baseCoin": "rSNY",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Sanofi",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "REVEXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "REVEXUSDT",
+        "baseCoin": "rEVEX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Eve Holding",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RBHPUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RBHPUSDT",
+        "baseCoin": "rBHP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "BHP Group Ltd",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RFOXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RFOXUSDT",
+        "baseCoin": "rFOX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Fox Corporation (Class B)",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPARAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPARAUSDT",
+        "baseCoin": "rPARA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Banzai International",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RFWRGUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RFWRGUSDT",
+        "baseCoin": "rFWRG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "First Watch Restaurant",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RTCBXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTCBXUSDT",
+        "baseCoin": "rTCBX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Third Coast Bancshares",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPRSUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPRSUSDT",
+        "baseCoin": "rPRS",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "PRUDENTIAL FINANCIAL INC 5.625%JUNIOR SUBORDINATED NOTES DUE 2058",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "ROABIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "ROABIUSDT",
+        "baseCoin": "rOABI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "OmniAb",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RBCSFUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RBCSFUSDT",
+        "baseCoin": "rBCSF",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Bain Capital Specialty Finance",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RNGVCUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RNGVCUSDT",
+        "baseCoin": "rNGVC",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Natural Grocers by Vitamin Cottage",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RBCALUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RBCALUSDT",
+        "baseCoin": "rBCAL",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "California Bancorp",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCTKBUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCTKBUSDT",
+        "baseCoin": "rCTKB",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Cytek Biosciences",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "ROFRMUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "ROFRMUSDT",
+        "baseCoin": "rOFRM",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Once Upon a Farm",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMFICUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMFICUSDT",
+        "baseCoin": "rMFIC",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "MidCap Financial Investment Corporation",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RGROYUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RGROYUSDT",
+        "baseCoin": "rGROY",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Gold Royalty",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RYEXTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RYEXTUSDT",
+        "baseCoin": "rYEXT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Yext Inc",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCOLLUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCOLLUSDT",
+        "baseCoin": "rCOLL",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Collegium Pharmaceutical",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCASSUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCASSUSDT",
+        "baseCoin": "rCASS",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Cass Information Systems",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPFISUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPFISUSDT",
+        "baseCoin": "rPFIS",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Peoples Financial Service",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDSGNUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDSGNUSDT",
+        "baseCoin": "rDSGN",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Design Therapeutics",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMOMOUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMOMOUSDT",
+        "baseCoin": "rMOMO",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Hello Group",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCNNEUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCNNEUSDT",
+        "baseCoin": "rCNNE",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Cannae Holdings",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RADAMUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RADAMUSDT",
+        "baseCoin": "rADAM",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Adamas Trust Inc",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RTSATUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTSATUSDT",
+        "baseCoin": "rTSAT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Telesat",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHNRGUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHNRGUSDT",
+        "baseCoin": "rHNRG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Hallador Energy",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCCSIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCCSIUSDT",
+        "baseCoin": "rCCSI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Consensus Cloud Solutions",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDGICAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDGICAUSDT",
+        "baseCoin": "rDGICA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Donegal Group-A",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMFAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMFAUSDT",
+        "baseCoin": "rMFA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "MFA Financial",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPSNYWUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPSNYWUSDT",
+        "baseCoin": "rPSNYW",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "POLESTAR AUTOMOTIVE HOLDING UK PLC SPON ADS C-1 EACH RP 30 CL C ORD (R/S)",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RZVRAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RZVRAUSDT",
+        "baseCoin": "rZVRA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Zevra Therapeutics",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPHRUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPHRUSDT",
+        "baseCoin": "rPHR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Phreesia",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDDIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDDIUSDT",
+        "baseCoin": "rDDI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "DoubleDown Interactive",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPHARUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPHARUSDT",
+        "baseCoin": "rPHAR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Pharming Group",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RAROWUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RAROWUSDT",
+        "baseCoin": "rAROW",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Arrow Financial",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RAURAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RAURAUSDT",
+        "baseCoin": "rAURA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Aura Biosciences",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSPTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSPTUSDT",
+        "baseCoin": "rSPT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Sprout Social",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RINNUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RINNUSDT",
+        "baseCoin": "rINN",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Summit Hotel Properties Inc",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RGOTUUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RGOTUUSDT",
+        "baseCoin": "rGOTU",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Gaotu Techedu",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHELEUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHELEUSDT",
+        "baseCoin": "rHELE",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Helen Of Troy",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RVTEXUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RVTEXUSDT",
+        "baseCoin": "rVTEX",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "VTEX",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RKEUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RKEUSDT",
+        "baseCoin": "rKE",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Kimball Electronics",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHYLNUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHYLNUSDT",
+        "baseCoin": "rHYLN",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Hyliion",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMSBIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMSBIUSDT",
+        "baseCoin": "rMSBI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Midland States",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSSYSUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSSYSUSDT",
+        "baseCoin": "rSSYS",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Stratasys",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHDLUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHDLUSDT",
+        "baseCoin": "rHDL",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Super Hi International Holding",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "ROSPNUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "ROSPNUSDT",
+        "baseCoin": "rOSPN",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "OneSpan",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RWGOUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RWGOUSDT",
+        "baseCoin": "rWGO",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Winnebago Industries",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPARUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPARUSDT",
+        "baseCoin": "rPAR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "PAR Technology",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPRMEUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPRMEUSDT",
+        "baseCoin": "rPRME",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Prime Medicine",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPFLTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPFLTUSDT",
+        "baseCoin": "rPFLT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "PennantPark",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RRRBIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RRRBIUSDT",
+        "baseCoin": "rRRBI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Red River Bancshares",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHPPUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHPPUSDT",
+        "baseCoin": "rHPP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Hudson Pacific Properties",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHTZUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHTZUSDT",
+        "baseCoin": "rHTZ",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Hertz Global",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RHIVEUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RHIVEUSDT",
+        "baseCoin": "rHIVE",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "HIVE Digital Technologies",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RMGUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RMGUSDT",
+        "baseCoin": "rMG",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Mistras Group",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPACBUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPACBUSDT",
+        "baseCoin": "rPACB",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Pacific Biosciences of California",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RSMCUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RSMCUSDT",
+        "baseCoin": "rSMC",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Summit Midstream",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RVLGEAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RVLGEAUSDT",
+        "baseCoin": "rVLGEA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Village Super Market",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDMIIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDMIIUSDT",
+        "baseCoin": "rDMII",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "DRUGS MADE IN AMERICA ACQ II CORP",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RDGICBUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RDGICBUSDT",
+        "baseCoin": "rDGICB",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Donegal Group-B",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RWCCBUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RWCCBUSDT",
+        "baseCoin": "rWCCB",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "West Coast Community",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "ROLMAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "ROLMAUSDT",
+        "baseCoin": "rOLMA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Olema Pharmaceuticals",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RNVCTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RNVCTUSDT",
+        "baseCoin": "rNVCT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Nuvectis Pharma",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RAVRUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RAVRUSDT",
+        "baseCoin": "rAVR",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Anteris Technologies Global",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RCGNTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RCGNTUSDT",
+        "baseCoin": "rCGNT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Cognyte Software",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RPZZAUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RPZZAUSDT",
+        "baseCoin": "rPZZA",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Papa John's",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RGILTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RGILTUSDT",
+        "baseCoin": "rGILT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Gilat Satellite Networks",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RLEGHUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RLEGHUSDT",
+        "baseCoin": "rLEGH",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Legacy Housing",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "RTIPTUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTIPTUSDT",
+        "baseCoin": "rTIPT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Tiptree-A",
+        "instrumentType": "crypto",
+        "isin": null,
+        "isReality": "yes"
+      },
+      "note": "Official Reality stock wrapper retained separately from cash equity and derivatives; no global alias/class edits or issuer/unit equivalence inferred.",
+      "supportingSources": []
+    },
+    {
+      "key": [
+        "variational",
+        "TBT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "official": {
+        "ticker": "TBT",
+        "name": "ProShares - UltraShort 20+ Year Treasury"
+      },
+      "note": "Venue-scoped RWA perpetual ambiguous. TBT/SQQQ native full names match official ProShares ETF names; ETF leverage is not a unitMultiplier or conversion to Treasury/QQQ.",
+      "supportingSources": [
+        "https://www.proshares.com/our-etfs/leveraged-and-inverse/tbt",
+        "https://www.proshares.com/our-etfs/leveraged-and-inverse/sqqq"
+      ]
+    },
+    {
+      "key": [
+        "variational",
+        "SQQQ",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "official": {
+        "ticker": "SQQQ",
+        "name": "ProShares - UltraPro Short QQQ"
+      },
+      "note": "Venue-scoped RWA perpetual ambiguous. TBT/SQQQ native full names match official ProShares ETF names; ETF leverage is not a unitMultiplier or conversion to Treasury/QQQ.",
+      "supportingSources": [
+        "https://www.proshares.com/our-etfs/leveraged-and-inverse/tbt",
+        "https://www.proshares.com/our-etfs/leveraged-and-inverse/sqqq"
+      ]
+    },
+    {
+      "key": [
+        "bitget",
+        "FISVUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-05",
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "FISVUSDT",
+        "baseCoin": "FISV",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Official isRwa YES supports RWA perpetual, not issuer by ticker alone or cross-venue units. Retain existing stock class; scope venue product ambiguous.",
+      "supportingSources": []
     }
   ],
   "lastUpdatedAt": "2026-10-17"

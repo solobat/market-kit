@@ -23,6 +23,9 @@ func TestBitgetIPOStockMetadataDoesNotRequireRealityOrStripPrefix(t *testing.T) 
 	}
 	reg := curation.BuildGeneratedRegistry(rows)
 	for _, v := range reg.MarketOverrides {
+		if v.RawSymbol == "RAAPLUSDT" && (v.AssetID != "equity:bitget:reality:raaplusdt" || string(v.ComparisonStatus) != "ambiguous" || v.InstrumentKind != "tokenized_equity") {
+			t.Fatal("Reality wrapper lost", v)
+		}
 		if v.AssetClass != "rwa_stock" {
 			t.Fatal(v)
 		}

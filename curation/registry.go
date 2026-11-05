@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 11
+const GeneratedRegistryVersion = 12
 
 var (
 	stableAssets = map[string]bool{
@@ -184,6 +184,15 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			if candidate.exchange == "gate" {
 				override.ContractType = "stocks"
 			}
+		}
+		if isBitgetRealitySpot(discovery.ImportedMarket{PlatformID: candidate.exchange, MarketType: candidate.marketType, InstrumentMetadata: candidate.metadata}) {
+			override.AssetClass = "rwa_stock"
+			override.AssetID = "equity:bitget:reality:" + strings.ToLower(candidate.symbol)
+			override.UnderlyingID = override.AssetID
+			override.ComparisonKey = override.AssetID + "/" + candidate.quote
+			override.ComparisonStatus = identity.ComparisonAmbiguous
+			override.InstrumentKind = "tokenized_equity"
+			override.ContractType = "reality_stock_token"
 		}
 		guardBybitDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)

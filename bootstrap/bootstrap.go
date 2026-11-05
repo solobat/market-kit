@@ -833,27 +833,32 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 			tags = []string{"bitget-reality", "rtoken", "tokenized-stock"}
 			category = "stock"
 		}
+		var metadata *discovery.InstrumentMetadata
+		if strings.EqualFold(strings.TrimSpace(item.SymbolType), "stock") {
+			metadata = &discovery.InstrumentMetadata{Source: "bitget", SourceURL: "https://api.bitget.com/api/v3/market/instruments?category=SPOT", ObservedAt: seenAt, SymbolType: strings.TrimSpace(item.SymbolType), IsReality: isBitgetRealityStock(item.IsReality, item.SymbolType)}
+		}
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:       BuiltInSourceID,
-			PlatformID:     "bitget",
-			Platform:       "Bitget",
-			VenueType:      "cex",
-			MarketType:     "spot",
-			Symbol:         strings.TrimSpace(item.Symbol),
-			BaseAsset:      base,
-			QuoteAsset:     strings.TrimSpace(item.QuoteCoin),
-			AssetClassHint: assetClassHint,
-			Category:       category,
-			Tags:           tags,
-			Status:         normalizeBitgetInstrumentStatus(item.Status),
-			ST:             st,
-			PreDelisting:   preDelisting,
-			Flags:          discovery.NormalizeMarketFlags(nil, st, preDelisting),
-			ExternalURL:    "https://www.bitget.com/spot/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt:    seenAt,
-			LastSeenAt:     seenAt,
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "bitget",
+			InstrumentMetadata: metadata,
+			Platform:           "Bitget",
+			VenueType:          "cex",
+			MarketType:         "spot",
+			Symbol:             strings.TrimSpace(item.Symbol),
+			BaseAsset:          base,
+			QuoteAsset:         strings.TrimSpace(item.QuoteCoin),
+			AssetClassHint:     assetClassHint,
+			Category:           category,
+			Tags:               tags,
+			Status:             normalizeBitgetInstrumentStatus(item.Status),
+			ST:                 st,
+			PreDelisting:       preDelisting,
+			Flags:              discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:        "https://www.bitget.com/spot/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
 		})
 	}
 	for _, item := range perp.Data {

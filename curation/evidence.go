@@ -60,6 +60,9 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 	if strings.EqualFold(row.PlatformID, "bybit") && isForexMarket(row) {
 		return 6
 	}
+	if isBitgetRealitySpot(row) {
+		return 6
+	}
 	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
 		return 5
 	}
@@ -106,4 +109,10 @@ func isVenueStockPerpetual(row discovery.ImportedMarket) bool {
 	}
 	m := row.InstrumentMetadata
 	return strings.EqualFold(row.PlatformID, "bybit") && m != nil && m.Source == "bybit" && m.ContractType == "LinearPerpetual" && (strings.EqualFold(m.SymbolType, "stock") || strings.EqualFold(m.SymbolType, "ETF"))
+}
+
+// Native wrapper evidence scopes the product; a ticker prefix alone is insufficient.
+func isBitgetRealitySpot(row discovery.ImportedMarket) bool {
+	m := row.InstrumentMetadata
+	return strings.EqualFold(row.PlatformID, "bitget") && normalizeGeneratedMarketType(row.MarketType) == "spot" && m != nil && m.Source == "bitget" && strings.EqualFold(m.SymbolType, "stock") && m.IsReality
 }
