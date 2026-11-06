@@ -32,7 +32,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 		if newRank < oldRank {
 			continue
 		}
-		same := sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
+		same := sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
 		if !same {
 			conflicts[key] = true
 		}
@@ -60,7 +60,7 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 	if strings.EqualFold(row.PlatformID, "bybit") && isForexMarket(row) {
 		return 6
 	}
-	if isBitgetRealitySpot(row) {
+	if isBitgetRWAPerpetual(row) || isBitgetRealitySpot(row) {
 		return 6
 	}
 	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
@@ -115,4 +115,17 @@ func isVenueStockPerpetual(row discovery.ImportedMarket) bool {
 func isBitgetRealitySpot(row discovery.ImportedMarket) bool {
 	m := row.InstrumentMetadata
 	return strings.EqualFold(row.PlatformID, "bitget") && normalizeGeneratedMarketType(row.MarketType) == "spot" && m != nil && m.Source == "bitget" && strings.EqualFold(m.SymbolType, "stock") && m.IsReality
+}
+
+// The RWA flag alone does not identify equity, commodity, index, or share units.
+func isBitgetRWAPerpetual(row discovery.ImportedMarket) bool {
+	m := row.InstrumentMetadata
+	return strings.EqualFold(row.PlatformID, "bitget") && normalizeGeneratedMarketType(row.MarketType) == "perpetual" && m != nil && m.Source == "bitget" && m.IsRWA && strings.EqualFold(m.ContractType, "perpetual")
+}
+
+func sameBitgetRWAEvidence(a, b discovery.ImportedMarket) bool {
+	if !isBitgetRWAPerpetual(a) && !isBitgetRWAPerpetual(b) {
+		return true
+	}
+	return isBitgetRWAPerpetual(a) && isBitgetRWAPerpetual(b) && strings.EqualFold(a.InstrumentMetadata.SettlementAsset, b.InstrumentMetadata.SettlementAsset)
 }

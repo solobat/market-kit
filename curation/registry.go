@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 12
+const GeneratedRegistryVersion = 13
 
 var (
 	stableAssets = map[string]bool{
@@ -111,15 +111,16 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		}
 
 		forex := isForexMarket(item)
+		bitgetRWA := isBitgetRWAPerpetual(item)
 		gateIndex := isGateIndexMarket(item)
 		baseClass := classifyGeneratedAsset(item, base)
-		if forex {
+		if forex || bitgetRWA {
 			baseClass = "unknown"
 		}
 		if collisionSet[base] && !hasExplicitCryptoIdentityHint(item) && !hasExplicitRWAHint(item) {
 			baseClass = "unknown"
 		}
-		if !forex && !gateIndex {
+		if !forex && !gateIndex && !bitgetRWA {
 			if !collisionSet[base] && !delisted {
 				ensureAsset(assets, base, baseClass)
 			}
@@ -194,6 +195,20 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.InstrumentKind = "tokenized_equity"
 			override.ContractType = "reality_stock_token"
 		}
+		if isBitgetRWAPerpetual(discovery.ImportedMarket{PlatformID: candidate.exchange, MarketType: candidate.marketType, InstrumentMetadata: candidate.metadata}) {
+			override.AssetClass = "unknown"
+			override.AssetID = "rwa:bitget:perpetual:" + strings.ToLower(candidate.symbol)
+			override.UnderlyingID = override.AssetID
+			override.ComparisonKey = override.AssetID + "/" + candidate.quote
+			override.ComparisonStatus = identity.ComparisonAmbiguous
+			override.InstrumentKind = "perpetual"
+			override.ContractType = "perpetual"
+			// Multiple supported collateral assets do not prove a selected settlement asset.
+			override.SettlementAsset = candidate.metadata.SettlementAsset
+			if override.SettlementAsset == "" {
+				override.ContractType = "rwa_perpetual_unverified"
+			}
+		}
 		guardBybitDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)
 		if candidate.forex {
@@ -235,6 +250,10 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.UnderlyingID = override.AssetID
 			override.ComparisonKey = ""
 			override.ComparisonStatus = identity.ComparisonAmbiguous
+			if isBitgetRWAPerpetual(discovery.ImportedMarket{PlatformID: candidate.exchange, MarketType: candidate.marketType, InstrumentMetadata: candidate.metadata}) {
+				override.ContractType = "rwa_perpetual_unverified"
+				override.SettlementAsset = ""
+			}
 			if override.InstrumentKind == "future" {
 				override.ComparisonStatus = identity.ComparisonProhibited
 				override.ContractType = "dated_future_unverified"

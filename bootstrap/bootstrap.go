@@ -795,14 +795,17 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 	}
 
 	type contract struct {
-		Symbol       string `json:"symbol"`
-		BaseCoin     string `json:"baseCoin"`
-		QuoteCoin    string `json:"quoteCoin"`
-		SymbolStatus string `json:"symbolStatus"`
-		ST           any    `json:"st"`
-		IsST         any    `json:"isST"`
-		PreDelisting any    `json:"preDelisting"`
-		InDelisting  any    `json:"in_delisting"`
+		IsRWA              string   `json:"isRwa"`
+		SymbolType         string   `json:"symbolType"`
+		SupportMarginCoins []string `json:"supportMarginCoins"`
+		Symbol             string   `json:"symbol"`
+		BaseCoin           string   `json:"baseCoin"`
+		QuoteCoin          string   `json:"quoteCoin"`
+		SymbolStatus       string   `json:"symbolStatus"`
+		ST                 any      `json:"st"`
+		IsST               any      `json:"isST"`
+		PreDelisting       any      `json:"preDelisting"`
+		InDelisting        any      `json:"in_delisting"`
 	}
 	type contractResponse struct {
 		Data []contract `json:"data"`
@@ -862,25 +865,34 @@ func fetchBitget(ctx context.Context, client *http.Client) ([]discovery.Imported
 		})
 	}
 	for _, item := range perp.Data {
+		var metadata *discovery.InstrumentMetadata
+		if strings.EqualFold(strings.TrimSpace(item.IsRWA), "yes") {
+			settle := ""
+			if len(item.SupportMarginCoins) == 1 {
+				settle = strings.ToUpper(strings.TrimSpace(item.SupportMarginCoins[0]))
+			}
+			metadata = &discovery.InstrumentMetadata{Source: "bitget", SourceURL: "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES", ObservedAt: seenAt, IsRWA: true, ContractType: strings.TrimSpace(item.SymbolType), SettlementAsset: settle}
+		}
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:     BuiltInSourceID,
-			PlatformID:   "bitget",
-			Platform:     "Bitget",
-			VenueType:    "cex",
-			MarketType:   "perp",
-			Symbol:       strings.TrimSpace(item.Symbol),
-			BaseAsset:    strings.TrimSpace(item.BaseCoin),
-			QuoteAsset:   strings.TrimSpace(item.QuoteCoin),
-			Category:     "usdt-futures",
-			Status:       normalizeSimpleLiveState(item.SymbolStatus),
-			ST:           st,
-			PreDelisting: preDelisting,
-			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
-			ExternalURL:  "https://www.bitget.com/futures/usdt/" + strings.ToUpper(item.Symbol),
-			FirstSeenAt:  seenAt,
-			LastSeenAt:   seenAt,
+			InstrumentMetadata: metadata,
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "bitget",
+			Platform:           "Bitget",
+			VenueType:          "cex",
+			MarketType:         "perp",
+			Symbol:             strings.TrimSpace(item.Symbol),
+			BaseAsset:          strings.TrimSpace(item.BaseCoin),
+			QuoteAsset:         strings.TrimSpace(item.QuoteCoin),
+			Category:           "usdt-futures",
+			Status:             normalizeSimpleLiveState(item.SymbolStatus),
+			ST:                 st,
+			PreDelisting:       preDelisting,
+			Flags:              discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:        "https://www.bitget.com/futures/usdt/" + strings.ToUpper(item.Symbol),
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
 		})
 	}
 	return out, nil

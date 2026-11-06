@@ -38616,6 +38616,359 @@
       },
       "note": "Official isRwa YES supports RWA perpetual, not issuer by ticker alone or cross-venue units. Retain existing stock class; scope venue product ambiguous.",
       "supportingSources": []
+    },
+    {
+      "key": [
+        "bitget",
+        "HINDUNILVRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "HINDUNILVRUSDT",
+        "baseCoin": "HINDUNILVR",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "LTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "LTUSDT",
+        "baseCoin": "LT",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "ITCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "ITCUSDT",
+        "baseCoin": "ITC",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "BHARTIARTLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "BHARTIARTLUSDT",
+        "baseCoin": "BHARTIARTL",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "TCSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "TCSUSDT",
+        "baseCoin": "TCS",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "INFYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "INFYUSDT",
+        "baseCoin": "INFY",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "SBINUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "SBINUSDT",
+        "baseCoin": "SBIN",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "ICICIBANKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "ICICIBANKUSDT",
+        "baseCoin": "ICICIBANK",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "HDFCBANKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "HDFCBANKUSDT",
+        "baseCoin": "HDFCBANK",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "RELIANCEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "RELIANCEUSDT",
+        "baseCoin": "RELIANCE",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "MSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "MSUSDT",
+        "baseCoin": "MS",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "bitget",
+        "KMBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+        "https://www.bitgetapp.com/asia/news/detail/12560606110681",
+        "https://www.bitgetapps.com/support/articles/12560603899780"
+      ],
+      "official": {
+        "symbol": "KMBUSDT",
+        "baseCoin": "KMB",
+        "quoteCoin": "USDT",
+        "isRwa": "YES",
+        "symbolType": "perpetual",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native RWA flag plus official announcement supports stock perpetual class for ten Indian stock contracts and MS/KMB. Official search excerpts checked; full page open failed. Preserve per-product scope; no share class, ADR/local, FX conversion or contract-unit equivalence inferred."
+    },
+    {
+      "key": [
+        "variational",
+        "MARA",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats"
+      ],
+      "official": {
+        "ticker": "MARA",
+        "name": "MARA Holdings, Inc."
+      },
+      "note": "Native full company name supports stock exposure, not crypto. Perpetual remains venue scoped ambiguous; no global class or unit/issuer join inferred."
+    },
+    {
+      "key": [
+        "variational",
+        "MCD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats"
+      ],
+      "official": {
+        "ticker": "MCD",
+        "name": "McDonald's Corporation"
+      },
+      "note": "Native full company name supports stock exposure, not crypto. Perpetual remains venue scoped ambiguous; no global class or unit/issuer join inferred."
+    },
+    {
+      "key": [
+        "aster",
+        "STRCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-06",
+      "sources": [
+        "https://fapi.asterdex.com/fapi/v1/exchangeInfo"
+      ],
+      "official": {
+        "symbol": "STRCUSDT",
+        "contractType": "PERPETUAL",
+        "status": "PRE_SETTLE",
+        "underlyingSubType": [
+          "STOCK"
+        ],
+        "baseAsset": "STRC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "tags": [
+          "Strategy",
+          "Stock",
+          "股票",
+          "微策略优先股",
+          "微策略",
+          "股票",
+          "微策略優先股",
+          "微策略"
+        ]
+      },
+      "note": "Native STOCK subtype corrects crypto label; PRE_SETTLE differs from TRADING. Conservatively prohibit comparisons pending active status and identity/unit review. PRE_SETTLE is not proof settlement completed, historic delisting date, or issuer-share equivalence."
     }
   ],
   "lastUpdatedAt": "2026-10-17"
