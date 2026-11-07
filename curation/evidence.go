@@ -32,7 +32,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 		if newRank < oldRank {
 			continue
 		}
-		same := sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
+		same := sameOKXStockEvidence(old, row) && sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
 		if !same {
 			conflicts[key] = true
 		}
@@ -60,7 +60,7 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 	if strings.EqualFold(row.PlatformID, "bybit") && isForexMarket(row) {
 		return 6
 	}
-	if isBitgetRWAPerpetual(row) || isBitgetRealitySpot(row) {
+	if (strings.EqualFold(row.PlatformID, "okx") && isVenueStockPerpetual(row)) || isBitgetRWAPerpetual(row) || isBitgetRealitySpot(row) {
 		return 6
 	}
 	if isForexMarket(row) || isGateIndexMarket(row) || hasExplicitRWAHint(row) {
@@ -108,6 +108,9 @@ func isVenueStockPerpetual(row discovery.ImportedMarket) bool {
 		return strings.EqualFold(strings.TrimSpace(row.Category), "stocks")
 	}
 	m := row.InstrumentMetadata
+	if strings.EqualFold(row.PlatformID, "okx") {
+		return m != nil && m.Source == "okx" && m.SymbolType == "3" && (m.ContractType == "linear_swap" || m.ContractType == "inverse_swap")
+	}
 	return strings.EqualFold(row.PlatformID, "bybit") && m != nil && m.Source == "bybit" && m.ContractType == "LinearPerpetual" && (strings.EqualFold(m.SymbolType, "stock") || strings.EqualFold(m.SymbolType, "ETF"))
 }
 
@@ -128,4 +131,17 @@ func sameBitgetRWAEvidence(a, b discovery.ImportedMarket) bool {
 		return true
 	}
 	return isBitgetRWAPerpetual(a) && isBitgetRWAPerpetual(b) && strings.EqualFold(a.InstrumentMetadata.SettlementAsset, b.InstrumentMetadata.SettlementAsset)
+}
+
+func sameOKXStockEvidence(a, b discovery.ImportedMarket) bool {
+	nativeA := strings.EqualFold(a.PlatformID, "okx") && isVenueStockPerpetual(a)
+	nativeB := strings.EqualFold(b.PlatformID, "okx") && isVenueStockPerpetual(b)
+	if !nativeA && !nativeB {
+		return true
+	}
+	if !nativeA || !nativeB {
+		return false
+	}
+	x, y := a.InstrumentMetadata, b.InstrumentMetadata
+	return x.ContractType == y.ContractType && x.SettlementAsset == y.SettlementAsset && x.ContractValue == y.ContractValue && x.ContractValueCurrency == y.ContractValueCurrency && x.ContractMultiplier == y.ContractMultiplier
 }

@@ -38969,6 +38969,436 @@
         ]
       },
       "note": "Native STOCK subtype corrects crypto label; PRE_SETTLE differs from TRADING. Conservatively prohibit comparisons pending active status and identity/unit review. PRE_SETTLE is not proof settlement completed, historic delisting date, or issuer-share equivalence."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "BTCUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "DOGEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "ETHUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "HYPEUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "MNTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "SOLUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "XAUTUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-06NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000"
+      ],
+      "official": {
+        "symbol": "XRPUSDT-06NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793952000000",
+        "settleCoin": "USDT",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT"
+      },
+      "note": "Archived official Nov6 metadata proves exact contract deliveryTime; timestamp has passed as of Nov7. Today absent from current linear catalog, not using archived metadata as a live listing. Preserve expiry, units, product ID and collateral; prohibit comparisons without guessing delisting history."
+    },
+    {
+      "key": [
+        "lighter",
+        "ASELS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks"
+      ],
+      "official": {
+        "symbol": "ASELS",
+        "market_id": 8286,
+        "market_type": "perp",
+        "market_deployer": "external",
+        "status": "active",
+        "multiplier": "1.000000000000000000",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "operator_account_index": 1
+      },
+      "note": "Native external-deployer product with no independently verified issuer/asset-class/share-unit metadata. Keep unknown exact market-ID/raw-symbol identity and ambiguous comparison; do not infer ASELS stock or TUR30 index from ticker. Retain existing USDC settlement as unverified here, no new cross-venue conversion. URA ID150 differs from ASELS8286, not a rename."
+    },
+    {
+      "key": [
+        "lighter",
+        "TUR30",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks"
+      ],
+      "official": {
+        "symbol": "TUR30",
+        "market_id": 4647,
+        "market_type": "perp",
+        "market_deployer": "external",
+        "status": "active",
+        "multiplier": "1.000000000000000000",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "operator_account_index": 1
+      },
+      "note": "Native external-deployer product with no independently verified issuer/asset-class/share-unit metadata. Keep unknown exact market-ID/raw-symbol identity and ambiguous comparison; do not infer ASELS stock or TUR30 index from ticker. Retain existing USDC settlement as unverified here, no new cross-venue conversion. URA ID150 differs from ASELS8286, not a rename."
+    },
+    {
+      "key": [
+        "okx",
+        "EIDO-USDT-SWAP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://www.okx.com/api/v5/public/instruments?instType=SWAP",
+        "https://www.okx.com/docs-v5/en/"
+      ],
+      "official": {
+        "instId": "EIDO-USDT-SWAP",
+        "instType": "SWAP",
+        "instCategory": "3",
+        "ctType": "linear",
+        "ctVal": "1",
+        "ctValCcy": "EIDO",
+        "ctMult": "1",
+        "settleCcy": "USDT",
+        "state": "live"
+      },
+      "note": "Native instCategory3 is Stocks per official API guide. Preserve exact linear-swap product identity and collateral; face value and multiplier1 do not prove cross-venue share/wrapper equivalence. No global class/alias or ETF leverage conversion."
+    },
+    {
+      "key": [
+        "okx",
+        "EWZS-USDT-SWAP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://www.okx.com/api/v5/public/instruments?instType=SWAP",
+        "https://www.okx.com/docs-v5/en/"
+      ],
+      "official": {
+        "instId": "EWZS-USDT-SWAP",
+        "instType": "SWAP",
+        "instCategory": "3",
+        "ctType": "linear",
+        "ctVal": "1",
+        "ctValCcy": "EWZS",
+        "ctMult": "1",
+        "settleCcy": "USDT",
+        "state": "live"
+      },
+      "note": "Native instCategory3 is Stocks per official API guide. Preserve exact linear-swap product identity and collateral; face value and multiplier1 do not prove cross-venue share/wrapper equivalence. No global class/alias or ETF leverage conversion."
+    },
+    {
+      "key": [
+        "okx",
+        "XLV-USDT-SWAP",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-07",
+      "sources": [
+        "https://www.okx.com/api/v5/public/instruments?instType=SWAP",
+        "https://www.okx.com/docs-v5/en/"
+      ],
+      "official": {
+        "instId": "XLV-USDT-SWAP",
+        "instType": "SWAP",
+        "instCategory": "3",
+        "ctType": "linear",
+        "ctVal": "1",
+        "ctValCcy": "XLV",
+        "ctMult": "1",
+        "settleCcy": "USDT",
+        "state": "live"
+      },
+      "note": "Native instCategory3 is Stocks per official API guide. Preserve exact linear-swap product identity and collateral; face value and multiplier1 do not prove cross-venue share/wrapper equivalence. No global class/alias or ETF leverage conversion."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "BTCUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "DOGEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "ETHUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "HYPEUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "MNTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "SOLUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "XAUTUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-30OCT26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-07",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "archivedEvidence": "full-2026-10-30/official-bybit-linear.json",
+      "official": {
+        "symbol": "XRPUSDT-30OCT26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1793347200000",
+        "settleCoin": "USDT",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT"
+      },
+      "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

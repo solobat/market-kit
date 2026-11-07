@@ -719,6 +719,12 @@ func fetchOKX(ctx context.Context, client *http.Client) ([]discovery.ImportedMar
 
 func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType string) ([]discovery.ImportedMarket, error) {
 	type item struct {
+		CTValCcy     string `json:"ctValCcy"`
+		InstCategory string `json:"instCategory"`
+		CTType       string `json:"ctType"`
+		CTVal        string `json:"ctVal"`
+		CTMult       string `json:"ctMult"`
+		SettleCcy    string `json:"settleCcy"`
 		InstID       string `json:"instId"`
 		BaseCcy      string `json:"baseCcy"`
 		QuoteCcy     string `json:"quoteCcy"`
@@ -746,25 +752,33 @@ func fetchOKXType(ctx context.Context, client *http.Client, instType, marketType
 		if base == "" || quote == "" {
 			base, quote = splitDelimitedSymbol(item.InstID)
 		}
+		var metadata *discovery.InstrumentMetadata
+		classHint := ""
+		if instType == "SWAP" && item.InstCategory == "3" && (item.CTType == "linear" || item.CTType == "inverse") {
+			classHint = "stock"
+			metadata = &discovery.InstrumentMetadata{Source: "okx", SourceURL: url, ObservedAt: seenAt, SymbolType: item.InstCategory, ContractType: item.CTType + "_swap", SettlementAsset: strings.TrimSpace(item.SettleCcy), ContractValue: item.CTVal, ContractValueCurrency: item.CTValCcy, ContractMultiplier: item.CTMult}
+		}
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			SourceID:     BuiltInSourceID,
-			PlatformID:   "okx",
-			Platform:     "OKX",
-			VenueType:    "cex",
-			MarketType:   marketType,
-			Symbol:       strings.TrimSpace(item.InstID),
-			BaseAsset:    base,
-			QuoteAsset:   quote,
-			Category:     strings.ToLower(instType),
-			Status:       normalizeSimpleLiveState(item.State),
-			ST:           st,
-			PreDelisting: preDelisting,
-			Flags:        discovery.NormalizeMarketFlags(nil, st, preDelisting),
-			ExternalURL:  "https://www.okx.com/trade-swap/" + strings.ToLower(item.InstID),
-			FirstSeenAt:  seenAt,
-			LastSeenAt:   seenAt,
+			InstrumentMetadata: metadata,
+			AssetClassHint:     classHint,
+			SourceID:           BuiltInSourceID,
+			PlatformID:         "okx",
+			Platform:           "OKX",
+			VenueType:          "cex",
+			MarketType:         marketType,
+			Symbol:             strings.TrimSpace(item.InstID),
+			BaseAsset:          base,
+			QuoteAsset:         quote,
+			Category:           strings.ToLower(instType),
+			Status:             normalizeSimpleLiveState(item.State),
+			ST:                 st,
+			PreDelisting:       preDelisting,
+			Flags:              discovery.NormalizeMarketFlags(nil, st, preDelisting),
+			ExternalURL:        "https://www.okx.com/trade-swap/" + strings.ToLower(item.InstID),
+			FirstSeenAt:        seenAt,
+			LastSeenAt:         seenAt,
 		})
 	}
 	return out, nil

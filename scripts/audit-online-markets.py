@@ -1,6 +1,6 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
-from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints, native_market_statuses
+from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints, native_market_statuses, expired_contract_review
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
@@ -24,6 +24,7 @@ security_drift = compare_catalogs(security_catalog, read_catalog(args.previous_o
 (ROOT/'security-metadata-drift.json').write_text(json.dumps(security_drift, ensure_ascii=False, indent=2))
 fingerprint=hashlib.sha256(pathlib.Path(args.inventory).read_bytes()+pathlib.Path(args.registry).read_bytes()).hexdigest()
 cache=ROOT/('batches-'+fingerprint[:16]);cache.mkdir(exist_ok=True)
+audit_now_ms = int(time.time() * 1000)
 norm=lambda s: {'perp':'perpetual','swap':'perpetual','linear':'perpetual'}.get(s,s)
 keys={}; inventories=collections.defaultdict(list)
 for r in inv['payload']['items']:
@@ -67,7 +68,9 @@ for i,batch in enumerate(batches):
   expected_hint_class = {'stock': 'rwa_stock', 'commodity': 'rwa_commodity', 'index': 'unknown'}.get(vh.get('kind'))
   if expected_hint_class and cl != expected_hint_class: flags.append('official_variational_name_class_review')
   native_status = native_statuses.get(k, {})
+  if m and native_status.get('marketDeployer') == 'external' and m.get('comparisonStatus') == 'eligible': flags.append('official_external_deployer_identity_review')
   if m and native_status.get('inactive') and m.get('comparisonStatus') != 'prohibited': flags.append('official_native_inactive_comparison_review')
+  if expired_contract_review(m, audit_now_ms): flags.append('expired_contract_comparison_review')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])
   if m:

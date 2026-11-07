@@ -108,5 +108,15 @@ def native_market_statuses(aster_path=None, lighter_path=None):
                 kind = 'perpetual' if row['market_type'] == 'perp' else 'spot'
                 result[('lighter', row['symbol'], kind)] = {
                     'status': row.get('status'), 'marketId': row.get('market_id'),
+                    'marketDeployer': row.get('market_deployer'),
                     'inactive': row.get('status') == 'inactive'}
     return result
+
+
+def expired_contract_review(market, now_ms):
+    """Review explicit expiry only; never parse dates out of display symbols."""
+    try:
+        expiry = int(market.get('expiryAtMs') or 0)
+    except (TypeError, ValueError):
+        return False
+    return expiry > 0 and expiry <= now_ms and market.get('comparisonStatus') != 'prohibited'

@@ -21,3 +21,34 @@ class SecurityMetadataTests(unittest.TestCase):
         out = compare_catalogs({'A': {'isin': 'us00762u2006', 'status': 'ONLINE'}},
                                {'A': {'isin': 'US00762U2006', 'status': 'online', 'fullName': None}})
         self.assertEqual(out['changes'], {})
+
+
+class ExternalMarketEvidenceTests(unittest.TestCase):
+    def test_external_ids_are_evidence_not_symbol_aliases(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from security_metadata import native_market_statuses
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'native.json'
+            path.write_text(json.dumps({'order_books': [
+                {'symbol': 'OLD', 'market_id': 150, 'market_type': 'perp', 'status': 'inactive', 'market_deployer': 'lighter'},
+                {'symbol': 'NEW', 'market_id': 8286, 'market_type': 'perp', 'status': 'active', 'market_deployer': 'external'}]}))
+            evidence = native_market_statuses(lighter_path=path)
+        self.assertEqual(len(evidence), 2)
+        self.assertTrue(evidence[('lighter', 'OLD', 'perpetual')]['inactive'])
+        current = evidence[('lighter', 'NEW', 'perpetual')]
+        self.assertEqual(current['marketId'], 8286)
+        self.assertEqual(current['marketDeployer'], 'external')
+        self.assertNotIn('assetClass', current)
+        self.assertNotIn('alias', current)
+
+
+class ExpiryEvidenceTests(unittest.TestCase):
+    def test_expiry_boundary_and_explicit_metadata_only(self):
+        from security_metadata import expired_contract_review
+        self.assertFalse(expired_contract_review({'rawSymbol': 'BTCUSDT-06NOV26'}, 2000))
+        self.assertFalse(expired_contract_review({'expiryAtMs': 2001}, 2000))
+        self.assertTrue(expired_contract_review({'expiryAtMs': 2000, 'comparisonStatus': 'ambiguous'}, 2000))
+        self.assertFalse(expired_contract_review({'expiryAtMs': 1999, 'comparisonStatus': 'prohibited'}, 2000))
+        self.assertFalse(expired_contract_review({'expiryAtMs': 'not-a-timestamp'}, 2000))

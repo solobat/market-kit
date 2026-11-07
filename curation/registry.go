@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 13
+const GeneratedRegistryVersion = 14
 
 var (
 	stableAssets = map[string]bool{
@@ -182,6 +182,13 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.ComparisonStatus = identity.ComparisonAmbiguous
 			override.InstrumentKind = "equity_perpetual"
 			override.ContractType = "linear_perpetual"
+			if candidate.exchange == "okx" {
+				override.ContractType = candidate.metadata.ContractType
+				override.SettlementAsset = candidate.metadata.SettlementAsset
+				if override.SettlementAsset == "" {
+					override.ContractType += "_unverified"
+				}
+			}
 			if candidate.exchange == "gate" {
 				override.ContractType = "stocks"
 			}
@@ -252,6 +259,10 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 			override.ComparisonStatus = identity.ComparisonAmbiguous
 			if isBitgetRWAPerpetual(discovery.ImportedMarket{PlatformID: candidate.exchange, MarketType: candidate.marketType, InstrumentMetadata: candidate.metadata}) {
 				override.ContractType = "rwa_perpetual_unverified"
+				override.SettlementAsset = ""
+			}
+			if candidate.exchange == "okx" && candidate.venueStock {
+				override.ContractType = "stock_swap_unverified"
 				override.SettlementAsset = ""
 			}
 			if override.InstrumentKind == "future" {

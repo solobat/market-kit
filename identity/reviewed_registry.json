@@ -22100,12 +22100,13 @@
       "asset_id": "crypto:bybit:future:btcusdt-06nov26",
       "underlying_id": "crypto:ticker:btc",
       "comparison_key": "crypto:bybit:future:btcusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "BTCUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22340,12 +22341,13 @@
       "asset_id": "crypto:bybit:future:btcusdt-30oct26",
       "underlying_id": "crypto:ticker:btc",
       "comparison_key": "crypto:bybit:future:btcusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "BTCUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22372,12 +22374,13 @@
       "asset_id": "crypto:bybit:future:dogeusdt-06nov26",
       "underlying_id": "crypto:ticker:doge",
       "comparison_key": "crypto:bybit:future:dogeusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "DOGEUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22484,12 +22487,13 @@
       "asset_id": "crypto:bybit:future:dogeusdt-30oct26",
       "underlying_id": "crypto:ticker:doge",
       "comparison_key": "crypto:bybit:future:dogeusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "DOGEUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22516,12 +22520,13 @@
       "asset_id": "crypto:bybit:future:ethusdt-06nov26",
       "underlying_id": "crypto:ticker:eth",
       "comparison_key": "crypto:bybit:future:ethusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "ETHUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22756,12 +22761,13 @@
       "asset_id": "crypto:bybit:future:ethusdt-30oct26",
       "underlying_id": "crypto:ticker:eth",
       "comparison_key": "crypto:bybit:future:ethusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "ETHUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22803,12 +22809,13 @@
       "asset_id": "crypto:bybit:future:hypeusdt-06nov26",
       "underlying_id": "crypto:ticker:hype",
       "comparison_key": "crypto:bybit:future:hypeusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "HYPEUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22915,12 +22922,13 @@
       "asset_id": "crypto:bybit:future:hypeusdt-30oct26",
       "underlying_id": "crypto:ticker:hype",
       "comparison_key": "crypto:bybit:future:hypeusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "HYPEUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -22962,12 +22970,13 @@
       "asset_id": "crypto:bybit:future:mntusdt-06nov26",
       "underlying_id": "crypto:ticker:mnt",
       "comparison_key": "crypto:bybit:future:mntusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "MNTUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23074,12 +23083,13 @@
       "asset_id": "crypto:bybit:future:mntusdt-30oct26",
       "underlying_id": "crypto:ticker:mnt",
       "comparison_key": "crypto:bybit:future:mntusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "MNTUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23194,12 +23204,13 @@
       "asset_id": "crypto:bybit:future:solusdt-06nov26",
       "underlying_id": "crypto:ticker:sol",
       "comparison_key": "crypto:bybit:future:solusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "SOLUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23306,12 +23317,13 @@
       "asset_id": "crypto:bybit:future:solusdt-30oct26",
       "underlying_id": "crypto:ticker:sol",
       "comparison_key": "crypto:bybit:future:solusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "SOLUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23353,12 +23365,13 @@
       "asset_id": "commodity:bybit:future:xautusdt-06nov26",
       "underlying_id": "commodity:ticker:xaut",
       "comparison_key": "commodity:bybit:future:xautusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "XAUTUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23465,12 +23478,13 @@
       "asset_id": "commodity:bybit:future:xautusdt-30oct26",
       "underlying_id": "commodity:ticker:xaut",
       "comparison_key": "commodity:bybit:future:xautusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "XAUTUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23527,12 +23541,13 @@
       "asset_id": "crypto:bybit:future:xrpusdt-06nov26",
       "underlying_id": "crypto:ticker:xrp",
       "comparison_key": "crypto:bybit:future:xrpusdt-06nov26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793952000000,
-      "unit_multiplier": 1
+      "unit_alias": "XRPUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -23639,12 +23654,13 @@
       "asset_id": "crypto:bybit:future:xrpusdt-30oct26",
       "underlying_id": "crypto:ticker:xrp",
       "comparison_key": "crypto:bybit:future:xrpusdt-30oct26/USDT",
-      "comparison_status": "ambiguous",
       "instrument_kind": "future",
       "contract_type": "linear_futures",
       "settlement_asset": "USDT",
       "expiry_at_ms": 1793347200000,
-      "unit_multiplier": 1
+      "unit_alias": "XRPUSDT",
+      "unit_multiplier": 1,
+      "comparison_status": "prohibited"
     },
     {
       "exchange": "bybit",
@@ -32846,6 +32862,21 @@
     },
     {
       "exchange": "lighter",
+      "raw_symbol": "ASELS",
+      "market_type": "perpetual",
+      "canonical_symbol": "ASELS/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:external:8286:asels",
+      "underlying_id": "unknown:lighter:external:8286:asels",
+      "comparison_key": "unknown:lighter:external:8286:asels/USDC",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "comparison_status": "ambiguous",
+      "contract_type": "external_perpetual"
+    },
+    {
+      "exchange": "lighter",
       "raw_symbol": "BB",
       "market_type": "perpetual",
       "canonical_symbol": "BB/USDC",
@@ -33359,6 +33390,21 @@
     },
     {
       "exchange": "lighter",
+      "raw_symbol": "TUR30",
+      "market_type": "perpetual",
+      "canonical_symbol": "TUR30/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:external:4647:tur30",
+      "underlying_id": "unknown:lighter:external:4647:tur30",
+      "comparison_key": "unknown:lighter:external:4647:tur30/USDC",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "comparison_status": "ambiguous",
+      "contract_type": "external_perpetual"
+    },
+    {
+      "exchange": "lighter",
       "raw_symbol": "UNITREE",
       "market_type": "perpetual",
       "canonical_symbol": "UNITREE/USDC",
@@ -33518,6 +33564,51 @@
       "comparison_status": "eligible",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC"
+    },
+    {
+      "exchange": "okx",
+      "raw_symbol": "EIDO-USDT-SWAP",
+      "market_type": "perpetual",
+      "canonical_symbol": "EIDO/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:okx:perpetual:eido-usdt-swap",
+      "underlying_id": "equity:okx:perpetual:eido-usdt-swap",
+      "comparison_key": "equity:okx:perpetual:eido-usdt-swap/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "linear_swap",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "okx",
+      "raw_symbol": "EWZS-USDT-SWAP",
+      "market_type": "perpetual",
+      "canonical_symbol": "EWZS/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:okx:perpetual:ewzs-usdt-swap",
+      "underlying_id": "equity:okx:perpetual:ewzs-usdt-swap",
+      "comparison_key": "equity:okx:perpetual:ewzs-usdt-swap/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "linear_swap",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "okx",
+      "raw_symbol": "XLV-USDT-SWAP",
+      "market_type": "perpetual",
+      "canonical_symbol": "XLV/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:okx:perpetual:xlv-usdt-swap",
+      "underlying_id": "equity:okx:perpetual:xlv-usdt-swap",
+      "comparison_key": "equity:okx:perpetual:xlv-usdt-swap/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "linear_swap",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
     },
     {
       "exchange": "qfex",
