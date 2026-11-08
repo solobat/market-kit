@@ -94,7 +94,7 @@ def variational_name_hints(path):
     return result
 
 
-def native_market_statuses(aster_path=None, lighter_path=None):
+def native_market_statuses(aster_path=None, lighter_path=None, binance_path=None):
     """Native status evidence only; never map aliases or infer delisting history."""
     result = {}
     if aster_path:
@@ -110,6 +110,17 @@ def native_market_statuses(aster_path=None, lighter_path=None):
                     'status': row.get('status'), 'marketId': row.get('market_id'),
                     'marketDeployer': row.get('market_deployer'),
                     'inactive': row.get('status') == 'inactive'}
+    if binance_path:
+        for row in json.loads(Path(binance_path).read_text())['symbols']:
+            kind = row.get('contractType', '').removesuffix('_DELIVERING')
+            if kind not in ('CURRENT_QUARTER', 'NEXT_QUARTER'):
+                continue
+            for market_type in ('perpetual', 'future'):
+                result[('binance', row['symbol'], market_type)] = {
+                    'quarterlyFuture': True, 'contractType': row['contractType'],
+                    'expiryAtMs': row.get('deliveryDate'),
+                    'settlementAsset': row.get('marginAsset'),
+                    'quoteAsset': row.get('quoteAsset'), 'baseAsset': row.get('baseAsset')}
     return result
 
 

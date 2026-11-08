@@ -8,23 +8,25 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
+var binanceDatedSuffix = regexp.MustCompile(`_[0-9]{6}$`)
+
 var bybitDatedSuffix = regexp.MustCompile(`-[0-9]{2}[A-Z]{3}[0-9]{2}$`)
 
 // Runs once per inventory row at discovery cadence. A name can only quarantine
 // an unverified derivative; it cannot supply expiry, settlement or eligibility.
-func guardBybitDatedFuture(rule *identity.MarketOverride, metadata *discovery.InstrumentMetadata) {
-	if rule.Exchange != "bybit" || rule.MarketType == "spot" {
+func guardDatedFuture(rule *identity.MarketOverride, metadata *discovery.InstrumentMetadata) {
+	if (rule.Exchange != "bybit" && rule.Exchange != "binance") || rule.MarketType == "spot" {
 		return
 	}
-	verified := isBybitFutureMetadata(metadata)
-	if !verified && rule.MarketType != "future" && !bybitDatedSuffix.MatchString(strings.ToUpper(rule.RawSymbol)) {
+	verified := isNativeFutureMetadata(rule.Exchange, metadata)
+	if !verified && rule.MarketType != "future" && !datedSymbolForExchange(rule.Exchange, rule.RawSymbol) {
 		return
 	}
 	prefix := strings.SplitN(rule.AssetID, ":", 2)[0]
 	if prefix == "" {
 		prefix = "unknown"
 	}
-	rule.AssetID = prefix + ":bybit:future:" + strings.ToLower(rule.RawSymbol)
+	rule.AssetID = prefix + ":" + rule.Exchange + ":future:" + strings.ToLower(rule.RawSymbol)
 	_, quote, _ := strings.Cut(rule.CanonicalSymbol, "/")
 	rule.ComparisonKey = rule.AssetID + "/" + quote
 	rule.InstrumentKind = "future"
@@ -34,6 +36,9 @@ func guardBybitDatedFuture(rule *identity.MarketOverride, metadata *discovery.In
 	rule.ComparisonStatus = identity.ComparisonProhibited
 	if verified {
 		rule.ContractType = strings.ToLower(strings.TrimSuffix(metadata.ContractType, "Futures")) + "_futures"
+		if rule.Exchange == "binance" {
+			rule.ContractType = "linear_futures"
+		}
 		rule.SettlementAsset = metadata.SettlementAsset
 		rule.ExpiryAtMs = metadata.ExpiryAtMs
 		if rule.MarketType == "future" && rule.ExpiryAtMs > 0 && rule.SettlementAsset != "" {
@@ -47,9 +52,34 @@ func isBybitFutureMetadata(metadata *discovery.InstrumentMetadata) bool {
 }
 
 func sameDatedProductEvidence(a, b discovery.ImportedMarket) bool {
-	if !strings.EqualFold(a.PlatformID, "bybit") || !isBybitFutureMetadata(a.InstrumentMetadata) || !isBybitFutureMetadata(b.InstrumentMetadata) {
+	if !isNativeFutureMetadata(a.PlatformID, a.InstrumentMetadata) || !isNativeFutureMetadata(b.PlatformID, b.InstrumentMetadata) {
 		return true
 	}
 	x, y := a.InstrumentMetadata, b.InstrumentMetadata
 	return strings.EqualFold(x.ContractType, y.ContractType) && x.ExpiryAtMs == y.ExpiryAtMs && strings.EqualFold(x.SettlementAsset, y.SettlementAsset)
+}
+
+func datedSymbolForExchange(exchange, symbol string) bool {
+	switch exchange {
+	case "bybit":
+		return bybitDatedSuffix.MatchString(strings.ToUpper(symbol))
+	case "binance":
+		return binanceDatedSuffix.MatchString(symbol)
+	}
+	return false
+}
+func isNativeFutureMetadata(exchange string, m *discovery.InstrumentMetadata) bool {
+	if strings.EqualFold(exchange, "bybit") {
+		return isBybitFutureMetadata(m)
+	}
+	if !strings.EqualFold(exchange, "binance") || m == nil || m.Source != "binance" {
+		return false
+	}
+	// The quarter enum also exists on COIN-M; only the USD-M endpoint
+	// proves this linear-future normalization. Other producers fail closed.
+	if strings.SplitN(m.SourceURL, "?", 2)[0] != "https://fapi.binance.com/fapi/v1/exchangeInfo" {
+		return false
+	}
+	kind := strings.TrimSuffix(strings.ToUpper(m.ContractType), "_DELIVERING")
+	return kind == "CURRENT_QUARTER" || kind == "NEXT_QUARTER"
 }

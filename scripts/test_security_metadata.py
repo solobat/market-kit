@@ -52,3 +52,22 @@ class ExpiryEvidenceTests(unittest.TestCase):
         self.assertTrue(expired_contract_review({'expiryAtMs': 2000, 'comparisonStatus': 'ambiguous'}, 2000))
         self.assertFalse(expired_contract_review({'expiryAtMs': 1999, 'comparisonStatus': 'prohibited'}, 2000))
         self.assertFalse(expired_contract_review({'expiryAtMs': 'not-a-timestamp'}, 2000))
+
+
+class NativeQuarterlyEvidenceTests(unittest.TestCase):
+    def test_native_type_supplies_expiry_not_name_suffix(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from security_metadata import native_market_statuses
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'native.json'
+            path.write_text(json.dumps({'symbols': [
+                {'symbol': 'BTCUSDT_261225', 'contractType': 'CURRENT_QUARTER', 'deliveryDate': 1798185600000, 'marginAsset': 'USDT', 'baseAsset': 'BTC', 'quoteAsset': 'USDT'},
+                {'symbol': 'ODD_261225', 'contractType': 'PERPETUAL'}]}))
+            evidence = native_market_statuses(binance_path=path)
+        self.assertEqual(len(evidence), 2)
+        self.assertNotIn(('binance', 'ODD_261225', 'future'), evidence)
+        row = evidence[('binance', 'BTCUSDT_261225', 'future')]
+        self.assertEqual(row['expiryAtMs'], 1798185600000)
+        self.assertEqual(row['settlementAsset'], 'USDT')

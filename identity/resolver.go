@@ -76,6 +76,9 @@ func (r *Resolver) Resolve(req ResolveRequest) ResolveResult {
 	}
 
 	// A dated contract without an exact identity must not become BASE/date-token.
+	if exchange == "binance" && binanceDatedSymbol(rawSymbol) {
+		return ResolveResult{Status: ResolveUnresolved, Reason: "dated Binance contract requires an explicit identity for the requested market type"}
+	}
 	if exchange == "bybit" && bybitDatedSymbol(rawSymbol) {
 		return ResolveResult{Status: ResolveUnresolved, Reason: "dated Bybit contract requires an explicit identity for the requested market type"}
 	}
@@ -604,6 +607,23 @@ func bybitDatedSymbol(symbol string) bool {
 	}
 	for i := 3; i <= 5; i++ {
 		if !((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')) {
+			return false
+		}
+	}
+	return true
+}
+
+// Only quarantine native dated syntax; never derive an expiry or quote from it.
+func binanceDatedSymbol(symbol string) bool {
+	if len(symbol) <= 7 {
+		return false
+	}
+	tail := symbol[len(symbol)-7:]
+	if tail[0] != '_' {
+		return false
+	}
+	for i := 1; i < 7; i++ {
+		if tail[i] < '0' || tail[i] > '9' {
 			return false
 		}
 	}

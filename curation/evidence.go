@@ -54,7 +54,7 @@ func marketEvidenceRank(row discovery.ImportedMarket) int {
 	if strings.EqualFold(row.PlatformID, "hyperliquid") && row.InstrumentMetadata != nil && row.InstrumentMetadata.Source == "hyperliquid" && row.InstrumentMetadata.IsDelisted {
 		return 7
 	}
-	if strings.EqualFold(row.PlatformID, "bybit") && isBybitFutureMetadata(row.InstrumentMetadata) {
+	if isNativeFutureMetadata(row.PlatformID, row.InstrumentMetadata) {
 		return 6
 	}
 	if strings.EqualFold(row.PlatformID, "bybit") && isForexMarket(row) {

@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 14
+const GeneratedRegistryVersion = 15
 
 var (
 	stableAssets = map[string]bool{
@@ -216,7 +216,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 				override.ContractType = "rwa_perpetual_unverified"
 			}
 		}
-		guardBybitDatedFuture(&override, candidate.metadata)
+		guardDatedFuture(&override, candidate.metadata)
 		guardHyperliquidDelisted(&override, candidate.metadata)
 		if candidate.forex {
 			pair := strings.ToLower(candidate.base + "-" + candidate.quote)
@@ -542,7 +542,7 @@ func backfillGeneratedRegistryIdentities(generated identity.Registry, reference 
 	for idx := range generated.MarketOverrides {
 		override := &generated.MarketOverrides[idx]
 		// Dated-product boundaries must never be filled from a generic token alias.
-		if override.ClassificationEvidence == "conflict" || (override.Exchange == "bybit" && override.InstrumentKind == "future") {
+		if override.ClassificationEvidence == "conflict" || ((override.Exchange == "bybit" || override.Exchange == "binance") && override.InstrumentKind == "future") {
 			continue
 		}
 		base, quote := splitGeneratedCanonicalSymbol(override.CanonicalSymbol)
@@ -660,8 +660,8 @@ func sanitizeExistingGeneratedRegistry(existing identity.Registry, current ident
 	// contracts even when the current catalog no longer includes them.
 	for i := range out.MarketOverrides {
 		rule := &out.MarketOverrides[i]
-		if rule.Exchange == "bybit" && bybitDatedSuffix.MatchString(strings.ToUpper(rule.RawSymbol)) && (rule.InstrumentKind != "future" || rule.ComparisonStatus == identity.ComparisonEligible) {
-			guardBybitDatedFuture(rule, nil)
+		if datedSymbolForExchange(rule.Exchange, rule.RawSymbol) && (rule.InstrumentKind != "future" || rule.ComparisonStatus == identity.ComparisonEligible) {
+			guardDatedFuture(rule, nil)
 		}
 	}
 
@@ -715,7 +715,7 @@ func shouldInclude(item discovery.ImportedMarket) bool {
 	}
 	marketType := strings.ToLower(strings.TrimSpace(item.MarketType))
 	return marketType == "spot" || marketType == "perp" || marketType == "perpetual" ||
-		(marketType == "future" && strings.EqualFold(item.PlatformID, "bybit"))
+		(marketType == "future" && (strings.EqualFold(item.PlatformID, "bybit") || strings.EqualFold(item.PlatformID, "binance")))
 }
 
 func normalizeGeneratedMarketType(value string) string {

@@ -39399,6 +39399,158 @@
         "quoteCoin": "USDT"
       },
       "note": "New explicit-expiry audit also found older Oct30-expired futures. Archived official contract deliveryTime agrees with current registered expiry; already expired, so prohibit comparisons. Archive used for historical contract specification only, never as current listing data. Preserve units, settlement and exact dated identity."
+    },
+    {
+      "key": [
+        "binance",
+        "BTCUSDT_261225",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BTCUSDT_261225",
+        "contractType": "CURRENT_QUARTER",
+        "baseAsset": "BTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1798185600000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "BTCUSDT_261225",
+        "future"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BTCUSDT_261225",
+        "contractType": "CURRENT_QUARTER",
+        "baseAsset": "BTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1798185600000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "ETHUSDT_261225",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ETHUSDT_261225",
+        "contractType": "CURRENT_QUARTER",
+        "baseAsset": "ETH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1798185600000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "ETHUSDT_261225",
+        "future"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ETHUSDT_261225",
+        "contractType": "CURRENT_QUARTER",
+        "baseAsset": "ETH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1798185600000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "BTCUSDT_270326",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BTCUSDT_270326",
+        "contractType": "NEXT_QUARTER",
+        "baseAsset": "BTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1806048000000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "BTCUSDT_270326",
+        "future"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BTCUSDT_270326",
+        "contractType": "NEXT_QUARTER",
+        "baseAsset": "BTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1806048000000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "ETHUSDT_270326",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ETHUSDT_270326",
+        "contractType": "NEXT_QUARTER",
+        "baseAsset": "ETH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1806048000000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "binance",
+        "ETHUSDT_270326",
+        "future"
+      ],
+      "reviewedAt": "2026-11-08",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ETHUSDT_270326",
+        "contractType": "NEXT_QUARTER",
+        "baseAsset": "ETH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "deliveryDate": 1806048000000,
+        "status": "TRADING"
+      },
+      "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
     }
   ],
   "lastUpdatedAt": "2026-10-17"

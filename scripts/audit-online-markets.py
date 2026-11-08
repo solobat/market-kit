@@ -11,10 +11,11 @@ parser.add_argument('--official-bitget', help='Current official Bitget SPOT cata
 parser.add_argument('--previous-official-bitget', help='Previous official catalog for security-ID/status drift; never infer ratios.')
 parser.add_argument('--official-extended', help='Official Extended metadata; checks both native and display symbols.')
 parser.add_argument('--official-variational', help='Official stats listing names; review hints only, never automatic joins.')
+parser.add_argument('--official-binance', help='Official USD-M exchangeInfo; native quarterly product-boundary review.')
 parser.add_argument('--official-aster', help='Saved current official Aster exchangeInfo; status review only.')
 parser.add_argument('--official-lighter', help='Saved current official Lighter orderBooks; exact native keys only.')
 args=parser.parse_args()
-native_statuses = native_market_statuses(args.official_aster, args.official_lighter)
+native_statuses = native_market_statuses(args.official_aster, args.official_lighter, args.official_binance)
 variational_hints = variational_name_hints(args.official_variational) if args.official_variational else {}
 extended_classes = extended_categories(args.official_extended) if args.official_extended else {}
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)
@@ -70,6 +71,9 @@ for i,batch in enumerate(batches):
   native_status = native_statuses.get(k, {})
   if m and native_status.get('marketDeployer') == 'external' and m.get('comparisonStatus') == 'eligible': flags.append('official_external_deployer_identity_review')
   if m and native_status.get('inactive') and m.get('comparisonStatus') != 'prohibited': flags.append('official_native_inactive_comparison_review')
+  if m and native_status.get('quarterlyFuture'):
+   wrong = m.get('comparisonStatus') != 'prohibited' if k[2] == 'perpetual' else (m.get('instrumentKind') != 'future' or m.get('expiryAtMs') != native_status.get('expiryAtMs') or m.get('settlementAsset') != native_status.get('settlementAsset') or m.get('quoteAsset') != native_status.get('quoteAsset') or m.get('baseAsset') != native_status.get('baseAsset') or m.get('comparisonStatus') == 'eligible')
+   if wrong: flags.append('official_quarterly_future_boundary_review')
   if expired_contract_review(m, audit_now_ms): flags.append('expired_contract_comparison_review')
   if result is None: flags.append('api_error')
   elif result['status']!='resolved':flags.append('resolve_'+result['status'])

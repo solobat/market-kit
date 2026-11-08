@@ -245,6 +245,8 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		QuoteAsset        string         `json:"quoteAsset"`
 		Permissions       []string       `json:"permissions"`
 		PermissionSets    permissionList `json:"permissionSets"`
+		DeliveryDate      int64          `json:"deliveryDate"`
+		MarginAsset       string         `json:"marginAsset"`
 		ContractType      string         `json:"contractType"`
 		UnderlyingType    string         `json:"underlyingType"`
 		UnderlyingSubType []string       `json:"underlyingSubType"`
@@ -294,16 +296,31 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 		})
 	}
 	for _, item := range perp.Symbols {
+		marketType := "perp"
+		metadata := binanceDescriptionMetadata(item.UnderlyingType, item.BaseAsset, seenAt)
+		quarter := strings.TrimSuffix(strings.ToUpper(item.ContractType), "_DELIVERING")
+		if quarter == "CURRENT_QUARTER" || quarter == "NEXT_QUARTER" {
+			marketType = "future"
+			if metadata == nil {
+				metadata = &discovery.InstrumentMetadata{Source: "binance", SourceURL: "https://fapi.binance.com/fapi/v1/exchangeInfo", ObservedAt: seenAt}
+			}
+			metadata.Source = "binance"
+			metadata.SourceURL = "https://fapi.binance.com/fapi/v1/exchangeInfo"
+			metadata.ObservedAt = seenAt
+			metadata.ContractType = item.ContractType
+			metadata.SettlementAsset = item.MarginAsset
+			metadata.ExpiryAtMs = item.DeliveryDate
+		}
 		assetClassHint, underlyingCategory, tags := binanceFuturesClassification(item.ContractType, item.UnderlyingType, item.UnderlyingSubType)
 		st := sourceBool(item.ST, item.IsST)
 		preDelisting := sourceBool(item.PreDelisting, item.InDelisting)
 		out = append(out, discovery.ImportedMarket{
-			InstrumentMetadata: binanceDescriptionMetadata(item.UnderlyingType, item.BaseAsset, seenAt),
+			InstrumentMetadata: metadata,
 			SourceID:           BuiltInSourceID,
 			PlatformID:         "binance",
 			Platform:           "Binance",
 			VenueType:          "cex",
-			MarketType:         "perp",
+			MarketType:         marketType,
 			Symbol:             strings.TrimSpace(item.Symbol),
 			BaseAsset:          strings.TrimSpace(item.BaseAsset),
 			QuoteAsset:         strings.TrimSpace(item.QuoteAsset),
