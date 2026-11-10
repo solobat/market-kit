@@ -276,6 +276,21 @@
     },
     {
       "exchange": "aster",
+      "raw_symbol": "IBMUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "IBM/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:aster:pre_settle:ibmusdt",
+      "underlying_id": "equity:aster:pre_settle:ibmusdt",
+      "comparison_key": "equity:aster:pre_settle:ibmusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "pre_settle_perpetual",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "aster",
       "raw_symbol": "IPUSDT",
       "market_type": "perpetual",
       "canonical_symbol": "IP/USDT",
@@ -2078,6 +2093,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "spot",
       "settlement_asset": "USDT"
+    },
+    {
+      "exchange": "bitget",
+      "raw_symbol": "RBRKBUSDT",
+      "market_type": "spot",
+      "canonical_symbol": "BRKB/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:reality:rbrkbusdt",
+      "underlying_id": "equity:bitget:reality:rbrkbusdt",
+      "comparison_key": "equity:bitget:reality:rbrkbusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
     },
     {
       "exchange": "bitget",

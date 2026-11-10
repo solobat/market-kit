@@ -39551,7 +39551,48 @@
         "status": "TRADING"
       },
       "note": "Official USD-M quarterly future, not perpetual. Exact deliveryDate/margin/base/quote preserved. Future type remains venue/expiry scoped ambiguous; legacy perpetual request prohibited. Date suffix never supplies quote/settlement."
+    },
+    {
+      "key": [
+        "aster",
+        "IBMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-10",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IBMUSDT",
+        "status": "PRE_SETTLE",
+        "contractType": "PERPETUAL",
+        "baseAsset": "IBM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingSubType": [
+          "STOCK"
+        ]
+      },
+      "note": "Exact native PRE_SETTLE product prohibited. No perpetual sentinel deliveryDate used as real expiry; identity/unit not independently certified."
+    },
+    {
+      "key": [
+        "bitget",
+        "RBRKBUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-10",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RBRKBUSDT",
+        "baseCoin": "rBRKB",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Berkshire Hathaway-B",
+        "isin": null,
+        "isReality": "yes",
+        "status": "online"
+      },
+      "note": "Official Reality stock wrapper; venue scoped ambiguous, not cash BRK.B unit equivalence. Native raw symbol preserved; no global BRKB alias/class change."
     }
   ],
-  "lastUpdatedAt": "2026-10-17"
+  "lastUpdatedAt": "2026-11-10"
 }
