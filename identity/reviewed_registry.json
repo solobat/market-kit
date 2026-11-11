@@ -96,6 +96,21 @@
     },
     {
       "exchange": "aster",
+      "raw_symbol": "APMUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "APM/USDT",
+      "asset_class": "crypto",
+      "asset_id": "crypto:aster:settling:apmusdt",
+      "underlying_id": "crypto:aster:settling:apmusdt",
+      "comparison_key": "crypto:aster:settling:apmusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "settling_perpetual",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "aster",
       "raw_symbol": "AVLUSDT",
       "market_type": "perpetual",
       "canonical_symbol": "AVL/USDT",
@@ -242,6 +257,21 @@
       "instrument_kind": "perpetual",
       "settlement_asset": "USDT",
       "contract_type": "inactive_perpetual",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "aster",
+      "raw_symbol": "DELTAUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "DELTA/USDT",
+      "asset_class": "crypto",
+      "asset_id": "crypto:aster:settling:deltausdt",
+      "underlying_id": "crypto:aster:settling:deltausdt",
+      "comparison_key": "crypto:aster:settling:deltausdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "settling_perpetual",
+      "settlement_asset": "USDT",
       "unit_multiplier": 1
     },
     {
@@ -1588,12 +1618,14 @@
       "market_type": "spot",
       "canonical_symbol": "ACHV/USDT",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:ticker:achv",
-      "underlying_id": "equity:ticker:achv",
-      "comparison_key": "equity:ticker:achv/USDT",
-      "comparison_status": "eligible",
-      "instrument_kind": "spot",
-      "settlement_asset": "USDT"
+      "asset_id": "equity:bitget:reality:rachvusdt",
+      "underlying_id": "equity:bitget:reality:rachvusdt",
+      "comparison_key": "equity:bitget:reality:rachvusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
     },
     {
       "exchange": "bitget",
@@ -12815,6 +12847,21 @@
     },
     {
       "exchange": "bitget",
+      "raw_symbol": "RQUITUSDT",
+      "market_type": "spot",
+      "canonical_symbol": "QUIT/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:reality:rquitusdt",
+      "underlying_id": "equity:bitget:reality:rquitusdt",
+      "comparison_key": "equity:bitget:reality:rquitusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "bitget",
       "raw_symbol": "RQUSDT",
       "market_type": "spot",
       "canonical_symbol": "Q/USDT",
@@ -16915,6 +16962,21 @@
     },
     {
       "exchange": "bitget",
+      "raw_symbol": "RTCBIUSDT",
+      "market_type": "spot",
+      "canonical_symbol": "TCBI/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:reality:rtcbiusdt",
+      "underlying_id": "equity:bitget:reality:rtcbiusdt",
+      "comparison_key": "equity:bitget:reality:rtcbiusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "bitget",
       "raw_symbol": "RTCBKUSDT",
       "market_type": "spot",
       "canonical_symbol": "TCBK/USDT",
@@ -18335,6 +18397,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "spot",
       "settlement_asset": "USDT"
+    },
+    {
+      "exchange": "bitget",
+      "raw_symbol": "RTXCPUSDT",
+      "market_type": "spot",
+      "canonical_symbol": "TXCP/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:reality:rtxcpusdt",
+      "underlying_id": "equity:bitget:reality:rtxcpusdt",
+      "comparison_key": "equity:bitget:reality:rtxcpusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
     },
     {
       "exchange": "bitget",
@@ -33035,6 +33112,21 @@
     },
     {
       "exchange": "lighter",
+      "raw_symbol": "AXTI",
+      "market_type": "perpetual",
+      "canonical_symbol": "AXTI/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:inactive:axti",
+      "underlying_id": "unknown:lighter:inactive:axti",
+      "comparison_key": "unknown:lighter:inactive:axti/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "lighter",
       "raw_symbol": "BB",
       "market_type": "perpetual",
       "canonical_symbol": "BB/USDC",
@@ -33087,6 +33179,21 @@
       "instrument_kind": "perpetual",
       "settlement_asset": "USDC",
       "contract_type": "inactive_perpetual",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "lighter",
+      "raw_symbol": "BYD",
+      "market_type": "perpetual",
+      "canonical_symbol": "BYD/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:inactive:byd",
+      "underlying_id": "unknown:lighter:inactive:byd",
+      "comparison_key": "unknown:lighter:inactive:byd/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
       "unit_multiplier": 1
     },
     {
@@ -33328,6 +33435,21 @@
     },
     {
       "exchange": "lighter",
+      "raw_symbol": "NOK",
+      "market_type": "perpetual",
+      "canonical_symbol": "NOK/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:inactive:nok",
+      "underlying_id": "unknown:lighter:inactive:nok",
+      "comparison_key": "unknown:lighter:inactive:nok/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "lighter",
       "raw_symbol": "NOW",
       "market_type": "perpetual",
       "canonical_symbol": "NOW/USDC",
@@ -33352,6 +33474,21 @@
       "instrument_kind": "perpetual",
       "settlement_asset": "USDC",
       "contract_type": "inactive_perpetual",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "lighter",
+      "raw_symbol": "POPMART",
+      "market_type": "perpetual",
+      "canonical_symbol": "POPMART/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:inactive:popmart",
+      "underlying_id": "unknown:lighter:inactive:popmart",
+      "comparison_key": "unknown:lighter:inactive:popmart/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
       "unit_multiplier": 1
     },
     {
@@ -33463,6 +33600,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC"
+    },
+    {
+      "exchange": "lighter",
+      "raw_symbol": "SOXS",
+      "market_type": "perpetual",
+      "canonical_symbol": "SOXS/USDC",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:lighter:inactive:soxs",
+      "underlying_id": "equity:lighter:inactive:soxs",
+      "comparison_key": "equity:lighter:inactive:soxs/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
     },
     {
       "exchange": "lighter",
@@ -33614,6 +33766,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC"
+    },
+    {
+      "exchange": "lighter",
+      "raw_symbol": "USDHKD",
+      "market_type": "perpetual",
+      "canonical_symbol": "USDHKD/USDC",
+      "asset_class": "unknown",
+      "asset_id": "unknown:lighter:inactive:usdhkd",
+      "underlying_id": "unknown:lighter:inactive:usdhkd",
+      "comparison_key": "unknown:lighter:inactive:usdhkd/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "inactive_perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
     },
     {
       "exchange": "lighter",
@@ -37662,6 +37829,21 @@
     },
     {
       "exchange": "variational",
+      "raw_symbol": "GTLB",
+      "market_type": "perpetual",
+      "canonical_symbol": "GTLB/USDC",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:gtlb",
+      "underlying_id": "equity:variational:perpetual:gtlb",
+      "comparison_key": "equity:variational:perpetual:gtlb/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "variational",
       "raw_symbol": "HOILP",
       "market_type": "perpetual",
       "canonical_symbol": "HOILP/USDC",
@@ -38117,6 +38299,21 @@
       "asset_id": "equity:variational:perpetual:tbt",
       "underlying_id": "equity:variational:perpetual:tbt",
       "comparison_key": "equity:variational:perpetual:tbt/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "variational",
+      "raw_symbol": "TEAM",
+      "market_type": "perpetual",
+      "canonical_symbol": "TEAM/USDC",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:team",
+      "underlying_id": "equity:variational:perpetual:team",
+      "comparison_key": "equity:variational:perpetual:team/USDC",
       "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
       "contract_type": "perpetual",

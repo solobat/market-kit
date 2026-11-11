@@ -32,15 +32,6 @@
     {
       "key": [
         "bitget",
-        "RACHVUSDT",
-        "spot"
-      ],
-      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
-      "note": "official stock type + ISIN US0044685008"
-    },
-    {
-      "key": [
-        "bitget",
         "RADSEUSDT",
         "spot"
       ],
@@ -39592,7 +39583,273 @@
         "status": "online"
       },
       "note": "Official Reality stock wrapper; venue scoped ambiguous, not cash BRK.B unit equivalence. Native raw symbol preserved; no global BRKB alias/class change."
+    },
+    {
+      "key": [
+        "lighter",
+        "NOK",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "NOK",
+        "market_id": 208,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "lighter",
+        "AXTI",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "AXTI",
+        "market_id": 224,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "lighter",
+        "USDHKD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "USDHKD",
+        "market_id": 198,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "lighter",
+        "POPMART",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "POPMART",
+        "market_id": 204,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "lighter",
+        "BYD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "BYD",
+        "market_id": 200,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "lighter",
+        "SOXS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "SOXS",
+        "market_id": 222,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "lighter",
+        "multiplier": "1.000000000000000000",
+        "settlement_type": 0
+      },
+      "note": "Official inactive;venue native product isolated. Existing SOXS stock class retained but issuer/unit/leverage not independently certified. Other generic crypto labels not evidence; unknown class kept pending native issuer/FX evidence. Native multiplier is not new hedge ratio; existing USDC settlement retained without inferring it from asset IDs."
+    },
+    {
+      "key": [
+        "aster",
+        "DELTAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DELTAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DELTA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT"
+      },
+      "note": "Official SETTLING;exact product prohibited. Native base/quote/margin retained;no sentinel expiry inference or global ticker change."
+    },
+    {
+      "key": [
+        "aster",
+        "APMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "APMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "APM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT"
+      },
+      "note": "Official SETTLING;exact product prohibited. Native base/quote/margin retained;no sentinel expiry inference or global ticker change."
+    },
+    {
+      "key": [
+        "variational",
+        "GTLB",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "official": {
+        "ticker": "GTLB",
+        "name": "GitLab Inc."
+      },
+      "note": "Official listing explicitly names company;stock category scoped only to venue product. Issuer share class, contract unit, and cross-venue comparison unverified;no generic crypto/global ticker identity."
+    },
+    {
+      "key": [
+        "variational",
+        "TEAM",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "official": {
+        "ticker": "TEAM",
+        "name": "Atlassian Corporation"
+      },
+      "note": "Official listing explicitly names company;stock category scoped only to venue product. Issuer share class, contract unit, and cross-venue comparison unverified;no generic crypto/global ticker identity."
+    },
+    {
+      "key": [
+        "bitget",
+        "RQUITUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RQUITUSDT",
+        "baseCoin": "rQUIT",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Achieve Life",
+        "isin": "US0044685008",
+        "isReality": "yes",
+        "status": "online",
+        "observedDate": "2026-11-11",
+        "currentCatalogPresent": true
+      },
+      "note": "Official Reality wrapper. New/old share same issuer ISIN does not certify same wrapper unit or conversion. Old symbols absent current catalog;archived Nov10 proves prior wrapper identity only,not current listing/delisting date. Each raw product independent ambiguous;no global alias or old-new merge."
+    },
+    {
+      "key": [
+        "bitget",
+        "RTXCPUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTXCPUSDT",
+        "baseCoin": "rTXCP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Texas Capital Bancshares, Inc.",
+        "isin": "US88224Q1076",
+        "isReality": "yes",
+        "status": "online",
+        "observedDate": "2026-11-11",
+        "currentCatalogPresent": true
+      },
+      "note": "Official Reality wrapper. New/old share same issuer ISIN does not certify same wrapper unit or conversion. Old symbols absent current catalog;archived Nov10 proves prior wrapper identity only,not current listing/delisting date. Each raw product independent ambiguous;no global alias or old-new merge."
+    },
+    {
+      "key": [
+        "bitget",
+        "RACHVUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RACHVUSDT",
+        "baseCoin": "rACHV",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Achieve Life",
+        "isin": "US0044685008",
+        "isReality": "yes",
+        "status": "online",
+        "observedDate": "2026-11-10",
+        "currentCatalogPresent": false
+      },
+      "note": "Official Reality wrapper. New/old share same issuer ISIN does not certify same wrapper unit or conversion. Old symbols absent current catalog;archived Nov10 proves prior wrapper identity only,not current listing/delisting date. Each raw product independent ambiguous;no global alias or old-new merge."
+    },
+    {
+      "key": [
+        "bitget",
+        "RTCBIUSDT",
+        "spot"
+      ],
+      "reviewedAt": "2026-11-11",
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "official": {
+        "symbol": "RTCBIUSDT",
+        "baseCoin": "rTCBI",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Texas Capital Bancshares, Inc.",
+        "isin": "US88224Q1076",
+        "isReality": "yes",
+        "status": "online",
+        "observedDate": "2026-11-10",
+        "currentCatalogPresent": false
+      },
+      "note": "Official Reality wrapper. New/old share same issuer ISIN does not certify same wrapper unit or conversion. Old symbols absent current catalog;archived Nov10 proves prior wrapper identity only,not current listing/delisting date. Each raw product independent ambiguous;no global alias or old-new merge."
     }
   ],
-  "lastUpdatedAt": "2026-11-10"
+  "lastUpdatedAt": "2026-11-11"
 }
