@@ -298,17 +298,18 @@ func fetchBinance(ctx context.Context, client *http.Client) ([]discovery.Importe
 	for _, item := range perp.Symbols {
 		marketType := "perp"
 		metadata := binanceDescriptionMetadata(item.UnderlyingType, item.BaseAsset, seenAt)
+		if metadata == nil {
+			metadata = &discovery.InstrumentMetadata{}
+		}
+		metadata.Source = "binance"
+		metadata.SourceURL = "https://fapi.binance.com/fapi/v1/exchangeInfo"
+		metadata.ObservedAt = seenAt
+		metadata.NativeTradingStatus = item.Status
+		metadata.ContractType = item.ContractType
+		metadata.SettlementAsset = item.MarginAsset
 		quarter := strings.TrimSuffix(strings.ToUpper(item.ContractType), "_DELIVERING")
 		if quarter == "CURRENT_QUARTER" || quarter == "NEXT_QUARTER" {
 			marketType = "future"
-			if metadata == nil {
-				metadata = &discovery.InstrumentMetadata{Source: "binance", SourceURL: "https://fapi.binance.com/fapi/v1/exchangeInfo", ObservedAt: seenAt}
-			}
-			metadata.Source = "binance"
-			metadata.SourceURL = "https://fapi.binance.com/fapi/v1/exchangeInfo"
-			metadata.ObservedAt = seenAt
-			metadata.ContractType = item.ContractType
-			metadata.SettlementAsset = item.MarginAsset
 			metadata.ExpiryAtMs = item.DeliveryDate
 		}
 		assetClassHint, underlyingCategory, tags := binanceFuturesClassification(item.ContractType, item.UnderlyingType, item.UnderlyingSubType)

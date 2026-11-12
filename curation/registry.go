@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 15
+const GeneratedRegistryVersion = 16
 
 var (
 	stableAssets = map[string]bool{
@@ -95,7 +95,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
 		symbol := strings.TrimSpace(item.Symbol)
 		marketType := normalizeGeneratedMarketType(item.MarketType)
-		delisted := exchange == "hyperliquid" && item.InstrumentMetadata != nil && item.InstrumentMetadata.Source == "hyperliquid" && item.InstrumentMetadata.IsDelisted
+		delisted := (exchange == "hyperliquid" && item.InstrumentMetadata != nil && item.InstrumentMetadata.Source == "hyperliquid" && item.InstrumentMetadata.IsDelisted) || binanceInactivePhase(exchange, item.InstrumentMetadata) != ""
 
 		if exchange == "" || base == "" || quote == "" || symbol == "" || marketType == "" {
 			continue
@@ -271,6 +271,11 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 				override.ExpiryAtMs = 0
 				override.SettlementAsset = ""
 			}
+		}
+		guardBinanceInactive(&override, candidate.metadata)
+		if conflicts[overrideKey(override)] && binanceInactivePhase(candidate.exchange, candidate.metadata) != "" {
+			override.SettlementAsset = ""
+			override.ContractType += "_unverified"
 		}
 		overrides[overrideKey(override)] = override
 	}

@@ -112,6 +112,11 @@ def native_market_statuses(aster_path=None, lighter_path=None, binance_path=None
                     'inactive': row.get('status') == 'inactive'}
     if binance_path:
         for row in json.loads(Path(binance_path).read_text())['symbols']:
+            if row.get('contractType') in ('PERPETUAL', 'TRADIFI_PERPETUAL'):
+                result[('binance', row['symbol'], 'perpetual')] = {
+                    'status': row.get('status'), 'contractType': row['contractType'],
+                    'settlementAsset': row.get('marginAsset'),
+                    'inactive': row.get('status') in ('PRE_TRADING', 'PENDING_TRADING', 'SETTLING')}
             kind = row.get('contractType', '').removesuffix('_DELIVERING')
             if kind not in ('CURRENT_QUARTER', 'NEXT_QUARTER'):
                 continue

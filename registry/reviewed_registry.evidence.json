@@ -14612,34 +14612,7 @@
     {
       "key": [
         "binance",
-        "DARUSDT",
-        "perpetual"
-      ],
-      "source": "Binance official exchangeInfo underlyingType=COIN",
-      "note": "scope to exact Binance market; never global stock alias"
-    },
-    {
-      "key": [
-        "binance",
-        "FISUSDT",
-        "perpetual"
-      ],
-      "source": "Binance official exchangeInfo underlyingType=COIN",
-      "note": "scope to exact Binance market; never global stock alias"
-    },
-    {
-      "key": [
-        "binance",
         "BILLUSDT",
-        "perpetual"
-      ],
-      "source": "Binance official exchangeInfo underlyingType=COIN",
-      "note": "scope to exact Binance market; never global stock alias"
-    },
-    {
-      "key": [
-        "binance",
-        "DUSDT",
         "perpetual"
       ],
       "source": "Binance official exchangeInfo underlyingType=COIN",
@@ -39849,7 +39822,3178 @@
         "currentCatalogPresent": false
       },
       "note": "Official Reality wrapper. New/old share same issuer ISIN does not certify same wrapper unit or conversion. Old symbols absent current catalog;archived Nov10 proves prior wrapper identity only,not current listing/delisting date. Each raw product independent ambiguous;no global alias or old-new merge."
+    },
+    {
+      "key": [
+        "binance",
+        "OMGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OMGUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OMG",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-2"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "WAVESUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "WAVESUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "WAVES",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MKRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MKRUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MKR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DEFIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DEFIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DEFI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "INDEX",
+        "underlyingSubType": [
+          "Index"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BALUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BALUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BAL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DEX"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ICXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ICXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ICX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "STORJUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STORJUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "STORJ",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Storage"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BLZUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BLZUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BLZ",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Storage"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FTMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FTMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FTM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FLMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FLMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FLM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RENUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RENUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "REN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "LRCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LRCUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "LRC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OCEANUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OCEANUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OCEAN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ALPHAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ALPHAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ALPHA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "UNFIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "UNFIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "UNFI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "REEFUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "REEFUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "REEF",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "XEMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "XEMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "XEM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "LINAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LINAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "LINA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "STMXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STMXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "STMX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Payment"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DENTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DENTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DENT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NKNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NKNUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "NKN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "PoW"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SCUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Storage"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DGBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DGBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DGB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Payment"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BAKEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BAKEUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BAKE",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RAYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RAYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "RAY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DEX"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ATAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ATAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ATA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "KLAYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "KLAYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "KLAY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FTTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FTTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FTT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "CEX"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DARUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DARUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DAR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "NFT"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "STGUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STGUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "STG",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FXSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FXSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FXS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HOOKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HOOKUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HOOK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HIGHUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HIGHUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HIGH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Metaverse"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "AGIXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AGIXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "AGIX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PHBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PHBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PHB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BNXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BNXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BNX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "NFT"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PERPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PERPUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PERP",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TRUUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TRUUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TRU",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "AMBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AMBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "AMB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "LEVERUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LEVERUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "LEVER",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RDNTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RDNTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "RDNT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HFTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HFTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HFT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "IDEXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IDEXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "IDEX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RADUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RADUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "RAD",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "KEYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "KEYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "KEY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "COMBOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "COMBOUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "COMBO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Metaverse"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OXTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OXTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OXT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HIFIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HIFIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HIFI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "GLMRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "GLMRUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "GLMR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-2"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "STRAXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STRAXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "STRAX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-2"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "LOOMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LOOMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "LOOM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BONDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BONDUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BOND",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ORBSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ORBSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ORBS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "STPTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "STPTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "STPT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SNTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SNTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SNT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TOKENUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TOKENUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TOKEN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BADGERUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BADGERUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BADGER",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Bitcoin Eco"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NTRNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NTRNUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "NTRN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NFPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NFPUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "NFP",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "AIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "AI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TONUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TONUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TON",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MYROUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MYROUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MYRO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VANRYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VANRYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VANRY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OMNIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OMNIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OMNI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SYSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SYSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SYS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "PoW"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VOXELUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VOXELUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VOXEL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ALPACAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ALPACAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ALPACA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VIDTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VIDTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VIDT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NULSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NULSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "NULS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MBOXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MBOXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MBOX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Metaverse"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "CHESSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "CHESSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "CHESS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BSWUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BSWUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BSW",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "QUICKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "QUICKUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "QUICK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NEIROETHUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NEIROETHUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "NEIROETH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "UXLINKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "UXLINKUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "UXLINK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "KDAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "KDAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "KDA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "PoW"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FIOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FIOUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FIO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "NFT"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "GHSTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "GHSTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "GHST",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Metaverse"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "LOKAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LOKAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "LOKA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "REIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "REIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "REI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "COSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "COSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "COS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TROYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TROYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TROY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PONKEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PONKEUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PONKE",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SWELLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SWELLUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SWELL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HIPPOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HIPPOUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HIPPO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "1000XUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000XUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "1000X",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DEGENUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DEGENUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DEGEN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SLERFUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SLERFUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SLERF",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SCRTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SCRTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SCRT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "1000WHYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000WHYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "1000WHY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ACXUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ACXUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ACX",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DEGOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DEGOUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DEGO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "NFT"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VELODROMEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VELODROMEUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VELODROME",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DFUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DFUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DF",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "AI16ZUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "AI16ZUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "AI16Z",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "D",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Metaverse"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VINEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VINEUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VINE",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "B3USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "B3USDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "B3",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "IPUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IPUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "IP",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "IPUSDC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IPUSDC",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "IP",
+        "quoteAsset": "USDC",
+        "marginAsset": "USDC",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "USDC"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VICUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VICUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VIC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "EPICUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "EPICUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "EPIC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "NFT",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BIDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BIDUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BID",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FUNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FUNUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FUN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MLNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MLNUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MLN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FORTHUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FORTHUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FORTH",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PROMPTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PROMPTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PROMPT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "XCNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "XCNUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "XCN",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "PoW"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "EPTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "EPTUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "EPT",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MEMEFIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MEMEFIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MEMEFI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FISUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FISUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "FIS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MILKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MILKUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MILK",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OBOLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OBOLUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OBOL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ZKJUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ZKJUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ZKJ",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-2"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PUFFERUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PUFFERUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PUFFER",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-2"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PORT3USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PORT3USDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PORT3",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "AI"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "1000000BOBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "1000000BOBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "1000000BOB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Meme",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "SKATEUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "SKATEUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "SKATE",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Layer-1"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PUMPBTCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PUMPBTCUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PUMPBTC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DMCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DMCUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DMC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "OLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "OLUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "OL",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TANSSIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TANSSIUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TANSSI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Infrastructure"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "ZRCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "ZRCUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "ZRC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "A2ZUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "A2ZUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "A2Z",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Gaming"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "YALAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "YALAUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "YALA",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "DAMUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "DAMUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "DAM",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "CUDISUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "CUDISUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "CUDIS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "MITOUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "MITOUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "MITO",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "PTBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "PTBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "PTB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "VFYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "VFYUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "VFY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RVVUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RVVUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "RVV",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "42USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "42USDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "42",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "COMMONUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "COMMONUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "COMMON",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "GAIBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "GAIBUSDT",
+        "status": "PENDING_TRADING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "GAIB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "BOBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "BOBUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "BOB",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "DeFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "RLSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "RLSUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "RLS",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "IRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "IRUSDT",
+        "status": "SETTLING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "IR",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "COIN",
+        "underlyingSubType": []
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "HYPEUSDC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "HYPEUSDC",
+        "status": "PENDING_TRADING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "HYPE",
+        "quoteAsset": "USDC",
+        "marginAsset": "USDC",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "USDC",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "TRXUSDC",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "TRXUSDC",
+        "status": "PENDING_TRADING",
+        "contractType": "PERPETUAL",
+        "baseAsset": "TRX",
+        "quoteAsset": "USDC",
+        "marginAsset": "USDC",
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "USDC",
+          "Crypto"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "NUUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "NUUSDT",
+        "status": "PENDING_TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "baseAsset": "NU",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "EQUITY",
+        "underlyingSubType": [
+          "TradFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "binance",
+        "FRHCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "FRHCUSDT",
+        "status": "PENDING_TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "baseAsset": "FRHC",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "underlyingType": "EQUITY",
+        "underlyingSubType": [
+          "TradFi"
+        ]
+      },
+      "note": "Official pending/pre-trading or settling perpetual is not an active comparison market. Venue/raw identity isolated,prohibited;native quote/margin retained. Prior display/unit alias/multiplier preserved without new unit certification. No sentinel deliveryDate expiry inference or global ticker identity change. Snapshot confirms current state,not exact historical delisting/start event."
+    },
+    {
+      "key": [
+        "arcus",
+        "CBRS-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://api.arcus.xyz/v1/markets",
+      "official": {
+        "marketDisplayName": "CBRS-USD",
+        "fullAssetName": "Cerebras Systems",
+        "marketId": 85,
+        "status": "ONLINE",
+        "baseAsset": "CBRS",
+        "quoteAsset": "USD",
+        "type": "PERPETUAL",
+        "category": "EQUITIES"
+      },
+      "note": "Native equity perpetual and company name identify a venue product,not independent share class/unit equivalence. Preserve prior settlement/display without newly certifying collateral;scope ambiguous,not global issuer alias."
+    },
+    {
+      "key": [
+        "arcus",
+        "WDC-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://api.arcus.xyz/v1/markets",
+      "official": {
+        "marketDisplayName": "WDC-USD",
+        "fullAssetName": "Western Digital",
+        "marketId": 86,
+        "status": "ONLINE",
+        "baseAsset": "WDC",
+        "quoteAsset": "USD",
+        "type": "PERPETUAL",
+        "category": "EQUITIES"
+      },
+      "note": "Native equity perpetual and company name identify a venue product,not independent share class/unit equivalence. Preserve prior settlement/display without newly certifying collateral;scope ambiguous,not global issuer alias."
+    },
+    {
+      "key": [
+        "arcus",
+        "NFLX-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-12",
+      "source": "https://api.arcus.xyz/v1/markets",
+      "official": {
+        "marketDisplayName": "NFLX-USD",
+        "fullAssetName": "Netflix",
+        "marketId": 87,
+        "status": "ONLINE",
+        "baseAsset": "NFLX",
+        "quoteAsset": "USD",
+        "type": "PERPETUAL",
+        "category": "EQUITIES"
+      },
+      "note": "Native equity perpetual and company name identify a venue product,not independent share class/unit equivalence. Preserve prior settlement/display without newly certifying collateral;scope ambiguous,not global issuer alias."
     }
   ],
-  "lastUpdatedAt": "2026-11-11"
+  "lastUpdatedAt": "2026-11-12"
 }

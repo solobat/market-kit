@@ -32,7 +32,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 		if newRank < oldRank {
 			continue
 		}
-		same := sameOKXStockEvidence(old, row) && sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
+		same := sameBinanceStateEvidence(old, row) && sameOKXStockEvidence(old, row) && sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
 		if !same {
 			conflicts[key] = true
 		}
@@ -48,6 +48,10 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
+	if binanceInactivePhase(row.PlatformID, row.InstrumentMetadata) != "" {
+		return 7
+	}
+
 	if _, ok := discovery.OfficialPreIPOIssuer(row); ok {
 		return 6
 	}

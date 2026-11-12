@@ -66,7 +66,9 @@ class NativeQuarterlyEvidenceTests(unittest.TestCase):
                 {'symbol': 'BTCUSDT_261225', 'contractType': 'CURRENT_QUARTER', 'deliveryDate': 1798185600000, 'marginAsset': 'USDT', 'baseAsset': 'BTC', 'quoteAsset': 'USDT'},
                 {'symbol': 'ODD_261225', 'contractType': 'PERPETUAL'}]}))
             evidence = native_market_statuses(binance_path=path)
-        self.assertEqual(len(evidence), 2)
+        self.assertEqual(len(evidence), 3)
+        self.assertNotIn("quarterlyFuture", evidence[("binance", "ODD_261225", "perpetual")])
+        self.assertNotIn("expiryAtMs", evidence[("binance", "ODD_261225", "perpetual")])
         self.assertNotIn(('binance', 'ODD_261225', 'future'), evidence)
         row = evidence[('binance', 'BTCUSDT_261225', 'future')]
         self.assertEqual(row['expiryAtMs'], 1798185600000)
