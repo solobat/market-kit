@@ -42993,7 +42993,90 @@
         "category": "EQUITIES"
       },
       "note": "Native equity perpetual and company name identify a venue product,not independent share class/unit equivalence. Preserve prior settlement/display without newly certifying collateral;scope ambiguous,not global issuer alias."
+    },
+    {
+      "key": [
+        "aster",
+        "GLWUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-13",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "GLWUSDT",
+        "status": "PRE_SETTLE",
+        "baseAsset": "GLW",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingSubType": [
+          "STOCK"
+        ]
+      },
+      "note": "Exact official PRE_SETTLE stock-reference product prohibited. No global ticker class/alias changes,no sentinel expiry or issuer unit certification."
+    },
+    {
+      "key": [
+        "aster",
+        "LLYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-13",
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "official": {
+        "symbol": "LLYUSDT",
+        "status": "PRE_SETTLE",
+        "baseAsset": "LLY",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "contractType": "PERPETUAL",
+        "underlyingSubType": [
+          "STOCK"
+        ]
+      },
+      "note": "Exact official PRE_SETTLE stock-reference product prohibited. No global ticker class/alias changes,no sentinel expiry or issuer unit certification."
+    },
+    {
+      "key": [
+        "bitget",
+        "FRHCUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-13",
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "official": {
+        "symbol": "FRHCUSDT",
+        "baseCoin": "FRHC",
+        "quoteCoin": "USDT",
+        "symbolType": "perpetual",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      },
+      "note": "Native isRwa confirms RWA product only,not issuer/share class or stock identity/units. Scoped unknown ambiguous;single supported native USDT margin retained,no generic FRHC equity join."
+    },
+    {
+      "key": [
+        "qfex",
+        "MTH-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-13",
+      "source": "https://api.qfex.com/refdata",
+      "additionalSource": "https://api.qfex.com/md/contracts",
+      "official": {
+        "symbol": "MTH-USD",
+        "status": "INACTIVE",
+        "product_category": "EQUITY",
+        "base_asset": "MTH",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "presentInCurrentPerpetualContracts": false
+      },
+      "note": "INACTIVE reference only,absent current native Perpetual contract catalog. Existing consumer-facing perpetual query must not be eligible;prohibited unverified product,not a confirmed listed perpetual/delisting. Native reference EQUITY retained only at exact scope;no settlement/units inferred from reference or quote."
     }
   ],
-  "lastUpdatedAt": "2026-11-12"
+  "lastUpdatedAt": "2026-11-13"
 }

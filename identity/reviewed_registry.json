@@ -336,6 +336,21 @@
     },
     {
       "exchange": "aster",
+      "raw_symbol": "GLWUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "GLW/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:aster:pre_settle:glwusdt",
+      "underlying_id": "equity:aster:pre_settle:glwusdt",
+      "comparison_key": "equity:aster:pre_settle:glwusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "pre_settle_perpetual",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "aster",
       "raw_symbol": "HIGHUSDT",
       "market_type": "perpetual",
       "canonical_symbol": "HIGH/USDT",
@@ -392,6 +407,21 @@
       "settlement_asset": "USDT",
       "comparison_key": "unknown:aster:inactive:irusdt/USDT",
       "contract_type": "inactive_perpetual",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "aster",
+      "raw_symbol": "LLYUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "LLY/USDT",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:aster:pre_settle:llyusdt",
+      "underlying_id": "equity:aster:pre_settle:llyusdt",
+      "comparison_key": "equity:aster:pre_settle:llyusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "pre_settle_perpetual",
+      "settlement_asset": "USDT",
       "unit_multiplier": 1
     },
     {
@@ -3346,6 +3376,21 @@
       "comparison_key": "equity:bitget:perpetual:fisvusdt/USDT",
       "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "bitget",
+      "raw_symbol": "FRHCUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "FRHC/USDT",
+      "asset_class": "unknown",
+      "asset_id": "rwa:bitget:perpetual:frhcusdt",
+      "underlying_id": "rwa:bitget:perpetual:frhcusdt",
+      "comparison_key": "rwa:bitget:perpetual:frhcusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "perpetual",
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
@@ -37878,6 +37923,20 @@
       "comparison_status": "eligible",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "qfex",
+      "raw_symbol": "MTH-USD",
+      "market_type": "perpetual",
+      "canonical_symbol": "MTH/USD",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:qfex:unverified:mth-usd",
+      "underlying_id": "equity:qfex:unverified:mth-usd",
+      "comparison_key": "equity:qfex:unverified:mth-usd/USD",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "rwa_perpetual_unverified",
       "unit_multiplier": 1
     },
     {
