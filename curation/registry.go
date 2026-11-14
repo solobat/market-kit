@@ -8,7 +8,7 @@ import (
 	"github.com/solobat/market-kit/identity"
 )
 
-const GeneratedRegistryVersion = 16
+const GeneratedRegistryVersion = 17
 
 var (
 	stableAssets = map[string]bool{
@@ -95,7 +95,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 		quote := strings.ToUpper(strings.TrimSpace(item.QuoteAsset))
 		symbol := strings.TrimSpace(item.Symbol)
 		marketType := normalizeGeneratedMarketType(item.MarketType)
-		delisted := (exchange == "hyperliquid" && item.InstrumentMetadata != nil && item.InstrumentMetadata.Source == "hyperliquid" && item.InstrumentMetadata.IsDelisted) || binanceInactivePhase(exchange, item.InstrumentMetadata) != ""
+		delisted := (exchange == "hyperliquid" && item.InstrumentMetadata != nil && item.InstrumentMetadata.Source == "hyperliquid" && item.InstrumentMetadata.IsDelisted) || binanceInactivePhase(exchange, item.InstrumentMetadata) != "" || popdexPhase(exchange, item.InstrumentMetadata) != "" || popdexUnclassified(exchange, item.InstrumentMetadata)
 
 		if exchange == "" || base == "" || quote == "" || symbol == "" || marketType == "" {
 			continue
@@ -272,6 +272,7 @@ func BuildGeneratedRegistry(items []discovery.ImportedMarket) identity.Registry 
 				override.SettlementAsset = ""
 			}
 		}
+		guardPopdexProduct(&override, candidate.metadata, conflicts[overrideKey(override)])
 		guardBinanceInactive(&override, candidate.metadata)
 		if conflicts[overrideKey(override)] && binanceInactivePhase(candidate.exchange, candidate.metadata) != "" {
 			override.SettlementAsset = ""

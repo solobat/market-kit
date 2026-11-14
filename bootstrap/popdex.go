@@ -23,6 +23,7 @@ func fetchPopdex(ctx context.Context, client *http.Client) ([]discovery.Imported
 			Category   string `json:"category"`
 			Status     string `json:"status"`
 			AssetClass string `json:"assetClass"`
+			Settlement string `json:"settlementToken"`
 		} `json:"data"`
 	}
 	if err := fetchJSON(ctx, client, http.MethodGet, popdexSymbolsURL, nil, &response); err != nil {
@@ -53,7 +54,7 @@ func fetchPopdex(ctx context.Context, client *http.Client) ([]discovery.Imported
 			case "SPCX", "SNDK", "MU", "NVDA", "INTC", "SKHY", "CRCL", "META", "MSTR", "ORCL", "SAMSUNG", "SKHYNIX", "SOFTBANK", "CXMT", "UNITREE", "ZHIPU", "MINIMAX", "AAOI", "TSLA", "GOOGL", "SMCI", "HOOD", "COIN":
 				hint = "stock"
 			default:
-				return nil, fmt.Errorf("Popdex unclassified RWA market %s", m.Symbol)
+				hint = "unknown"
 			}
 		}
 		status := "paused"
@@ -62,7 +63,11 @@ func fetchPopdex(ctx context.Context, client *http.Client) ([]discovery.Imported
 		} else if m.Status == "Delisted" {
 			status = "delisted"
 		}
-		rows = append(rows, discovery.ImportedMarket{SourceID: BuiltInSourceID, PlatformID: "popdex", Platform: "Popdex", VenueType: "dex", MarketType: "perp", Symbol: m.Symbol, BaseAsset: m.Base, QuoteAsset: m.Quote, AssetClassHint: hint, Category: m.AssetClass, Chain: "morph-tachyon", Status: status, ExternalURL: "https://app.popdex.xyz/en/trade/futures/" + url.PathEscape(m.Symbol), FirstSeenAt: now, LastSeenAt: now})
+		symbolType := ""
+		if m.AssetClass == "Rwa" && hint == "unknown" {
+			symbolType = "unclassified_rwa"
+		}
+		rows = append(rows, discovery.ImportedMarket{InstrumentMetadata: &discovery.InstrumentMetadata{Source: "popdex", SourceURL: popdexSymbolsURL, ObservedAt: now, ContractType: "perpetual", NativeTradingStatus: m.Status, SettlementAsset: m.Settlement, IsRWA: m.AssetClass == "Rwa", SymbolType: symbolType}, SourceID: BuiltInSourceID, PlatformID: "popdex", Platform: "Popdex", VenueType: "dex", MarketType: "perp", Symbol: m.Symbol, BaseAsset: m.Base, QuoteAsset: m.Quote, AssetClassHint: hint, Category: m.AssetClass, Chain: "morph-tachyon", Status: status, ExternalURL: "https://app.popdex.xyz/en/trade/futures/" + url.PathEscape(m.Symbol), FirstSeenAt: now, LastSeenAt: now})
 	}
 	return rows, nil
 }

@@ -14,8 +14,9 @@ parser.add_argument('--official-variational', help='Official stats listing names
 parser.add_argument('--official-binance', help='Official USD-M exchangeInfo; native quarterly product-boundary review.')
 parser.add_argument('--official-aster', help='Saved current official Aster exchangeInfo; status review only.')
 parser.add_argument('--official-lighter', help='Saved current official Lighter orderBooks; exact native keys only.')
+parser.add_argument('--official-popdex', help='Current native Futures catalog; exact status review only.')
 args=parser.parse_args()
-native_statuses = native_market_statuses(args.official_aster, args.official_lighter, args.official_binance)
+native_statuses = native_market_statuses(args.official_aster, args.official_lighter, args.official_binance, args.official_popdex)
 variational_hints = variational_name_hints(args.official_variational) if args.official_variational else {}
 extended_classes = extended_categories(args.official_extended) if args.official_extended else {}
 ROOT=pathlib.Path(args.output_dir);ROOT.mkdir(parents=True,exist_ok=True)

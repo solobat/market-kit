@@ -40,3 +40,16 @@ class NativeStatusTests(unittest.TestCase):
         self.assertNotIn('expiryAtMs', rows[('binance', 'NEWUSDC', 'perpetual')])
         self.assertNotIn(('binance', 'NEWUSDC', 'spot'), rows)
         self.assertNotIn(('binance', 'UNKNOWN', 'perpetual'), rows)
+
+    def test_popdex_pretrading_uses_native_contract_and_settlement(self):
+        with tempfile.TemporaryDirectory() as directory:
+            p = Path(directory) / 'popdex.json'
+            p.write_text(json.dumps({'data': [
+                dict(symbol='NEWUSDT', category='Futures', status='PreTrading', settlementToken='USDC', assetClass='Rwa'),
+                dict(symbol='LIVEUSDT', category='Futures', status='Trading'),
+                dict(symbol='SKIP', category='Spot', status='PreTrading')]}))
+            rows = native_market_statuses(popdex_path=p)
+        self.assertTrue(rows[('popdex', 'NEWUSDT', 'perpetual')]['inactive'])
+        self.assertEqual(rows[('popdex', 'NEWUSDT', 'perpetual')]['settlementAsset'], 'USDC')
+        self.assertFalse(rows[('popdex', 'LIVEUSDT', 'perpetual')]['inactive'])
+        self.assertNotIn(('popdex', 'SKIP', 'perpetual'), rows)

@@ -21558,25 +21558,6 @@
     {
       "key": [
         "bybit",
-        "BTCUSDT-13NOV26",
-        "future"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "BTCUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "BTC",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
         "BTCUSDT-24SEP27",
         "perpetual"
       ],
@@ -21862,25 +21843,6 @@
     {
       "key": [
         "bybit",
-        "DOGEUSDT-13NOV26",
-        "future"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "DOGEUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "DOGE",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
         "DOGEUSDT-27NOV26",
         "perpetual"
       ],
@@ -21997,25 +21959,6 @@
         "bybit",
         "ETHUSDT-13NOV26",
         "perpetual"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "ETHUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "ETH",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
-        "ETHUSDT-13NOV26",
-        "future"
       ],
       "reviewedAt": "2026-10-24",
       "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
@@ -22318,25 +22261,6 @@
     {
       "key": [
         "bybit",
-        "HYPEUSDT-13NOV26",
-        "future"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "HYPEUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "HYPE",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
         "HYPEUSDT-27NOV26",
         "perpetual"
       ],
@@ -22453,25 +22377,6 @@
         "bybit",
         "MNTUSDT-13NOV26",
         "perpetual"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "MNTUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "MNT",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
-        "MNTUSDT-13NOV26",
-        "future"
       ],
       "reviewedAt": "2026-10-24",
       "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
@@ -22622,25 +22527,6 @@
     {
       "key": [
         "bybit",
-        "SOLUSDT-13NOV26",
-        "future"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "SOLUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "SOL",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
         "SOLUSDT-27NOV26",
         "perpetual"
       ],
@@ -22774,25 +22660,6 @@
     {
       "key": [
         "bybit",
-        "XAUTUSDT-13NOV26",
-        "future"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "XAUTUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "XAUT",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
         "XAUTUSDT-27NOV26",
         "perpetual"
       ],
@@ -22909,25 +22776,6 @@
         "bybit",
         "XRPUSDT-13NOV26",
         "perpetual"
-      ],
-      "reviewedAt": "2026-10-24",
-      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
-      "official": {
-        "symbol": "XRPUSDT-13NOV26",
-        "contractType": "LinearFutures",
-        "baseCoin": "XRP",
-        "quoteCoin": "USDT",
-        "settleCoin": "USDT",
-        "deliveryTime": "1794556800000",
-        "status": "Trading"
-      },
-      "note": "Official dated future, not perpetual. Wrong legacy perpetual request is prohibited; actual future key remains ambiguous for cross-venue comparisons. Identity is contract-specific, including expiry; underlying token is not a sufficient join key. Expiry from official metadata, never symbol-only inference."
-    },
-    {
-      "key": [
-        "bybit",
-        "XRPUSDT-13NOV26",
-        "future"
       ],
       "reviewedAt": "2026-10-24",
       "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
@@ -43076,7 +42924,635 @@
         "presentInCurrentPerpetualContracts": false
       },
       "note": "INACTIVE reference only,absent current native Perpetual contract catalog. Existing consumer-facing perpetual query must not be eligible;prohibited unverified product,not a confirmed listed perpetual/delisting. Native reference EQUITY retained only at exact scope;no settlement/units inferred from reference or quote."
+    },
+    {
+      "key": [
+        "bybit",
+        "4STOCKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "4STOCKUSDT",
+        "contractType": "LinearPerpetual",
+        "deliveryTime": "1794560400000",
+        "baseCoin": "4STOCK",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "AGIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "AGIUSDT",
+        "contractType": "LinearPerpetual",
+        "deliveryTime": "1794560400000",
+        "baseCoin": "AGI",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "HAJIMIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "HAJIMIUSDT",
+        "contractType": "LinearPerpetual",
+        "deliveryTime": "1794560400000",
+        "baseCoin": "HAJIMI",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "BTCUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "BTCUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "DOGEUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "DOGEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "ETHUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "ETHUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "HYPEUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "HYPEUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "MNTUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "MNTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "SOLUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "SOLUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "XAUTUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "XAUTUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "bybit",
+        "XRPUSDT-13NOV26",
+        "future"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "observedDate": "2026-11-13",
+      "currentCatalogPresent": false,
+      "official": {
+        "symbol": "XRPUSDT-13NOV26",
+        "contractType": "LinearFutures",
+        "deliveryTime": "1794556800000",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "settleCoin": "USDT",
+        "status": "Trading"
+      },
+      "note": "Archived native deliveryTime has passed;not a date inferred from symbol. Current catalog absence corroborates but does not itself establish end date. Keep native LinearPerpetual as ended perpetual,LinearFutures as future. Prohibited exact product,no global ticker/category or expiry-unit merge."
+    },
+    {
+      "key": [
+        "gtrade",
+        "TTWO/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "official": {
+        "pair": {
+          "from": "TTWO",
+          "to": "USD",
+          "spreadP": "600000000",
+          "groupIndex": "4",
+          "feeIndex": "4"
+        },
+        "group": "stocks-3",
+        "collateralCount": 4
+      },
+      "note": "Native stocks group identifies a gTrade synthetic reference product,not cash stock or a globally interchangeable pre-IPO share. Platform multi-collateral CFD;selected collateral unknown,USD quote not settlement. Do not merge ANTH with io:ANTH or OPENAI with other pre-IPO units;issuer/share class/unit evidence still pending."
+    },
+    {
+      "key": [
+        "gtrade",
+        "OPENAI/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "official": {
+        "pair": {
+          "from": "OPENAI",
+          "to": "USD",
+          "spreadP": "600000000",
+          "groupIndex": "4",
+          "feeIndex": "4"
+        },
+        "group": "stocks-3",
+        "collateralCount": 4
+      },
+      "note": "Native stocks group identifies a gTrade synthetic reference product,not cash stock or a globally interchangeable pre-IPO share. Platform multi-collateral CFD;selected collateral unknown,USD quote not settlement. Do not merge ANTH with io:ANTH or OPENAI with other pre-IPO units;issuer/share class/unit evidence still pending."
+    },
+    {
+      "key": [
+        "gtrade",
+        "ANTH/USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://backend-arbitrum.gains.trade/trading-variables",
+      "official": {
+        "pair": {
+          "from": "ANTH",
+          "to": "USD",
+          "spreadP": "600000000",
+          "groupIndex": "4",
+          "feeIndex": "4"
+        },
+        "group": "stocks-3",
+        "collateralCount": 4
+      },
+      "note": "Native stocks group identifies a gTrade synthetic reference product,not cash stock or a globally interchangeable pre-IPO share. Platform multi-collateral CFD;selected collateral unknown,USD quote not settlement. Do not merge ANTH with io:ANTH or OPENAI with other pre-IPO units;issuer/share class/unit evidence still pending."
+    },
+    {
+      "key": [
+        "qfex",
+        "PM-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.qfex.com/refdata",
+      "additionalSource": "https://api.qfex.com/md/contracts",
+      "official": {
+        "symbol": "PM-USD",
+        "status": "ACTIVE",
+        "product_category": "EQUITY",
+        "base_asset": "PM",
+        "quote_asset": "USD",
+        "margin_asset": "USDC"
+      },
+      "note": "Native ACTIVE equity reference and Perpetual contract confirm venue product,not issuer share class/unit equivalence;scoped ambiguous,USD quote and USDC margin separate."
+    },
+    {
+      "key": [
+        "popdex",
+        "LITUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "LITUSDT",
+        "symbolId": "20032",
+        "baseToken": "LIT",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "XMRUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "XMRUSDT",
+        "symbolId": "20033",
+        "baseToken": "XMR",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "VVVUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "VVVUSDT",
+        "symbolId": "20034",
+        "baseToken": "VVV",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "UNIUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "UNIUSDT",
+        "symbolId": "20035",
+        "baseToken": "UNI",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "STRKUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "STRKUSDT",
+        "symbolId": "20036",
+        "baseToken": "STRK",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "XPLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "XPLUSDT",
+        "symbolId": "20037",
+        "baseToken": "XPL",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "ARBUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "ARBUSDT",
+        "symbolId": "20038",
+        "baseToken": "ARB",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "ZROUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "ZROUSDT",
+        "symbolId": "20039",
+        "baseToken": "ZRO",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Crypto",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "NBISUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "NBISUSDT",
+        "symbolId": "21128",
+        "baseToken": "NBIS",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "AAPLUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "AAPLUSDT",
+        "symbolId": "21129",
+        "baseToken": "AAPL",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "AMZNUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "AMZNUSDT",
+        "symbolId": "21130",
+        "baseToken": "AMZN",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "CBRSUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "CBRSUSDT",
+        "symbolId": "21131",
+        "baseToken": "CBRS",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "MSFTUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "MSFTUSDT",
+        "symbolId": "21132",
+        "baseToken": "MSFT",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "AMDUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "AMDUSDT",
+        "symbolId": "21133",
+        "baseToken": "AMD",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "popdex",
+        "MRNAUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-14",
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "official": {
+        "symbol": "MRNAUSDT",
+        "symbolId": "21134",
+        "baseToken": "MRNA",
+        "quoteToken": "USDT",
+        "settlementToken": "USDT",
+        "category": "Futures",
+        "assetClass": "Rwa",
+        "status": "PreTrading",
+        "tradingOpenTime": "1794816000000"
+      },
+      "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
     }
   ],
-  "lastUpdatedAt": "2026-11-13"
+  "lastUpdatedAt": "2026-11-14"
 }

@@ -94,7 +94,7 @@ def variational_name_hints(path):
     return result
 
 
-def native_market_statuses(aster_path=None, lighter_path=None, binance_path=None):
+def native_market_statuses(aster_path=None, lighter_path=None, binance_path=None, popdex_path=None):
     """Native status evidence only; never map aliases or infer delisting history."""
     result = {}
     if aster_path:
@@ -126,6 +126,13 @@ def native_market_statuses(aster_path=None, lighter_path=None, binance_path=None
                     'expiryAtMs': row.get('deliveryDate'),
                     'settlementAsset': row.get('marginAsset'),
                     'quoteAsset': row.get('quoteAsset'), 'baseAsset': row.get('baseAsset')}
+    if popdex_path:
+        for row in json.loads(Path(popdex_path).read_text())['data']:
+            if row.get('category') == 'Futures':
+                result[('popdex', row['symbol'], 'perpetual')] = {
+                    'status': row.get('status'), 'assetClass': row.get('assetClass'),
+                    'settlementAsset': row.get('settlementToken'),
+                    'inactive': row.get('status') in ('PreTrading', 'Delisted')}
     return result
 
 

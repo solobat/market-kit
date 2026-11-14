@@ -32,7 +32,7 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 		if newRank < oldRank {
 			continue
 		}
-		same := sameBinanceStateEvidence(old, row) && sameOKXStockEvidence(old, row) && sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
+		same := samePopdexEvidence(old, row) && sameBinanceStateEvidence(old, row) && sameOKXStockEvidence(old, row) && sameBitgetRWAEvidence(old, row) && sameDatedProductEvidence(old, row) && strings.EqualFold(strings.TrimSpace(old.BaseAsset), strings.TrimSpace(row.BaseAsset)) && strings.EqualFold(strings.TrimSpace(old.QuoteAsset), strings.TrimSpace(row.QuoteAsset)) && inferAssetClassFromExchangeMetadata(old) == inferAssetClassFromExchangeMetadata(row)
 		if !same {
 			conflicts[key] = true
 		}
@@ -48,6 +48,12 @@ func selectMarketIdentityEvidence(items []discovery.ImportedMarket) ([]discovery
 	return out, conflicts
 }
 func marketEvidenceRank(row discovery.ImportedMarket) int {
+	if popdexPhase(row.PlatformID, row.InstrumentMetadata) != "" {
+		return 7
+	}
+	if popdexUnclassified(row.PlatformID, row.InstrumentMetadata) {
+		return 6
+	}
 	if binanceInactivePhase(row.PlatformID, row.InstrumentMetadata) != "" {
 		return 7
 	}
