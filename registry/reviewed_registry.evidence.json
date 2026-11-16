@@ -43552,7 +43552,25 @@
         "tradingOpenTime": "1794816000000"
       },
       "note": "Native PreTrading product prohibited;Rwa label alone is not stock/issuer/unit proof,unknown scoped identity retained. Native settlementToken used independently of quote. No global aliases or scheduled time inferred from symbol."
+    },
+    {
+      "key": [
+        "lighter",
+        "ASELS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-16T01:04:49.871839+00:00",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "official": {
+        "symbol": "ASELS",
+        "market_id": 8286,
+        "market_type": "perp",
+        "status": "inactive",
+        "market_deployer": "external",
+        "multiplier": "1.000000000000000000"
+      },
+      "note": "Native external market 8286 now inactive. Preserve unknown issuer/units and external scoped identity; prohibit comparison without guessing stock identity or collateral. Existing USDC field retained,not newly certified."
     }
   ],
-  "lastUpdatedAt": "2026-11-14"
+  "lastUpdatedAt": "2026-11-16"
 }

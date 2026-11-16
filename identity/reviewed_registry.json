@@ -35387,8 +35387,8 @@
       "instrument_kind": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1,
-      "comparison_status": "ambiguous",
-      "contract_type": "external_perpetual"
+      "comparison_status": "prohibited",
+      "contract_type": "inactive_perpetual"
     },
     {
       "exchange": "lighter",
