@@ -43570,7 +43570,57 @@
         "multiplier": "1.000000000000000000"
       },
       "note": "Native external market 8286 now inactive. Preserve unknown issuer/units and external scoped identity; prohibit comparison without guessing stock identity or collateral. Existing USDC field retained,not newly certified."
+    },
+    {
+      "key": [
+        "arcus",
+        "ANT-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
+      "source": "https://api.arcus.xyz/v1/markets",
+      "note": "Official Anthropic/EQUITIES/PERPETUAL/OFFLINE;prohibit scoped prelaunch product,no merge with ANT crypto or other pre-IPO units."
+    },
+    {
+      "key": [
+        "variational",
+        "EWZS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Official iShares MSCI Brazil Small-Cap ETF;correct crypto class per market,unit equivalence unverified."
+    },
+    {
+      "key": [
+        "qfex",
+        "ZETA-USD",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
+      "source": "https://api.qfex.com/refdata",
+      "note": "Official EQUITY ACTIVE and native Perpetual;scope issuer/unit-unverified product,quote USD distinct from native margin USDC."
+    },
+    {
+      "key": [
+        "bitget",
+        "DXYUSDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "isRwa YES alone does not certify index composition/issuer;scope unknown RWA,retain native single USDT collateral."
+    },
+    {
+      "key": [
+        "lighter",
+        "ASELS",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "note": "New market_id10635/deployer lighter active replaces absent8286/external. New independent product ambiguous pending issuer/unit review;not old inactive contract reactivation."
     }
   ],
-  "lastUpdatedAt": "2026-11-16"
+  "lastUpdatedAt": "2026-11-17"
 }

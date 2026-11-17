@@ -4,6 +4,21 @@
   "asset_aliases": [],
   "market_overrides": [
     {
+      "canonical_symbol": "ANT/USD",
+      "settlement_asset": "USD",
+      "unit_multiplier": 1,
+      "exchange": "arcus",
+      "raw_symbol": "ANT-USD",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:arcus:offline:ant-usd",
+      "underlying_id": "equity:arcus:offline:ant-usd",
+      "comparison_key": "equity:arcus:offline:ant-usd/USD",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "offline_perpetual"
+    },
+    {
       "exchange": "arcus",
       "raw_symbol": "CBRS-USD",
       "market_type": "perpetual",
@@ -3319,6 +3334,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "DXY/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "DXYUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:bitget:perpetual:dxyusdt",
+      "underlying_id": "rwa:bitget:perpetual:dxyusdt",
+      "comparison_key": "rwa:bitget:perpetual:dxyusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "bitget",
@@ -35381,14 +35411,17 @@
       "market_type": "perpetual",
       "canonical_symbol": "ASELS/USDC",
       "asset_class": "unknown",
-      "asset_id": "unknown:lighter:external:8286:asels",
-      "underlying_id": "unknown:lighter:external:8286:asels",
-      "comparison_key": "unknown:lighter:external:8286:asels/USDC",
+      "asset_id": "unknown:lighter:perpetual:10635:asels",
+      "underlying_id": "unknown:lighter:perpetual:10635:asels",
+      "comparison_key": "unknown:lighter:perpetual:10635:asels/USDC",
       "instrument_kind": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1,
-      "comparison_status": "prohibited",
-      "contract_type": "inactive_perpetual"
+      "comparison_status": "ambiguous",
+      "contract_type": "perpetual",
+      "unit_alias": "ASELS",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "lighter",
@@ -39735,6 +39768,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "ZETA/USD",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "qfex",
+      "raw_symbol": "ZETA-USD",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:qfex:perpetual:zeta-usd",
+      "underlying_id": "equity:qfex:perpetual:zeta-usd",
+      "comparison_key": "equity:qfex:perpetual:zeta-usd/USD",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "qfex",
       "raw_symbol": "ZM-USD",
       "market_type": "perpetual",
@@ -40285,6 +40333,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "EWZS/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "EWZS",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:ewzs",
+      "underlying_id": "equity:variational:perpetual:ewzs",
+      "comparison_key": "equity:variational:perpetual:ewzs/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "variational",
