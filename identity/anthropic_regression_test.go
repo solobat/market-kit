@@ -2,7 +2,7 @@ package identity
 
 import "testing"
 
-func TestAnthropicPreIPOHasSharedUnderlyingAndDistinctLifecycle(t *testing.T) {
+func TestAnthropicRebaseKeepsRetiredAndLiveProductsDistinct(t *testing.T) {
 	reg, err := LoadDefaultRegistry()
 	if err != nil {
 		t.Fatal(err)
@@ -17,17 +17,33 @@ func TestAnthropicPreIPOHasSharedUnderlyingAndDistinctLifecycle(t *testing.T) {
 	} {
 		result := r.Resolve(q)
 		m := result.Market
-		if result.Status != ResolveResolved || m == nil || m.BaseAsset != "ANTHROPIC" || m.AssetClass != "rwa_stock" || m.UnderlyingID != "equity:private:anthropic" || m.ComparisonStatus != ComparisonAmbiguous || m.UnitMultiplier != 1 {
+		if result.Status != ResolveResolved || m == nil || m.BaseAsset != "ANTHROPIC" || m.AssetClass != "rwa_stock" || m.UnitMultiplier != 1 {
 			t.Fatalf("incorrect Anthropic identity: %+v market=%+v", result, m)
 		}
 		if q.Exchange == "binance" {
+			if m.ComparisonStatus != ComparisonProhibited || m.ContractType != "settling_perpetual" {
+				t.Fatalf("retired pre-rebase contract is not quarantined: %+v", m)
+			}
 			binance = m
 		} else {
+			if m.UnderlyingID != "equity:private:anthropic" || m.ComparisonStatus != ComparisonAmbiguous {
+				t.Fatalf("Entropy identity or unit-review boundary changed: %+v", m)
+			}
 			entropy = m
 		}
 	}
 	if binance.AssetID == entropy.AssetID || binance.ComparisonKey == entropy.ComparisonKey || entropy.SettlementAsset != "USDC" || binance.SettlementAsset != "USDT" {
 		t.Fatal("distinct lifecycle or settlement boundary lost", binance, entropy)
+	}
+	for _, exchange := range []string{"binance", "bitget"} {
+		result := r.Resolve(ResolveRequest{Exchange: exchange, Symbol: "ANTUSDT", MarketTypeHint: "perpetual"})
+		m := result.Market
+		if result.Status != ResolveResolved || m == nil || m.AssetClass != "rwa_stock" || m.ComparisonStatus != ComparisonAmbiguous {
+			t.Fatalf("post-rebase product lost independent unit review: %+v", result)
+		}
+		if m.AssetID == binance.AssetID || m.ComparisonKey == binance.ComparisonKey || m.ComparisonKey == entropy.ComparisonKey {
+			t.Fatalf("post-rebase product merged with old units: %+v", m)
+		}
 	}
 	for _, q := range []ResolveRequest{
 		{Exchange: "binance", Symbol: "ANTHUSDT", MarketTypeHint: "spot"},

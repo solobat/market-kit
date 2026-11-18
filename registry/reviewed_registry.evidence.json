@@ -43620,7 +43620,185 @@
       "reviewedAt": "2026-11-17T01:10:15.200837+00:00",
       "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
       "note": "New market_id10635/deployer lighter active replaces absent8286/external. New independent product ambiguous pending issuer/unit review;not old inactive contract reactivation."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "binance",
+        "ANTHROPICUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "announcement": "https://www.binance.com/en/support/announcement/detail/0dc9c6bdb729413ba54ba68ca83403e1",
+      "note": "Old pre-IPO unit isolated. Binance/Aster native SETTLING;Bitget official rename and 13.116 contract resize plus absent old catalog. No old/new 1:1 alias or cross-venue ratio inferred."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "aster",
+        "ANTHROPICUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "announcement": null,
+      "note": "Old pre-IPO unit isolated. Binance/Aster native SETTLING;Bitget official rename and 13.116 contract resize plus absent old catalog. No old/new 1:1 alias or cross-venue ratio inferred."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "aster",
+        "ANTHROPICUSD1",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "announcement": null,
+      "note": "Old pre-IPO unit isolated. Binance/Aster native SETTLING;Bitget official rename and 13.116 contract resize plus absent old catalog. No old/new 1:1 alias or cross-venue ratio inferred."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "bitget",
+        "ANTHROPICUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "announcement": "https://www.bitgetapp.com/support/articles/12560603900687",
+      "note": "Old pre-IPO unit isolated. Binance/Aster native SETTLING;Bitget official rename and 13.116 contract resize plus absent old catalog. No old/new 1:1 alias or cross-venue ratio inferred."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "binance",
+        "ANTUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "announcement": "https://www.binance.com/en/support/announcement/detail/0dc9c6bdb729413ba54ba68ca83403e1",
+      "note": "Current separate native contract. Binance/Bitget official13.116 resize evidence recorded;Aster generic COIN metadata insufficient issuer/unit proof,retain unknown. Unit multiplier not set to corporate-action factor without common canonical unit framework."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "aster",
+        "ANTUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "announcement": null,
+      "note": "Current separate native contract. Binance/Bitget official13.116 resize evidence recorded;Aster generic COIN metadata insufficient issuer/unit proof,retain unknown. Unit multiplier not set to corporate-action factor without common canonical unit framework."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "aster",
+        "ANTUSD1",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "announcement": null,
+      "note": "Current separate native contract. Binance/Bitget official13.116 resize evidence recorded;Aster generic COIN metadata insufficient issuer/unit proof,retain unknown. Unit multiplier not set to corporate-action factor without common canonical unit framework."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "bitget",
+        "ANTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "announcement": "https://www.bitgetapp.com/support/articles/12560603900687",
+      "note": "Current separate native contract. Binance/Bitget official13.116 resize evidence recorded;Aster generic COIN metadata insufficient issuer/unit proof,retain unknown. Unit multiplier not set to corporate-action factor without common canonical unit framework."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "lighter",
+        "ANTHROPIC",
+        "perpetual"
+      ],
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "announcement": null,
+      "note": "Native193 remains active while10902ANT newly appears. Different product IDs,no inferred unit equality or rebase ratio."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "lighter",
+        "ANT",
+        "perpetual"
+      ],
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "announcement": null,
+      "note": "Native10902/lighter/active;name alone not issuer or unit proof. Not Aragon ANT or native193ANTHROPIC alias."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "variational",
+        "ANTHROPIC",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "announcement": null,
+      "note": "Absent current stats;newANT names AnthropicPBC. Absence alone not independently verified delisting,retain ambiguous not prohibited;no conversion ratio inferred."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "variational",
+        "ANT",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "announcement": null,
+      "note": "Official name AnthropicPBC;correct unknown to stock per market,new contract units pending independent verification."
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "bitget",
+        "RHZNUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "note": "Official isReality yes/symbolType stock. RHZN Black Hills ISINUS0921131092,not HZN inferred issuer;RINTW 2xLongINTCDailyETF ISINUS38747R5533. Separate wrappers,do not treat leverage as fixed hedge-unitMultiplier.",
+      "official": {
+        "symbol": "RHZNUSDT",
+        "fullName": "Black Hills Corporation",
+        "isin": "US0921131092",
+        "symbolType": "stock",
+        "isReality": "yes",
+        "status": "online"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-18T01:03:35.162741+00:00",
+      "key": [
+        "bitget",
+        "RINTWUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "note": "Official isReality yes/symbolType stock. RHZN Black Hills ISINUS0921131092,not HZN inferred issuer;RINTW 2xLongINTCDailyETF ISINUS38747R5533. Separate wrappers,do not treat leverage as fixed hedge-unitMultiplier.",
+      "official": {
+        "symbol": "RINTWUSDT",
+        "fullName": "2x Long INTC Daily ETF",
+        "isin": "US38747R5533",
+        "symbolType": "stock",
+        "isReality": "yes",
+        "status": "online"
+      }
+    },
+    {
+      "key": [
+        "binance",
+        "ANTHROPIC/USDT",
+        "perpetual"
+      ],
+      "reviewedAt": "2026-11-18T01:04:40.033719+00:00",
+      "source": "https://www.binance.com/en/support/announcement/detail/0dc9c6bdb729413ba54ba68ca83403e1",
+      "note": "Existing raw slash alias for same superseded contract must match compact raw form to avoid multiple explicit overrides."
     }
   ],
-  "lastUpdatedAt": "2026-11-17"
+  "lastUpdatedAt": "2026-11-18"
 }
