@@ -1152,6 +1152,21 @@
       "contract_type": "perpetual"
     },
     {
+      "canonical_symbol": "ARTY/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "ARTYUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:artyusdt",
+      "underlying_id": "equity:binance:perpetual:artyusdt",
+      "comparison_key": "equity:binance:perpetual:artyusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "ATAUSDT",
       "market_type": "perpetual",
@@ -1253,6 +1268,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "perpetual",
       "settlement_asset": "USDT"
+    },
+    {
+      "canonical_symbol": "BITO/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "BITOUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:corporate-action:bito-20261119",
+      "underlying_id": "equity:binance:corporate-action:bito-20261119",
+      "comparison_key": "equity:binance:corporate-action:bito-20261119/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "corporate_action_halt_perpetual"
     },
     {
       "exchange": "binance",
@@ -1392,6 +1422,21 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1806048000000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "CCJ/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "CCJUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:ccjusdt",
+      "underlying_id": "equity:binance:perpetual:ccjusdt",
+      "comparison_key": "equity:binance:perpetual:ccjusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
     },
     {
       "exchange": "binance",
@@ -1726,6 +1771,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "ETN/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "ETNUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:etnusdt",
+      "underlying_id": "equity:binance:perpetual:etnusdt",
+      "comparison_key": "equity:binance:perpetual:etnusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "FIOUSDT",
       "market_type": "perpetual",
@@ -2022,6 +2082,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "IBIT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "IBITUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:ibitusdt",
+      "underlying_id": "equity:binance:perpetual:ibitusdt",
+      "comparison_key": "equity:binance:perpetual:ibitusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "ICXUSDT",
       "market_type": "perpetual",
@@ -2050,6 +2125,21 @@
       "contract_type": "settling_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "IGV/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "IGVUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:igvusdt",
+      "underlying_id": "equity:binance:perpetual:igvusdt",
+      "comparison_key": "equity:binance:perpetual:igvusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
     },
     {
       "exchange": "binance",
@@ -2862,6 +2952,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "SOXX/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "SOXXUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:soxxusdt",
+      "underlying_id": "equity:binance:perpetual:soxxusdt",
+      "comparison_key": "equity:binance:perpetual:soxxusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "STGUSDT",
       "market_type": "perpetual",
@@ -3342,6 +3447,21 @@
       "contract_type": "perpetual"
     },
     {
+      "canonical_symbol": "ARTY/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "ARTYUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:artyusdt",
+      "underlying_id": "equity:bitget:perpetual:artyusdt",
+      "comparison_key": "equity:bitget:perpetual:artyusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "BHARTIARTLUSDT",
       "market_type": "perpetual",
@@ -3370,6 +3490,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "CCJ/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "CCJUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:ccjusdt",
+      "underlying_id": "equity:bitget:perpetual:ccjusdt",
+      "comparison_key": "equity:bitget:perpetual:ccjusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "bitget",
@@ -3492,6 +3627,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "ETN/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "ETNUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:bitget:perpetual:etnusdt",
+      "underlying_id": "rwa:bitget:perpetual:etnusdt",
+      "comparison_key": "rwa:bitget:perpetual:etnusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "EWZSUSDT",
       "market_type": "perpetual",
@@ -3597,6 +3747,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "IBIT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "IBITUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:bitget:perpetual:ibitusdt",
+      "underlying_id": "rwa:bitget:perpetual:ibitusdt",
+      "comparison_key": "rwa:bitget:perpetual:ibitusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "IBKRUSDT",
       "market_type": "perpetual",
@@ -3625,6 +3790,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "IGV/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "IGVUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:igvusdt",
+      "underlying_id": "equity:bitget:perpetual:igvusdt",
+      "comparison_key": "equity:bitget:perpetual:igvusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "bitget",
@@ -3805,6 +3985,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "NEM/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "NEMUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:nemusdt",
+      "underlying_id": "equity:bitget:perpetual:nemusdt",
+      "comparison_key": "equity:bitget:perpetual:nemusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "bitget",
@@ -24427,6 +24622,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "SOXX/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "SOXXUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:bitget:perpetual:soxxusdt",
+      "underlying_id": "rwa:bitget:perpetual:soxxusdt",
+      "comparison_key": "rwa:bitget:perpetual:soxxusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "SPOTUSDT",
       "market_type": "perpetual",
@@ -24682,6 +24892,21 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1794560400000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "ARTY/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bybit",
+      "raw_symbol": "ARTYUSDT",
+      "market_type": "spot",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:delisted:artyusdt",
+      "underlying_id": "crypto:bybit:delisted:artyusdt",
+      "comparison_key": "crypto:bybit:delisted:artyusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "spot",
+      "contract_type": "delisted_spot"
     },
     {
       "exchange": "bybit",
@@ -36073,6 +36298,21 @@
       "settlement_asset": "USDC"
     },
     {
+      "canonical_symbol": "SNDK/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "lighter",
+      "raw_symbol": "SNDK",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:lighter:inactive:139:sndk",
+      "underlying_id": "equity:lighter:inactive:139:sndk",
+      "comparison_key": "equity:lighter:inactive:139:sndk/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "inactive_perpetual"
+    },
+    {
       "exchange": "lighter",
       "raw_symbol": "SOXS",
       "market_type": "perpetual",
@@ -40658,6 +40898,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "HUT/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "HUT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:hut",
+      "underlying_id": "equity:variational:perpetual:hut",
+      "comparison_key": "equity:variational:perpetual:hut/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "variational",
       "raw_symbol": "IBKR",
       "market_type": "perpetual",
@@ -40881,6 +41136,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "PFE/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "PFE",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:pfe",
+      "underlying_id": "equity:variational:perpetual:pfe",
+      "comparison_key": "equity:variational:perpetual:pfe/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "variational",
@@ -41359,6 +41629,36 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "VKTX/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "VKTX",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:vktx",
+      "underlying_id": "equity:variational:perpetual:vktx",
+      "comparison_key": "equity:variational:perpetual:vktx/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
+      "canonical_symbol": "VRT/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "VRT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:vrt",
+      "underlying_id": "equity:variational:perpetual:vrt",
+      "comparison_key": "equity:variational:perpetual:vrt/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "variational",

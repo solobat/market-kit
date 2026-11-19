@@ -43798,7 +43798,334 @@
       "reviewedAt": "2026-11-18T01:04:40.033719+00:00",
       "source": "https://www.binance.com/en/support/announcement/detail/0dc9c6bdb729413ba54ba68ca83403e1",
       "note": "Existing raw slash alias for same superseded contract must match compact raw form to avoid multiple explicit overrides."
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.205905+00:00",
+      "key": [
+        "binance",
+        "BITOUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.com/en/support/announcement/detail/dfd8cf5e698146ce83b560026529a752",
+      "note": "Native TRADING_HALT during1-for2reverse split,scale0.5. Do not globally encode split ratio or automatically reenable once trading resumes.",
+      "official": {
+        "symbol": "BITOUSDT",
+        "status": "TRADING_HALT",
+        "contractType": "TRADIFI_PERPETUAL",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.206382+00:00",
+      "key": [
+        "lighter",
+        "SNDK",
+        "perpetual"
+      ],
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "note": "Native139 inactive;otherproviders not inferred inactive.",
+      "official": {
+        "symbol": "SNDK",
+        "market_id": 139,
+        "market_deployer": "lighter",
+        "status": "inactive"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.206595+00:00",
+      "key": [
+        "binance",
+        "SOXXUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "SOXXUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.206808+00:00",
+      "key": [
+        "binance",
+        "IGVUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "IGVUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.207017+00:00",
+      "key": [
+        "binance",
+        "ARTYUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "ARTYUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.207222+00:00",
+      "key": [
+        "binance",
+        "IBITUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "IBITUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.207433+00:00",
+      "key": [
+        "binance",
+        "CCJUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "CCJUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.207636+00:00",
+      "key": [
+        "binance",
+        "ETNUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.bh/en/support/announcement/detail/e881bca4de484755b172ec53141bd422",
+      "note": "Official newTradFi listing and nativeEQUITY. Keep venue product and unit review;ETFunderlying notcrypto or fixedunits comparison.",
+      "official": {
+        "symbol": "ETNUSDT",
+        "status": "TRADING",
+        "contractType": "TRADIFI_PERPETUAL",
+        "underlyingType": "EQUITY",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.207841+00:00",
+      "key": [
+        "variational",
+        "PFE",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Official full company name corrects crypto per market;contractunit remains unverified.",
+      "official": {
+        "ticker": "PFE",
+        "name": "Pfizer Inc."
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.208042+00:00",
+      "key": [
+        "variational",
+        "HUT",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Official full company name corrects crypto per market;contractunit remains unverified.",
+      "official": {
+        "ticker": "HUT",
+        "name": "Hut 8 Corp."
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.208243+00:00",
+      "key": [
+        "variational",
+        "VKTX",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Official full company name corrects crypto per market;contractunit remains unverified.",
+      "official": {
+        "ticker": "VKTX",
+        "name": "Viking Therapeutics, Inc."
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.208444+00:00",
+      "key": [
+        "variational",
+        "VRT",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Official full company name corrects crypto per market;contractunit remains unverified.",
+      "official": {
+        "ticker": "VRT",
+        "name": "Vertiv Holdings Co"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.208662+00:00",
+      "key": [
+        "bitget",
+        "SOXXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "SOXXUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.208875+00:00",
+      "key": [
+        "bitget",
+        "IGVUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "IGVUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.209092+00:00",
+      "key": [
+        "bitget",
+        "ARTYUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "ARTYUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.209309+00:00",
+      "key": [
+        "bitget",
+        "IBITUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "IBITUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.209524+00:00",
+      "key": [
+        "bitget",
+        "CCJUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "CCJUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.209739+00:00",
+      "key": [
+        "bitget",
+        "ETNUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "ETNUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.209961+00:00",
+      "key": [
+        "bitget",
+        "NEMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bitget.com/api/v2/mix/market/contracts?productType=USDT-FUTURES",
+      "note": "NativeisRwaYES/singleUSDTmargin. IGV/ARTY/CCJ/NEM official stock listing title https://www.bitgetapps.com/support/articles/12560603900923;remainingisRwaalone insufficient issuer/categoryproof. No global ticker join.",
+      "official": {
+        "symbol": "NEMUSDT",
+        "isRwa": "YES",
+        "symbolStatus": "normal",
+        "supportMarginCoins": [
+          "USDT"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-19T01:09:38.210164+00:00",
+      "key": [
+        "bybit",
+        "ARTYUSDT",
+        "spot"
+      ],
+      "source": "https://announcements.bybit.com/en/article/delisting-of-arty-cta-gtai-lbtc-mbox-naka-u--art81c9cb138ade/",
+      "note": "Official token delistingJuly16 08UTC;historical crypto spot cannot becomeiSharesETF due globalARTYstock hint.",
+      "official": null
     }
   ],
-  "lastUpdatedAt": "2026-11-18"
+  "lastUpdatedAt": "2026-11-19"
 }
