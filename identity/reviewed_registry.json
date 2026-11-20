@@ -11,12 +11,15 @@
       "raw_symbol": "ANT-USD",
       "market_type": "perpetual",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:arcus:offline:ant-usd",
-      "underlying_id": "equity:arcus:offline:ant-usd",
-      "comparison_key": "equity:arcus:offline:ant-usd/USD",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:arcus:perpetual:ant-usd",
+      "underlying_id": "equity:arcus:perpetual:ant-usd",
+      "comparison_key": "equity:arcus:perpetual:ant-usd/USD",
+      "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
-      "contract_type": "offline_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "ANT",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "arcus",
@@ -710,6 +713,36 @@
       "unit_multiplier": 1
     },
     {
+      "unit_multiplier": 1,
+      "canonical_symbol": "SNDK/USD1",
+      "settlement_asset": "USD1",
+      "exchange": "aster",
+      "raw_symbol": "SNDKUSD1",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "unknown:aster:pre_settle:sndkusd1",
+      "underlying_id": "unknown:aster:pre_settle:sndkusd1",
+      "comparison_key": "unknown:aster:pre_settle:sndkusd1/USD1",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "pre_settle_perpetual"
+    },
+    {
+      "canonical_symbol": "SNDK/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "aster",
+      "raw_symbol": "SNDKUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:aster:pre_settle:sndkusdt",
+      "underlying_id": "equity:aster:pre_settle:sndkusdt",
+      "comparison_key": "equity:aster:pre_settle:sndkusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "pre_settle_perpetual"
+    },
+    {
       "exchange": "aster",
       "raw_symbol": "STGUSDT",
       "market_type": "perpetual",
@@ -858,6 +891,36 @@
       "settlement_asset": "USDT",
       "contract_type": "inactive_perpetual",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "SNDK/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "backpack",
+      "raw_symbol": "SNDK.US_USDC",
+      "market_type": "spot",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:backpack:closed:sndk.us_usdc",
+      "underlying_id": "equity:backpack:closed:sndk.us_usdc",
+      "comparison_key": "equity:backpack:closed:sndk.us_usdc/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "spot",
+      "contract_type": "closed_spot"
+    },
+    {
+      "canonical_symbol": "SNDK/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "backpack",
+      "raw_symbol": "SNDK.US_USDC_PERP",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:backpack:closed:sndk.us_usdc_perp",
+      "underlying_id": "equity:backpack:closed:sndk.us_usdc_perp",
+      "comparison_key": "equity:backpack:closed:sndk.us_usdc_perp/USDC",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "closed_perpetual"
     },
     {
       "exchange": "binance",
@@ -2937,6 +3000,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "SNDK/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "SNDKUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:corporate-action:sndk-20261120",
+      "underlying_id": "equity:binance:corporate-action:sndk-20261120",
+      "comparison_key": "equity:binance:corporate-action:sndk-20261120/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "corporate_action_halt_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "SNTUSDT",
       "market_type": "perpetual",
@@ -4304,6 +4382,21 @@
       "comparison_status": "eligible",
       "instrument_kind": "spot",
       "settlement_asset": "USDT"
+    },
+    {
+      "canonical_symbol": "ANT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "RANTUSDT",
+      "market_type": "spot",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:reality:rantusdt",
+      "underlying_id": "equity:bitget:reality:rantusdt",
+      "comparison_key": "equity:bitget:reality:rantusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "tokenized_equity",
+      "contract_type": "reality_stock_token"
     },
     {
       "exchange": "bitget",
@@ -28300,6 +28393,21 @@
       "settlement_asset": "USD"
     },
     {
+      "canonical_symbol": "SNDK_24_5/USD",
+      "settlement_asset": "USD",
+      "unit_multiplier": 1,
+      "exchange": "extended",
+      "raw_symbol": "SNDK_24_5-USD",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:extended:reduce-only:sndk_24_5-usd",
+      "underlying_id": "equity:extended:reduce-only:sndk_24_5-usd",
+      "comparison_key": "equity:extended:reduce-only:sndk_24_5-usd/USD",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "reduce_only_perpetual"
+    },
+    {
       "exchange": "extended",
       "raw_symbol": "SNDK_24_5/USD",
       "market_type": "perpetual",
@@ -36692,6 +36800,21 @@
       "unit_multiplier": 1
     },
     {
+      "unit_multiplier": 1,
+      "canonical_symbol": "ANT/USDT",
+      "settlement_asset": "USDT",
+      "exchange": "popdex",
+      "raw_symbol": "ANTUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:antusdt",
+      "underlying_id": "rwa:popdex:prelaunch:antusdt",
+      "comparison_key": "rwa:popdex:prelaunch:antusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "ARBUSDT",
       "market_type": "perpetual",
@@ -39554,13 +39677,17 @@
       "market_type": "perpetual",
       "canonical_symbol": "SNDK/USD",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:ticker:sndk",
-      "underlying_id": "equity:ticker:sndk",
-      "comparison_key": "equity:ticker:sndk/USD",
-      "comparison_status": "eligible",
+      "asset_id": "equity:qfex:inactive:sndk-usd",
+      "underlying_id": "equity:qfex:inactive:sndk-usd",
+      "comparison_key": "equity:qfex:inactive:sndk-usd/USD",
+      "comparison_status": "prohibited",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC",
-      "unit_multiplier": 1
+      "unit_multiplier": 1,
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1,
+      "contract_type": "inactive_perpetual"
     },
     {
       "exchange": "qfex",
@@ -41254,6 +41381,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "SNDK/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "SNDK",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:unit-review:sndk",
+      "underlying_id": "equity:variational:unit-review:sndk",
+      "comparison_key": "equity:variational:unit-review:sndk/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "variational",

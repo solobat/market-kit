@@ -44125,7 +44125,188 @@
       "source": "https://announcements.bybit.com/en/article/delisting-of-arty-cta-gtai-lbtc-mbox-naka-u--art81c9cb138ade/",
       "note": "Official token delistingJuly16 08UTC;historical crypto spot cannot becomeiSharesETF due globalARTYstock hint.",
       "official": null
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.680439+00:00",
+      "key": [
+        "binance",
+        "SNDKUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "note": "Late native TRADING_HALT after initial snapshot;issuer8-for1split not a global contract multiplier.",
+      "official": {
+        "symbol": "SNDKUSDT",
+        "status": "TRADING_HALT",
+        "contractType": "TRADIFI_PERPETUAL",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.680931+00:00",
+      "key": [
+        "aster",
+        "SNDKUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "note": "NativePRE_SETTLE;do not map unverifiedUSD1 contract to cashshares.",
+      "official": {
+        "symbol": "SNDKUSDT",
+        "status": "PRE_SETTLE",
+        "underlyingType": "COIN",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.681178+00:00",
+      "key": [
+        "aster",
+        "SNDKUSD1",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "note": "NativePRE_SETTLE;do not map unverifiedUSD1 contract to cashshares.",
+      "official": {
+        "symbol": "SNDKUSD1",
+        "status": "PRE_SETTLE",
+        "underlyingType": "COIN",
+        "marginAsset": "USD1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.681411+00:00",
+      "key": [
+        "backpack",
+        "SNDK.US_USDC",
+        "spot"
+      ],
+      "source": "https://api.backpack.exchange/api/v1/markets",
+      "note": "NativeorderBookStateClosed;spot/securities wrapper andperpetual separate products.",
+      "official": {
+        "symbol": "SNDK.US_USDC",
+        "marketType": "SPOT",
+        "rwaMarketType": "STOCK",
+        "orderBookState": "Closed",
+        "baseSymbol": "SNDK.US",
+        "quoteSymbol": "USDC"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.681644+00:00",
+      "key": [
+        "backpack",
+        "SNDK.US_USDC_PERP",
+        "perpetual"
+      ],
+      "source": "https://api.backpack.exchange/api/v1/markets",
+      "note": "NativeorderBookStateClosed;spot/securities wrapper andperpetual separate products.",
+      "official": {
+        "symbol": "SNDK.US_USDC_PERP",
+        "marketType": "PERP",
+        "rwaMarketType": "STOCK",
+        "orderBookState": "Closed",
+        "baseSymbol": "SNDK.US",
+        "quoteSymbol": "USDC"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.681873+00:00",
+      "key": [
+        "qfex",
+        "SNDK-USD",
+        "perpetual"
+      ],
+      "source": "https://api.qfex.com/refdata",
+      "note": "NativeINACTIVE/EQUITY and absentcurrent nativeperpetual;quoteUSD distinctmarginUSDC.",
+      "official": {
+        "symbol": "SNDK-USD",
+        "status": "INACTIVE",
+        "product_category": "EQUITY",
+        "margin_asset": "USDC"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.682107+00:00",
+      "key": [
+        "extended",
+        "SNDK_24_5-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "NativeREDUCE_ONLY,notindependentlyverifiednormal crossvenue product units.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "status": "REDUCE_ONLY",
+        "category": "RWA",
+        "subCategory": "Equity"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.682333+00:00",
+      "key": [
+        "variational",
+        "SNDK",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Absentcurrentstats duringissuer corporateaction;absencealone notindependentdelistingproof,keepambiguous notprohibited.",
+      "official": {
+        "currentListingPresent": false,
+        "previousName": "Sandisk Corporation"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.682349+00:00",
+      "key": [
+        "arcus",
+        "ANT-USD",
+        "perpetual"
+      ],
+      "source": "https://api.arcus.xyz/v1/markets",
+      "note": "NativeOFFLINEtoONLINE;removeobsoleteoffline label butissuer identitydoesnotcertifycontractunit equivalenttoshare orotherplatform.",
+      "official": {
+        "marketDisplayName": "ANT-USD",
+        "fullAssetName": "Anthropic",
+        "status": "ONLINE",
+        "category": "EQUITIES",
+        "type": "PERPETUAL"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.682594+00:00",
+      "key": [
+        "bitget",
+        "RANTUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "note": "NativeRealitystock wrapper;missingISIN retained,notAntcrypto orcashsharejoin.",
+      "official": {
+        "symbol": "RANTUSDT",
+        "fullName": "Anthropic",
+        "isin": null,
+        "symbolType": "stock",
+        "isReality": "yes",
+        "status": "online"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-20T01:03:35.682815+00:00",
+      "key": [
+        "popdex",
+        "ANTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "NativePreTrading/Rwa,nativealone notissuerproof. Localexistingguard awaitingdeployment;exactnewkey quarantine.",
+      "official": {
+        "symbol": "ANTUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-19"
+  "lastUpdatedAt": "2026-11-20"
 }
