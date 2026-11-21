@@ -44306,7 +44306,729 @@
         "assetClass": "Rwa",
         "settlementToken": "USDT"
       }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.954482+00:00",
+      "key": [
+        "bybit",
+        "BTCUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "BTCUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.955252+00:00",
+      "key": [
+        "bybit",
+        "DOGEUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "DOGEUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.955526+00:00",
+      "key": [
+        "bybit",
+        "ETHUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "ETHUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.955755+00:00",
+      "key": [
+        "bybit",
+        "HYPEUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "HYPEUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.955976+00:00",
+      "key": [
+        "bybit",
+        "MNTUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "MNTUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.956193+00:00",
+      "key": [
+        "bybit",
+        "SOLUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "SOLUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.956421+00:00",
+      "key": [
+        "bybit",
+        "XAUTUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "XAUTUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.956635+00:00",
+      "key": [
+        "bybit",
+        "XRPUSDT-20NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&limit=1000",
+      "note": "Officialexpiry elapsed,currentcatalogabsent;retainnativefutureID,expiry,settlementandmultipliers. Historicalmetadata onlyforexpiry evidence.",
+      "official": {
+        "symbol": "XRPUSDT-20NOV26",
+        "deliveryTime": "1795161600000",
+        "referenceDate": "2026-11-20"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.956849+00:00",
+      "key": [
+        "popdex",
+        "MONUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "MONUSDT",
+        "status": "PreTrading",
+        "assetClass": "Crypto",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.957060+00:00",
+      "key": [
+        "popdex",
+        "OPUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "OPUSDT",
+        "status": "PreTrading",
+        "assetClass": "Crypto",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.957272+00:00",
+      "key": [
+        "popdex",
+        "POLUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "POLUSDT",
+        "status": "PreTrading",
+        "assetClass": "Crypto",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.957484+00:00",
+      "key": [
+        "popdex",
+        "WLFIUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "WLFIUSDT",
+        "status": "PreTrading",
+        "assetClass": "Crypto",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.957695+00:00",
+      "key": [
+        "popdex",
+        "PENGUUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "PENGUUSDT",
+        "status": "PreTrading",
+        "assetClass": "Crypto",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.957906+00:00",
+      "key": [
+        "popdex",
+        "AVGOUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "AVGOUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.958121+00:00",
+      "key": [
+        "popdex",
+        "NFLXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "NFLXUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.958333+00:00",
+      "key": [
+        "popdex",
+        "LLYUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "LLYUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.958544+00:00",
+      "key": [
+        "popdex",
+        "JPMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "JPMUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.958762+00:00",
+      "key": [
+        "popdex",
+        "VUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "VUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.958974+00:00",
+      "key": [
+        "popdex",
+        "WMTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "WMTUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.959184+00:00",
+      "key": [
+        "popdex",
+        "QCOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "QCOMUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.959394+00:00",
+      "key": [
+        "popdex",
+        "UNHUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "UNHUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.959604+00:00",
+      "key": [
+        "popdex",
+        "AMATUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "AMATUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.959816+00:00",
+      "key": [
+        "popdex",
+        "PFEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "PFEUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.960031+00:00",
+      "key": [
+        "popdex",
+        "XOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "XOMUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.960241+00:00",
+      "key": [
+        "popdex",
+        "GMEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "OfficialPreTrading;genericRwa flag notissuerproof,nounverifiedstockclass orcrossvenuejoin.",
+      "official": {
+        "symbol": "GMEUSDT",
+        "status": "PreTrading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.960448+00:00",
+      "key": [
+        "binance",
+        "JNJUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.com/en/support/announcement/detail/5947f1c3a2904daab60fa896fe0fafea",
+      "note": "OfficialJNJcommonstock,AMDL2xdailyETF,NIOADR. Separatecontractunits;do notapplyfixed2xhedge orADRordinarysharejoin.",
+      "official": {
+        "symbol": "JNJUSDT",
+        "status": "TRADING",
+        "underlyingType": "EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.960655+00:00",
+      "key": [
+        "binance",
+        "AMDLUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.com/en/support/announcement/detail/5947f1c3a2904daab60fa896fe0fafea",
+      "note": "OfficialJNJcommonstock,AMDL2xdailyETF,NIOADR. Separatecontractunits;do notapplyfixed2xhedge orADRordinarysharejoin.",
+      "official": {
+        "symbol": "AMDLUSDT",
+        "status": "TRADING",
+        "underlyingType": "EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.960863+00:00",
+      "key": [
+        "binance",
+        "NIOUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.binance.com/en/support/announcement/detail/5947f1c3a2904daab60fa896fe0fafea",
+      "note": "OfficialJNJcommonstock,AMDL2xdailyETF,NIOADR. Separatecontractunits;do notapplyfixed2xhedge orADRordinarysharejoin.",
+      "official": {
+        "symbol": "NIOUSDT",
+        "status": "TRADING",
+        "underlyingType": "EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961082+00:00",
+      "key": [
+        "bitget",
+        "JNJUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitgetapps.com/support/articles/12560603901213",
+      "note": "Officialstockperps listing andnativeisRwaYES;issuerclassnotunitcomparability. DailyETFnotfixedunderlyingmultiplier.",
+      "official": {
+        "symbol": "JNJUSDT",
+        "isRwa": "YES",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "symbolStatus": "normal"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961315+00:00",
+      "key": [
+        "bitget",
+        "AMDLUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitgetapps.com/support/articles/12560603901213",
+      "note": "Officialstockperps listing andnativeisRwaYES;issuerclassnotunitcomparability. DailyETFnotfixedunderlyingmultiplier.",
+      "official": {
+        "symbol": "AMDLUSDT",
+        "isRwa": "YES",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "symbolStatus": "normal"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961521+00:00",
+      "key": [
+        "variational",
+        "TENCENT",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "OfficialTencentHoldingsLimited correctscrypto;currency/listing/contractunitsnotindependentlycertified.",
+      "official": {
+        "ticker": "TENCENT",
+        "name": "Tencent Holdings Limited"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961613+00:00",
+      "key": [
+        "aster",
+        "SNDKUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "note": "NativeTRADINGrestored;removeoldPRE_SETTLElabel butkeepindependentpostsplitunitreview.",
+      "official": {
+        "symbol": "SNDKUSDT",
+        "status": "TRADING",
+        "marginAsset": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961633+00:00",
+      "key": [
+        "aster",
+        "SNDKUSD1",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "note": "NativeTRADINGrestored;removeoldPRE_SETTLElabel butkeepindependentpostsplitunitreview.",
+      "official": {
+        "symbol": "SNDKUSD1",
+        "status": "TRADING",
+        "marginAsset": "USD1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961651+00:00",
+      "key": [
+        "backpack",
+        "SNDK.US_USDC",
+        "spot"
+      ],
+      "source": "https://api.backpack.exchange/api/v1/markets",
+      "note": "OrderbookOpenagain,notoldClosedcontractlabel;spotsecurities/perpetualrightsandunitsstayseparate.",
+      "official": {
+        "symbol": "SNDK.US_USDC",
+        "marketType": "SPOT",
+        "orderBookState": "Open",
+        "rwaMarketType": "STOCK"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961669+00:00",
+      "key": [
+        "backpack",
+        "SNDK.US_USDC_PERP",
+        "perpetual"
+      ],
+      "source": "https://api.backpack.exchange/api/v1/markets",
+      "note": "OrderbookOpenagain,notoldClosedcontractlabel;spotsecurities/perpetualrightsandunitsstayseparate.",
+      "official": {
+        "symbol": "SNDK.US_USDC_PERP",
+        "marketType": "PERP",
+        "orderBookState": "Open",
+        "rwaMarketType": "STOCK"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.961851+00:00",
+      "key": [
+        "lighter",
+        "SNDK",
+        "perpetual"
+      ],
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "note": "New11649active vsold139absent,inactivehistoryretained. Do notreuseoldproductID orassumeequalunits.",
+      "official": {
+        "symbol": "SNDK",
+        "market_id": 11649,
+        "market_deployer": "lighter",
+        "status": "active"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962047+00:00",
+      "key": [
+        "qfex",
+        "SNDK-USD",
+        "perpetual"
+      ],
+      "source": "https://api.qfex.com/refdata",
+      "note": "ACTIVEandcurrentnativePerpetualrestored;replaceobsoleteinactivelabelwithunitreview.",
+      "official": {
+        "symbol": "SNDK-USD",
+        "status": "ACTIVE",
+        "product_category": "EQUITY",
+        "margin_asset": "USDC"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962250+00:00",
+      "key": [
+        "qfex",
+        "UNITREE-CNY",
+        "perpetual"
+      ],
+      "source": "https://api.qfex.com/refdata",
+      "note": "OfficialRISK_REDUCE_ONLYandabsentnativePerpetual;CNYquotedoesnotmeanCNYmargin.",
+      "official": {
+        "symbol": "UNITREE-CNY",
+        "status": "RISK_REDUCE_ONLY",
+        "product_category": "EQUITY",
+        "margin_asset": "USDC"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962397+00:00",
+      "key": [
+        "extended",
+        "SNDK_24_5-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "NativePRELISTED. AlignexactassetName/quoteconsumerformandexplicitnativeuiName;do notcreateglobalSNDKalias.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "uiName": "SNDK-USD",
+        "assetName": "SNDK_24_5",
+        "collateralAssetName": "USD",
+        "status": "PRELISTED"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962541+00:00",
+      "key": [
+        "extended",
+        "SNDK_24_5/USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "NativePRELISTED. AlignexactassetName/quoteconsumerformandexplicitnativeuiName;do notcreateglobalSNDKalias.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "uiName": "SNDK-USD",
+        "assetName": "SNDK_24_5",
+        "collateralAssetName": "USD",
+        "status": "PRELISTED"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962751+00:00",
+      "key": [
+        "extended",
+        "SNDK-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "NativePRELISTED. AlignexactassetName/quoteconsumerformandexplicitnativeuiName;do notcreateglobalSNDKalias.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "uiName": "SNDK-USD",
+        "assetName": "SNDK_24_5",
+        "collateralAssetName": "USD",
+        "status": "PRELISTED"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.962939+00:00",
+      "key": [
+        "popdex",
+        "ANTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "NativeTrading;replaceprelaunchorpre-splitglobaljoinwithindependentunitreview. Rwaaloneisnotissuerproof.",
+      "official": {
+        "symbol": "ANTUSDT",
+        "status": "Trading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.963150+00:00",
+      "key": [
+        "popdex",
+        "SNDKUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "NativeTrading;replaceprelaunchorpre-splitglobaljoinwithindependentunitreview. Rwaaloneisnotissuerproof.",
+      "official": {
+        "symbol": "SNDKUSDT",
+        "status": "Trading",
+        "assetClass": "Rwa",
+        "settlementToken": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.963373+00:00",
+      "key": [
+        "bitget",
+        "CLEARUSDT",
+        "spot"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603901207",
+      "note": "CompletedCPOOLtoCLEAR1:1insideBitget,newERC20contract0x5200f539478F58D9aEA962095ba3b16b5e550E00. Classifycrypto;notglobaloldtoken/newtokenjoin.",
+      "official": {
+        "ratio": "1CPOOL=1CLEAR",
+        "contract": "0x5200f539478F58D9aEA962095ba3b16b5e550E00"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.963596+00:00",
+      "key": [
+        "bitget",
+        "CPOOLUSDT",
+        "spot"
+      ],
+      "source": "https://www.bitget.org/support/articles/12560603900583",
+      "note": "OldspotremovedNov18 04UTCduringcompletedtokenswap.",
+      "official": null
+    },
+    {
+      "reviewedAt": "2026-11-21T01:01:48.963816+00:00",
+      "key": [
+        "bitget",
+        "MANTRAUSDT",
+        "spot"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603900511",
+      "note": "OfficialspotdelistedNov20 10UTC;perpetualmarketunaffected.",
+      "official": null
     }
   ],
-  "lastUpdatedAt": "2026-11-20"
+  "lastUpdatedAt": "2026-11-21"
 }

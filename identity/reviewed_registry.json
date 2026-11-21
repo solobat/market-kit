@@ -720,12 +720,15 @@
       "raw_symbol": "SNDKUSD1",
       "market_type": "perpetual",
       "asset_class": "unknown",
-      "asset_id": "unknown:aster:pre_settle:sndkusd1",
-      "underlying_id": "unknown:aster:pre_settle:sndkusd1",
-      "comparison_key": "unknown:aster:pre_settle:sndkusd1/USD1",
-      "comparison_status": "prohibited",
+      "asset_id": "unknown:aster:post-split:sndkusd1",
+      "underlying_id": "unknown:aster:post-split:sndkusd1",
+      "comparison_key": "unknown:aster:post-split:sndkusd1/USD1",
+      "comparison_status": "ambiguous",
       "instrument_kind": "perpetual",
-      "contract_type": "pre_settle_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "canonical_symbol": "SNDK/USDT",
@@ -735,12 +738,15 @@
       "raw_symbol": "SNDKUSDT",
       "market_type": "perpetual",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:aster:pre_settle:sndkusdt",
-      "underlying_id": "equity:aster:pre_settle:sndkusdt",
-      "comparison_key": "equity:aster:pre_settle:sndkusdt/USDT",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:aster:post-split:sndkusdt",
+      "underlying_id": "equity:aster:post-split:sndkusdt",
+      "comparison_key": "equity:aster:post-split:sndkusdt/USDT",
+      "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
-      "contract_type": "pre_settle_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "aster",
@@ -900,12 +906,15 @@
       "raw_symbol": "SNDK.US_USDC",
       "market_type": "spot",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:backpack:closed:sndk.us_usdc",
-      "underlying_id": "equity:backpack:closed:sndk.us_usdc",
-      "comparison_key": "equity:backpack:closed:sndk.us_usdc/USDC",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:backpack:post-split:sndk.us_usdc",
+      "underlying_id": "equity:backpack:post-split:sndk.us_usdc",
+      "comparison_key": "equity:backpack:post-split:sndk.us_usdc/USDC",
+      "comparison_status": "ambiguous",
       "instrument_kind": "spot",
-      "contract_type": "closed_spot"
+      "contract_type": "spot",
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "canonical_symbol": "SNDK/USDC",
@@ -915,12 +924,15 @@
       "raw_symbol": "SNDK.US_USDC_PERP",
       "market_type": "perpetual",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:backpack:closed:sndk.us_usdc_perp",
-      "underlying_id": "equity:backpack:closed:sndk.us_usdc_perp",
-      "comparison_key": "equity:backpack:closed:sndk.us_usdc_perp/USDC",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:backpack:post-split:sndk.us_usdc_perp",
+      "underlying_id": "equity:backpack:post-split:sndk.us_usdc_perp",
+      "comparison_key": "equity:backpack:post-split:sndk.us_usdc_perp/USDC",
+      "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
-      "contract_type": "closed_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "binance",
@@ -1162,6 +1174,21 @@
       "contract_type": "settling_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "AMDL/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "AMDLUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:leveraged-etf:amdlusdt",
+      "underlying_id": "equity:binance:leveraged-etf:amdlusdt",
+      "comparison_key": "equity:binance:leveraged-etf:amdlusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
     },
     {
       "exchange": "binance",
@@ -2250,6 +2277,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "JNJ/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "JNJUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:perpetual:jnjusdt",
+      "underlying_id": "equity:binance:perpetual:jnjusdt",
+      "comparison_key": "equity:binance:perpetual:jnjusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "KDAUSDT",
       "market_type": "perpetual",
@@ -2503,6 +2545,21 @@
       "contract_type": "settling_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "NIO/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "binance",
+      "raw_symbol": "NIOUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:binance:adr:niousdt",
+      "underlying_id": "equity:binance:adr:niousdt",
+      "comparison_key": "equity:binance:adr:niousdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "tradifi_perpetual"
     },
     {
       "exchange": "binance",
@@ -3495,6 +3552,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "AMDL/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "AMDLUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:amdlusdt",
+      "underlying_id": "equity:bitget:perpetual:amdlusdt",
+      "comparison_key": "equity:bitget:perpetual:amdlusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "canonical_symbol": "ANTHROPIC/USDT",
       "settlement_asset": "USDT",
       "unit_multiplier": 1,
@@ -3585,6 +3657,21 @@
       "contract_type": "perpetual"
     },
     {
+      "canonical_symbol": "CLEAR/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "CLEARUSDT",
+      "market_type": "spot",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bitget:migrated:clearusdt",
+      "underlying_id": "crypto:project:clearpool",
+      "comparison_key": "crypto:bitget:migrated:clearusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "spot",
+      "contract_type": "spot"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "CLSUSDT",
       "market_type": "perpetual",
@@ -3598,6 +3685,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "CPOOL/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "CPOOLUSDT",
+      "market_type": "spot",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bitget:delisted:cpoolusdt",
+      "underlying_id": "crypto:bitget:delisted:cpoolusdt",
+      "comparison_key": "crypto:bitget:delisted:cpoolusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "spot",
+      "contract_type": "delisted_spot"
     },
     {
       "exchange": "bitget",
@@ -3930,6 +4032,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "JNJ/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "JNJUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:bitget:perpetual:jnjusdt",
+      "underlying_id": "equity:bitget:perpetual:jnjusdt",
+      "comparison_key": "equity:bitget:perpetual:jnjusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "bitget",
       "raw_symbol": "KMBUSDT",
       "market_type": "perpetual",
@@ -3973,6 +4090,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "MANTRA/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "bitget",
+      "raw_symbol": "MANTRAUSDT",
+      "market_type": "spot",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bitget:delisted:mantrausdt",
+      "underlying_id": "crypto:bitget:delisted:mantrausdt",
+      "comparison_key": "crypto:bitget:delisted:mantrausdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "spot",
+      "contract_type": "delisted_spot"
     },
     {
       "exchange": "bitget",
@@ -25083,6 +25215,22 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "BTC/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "BTCUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:btcusdt-20nov26",
+      "underlying_id": "crypto:ticker:btc",
+      "comparison_key": "crypto:bybit:future:btcusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
+    },
+    {
       "exchange": "bybit",
       "raw_symbol": "BTCUSDT-20NOV26",
       "market_type": "perpetual",
@@ -25358,6 +25506,22 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "DOGE/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "DOGEUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:dogeusdt-20nov26",
+      "underlying_id": "crypto:ticker:doge",
+      "comparison_key": "crypto:bybit:future:dogeusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
+    },
+    {
       "exchange": "bybit",
       "raw_symbol": "DOGEUSDT-20NOV26",
       "market_type": "perpetual",
@@ -25503,6 +25667,22 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1794556800000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "ETH/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "ETHUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:ethusdt-20nov26",
+      "underlying_id": "crypto:ticker:eth",
+      "comparison_key": "crypto:bybit:future:ethusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
     },
     {
       "exchange": "bybit",
@@ -25811,6 +25991,22 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "HYPE/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "HYPEUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:hypeusdt-20nov26",
+      "underlying_id": "crypto:ticker:hype",
+      "comparison_key": "crypto:bybit:future:hypeusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
+    },
+    {
       "exchange": "bybit",
       "raw_symbol": "HYPEUSDT-20NOV26",
       "market_type": "perpetual",
@@ -25971,6 +26167,22 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1794556800000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "MNT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "MNTUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:mntusdt-20nov26",
+      "underlying_id": "crypto:ticker:mnt",
+      "comparison_key": "crypto:bybit:future:mntusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
     },
     {
       "exchange": "bybit",
@@ -26208,6 +26420,22 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "SOL/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "SOLUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:solusdt-20nov26",
+      "underlying_id": "crypto:ticker:sol",
+      "comparison_key": "crypto:bybit:future:solusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
+    },
+    {
       "exchange": "bybit",
       "raw_symbol": "SOLUSDT-20NOV26",
       "market_type": "perpetual",
@@ -26368,6 +26596,22 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1794556800000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "XAUT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "XAUTUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "rwa_commodity",
+      "asset_id": "commodity:bybit:future:xautusdt-20nov26",
+      "underlying_id": "commodity:ticker:xaut",
+      "comparison_key": "commodity:bybit:future:xautusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
     },
     {
       "exchange": "bybit",
@@ -26545,6 +26789,22 @@
       "settlement_asset": "USDT",
       "expiry_at_ms": 1794556800000,
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "XRP/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "expiry_at_ms": 1795161600000,
+      "exchange": "bybit",
+      "raw_symbol": "XRPUSDT-20NOV26",
+      "market_type": "future",
+      "asset_class": "crypto",
+      "asset_id": "crypto:bybit:future:xrpusdt-20nov26",
+      "underlying_id": "crypto:ticker:xrp",
+      "comparison_key": "crypto:bybit:future:xrpusdt-20nov26/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "future",
+      "contract_type": "linear_futures"
     },
     {
       "exchange": "bybit",
@@ -28397,15 +28657,33 @@
       "settlement_asset": "USD",
       "unit_multiplier": 1,
       "exchange": "extended",
+      "raw_symbol": "SNDK-USD",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "underlying_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "comparison_key": "equity:extended:prelisted:sndk_24_5-usd/USD",
+      "comparison_status": "prohibited",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "SNDK_24_5/USD",
+      "settlement_asset": "USD",
+      "unit_multiplier": 1,
+      "exchange": "extended",
       "raw_symbol": "SNDK_24_5-USD",
       "market_type": "perpetual",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:extended:reduce-only:sndk_24_5-usd",
-      "underlying_id": "equity:extended:reduce-only:sndk_24_5-usd",
-      "comparison_key": "equity:extended:reduce-only:sndk_24_5-usd/USD",
+      "asset_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "underlying_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "comparison_key": "equity:extended:prelisted:sndk_24_5-usd/USD",
       "comparison_status": "prohibited",
       "instrument_kind": "equity_perpetual",
-      "contract_type": "reduce_only_perpetual"
+      "contract_type": "prelaunch_perpetual",
+      "unit_alias": "SNDK_24_5",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "extended",
@@ -28413,12 +28691,14 @@
       "market_type": "perpetual",
       "canonical_symbol": "SNDK_24_5/USD",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:ticker:sndk_24_5",
-      "underlying_id": "equity:ticker:sndk_24_5",
-      "comparison_key": "equity:ticker:sndk_24_5/USD",
-      "comparison_status": "eligible",
+      "asset_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "underlying_id": "equity:extended:prelisted:sndk_24_5-usd",
+      "comparison_key": "equity:extended:prelisted:sndk_24_5-usd/USD",
+      "comparison_status": "prohibited",
       "instrument_kind": "equity_perpetual",
-      "settlement_asset": "USD"
+      "settlement_asset": "USD",
+      "unit_multiplier": 1,
+      "contract_type": "prelaunch_perpetual"
     },
     {
       "exchange": "extended",
@@ -36413,12 +36693,15 @@
       "raw_symbol": "SNDK",
       "market_type": "perpetual",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:lighter:inactive:139:sndk",
-      "underlying_id": "equity:lighter:inactive:139:sndk",
-      "comparison_key": "equity:lighter:inactive:139:sndk/USDC",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:lighter:post-split:11649:sndk",
+      "underlying_id": "equity:lighter:post-split:11649:sndk",
+      "comparison_key": "equity:lighter:post-split:11649:sndk/USDC",
+      "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
-      "contract_type": "inactive_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "SNDK",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "lighter",
@@ -36770,6 +37053,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "AMAT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "AMATUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:amatusdt",
+      "underlying_id": "rwa:popdex:prelaunch:amatusdt",
+      "comparison_key": "rwa:popdex:prelaunch:amatusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "AMDUSDT",
       "market_type": "perpetual",
@@ -36807,12 +37105,15 @@
       "raw_symbol": "ANTUSDT",
       "market_type": "perpetual",
       "asset_class": "unknown",
-      "asset_id": "rwa:popdex:prelaunch:antusdt",
-      "underlying_id": "rwa:popdex:prelaunch:antusdt",
-      "comparison_key": "rwa:popdex:prelaunch:antusdt/USDT",
-      "comparison_status": "prohibited",
+      "asset_id": "rwa:popdex:active-unit-review:antusdt",
+      "underlying_id": "rwa:popdex:active-unit-review:antusdt",
+      "comparison_key": "rwa:popdex:active-unit-review:antusdt/USDT",
+      "comparison_status": "ambiguous",
       "instrument_kind": "perpetual",
-      "contract_type": "prelaunch_perpetual"
+      "contract_type": "perpetual",
+      "unit_alias": "ANT",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1
     },
     {
       "exchange": "popdex",
@@ -36830,6 +37131,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "AVGO/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "AVGOUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:avgousdt",
+      "underlying_id": "rwa:popdex:prelaunch:avgousdt",
+      "comparison_key": "rwa:popdex:prelaunch:avgousdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "CBRSUSDT",
       "market_type": "perpetual",
@@ -36845,6 +37161,36 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "GME/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "GMEUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:gmeusdt",
+      "underlying_id": "rwa:popdex:prelaunch:gmeusdt",
+      "comparison_key": "rwa:popdex:prelaunch:gmeusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "JPM/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "JPMUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:jpmusdt",
+      "underlying_id": "rwa:popdex:prelaunch:jpmusdt",
+      "comparison_key": "rwa:popdex:prelaunch:jpmusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "LITUSDT",
       "market_type": "perpetual",
@@ -36858,6 +37204,36 @@
       "contract_type": "prelaunch_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "LLY/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "LLYUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:llyusdt",
+      "underlying_id": "rwa:popdex:prelaunch:llyusdt",
+      "comparison_key": "rwa:popdex:prelaunch:llyusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "MON/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "MONUSDT",
+      "market_type": "perpetual",
+      "asset_class": "crypto",
+      "asset_id": "crypto:popdex:prelaunch:monusdt",
+      "underlying_id": "crypto:popdex:prelaunch:monusdt",
+      "comparison_key": "crypto:popdex:prelaunch:monusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
     },
     {
       "exchange": "popdex",
@@ -36905,6 +37281,111 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "NFLX/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "NFLXUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:nflxusdt",
+      "underlying_id": "rwa:popdex:prelaunch:nflxusdt",
+      "comparison_key": "rwa:popdex:prelaunch:nflxusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "OP/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "OPUSDT",
+      "market_type": "perpetual",
+      "asset_class": "crypto",
+      "asset_id": "crypto:popdex:prelaunch:opusdt",
+      "underlying_id": "crypto:popdex:prelaunch:opusdt",
+      "comparison_key": "crypto:popdex:prelaunch:opusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "PENGU/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "PENGUUSDT",
+      "market_type": "perpetual",
+      "asset_class": "crypto",
+      "asset_id": "crypto:popdex:prelaunch:penguusdt",
+      "underlying_id": "crypto:popdex:prelaunch:penguusdt",
+      "comparison_key": "crypto:popdex:prelaunch:penguusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "PFE/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "PFEUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:pfeusdt",
+      "underlying_id": "rwa:popdex:prelaunch:pfeusdt",
+      "comparison_key": "rwa:popdex:prelaunch:pfeusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "POL/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "POLUSDT",
+      "market_type": "perpetual",
+      "asset_class": "crypto",
+      "asset_id": "crypto:popdex:prelaunch:polusdt",
+      "underlying_id": "crypto:popdex:prelaunch:polusdt",
+      "comparison_key": "crypto:popdex:prelaunch:polusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "QCOM/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "QCOMUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:qcomusdt",
+      "underlying_id": "rwa:popdex:prelaunch:qcomusdt",
+      "comparison_key": "rwa:popdex:prelaunch:qcomusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "SNDK/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "SNDKUSDT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:popdex:active-unit-review:sndkusdt",
+      "underlying_id": "equity:popdex:active-unit-review:sndkusdt",
+      "comparison_key": "equity:popdex:active-unit-review:sndkusdt/USDT",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "STRKUSDT",
       "market_type": "perpetual",
@@ -36918,6 +37399,21 @@
       "contract_type": "prelaunch_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "UNH/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "UNHUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:unhusdt",
+      "underlying_id": "rwa:popdex:prelaunch:unhusdt",
+      "comparison_key": "rwa:popdex:prelaunch:unhusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
     },
     {
       "exchange": "popdex",
@@ -36935,6 +37431,21 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "V/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "VUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:vusdt",
+      "underlying_id": "rwa:popdex:prelaunch:vusdt",
+      "comparison_key": "rwa:popdex:prelaunch:vusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "VVVUSDT",
       "market_type": "perpetual",
@@ -36950,6 +37461,36 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "WLFI/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "WLFIUSDT",
+      "market_type": "perpetual",
+      "asset_class": "crypto",
+      "asset_id": "crypto:popdex:prelaunch:wlfiusdt",
+      "underlying_id": "crypto:popdex:prelaunch:wlfiusdt",
+      "comparison_key": "crypto:popdex:prelaunch:wlfiusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
+      "canonical_symbol": "WMT/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "WMTUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:wmtusdt",
+      "underlying_id": "rwa:popdex:prelaunch:wmtusdt",
+      "comparison_key": "rwa:popdex:prelaunch:wmtusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
+    },
+    {
       "exchange": "popdex",
       "raw_symbol": "XMRUSDT",
       "market_type": "perpetual",
@@ -36963,6 +37504,21 @@
       "contract_type": "prelaunch_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "XOM/USDT",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "popdex",
+      "raw_symbol": "XOMUSDT",
+      "market_type": "perpetual",
+      "asset_class": "unknown",
+      "asset_id": "rwa:popdex:prelaunch:xomusdt",
+      "underlying_id": "rwa:popdex:prelaunch:xomusdt",
+      "comparison_key": "rwa:popdex:prelaunch:xomusdt/USDT",
+      "comparison_status": "prohibited",
+      "instrument_kind": "perpetual",
+      "contract_type": "prelaunch_perpetual"
     },
     {
       "exchange": "popdex",
@@ -39677,17 +40233,17 @@
       "market_type": "perpetual",
       "canonical_symbol": "SNDK/USD",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:qfex:inactive:sndk-usd",
-      "underlying_id": "equity:qfex:inactive:sndk-usd",
-      "comparison_key": "equity:qfex:inactive:sndk-usd/USD",
-      "comparison_status": "prohibited",
+      "asset_id": "equity:qfex:post-split:sndk-usd",
+      "underlying_id": "equity:qfex:post-split:sndk-usd",
+      "comparison_key": "equity:qfex:post-split:sndk-usd/USD",
+      "comparison_status": "ambiguous",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1,
       "unit_alias": "SNDK",
       "canonical_price_multiplier": 1,
       "canonical_quantity_multiplier": 1,
-      "contract_type": "inactive_perpetual"
+      "contract_type": "perpetual"
     },
     {
       "exchange": "qfex",
@@ -39989,13 +40545,17 @@
       "market_type": "perpetual",
       "canonical_symbol": "UNITREE/CNY",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:ticker:unitree",
-      "underlying_id": "equity:ticker:unitree",
-      "comparison_key": "equity:ticker:unitree/CNY",
-      "comparison_status": "eligible",
+      "asset_id": "equity:qfex:risk-reduce-only:unitree-cny",
+      "underlying_id": "equity:qfex:risk-reduce-only:unitree-cny",
+      "comparison_key": "equity:qfex:risk-reduce-only:unitree-cny/CNY",
+      "comparison_status": "prohibited",
       "instrument_kind": "equity_perpetual",
       "settlement_asset": "USDC",
-      "unit_multiplier": 1
+      "unit_multiplier": 1,
+      "unit_alias": "UNITREE",
+      "canonical_price_multiplier": 1,
+      "canonical_quantity_multiplier": 1,
+      "contract_type": "reduce_only_perpetual"
     },
     {
       "exchange": "qfex",
@@ -41516,6 +42076,21 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "TENCENT/USDC",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "variational",
+      "raw_symbol": "TENCENT",
+      "market_type": "perpetual",
+      "asset_class": "rwa_stock",
+      "asset_id": "equity:variational:perpetual:tencent",
+      "underlying_id": "equity:variational:perpetual:tencent",
+      "comparison_key": "equity:variational:perpetual:tencent/USDC",
+      "comparison_status": "ambiguous",
+      "instrument_kind": "equity_perpetual",
+      "contract_type": "perpetual"
     },
     {
       "exchange": "variational",

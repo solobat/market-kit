@@ -1,6 +1,6 @@
 import json,collections,concurrent.futures,urllib.request,time,datetime,pathlib,re,hashlib
 import argparse
-from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints, native_market_statuses, expired_contract_review
+from security_metadata import read_catalog, compare_catalogs, extended_categories, variational_name_hints, native_market_statuses, expired_contract_review, source_identity_conflicts
 parser=argparse.ArgumentParser(description="Read-only full market-kit online identity audit; flags are review leads, not automatic merge decisions.")
 parser.add_argument('--inventory', required=True)
 parser.add_argument('--registry', required=True)
@@ -94,7 +94,7 @@ for i,batch in enumerate(batches):
     for target,mult in targets:
      if target!=b and base==b:flags.append('registered_alias_not_normalized')
      if target==base and mult!=1 and abs(m.get('unitMultiplier',1)-mult)>1e-9:flags.append('unit_multiplier_conflict')
-    if b!=base and not any(t[0]==base for t in targets):flags.append('base_changed_without_global_alias')
+    if b and b!=base and not any(t[0]==base for t in targets):flags.append('base_changed_without_global_alias')
    if m.get('unitMultiplier',1)!=1:
     mult=m['unitMultiplier'];p=m.get('canonicalPriceMultiplier',1);q=m.get('canonicalQuantityMultiplier',1)
     if abs(p*mult-1)>1e-8 or abs(q-mult)>1e-8:flags.append('unit_conversion_inconsistent')
@@ -106,7 +106,7 @@ for i,batch in enumerate(batches):
     if wrapped and wrapped[1] in assets and assets[wrapped[1]].get('asset_class')=='rwa_stock' and base==b:flags.append('wrapper_identity_review')
    if re.match(r'^(1000|10000|1000000|1M)[A-Z]',base) and m.get('unitMultiplier',1)==1:flags.append('scaled_name_review')
   if len({str(v.get('chain')) for v in sources if v.get('chain')})>1:flags.append('multiple_chains_single_resolve_key')
-  if len({(v['baseAsset'].upper(),v['quoteAsset'].upper(),v.get('assetClass') or v.get('assetClassHint') or '') for v in sources})>1:flags.append('conflicting_source_identity')
+  if source_identity_conflicts(sources):flags.append('conflicting_source_identity')
   row={'officialNativeStatus':native_status,'officialVariationalNameHint':vh,'officialSecurityChanges':security_changes,'key':list(k),'checkedAt':d.get('checkedAt'),'inventoryRows':len(sources),'inventory':sources,'result':result,'flags':sorted(set(flags))};rows.append(row)
   summary[k[0]]['markets']+=1;summary[k[0]][(result or {}).get('status','api_error')]+=1
   if flags:summary[k[0]]['flagged']+=1

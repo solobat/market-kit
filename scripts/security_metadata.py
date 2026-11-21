@@ -143,3 +143,18 @@ def expired_contract_review(market, now_ms):
     except (TypeError, ValueError):
         return False
     return expiry > 0 and expiry <= now_ms and market.get('comparisonStatus') != 'prohibited'
+
+
+def source_identity_conflicts(rows):
+    """Missing native fields are evidence gaps, not contradictory identities."""
+    aliases = {'stock': 'rwa_stock', 'equity': 'rwa_stock'}
+    values = [set(), set(), set()]
+    for row in rows:
+        base = (row.get('baseAsset') or '').upper()
+        quote = (row.get('quoteAsset') or '').upper()
+        category = (row.get('assetClass') or row.get('assetClassHint') or '').lower()
+        category = aliases.get(category, category)
+        for bucket, value in zip(values, (base, quote, category)):
+            if value and value not in ('unknown', 'unclassified'):
+                bucket.add(value)
+    return any(len(bucket) > 1 for bucket in values)
