@@ -45028,7 +45028,127 @@
       "source": "https://www.bitget.com/support/articles/12560603900511",
       "note": "OfficialspotdelistedNov20 10UTC;perpetualmarketunaffected.",
       "official": null
+    },
+    {
+      "reviewedAt": "2026-11-23T01:10:03.098302+00:00",
+      "key": [
+        "gate",
+        "ACE_USDT",
+        "spot"
+      ],
+      "source": "https://api.gateio.ws/api/v4/spot/currency_pairs",
+      "note": "Nativeuntradable,noteligiblecrossvenuecomparison. Exactspotmarket,noglobalACEaliasorclasschange.",
+      "official": {
+        "id": "ACE_USDT",
+        "base": "ACE",
+        "quote": "USDT",
+        "trade_status": "untradable"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-23T01:10:03.098889+00:00",
+      "key": [
+        "gate",
+        "ACE_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Nativein_delistingtrue. Retainquanto_multiplier0.1asnativecontractsizeevidence,notcanonicalprice/quantityunitmultiplier.",
+      "official": {
+        "name": "ACE_USDT",
+        "type": "direct",
+        "in_delisting": true,
+        "quanto_multiplier": "0.1",
+        "settle_price": null
+      }
+    },
+    {
+      "reviewedAt": "2026-11-23T01:10:03.099138+00:00",
+      "key": [
+        "hyperliquid",
+        "@1193",
+        "spot"
+      ],
+      "source": "https://api.hyperliquid.xyz/info",
+      "note": "IndependentnativetokenIdproduct;raw@marketpreserved. HXMRfullNameHyperliquidXMR-Wagyu.xyzdoesnotprovebackingor1:1nativeXMRunits;MONTRAname/addressenrichmentnotcrosschainidentityproof. Noinferredglobaltickeraliasorunderlyingbridgeconversion.",
+      "official": {
+        "market": {
+          "tokens": [
+            1339,
+            0
+          ],
+          "name": "@1193",
+          "index": 1193,
+          "isCanonical": false
+        },
+        "tokens": [
+          {
+            "index": 1339,
+            "name": "HXMR",
+            "tokenId": "0x700beac50c950503f401d218e52014e7",
+            "fullName": "Hyperliquid XMR - Wagyu.xyz",
+            "isCanonical": false,
+            "evmContract": null
+          },
+          {
+            "index": 0,
+            "name": "USDC",
+            "tokenId": "0x6d1e7cde53ba9467b783cb7c530ce054",
+            "fullName": null,
+            "isCanonical": true,
+            "evmContract": {
+              "address": "0x6b9e773128f453f5c2c60935ee2de2cbc5390a24",
+              "evm_extra_wei_decimals": -2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-23T01:10:03.099383+00:00",
+      "key": [
+        "hyperliquid",
+        "@1194",
+        "spot"
+      ],
+      "source": "https://api.hyperliquid.xyz/info",
+      "note": "IndependentnativetokenIdproduct;raw@marketpreserved. HXMRfullNameHyperliquidXMR-Wagyu.xyzdoesnotprovebackingor1:1nativeXMRunits;MONTRAname/addressenrichmentnotcrosschainidentityproof. Noinferredglobaltickeraliasorunderlyingbridgeconversion.",
+      "official": {
+        "market": {
+          "tokens": [
+            1334,
+            0
+          ],
+          "name": "@1194",
+          "index": 1194,
+          "isCanonical": false
+        },
+        "tokens": [
+          {
+            "index": 1334,
+            "name": "MONTRA",
+            "tokenId": "0xe71e2d154c1c50d9e18caa3c6175ec17",
+            "fullName": "Montra",
+            "isCanonical": false,
+            "evmContract": {
+              "address": "0x9ac909a79c54204fd541e474c35a06728dd6a16c",
+              "evm_extra_wei_decimals": 10
+            }
+          },
+          {
+            "index": 0,
+            "name": "USDC",
+            "tokenId": "0x6d1e7cde53ba9467b783cb7c530ce054",
+            "fullName": null,
+            "isCanonical": true,
+            "evmContract": {
+              "address": "0x6b9e773128f453f5c2c60935ee2de2cbc5390a24",
+              "evm_extra_wei_decimals": -2
+            }
+          }
+        ]
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-21"
+  "lastUpdatedAt": "2026-11-23"
 }

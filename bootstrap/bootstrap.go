@@ -996,6 +996,9 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 			FirstSeenAt:  seenAt,
 			LastSeenAt:   seenAt,
 		}
+		if strings.EqualFold(strings.TrimSpace(item.TradeStatus), "untradable") {
+			market.InstrumentMetadata = &discovery.InstrumentMetadata{Source: "gate", SourceURL: "https://api.gateio.ws/api/v4/spot/currency_pairs", ObservedAt: seenAt, NativeTradingStatus: "UNTRADABLE", SettlementAsset: market.QuoteAsset}
+		}
 		if discovery.ShouldIgnoreImportedMarket(market) {
 			continue
 		}
@@ -1050,6 +1053,19 @@ func fetchGate(ctx context.Context, client *http.Client) ([]discovery.ImportedMa
 			case "commodities":
 				market.AssetClassHint = "commodity"
 			}
+		}
+		if item.InDelisting {
+			// The USDT endpoint and exact native pair supply exclusion identity,
+			// not evidence that a missing contract_type is a crypto product.
+			if split := strings.LastIndex(market.Symbol, "_"); split > 0 && strings.EqualFold(market.Symbol[split+1:], "USDT") {
+				if market.BaseAsset == "" {
+					market.BaseAsset = market.Symbol[:split]
+				}
+				if market.QuoteAsset == "" {
+					market.QuoteAsset = "USDT"
+				}
+			}
+			market.InstrumentMetadata = &discovery.InstrumentMetadata{Source: "gate", SourceURL: "https://api.gateio.ws/api/v4/futures/usdt/contracts", ObservedAt: seenAt, NativeTradingStatus: "DELISTING", ContractType: item.ContractType, SettlementAsset: "USDT"}
 		}
 		if discovery.ShouldIgnoreImportedMarket(market) {
 			continue

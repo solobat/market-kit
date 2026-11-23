@@ -67,7 +67,7 @@ func DefaultInstrumentKind(marketType MarketType, assetClass string) string {
 // reference quote is not proof of settlement. Explicit venue evidence wins.
 func DefaultSettlementAsset(contractType, quote string) string {
 	switch strings.ToLower(strings.TrimSpace(contractType)) {
-	case "prelaunch_perpetual_unverified", "settling_perpetual_unverified", "stock_swap_unverified", "linear_swap_unverified", "inverse_swap_unverified", "rwa_perpetual_unverified", "multi_collateral_cfd", "dated_future_unverified", "linear_futures", "inverse_futures":
+	case "gate_delisting_perpetual_unverified", "gate_untradable_spot_unverified", "prelaunch_perpetual_unverified", "settling_perpetual_unverified", "stock_swap_unverified", "linear_swap_unverified", "inverse_swap_unverified", "rwa_perpetual_unverified", "multi_collateral_cfd", "dated_future_unverified", "linear_futures", "inverse_futures":
 		return ""
 	default:
 		return quote

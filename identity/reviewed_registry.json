@@ -29183,6 +29183,36 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "ACE/USDT",
+      "asset_class": "crypto",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "gate",
+      "raw_symbol": "ACE_USDT",
+      "market_type": "perpetual",
+      "asset_id": "crypto:gate:delisting:ace_usdt",
+      "underlying_id": "crypto:gate:delisting:ace_usdt",
+      "comparison_key": "crypto:gate:delisting:ace_usdt/USDT",
+      "comparison_status": "prohibited",
+      "contract_type": "delisting_perpetual"
+    },
+    {
+      "canonical_symbol": "ACE/USDT",
+      "asset_class": "crypto",
+      "instrument_kind": "spot",
+      "settlement_asset": "USDT",
+      "unit_multiplier": 1,
+      "exchange": "gate",
+      "raw_symbol": "ACE_USDT",
+      "market_type": "spot",
+      "asset_id": "crypto:gate:untradable:ace_usdt",
+      "underlying_id": "crypto:gate:untradable:ace_usdt",
+      "comparison_key": "crypto:gate:untradable:ace_usdt/USDT",
+      "comparison_status": "prohibited",
+      "contract_type": "untradable_spot"
+    },
+    {
       "exchange": "gate",
       "raw_symbol": "ADI_USDT",
       "market_type": "perpetual",
@@ -32796,6 +32826,36 @@
       "comparison_status": "eligible",
       "instrument_kind": "commodity_perpetual",
       "settlement_asset": "USD"
+    },
+    {
+      "canonical_symbol": "HXMR/USDC",
+      "asset_class": "crypto",
+      "instrument_kind": "spot",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "hyperliquid",
+      "raw_symbol": "@1193",
+      "market_type": "spot",
+      "asset_id": "crypto:hyperliquid:spot-token:0x700beac50c950503f401d218e52014e7",
+      "underlying_id": "crypto:hyperliquid:spot-token:0x700beac50c950503f401d218e52014e7",
+      "comparison_key": "crypto:hyperliquid:spot-token:0x700beac50c950503f401d218e52014e7/USDC",
+      "comparison_status": "ambiguous",
+      "contract_type": "spot"
+    },
+    {
+      "canonical_symbol": "MONTRA/USDC",
+      "asset_class": "crypto",
+      "instrument_kind": "spot",
+      "settlement_asset": "USDC",
+      "unit_multiplier": 1,
+      "exchange": "hyperliquid",
+      "raw_symbol": "@1194",
+      "market_type": "spot",
+      "asset_id": "crypto:hyperliquid:spot-token:0xe71e2d154c1c50d9e18caa3c6175ec17",
+      "underlying_id": "crypto:hyperliquid:spot-token:0xe71e2d154c1c50d9e18caa3c6175ec17",
+      "comparison_key": "crypto:hyperliquid:spot-token:0xe71e2d154c1c50d9e18caa3c6175ec17/USDC",
+      "comparison_status": "ambiguous",
+      "contract_type": "spot"
     },
     {
       "exchange": "hyperliquid",
