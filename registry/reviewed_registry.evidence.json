@@ -45148,7 +45148,2907 @@
           }
         ]
       }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.318069+00:00",
+      "key": [
+        "bybit",
+        "MPWRUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native symbolType stock. Independent venue product; share units and cash equity rights not certified.",
+      "official": {
+        "symbol": "MPWRUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "MPWR",
+        "quoteCoin": "USDT",
+        "launchTime": "1795425565000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "170.000",
+          "minOrderQty": "0.001",
+          "qtyStep": "0.001",
+          "postOnlyMaxOrderQty": "170.000",
+          "maxMktOrderQty": "43.000",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "MPWRUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3015,
+        "fullName": "Monolithic Power Systems Inc",
+        "marketRegion": "US",
+        "underlyingTicker": "MPWR",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.318315+00:00",
+      "key": [
+        "bybit",
+        "NXPIUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native symbolType stock. Independent venue product; share units and cash equity rights not certified.",
+      "official": {
+        "symbol": "NXPIUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "NXPI",
+        "quoteCoin": "USDT",
+        "launchTime": "1795425669000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "830.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "830.00",
+          "maxMktOrderQty": "207.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "NXPIUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3016,
+        "fullName": "Nxp Semiconductors N V",
+        "marketRegion": "US",
+        "underlyingTicker": "NXPI",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.318513+00:00",
+      "key": [
+        "bybit",
+        "SMTCUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native symbolType stock. Independent venue product; share units and cash equity rights not certified.",
+      "official": {
+        "symbol": "SMTCUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "SMTC",
+        "quoteCoin": "USDT",
+        "launchTime": "1795425796000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "2210.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "2210.00",
+          "maxMktOrderQty": "552.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "SMTCUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3017,
+        "fullName": "Semtech Corporation",
+        "marketRegion": "US",
+        "underlyingTicker": "SMTC",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.318712+00:00",
+      "key": [
+        "aster",
+        "COSTUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.asterdex.com/fapi/v1/exchangeInfo",
+      "note": "Native PRE_SETTLE exclusion; no automatic trading comparison.",
+      "official": {
+        "symbol": "COSTUSDT",
+        "filters": [
+          {
+            "minPrice": "0.01000",
+            "maxPrice": "20000",
+            "filterType": "PRICE_FILTER",
+            "tickSize": "0.01000"
+          },
+          {
+            "stepSize": "0.01",
+            "filterType": "LOT_SIZE",
+            "maxQty": "30000",
+            "minQty": "0.01"
+          },
+          {
+            "stepSize": "0.01",
+            "filterType": "MARKET_LOT_SIZE",
+            "maxQty": "2000",
+            "minQty": "0.01"
+          },
+          {
+            "limit": 200,
+            "filterType": "MAX_NUM_ORDERS"
+          },
+          {
+            "limit": 10,
+            "filterType": "MAX_NUM_ALGO_ORDERS"
+          },
+          {
+            "notional": "5",
+            "filterType": "MIN_NOTIONAL"
+          },
+          {
+            "multiplierDown": "0.9500",
+            "multiplierUp": "1.0500",
+            "ltMultiplierDown": "0.9500",
+            "multiplierDecimal": "4",
+            "filterType": "PERCENT_PRICE",
+            "ltMultiplierUp": "1.0500"
+          }
+        ],
+        "orderTypes": [
+          "LIMIT",
+          "MARKET",
+          "STOP",
+          "STOP_MARKET",
+          "TAKE_PROFIT",
+          "TAKE_PROFIT_MARKET",
+          "TRAILING_STOP_MARKET"
+        ],
+        "timeInForce": [
+          "GTC",
+          "IOC",
+          "GTX",
+          "HIDDEN"
+        ],
+        "createTime": 1781281516937,
+        "pair": "COSTUSDT",
+        "contractType": "PERPETUAL",
+        "deliveryDate": 4133404800000,
+        "onboardDate": 1781533800000,
+        "status": "PRE_SETTLE",
+        "maintMarginPercent": "16.6600",
+        "requiredMarginPercent": "33.3300",
+        "baseAsset": "COST",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "pricePrecision": 5,
+        "quantityPrecision": 2,
+        "baseAssetPrecision": 8,
+        "quotePrecision": 8,
+        "underlyingType": "COIN",
+        "underlyingSubType": [
+          "STOCK"
+        ],
+        "symbolType": 1,
+        "tradingMode": 1,
+        "name": "",
+        "channel": "nasdaq",
+        "sequenceNo": 0,
+        "twapMinNotional": "1000",
+        "imn": "4000.00",
+        "tags": [
+          "Costco",
+          "Stock",
+          "股票",
+          "好市多",
+          "好市",
+          "股票",
+          "好市多",
+          "好市"
+        ],
+        "settlePlan": 0,
+        "triggerProtect": "0.0500",
+        "liquidationFee": "0.025000",
+        "marketTakeBound": "0.05"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.319036+00:00",
+      "key": [
+        "popdex",
+        "MONUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "20040",
+        "symbol": "MONUSDT",
+        "baseToken": "MON",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "600",
+        "maxQty": "60000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40040",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50040",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.319394+00:00",
+      "key": [
+        "popdex",
+        "OPUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "20041",
+        "symbol": "OPUSDT",
+        "baseToken": "OP",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "100",
+        "maxQty": "10000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40041",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50041",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.319754+00:00",
+      "key": [
+        "popdex",
+        "POLUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "20042",
+        "symbol": "POLUSDT",
+        "baseToken": "POL",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "100",
+        "maxQty": "11000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40042",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50042",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.320120+00:00",
+      "key": [
+        "popdex",
+        "WLFIUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "20043",
+        "symbol": "WLFIUSDT",
+        "baseToken": "WLFI",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "200",
+        "maxQty": "21000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40043",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50043",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.320473+00:00",
+      "key": [
+        "popdex",
+        "PENGUUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "20044",
+        "symbol": "PENGUUSDT",
+        "baseToken": "PENGU",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.000001",
+        "lotSize": "1",
+        "minQty": "1000",
+        "maxQty": "160000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "6",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40044",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50044",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.320825+00:00",
+      "key": [
+        "popdex",
+        "AVGOUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21135",
+        "symbol": "AVGOUSDT",
+        "baseToken": "AVGO",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2900",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41135",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51135",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.321116+00:00",
+      "key": [
+        "popdex",
+        "NFLXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21136",
+        "symbol": "NFLXUSDT",
+        "baseToken": "NFLX",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "16000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41136",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51136",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.321313+00:00",
+      "key": [
+        "popdex",
+        "LLYUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21137",
+        "symbol": "LLYUSDT",
+        "baseToken": "LLY",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.1",
+        "lotSize": "0.001",
+        "minQty": "0.001",
+        "maxQty": "700",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "1",
+        "baseTokenPrecision": "3",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41137",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51137",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.321502+00:00",
+      "key": [
+        "popdex",
+        "JPMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21138",
+        "symbol": "JPMUSDT",
+        "baseToken": "JPM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2900",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41138",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51138",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.321693+00:00",
+      "key": [
+        "popdex",
+        "VUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21139",
+        "symbol": "VUSDT",
+        "baseToken": "V",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2400",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41139",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51139",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.321885+00:00",
+      "key": [
+        "popdex",
+        "WMTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21140",
+        "symbol": "WMTUSDT",
+        "baseToken": "WMT",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "8000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41140",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51140",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.322077+00:00",
+      "key": [
+        "popdex",
+        "QCOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21141",
+        "symbol": "QCOMUSDT",
+        "baseToken": "QCOM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "5600",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41141",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51141",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.322268+00:00",
+      "key": [
+        "popdex",
+        "UNHUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21142",
+        "symbol": "UNHUSDT",
+        "baseToken": "UNH",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2500",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41142",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51142",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.322459+00:00",
+      "key": [
+        "popdex",
+        "AMATUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21143",
+        "symbol": "AMATUSDT",
+        "baseToken": "AMAT",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2600",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41143",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51143",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.322652+00:00",
+      "key": [
+        "popdex",
+        "PFEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21144",
+        "symbol": "PFEUSDT",
+        "baseToken": "PFE",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.1",
+        "minQty": "0.1",
+        "maxQty": "34000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "1",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41144",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51144",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.322842+00:00",
+      "key": [
+        "popdex",
+        "XOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21145",
+        "symbol": "XOMUSDT",
+        "baseToken": "XOM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "6100",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41145",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51145",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323032+00:00",
+      "key": [
+        "popdex",
+        "GMEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native Trading replaces PreTrading. Separate venue identity pending issuer and unit verification; no cross-platform join.",
+      "official": {
+        "symbolId": "21146",
+        "symbol": "GMEUSDT",
+        "baseToken": "GME",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.001",
+        "lotSize": "0.01",
+        "minQty": "0.1",
+        "maxQty": "40000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "3",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41146",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51146",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323239+00:00",
+      "key": [
+        "qfex",
+        "UNITREE-CNY",
+        "perpetual"
+      ],
+      "source": "https://api.qfex.com/refdata",
+      "note": "Native INACTIVE. No inference from catalog absence alone; keep quote/margin distinction.",
+      "official": {
+        "clobPairId": "250",
+        "symbol": "UNITREE-CNY",
+        "underlier_price": "728.79829497",
+        "price_change_24h": "17.42527995",
+        "default_max_leverage": 10,
+        "isolated_only": true,
+        "tick_size": "0.01",
+        "lot_size": "0.001",
+        "min_price": "692.35838023",
+        "max_price": "765.23820971",
+        "min_quantity": "0.01",
+        "max_quantity": "100000",
+        "base_asset": "UNITREE",
+        "quote_asset": "CNY",
+        "margin_asset": "USDC",
+        "order_time_in_force": [
+          "GTC",
+          "IOC",
+          "FOK"
+        ],
+        "order_types": [
+          "LIMIT",
+          "MARKET",
+          "ALO"
+        ],
+        "market_hours": {
+          "friday": [
+            {
+              "session": "open",
+              "open": "09:30:00",
+              "close": "11:30:00"
+            },
+            {
+              "session": "open",
+              "open": "13:00:00",
+              "close": "15:00:00"
+            }
+          ],
+          "monday": [
+            {
+              "session": "open",
+              "open": "09:30:00",
+              "close": "11:30:00"
+            },
+            {
+              "session": "open",
+              "open": "13:00:00",
+              "close": "15:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "session": "weekend",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "sunday": [
+            {
+              "session": "weekend",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "thursday": [
+            {
+              "session": "open",
+              "open": "09:30:00",
+              "close": "11:30:00"
+            },
+            {
+              "session": "open",
+              "open": "13:00:00",
+              "close": "15:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "session": "open",
+              "open": "09:30:00",
+              "close": "11:30:00"
+            },
+            {
+              "session": "open",
+              "open": "13:00:00",
+              "close": "15:00:00"
+            }
+          ],
+          "tz": "Asia/Shanghai",
+          "wednesday": [
+            {
+              "session": "open",
+              "open": "09:30:00",
+              "close": "11:30:00"
+            },
+            {
+              "session": "open",
+              "open": "13:00:00",
+              "close": "15:00:00"
+            }
+          ]
+        },
+        "status": "INACTIVE",
+        "product_category": "EQUITY"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323437+00:00",
+      "key": [
+        "qfex",
+        "OURA-USD",
+        "perpetual"
+      ],
+      "source": "https://api.qfex.com/refdata",
+      "note": "Native INACTIVE. No inference from catalog absence alone; keep quote/margin distinction.",
+      "official": {
+        "clobPairId": "274",
+        "symbol": "OURA-USD",
+        "underlier_price": "48.19051411",
+        "price_change_24h": "0.14522822",
+        "default_max_leverage": 10,
+        "isolated_only": true,
+        "tick_size": "0.01",
+        "lot_size": "0.001",
+        "min_price": "43.37148046",
+        "max_price": "53.00958722",
+        "min_quantity": "0.01",
+        "max_quantity": "100000",
+        "base_asset": "OURA",
+        "quote_asset": "USD",
+        "margin_asset": "USDC",
+        "order_time_in_force": [
+          "GTC",
+          "IOC",
+          "FOK"
+        ],
+        "order_types": [
+          "LIMIT",
+          "MARKET",
+          "ALO"
+        ],
+        "market_hours": {
+          "friday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "monday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "saturday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "sunday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "thursday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "tuesday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ],
+          "tz": "UTC",
+          "wednesday": [
+            {
+              "session": "open",
+              "open": "00:00:00",
+              "close": "23:59:59"
+            }
+          ]
+        },
+        "status": "INACTIVE",
+        "product_category": "EQUITY"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323586+00:00",
+      "key": [
+        "extended",
+        "SNDK_24_5-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native ACTIVE replaces PRELISTED. All existing raw/ui variants scoped to same product. Post-split units remain unverified.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "type": "PERPETUAL",
+        "uiName": "SNDK-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SNDK_24_5",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SanDisk",
+        "active": true,
+        "isRfq": false,
+        "isOffHours": false,
+        "status": "ACTIVE",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "3838765.555062",
+          "dailyVolumeBase": "44199.660",
+          "dailyPriceChange": "3.177",
+          "dailyPriceChangePercentage": "0.0371",
+          "dailyLow": "81.732",
+          "dailyHigh": "99.878",
+          "lastPrice": "88.848",
+          "askPrice": "88.937",
+          "bidPrice": "88.918",
+          "markPrice": "88.801",
+          "indexPrice": "88.801",
+          "fundingRate": "0.000030",
+          "nextFundingRate": 1795482000000,
+          "openInterest": "146213.370990",
+          "openInterestBase": "1646.955",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-32.0604"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-1.2257"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0001"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-1.8778"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0000"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.1",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.001",
+          "maxMarketOrderValue": "150000",
+          "maxLimitOrderValue": "750000",
+          "maxPositionValue": "1000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "0",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534e444b5f32345f35000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1772620963216
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323732+00:00",
+      "key": [
+        "extended",
+        "SNDK_24_5/USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native ACTIVE replaces PRELISTED. All existing raw/ui variants scoped to same product. Post-split units remain unverified.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "type": "PERPETUAL",
+        "uiName": "SNDK-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SNDK_24_5",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SanDisk",
+        "active": true,
+        "isRfq": false,
+        "isOffHours": false,
+        "status": "ACTIVE",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "3838765.555062",
+          "dailyVolumeBase": "44199.660",
+          "dailyPriceChange": "3.177",
+          "dailyPriceChangePercentage": "0.0371",
+          "dailyLow": "81.732",
+          "dailyHigh": "99.878",
+          "lastPrice": "88.848",
+          "askPrice": "88.937",
+          "bidPrice": "88.918",
+          "markPrice": "88.801",
+          "indexPrice": "88.801",
+          "fundingRate": "0.000030",
+          "nextFundingRate": 1795482000000,
+          "openInterest": "146213.370990",
+          "openInterestBase": "1646.955",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-32.0604"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-1.2257"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0001"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-1.8778"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0000"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.1",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.001",
+          "maxMarketOrderValue": "150000",
+          "maxLimitOrderValue": "750000",
+          "maxPositionValue": "1000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "0",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534e444b5f32345f35000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1772620963216
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.323878+00:00",
+      "key": [
+        "extended",
+        "SNDK-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native ACTIVE replaces PRELISTED. All existing raw/ui variants scoped to same product. Post-split units remain unverified.",
+      "official": {
+        "name": "SNDK_24_5-USD",
+        "type": "PERPETUAL",
+        "uiName": "SNDK-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SNDK_24_5",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SanDisk",
+        "active": true,
+        "isRfq": false,
+        "isOffHours": false,
+        "status": "ACTIVE",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "3838765.555062",
+          "dailyVolumeBase": "44199.660",
+          "dailyPriceChange": "3.177",
+          "dailyPriceChangePercentage": "0.0371",
+          "dailyLow": "81.732",
+          "dailyHigh": "99.878",
+          "lastPrice": "88.848",
+          "askPrice": "88.937",
+          "bidPrice": "88.918",
+          "markPrice": "88.801",
+          "indexPrice": "88.801",
+          "fundingRate": "0.000030",
+          "nextFundingRate": 1795482000000,
+          "openInterest": "146213.370990",
+          "openInterestBase": "1646.955",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-32.0604"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-1.2257"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0001"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-1.8778"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0000"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.1",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.001",
+          "maxMarketOrderValue": "150000",
+          "maxLimitOrderValue": "750000",
+          "maxPositionValue": "1000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "0",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534e444b5f32345f35000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1772620963216
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:26.324089+00:00",
+      "key": [
+        "extended",
+        "COST-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native REDUCE_ONLY_OI; preserve exclusion and exact product.",
+      "official": {
+        "name": "COST-USD",
+        "type": "PERPETUAL",
+        "uiName": "COST-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "COST",
+        "assetPrecision": 2,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "Costco Wholesale Corp",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "REDUCE_ONLY_OI",
+        "tradingHours": "NO_OVERNIGHT",
+        "marketStats": {
+          "dailyVolume": "784812.012000",
+          "dailyVolumeBase": "711.36",
+          "dailyPriceChange": "50.27",
+          "dailyPriceChangePercentage": "0.0477",
+          "dailyLow": "1053.35",
+          "dailyHigh": "1106.21",
+          "lastPrice": "1103.62",
+          "askPrice": "1141.71",
+          "bidPrice": "1070.39",
+          "markPrice": "1104.9121",
+          "indexPrice": "1104.9121",
+          "fundingRate": "-0.000030",
+          "nextFundingRate": 1795482000000,
+          "openInterest": "996372.990000",
+          "openInterestBase": "903.33",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-5.9494"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.0056"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0002"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-0.0521"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.01",
+          "minOrderSizeChange": "0.01",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "75000",
+          "maxLimitOrderValue": "375000",
+          "maxPositionValue": "500000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "1000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x434f53542d33000000000000000000",
+          "syntheticResolution": 1000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1788426407082
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:44.206744+00:00",
+      "key": [
+        "bitget",
+        "RBIPUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "note": "Native ISIN changed BMG162521014 to CA11275T1012. Preserve raw and quarantine independent Reality wrapper; no automatic BIP/BIPC issuer or unit join.",
+      "official": {
+        "symbol": "RBIPUSDT",
+        "category": "SPOT",
+        "baseCoin": "rBIP",
+        "quoteCoin": "USDT",
+        "symbolType": "stock",
+        "fullName": "Brookfield Infrastructure Partners L.P.",
+        "instrumentType": "stock",
+        "marketRegion": "US",
+        "isin": "CA11275T1012",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "minOrderQty": "0",
+        "maxOrderQty": "0",
+        "pricePrecision": "2",
+        "quantityPrecision": "4",
+        "quotePrecision": "6",
+        "minOrderAmount": "10",
+        "maxMarketOrderAmount": "500000",
+        "maxSymbolOrderNum": "",
+        "maxProductOrderNum": "400",
+        "status": "online",
+        "maintainTime": "",
+        "areaSymbol": "yes",
+        "maxPositionNum": "200",
+        "isReality": "yes",
+        "launchTime": "1792464915525"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:03:44.207086+00:00",
+      "key": [
+        "backpack",
+        "GEOD_USDC",
+        "spot"
+      ],
+      "source": "https://api.backpack.exchange/api/v1/markets",
+      "note": "Native PostOnly new market, not unrestricted executable spot; no automatic cross-venue hedge eligibility.",
+      "official": {
+        "baseSymbol": "GEOD",
+        "createdAt": "2026-11-23T19:03:39.978682",
+        "filters": {
+          "price": {
+            "borrowEntryFeeMaxMultiplier": "1.01",
+            "borrowEntryFeeMinMultiplier": "0.99",
+            "discoveryBoundBand": null,
+            "marketOrderMaxSpreadMultiplier": null,
+            "maxImpactMultiplier": "1.05",
+            "maxMultiplier": "2",
+            "maxPrice": "1000",
+            "maxPriceUpdateMultiplier": null,
+            "meanMarkPriceBand": {
+              "indexMaxMultiplier": "1",
+              "indexMinMultiplier": "1",
+              "maxMultiplier": "1.125",
+              "minMultiplier": "0.875"
+            },
+            "meanPremiumBand": null,
+            "minImpactMultiplier": "0.95",
+            "minMultiplier": "0.25",
+            "minPrice": "0.0001",
+            "minPriceUpdateMultiplier": null,
+            "tickSize": "0.0001"
+          },
+          "quantity": {
+            "maxQuantity": null,
+            "minQuantity": "1",
+            "stepSize": "1"
+          }
+        },
+        "fundingInterval": null,
+        "fundingRateLowerBound": null,
+        "fundingRateUpperBound": null,
+        "imfFunction": null,
+        "marketType": "SPOT",
+        "mmfFunction": null,
+        "openInterestLimit": null,
+        "orderBookState": "PostOnly",
+        "positionLimitWeight": null,
+        "quoteSymbol": "USDC",
+        "rwaMarketType": null,
+        "symbol": "GEOD_USDC",
+        "visible": false
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.592819+00:00",
+      "key": [
+        "popdex",
+        "MONUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "20040",
+        "symbol": "MONUSDT",
+        "baseToken": "MON",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "600",
+        "maxQty": "60000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40040",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50040",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.593077+00:00",
+      "key": [
+        "popdex",
+        "OPUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "20041",
+        "symbol": "OPUSDT",
+        "baseToken": "OP",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "100",
+        "maxQty": "10000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40041",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50041",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.593289+00:00",
+      "key": [
+        "popdex",
+        "POLUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "20042",
+        "symbol": "POLUSDT",
+        "baseToken": "POL",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "100",
+        "maxQty": "11000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40042",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50042",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.593498+00:00",
+      "key": [
+        "popdex",
+        "WLFIUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "20043",
+        "symbol": "WLFIUSDT",
+        "baseToken": "WLFI",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "200",
+        "maxQty": "21000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40043",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50043",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.593704+00:00",
+      "key": [
+        "popdex",
+        "PENGUUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "20044",
+        "symbol": "PENGUUSDT",
+        "baseToken": "PENGU",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.000001",
+        "lotSize": "1",
+        "minQty": "1000",
+        "maxQty": "160000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "6",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40044",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50044",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.593906+00:00",
+      "key": [
+        "popdex",
+        "AVGOUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21135",
+        "symbol": "AVGOUSDT",
+        "baseToken": "AVGO",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2900",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41135",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51135",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.594104+00:00",
+      "key": [
+        "popdex",
+        "NFLXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21136",
+        "symbol": "NFLXUSDT",
+        "baseToken": "NFLX",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "16000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41136",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51136",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.594301+00:00",
+      "key": [
+        "popdex",
+        "LLYUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21137",
+        "symbol": "LLYUSDT",
+        "baseToken": "LLY",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.1",
+        "lotSize": "0.001",
+        "minQty": "0.001",
+        "maxQty": "700",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "1",
+        "baseTokenPrecision": "3",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41137",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51137",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.594497+00:00",
+      "key": [
+        "popdex",
+        "JPMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21138",
+        "symbol": "JPMUSDT",
+        "baseToken": "JPM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2900",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41138",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51138",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.594691+00:00",
+      "key": [
+        "popdex",
+        "VUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21139",
+        "symbol": "VUSDT",
+        "baseToken": "V",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2400",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41139",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51139",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.594889+00:00",
+      "key": [
+        "popdex",
+        "WMTUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21140",
+        "symbol": "WMTUSDT",
+        "baseToken": "WMT",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "8000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41140",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51140",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.595082+00:00",
+      "key": [
+        "popdex",
+        "QCOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21141",
+        "symbol": "QCOMUSDT",
+        "baseToken": "QCOM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "5600",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41141",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51141",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.595279+00:00",
+      "key": [
+        "popdex",
+        "UNHUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21142",
+        "symbol": "UNHUSDT",
+        "baseToken": "UNH",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2500",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41142",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51142",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.595469+00:00",
+      "key": [
+        "popdex",
+        "AMATUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21143",
+        "symbol": "AMATUSDT",
+        "baseToken": "AMAT",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "2600",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41143",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51143",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.595658+00:00",
+      "key": [
+        "popdex",
+        "PFEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21144",
+        "symbol": "PFEUSDT",
+        "baseToken": "PFE",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.1",
+        "minQty": "0.1",
+        "maxQty": "34000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "1",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41144",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51144",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.595847+00:00",
+      "key": [
+        "popdex",
+        "XOMUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21145",
+        "symbol": "XOMUSDT",
+        "baseToken": "XOM",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.01",
+        "lotSize": "0.01",
+        "minQty": "0.01",
+        "maxQty": "6100",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "2",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41145",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51145",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-24T01:05:18.596033+00:00",
+      "key": [
+        "popdex",
+        "GMEUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Keep class-consistent identity prefix while isolating newly Trading venue product. Issuer and units remain unverified.",
+      "official": {
+        "symbolId": "21146",
+        "symbol": "GMEUSDT",
+        "baseToken": "GME",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "Trading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.001",
+        "lotSize": "0.01",
+        "minQty": "0.1",
+        "maxQty": "40000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "3",
+        "baseTokenPrecision": "2",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "41146",
+        "defaultLeverage": "5",
+        "fundingBaseRate": "0.0000500000",
+        "fundingCap": "0.0225000000",
+        "fundingFloor": "-0.0225000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "51146",
+        "tradingOpenTime": "1795420800000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Rwa"
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-23"
+  "lastUpdatedAt": "2026-11-24"
 }
