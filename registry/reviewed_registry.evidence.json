@@ -112658,7 +112658,1234 @@
         "isReality": "yes",
         "status": "online"
       }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491730+00:00",
+      "key": [
+        "bybit",
+        "ANDDUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF product; exact venue unit review. ANDD independent daily inverse ETF, not ANTD or Anthropic common shares. No leverage ratio used as unit multiplier.",
+      "official": {
+        "symbol": "ANDDUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "ANDD",
+        "quoteCoin": "USDT",
+        "launchTime": "1795601789000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "10917.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "10917.00",
+          "maxMktOrderQty": "2729.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "ANDDUSDT",
+        "symbolType": "ETF",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3021,
+        "fullName": "Leverage Shares 2x Short Anthropic Daily ETF",
+        "marketRegion": "US",
+        "underlyingTicker": "ANDD",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491754+00:00",
+      "key": [
+        "bybit",
+        "KRUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF product; exact venue unit review. ANDD independent daily inverse ETF, not ANTD or Anthropic common shares. No leverage ratio used as unit multiplier.",
+      "official": {
+        "symbol": "KRUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "KR",
+        "quoteCoin": "USDT",
+        "launchTime": "1795600892000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "2836.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "2836.00",
+          "maxMktOrderQty": "709.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "KRUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3020,
+        "fullName": "The Kroger Co",
+        "marketRegion": "US",
+        "underlyingTicker": "KR",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491767+00:00",
+      "key": [
+        "bybit",
+        "STORJUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native positive deliveryTime Nov27 09UTC, still Trading on Nov26. Preserve perpetual kind, scheduled close timestamp not a dated future; not already expired/delisted.",
+      "official": {
+        "symbol": "STORJUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "STORJ",
+        "quoteCoin": "USDT",
+        "launchTime": "1637539200000",
+        "deliveryTime": "1795770000000",
+        "deliveryFeeRate": "",
+        "priceScale": "5",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.00001",
+          "maxPrice": "199.99998",
+          "tickSize": "0.00001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1200000.0",
+          "minOrderQty": "0.1",
+          "qtyStep": "0.1",
+          "postOnlyMaxOrderQty": "1200000.0",
+          "maxMktOrderQty": "240000.0",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.1",
+          "priceLimitRatioY": "0.2"
+        },
+        "displayName": "STORJUSDT",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 107,
+        "fullName": "Storj",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": [
+          "ST"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491779+00:00",
+      "key": [
+        "bybit",
+        "TGTSTOCKUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF product; exact venue unit review. ANDD independent daily inverse ETF, not ANTD or Anthropic common shares. No leverage ratio used as unit multiplier.",
+      "official": {
+        "symbol": "TGTSTOCKUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "TGTSTOCK",
+        "quoteCoin": "USDT",
+        "launchTime": "1795600829000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1134.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "1134.00",
+          "maxMktOrderQty": "284.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "TGTSTOCKUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3019,
+        "fullName": "Target Corporation",
+        "marketRegion": "US",
+        "underlyingTicker": "TGT",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491799+00:00",
+      "key": [
+        "bybit",
+        "TJXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF product; exact venue unit review. ANDD independent daily inverse ETF, not ANTD or Anthropic common shares. No leverage ratio used as unit multiplier.",
+      "official": {
+        "symbol": "TJXUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "TJX",
+        "quoteCoin": "USDT",
+        "launchTime": "1795600700000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1398.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "1398.00",
+          "maxMktOrderQty": "350.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "TJXUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3018,
+        "fullName": "Tjx Companies Inc",
+        "marketRegion": "US",
+        "underlyingTicker": "TJX",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491812+00:00",
+      "key": [
+        "bybit",
+        "TOWNSUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native positive deliveryTime Nov27 09UTC, still Trading on Nov26. Preserve perpetual kind, scheduled close timestamp not a dated future; not already expired/delisted.",
+      "official": {
+        "symbol": "TOWNSUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "TOWNS",
+        "quoteCoin": "USDT",
+        "launchTime": "1754404399000",
+        "deliveryTime": "1795770000000",
+        "deliveryFeeRate": "",
+        "priceScale": "6",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "5.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.000001",
+          "maxPrice": "19.999998",
+          "tickSize": "0.000001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "5250000",
+          "minOrderQty": "10",
+          "qtyStep": "10",
+          "postOnlyMaxOrderQty": "5250000",
+          "maxMktOrderQty": "1050000",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 240,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.05",
+        "lowerFundingRate": "-0.05",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.15",
+          "priceLimitRatioY": "0.3"
+        },
+        "displayName": "TOWNSUSDT",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 2398,
+        "fullName": "Towns Protocol",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": [
+          "ST"
+        ]
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491823+00:00",
+      "key": [
+        "variational",
+        "PATH",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Native full company name establishes per-market stock class, not token issuer rights or share units.",
+      "official": {
+        "ticker": "PATH",
+        "name": "UiPath Inc.",
+        "mark_price": "12.48994961071908",
+        "volume_24h": "19936.900165",
+        "open_interest": {
+          "long_open_interest": "18722.971916905204625040000000",
+          "short_open_interest": "0"
+        },
+        "funding_rate": "0",
+        "funding_interval_s": 28800,
+        "base_spread_bps": "39.391672131147552035955285000",
+        "quotes": {
+          "updated_at": "2026-11-26T00:59:26.313311178Z",
+          "base": {
+            "bid": "12.4652",
+            "ask": "12.5144"
+          },
+          "size_1k": {
+            "bid": "12.4252",
+            "ask": "12.5388"
+          },
+          "size_100k": {
+            "bid": "9.51513",
+            "ask": "14.6767"
+          }
+        }
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491834+00:00",
+      "key": [
+        "variational",
+        "TEM",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "Native full company name establishes per-market stock class, not token issuer rights or share units.",
+      "official": {
+        "ticker": "TEM",
+        "name": "Tempus AI, Inc.",
+        "mark_price": "55.7822245971145",
+        "volume_24h": "94600.239571",
+        "open_interest": {
+          "long_open_interest": "6.6897046896021360000000000",
+          "short_open_interest": "8640.8685574027590"
+        },
+        "funding_rate": "0",
+        "funding_interval_s": 28800,
+        "base_spread_bps": "22.121742345568489348811985000",
+        "quotes": {
+          "updated_at": "2026-11-26T00:59:14.964396855Z",
+          "base": {
+            "bid": "55.7161",
+            "ask": "55.8395"
+          },
+          "size_1k": {
+            "bid": "55.6563",
+            "ask": "55.9262"
+          },
+          "size_100k": {
+            "bid": "46.4645",
+            "ask": "61.9172"
+          }
+        }
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491845+00:00",
+      "key": [
+        "bitget",
+        "RIVNUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/asia/support/articles/12560603901632",
+      "note": "Official Nov25 stock-perp announcement identifies Disney/Rivian/Novo Nordisk US ADR. NVO not Danish ordinary shares; USDT margin native. Cross-platform units remain unverified.",
+      "official": {
+        "symbol": "RIVNUSDT",
+        "baseCoin": "RIVN",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "3",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795609503994",
+        "maxMarketOrderQty": "9000",
+        "maxOrderQty": "30000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491861+00:00",
+      "key": [
+        "bitget",
+        "NVOUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/asia/support/articles/12560603901632",
+      "note": "Official Nov25 stock-perp announcement identifies Disney/Rivian/Novo Nordisk US ADR. NVO not Danish ordinary shares; USDT margin native. Cross-platform units remain unverified.",
+      "official": {
+        "symbol": "NVOUSDT",
+        "baseCoin": "NVO",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "3",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795609501797",
+        "maxMarketOrderQty": "3000",
+        "maxOrderQty": "8000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491874+00:00",
+      "key": [
+        "bitget",
+        "DISUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/asia/support/articles/12560603901632",
+      "note": "Official Nov25 stock-perp announcement identifies Disney/Rivian/Novo Nordisk US ADR. NVO not Danish ordinary shares; USDT margin native. Cross-platform units remain unverified.",
+      "official": {
+        "symbol": "DISUSDT",
+        "baseCoin": "DIS",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "2",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795609496742",
+        "maxMarketOrderQty": "800",
+        "maxOrderQty": "2000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491885+00:00",
+      "key": [
+        "gate",
+        "AMDL_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "AMDL_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "0.1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491896+00:00",
+      "key": [
+        "gate",
+        "ETN_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "ETN_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "0.01"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491907+00:00",
+      "key": [
+        "gate",
+        "LI_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "LI_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "0.1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491917+00:00",
+      "key": [
+        "gate",
+        "NIO_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "NIO_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491928+00:00",
+      "key": [
+        "gate",
+        "NXPI_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "NXPI_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "0.01"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491939+00:00",
+      "key": [
+        "gate",
+        "SMTC_USDT",
+        "perpetual"
+      ],
+      "source": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+      "note": "Native stock contract. Independent exact product; AMDL daily ETF and LI/NIO ADR identities not ordinary shares. quanto_multiplier retained as contract lot evidence, not canonical unit/hedge multiplier.",
+      "official": {
+        "name": "SMTC_USDT",
+        "type": "direct",
+        "contract_type": "stocks",
+        "in_delisting": false,
+        "quanto_multiplier": "0.1"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491951+00:00",
+      "key": [
+        "extended",
+        "SKHYNIX-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native REDUCE_ONLY_OI. Exact UI/raw forms of same product, not SKHY ADR or leveraged ETF; preserve unit boundary.",
+      "official": {
+        "name": "SKHYNIX-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHYNIX-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHYNIX",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "REDUCE_ONLY_OI",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "7575274.440520",
+          "dailyVolumeBase": "10154.594",
+          "dailyPriceChange": "-6.51",
+          "dailyPriceChangePercentage": "-0.0082",
+          "dailyLow": "722.71",
+          "dailyHigh": "791.08",
+          "lastPrice": "784.57",
+          "askPrice": "811.36",
+          "bidPrice": "811.16",
+          "markPrice": "810.395398867681",
+          "indexPrice": "807.661045301977",
+          "fundingRate": "0.000166",
+          "nextFundingRate": 1795654800000,
+          "openInterest": "6342736.029668",
+          "openInterestBase": "7803.702",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-437.4638"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.4745"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.3593"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "-0.0840"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-354160.0034"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.0997"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0004"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0238"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.01",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "300000",
+          "maxLimitOrderValue": "1500000",
+          "maxPositionValue": "3000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "6000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "6000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "7000000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "8000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "9000000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "10000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48594e49580000000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "kr_equity",
+        "createdAt": 1783503432074
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491962+00:00",
+      "key": [
+        "extended",
+        "SKHYNIX/USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native REDUCE_ONLY_OI. Exact UI/raw forms of same product, not SKHY ADR or leveraged ETF; preserve unit boundary.",
+      "official": {
+        "name": "SKHYNIX-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHYNIX-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHYNIX",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "REDUCE_ONLY_OI",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "7575274.440520",
+          "dailyVolumeBase": "10154.594",
+          "dailyPriceChange": "-6.51",
+          "dailyPriceChangePercentage": "-0.0082",
+          "dailyLow": "722.71",
+          "dailyHigh": "791.08",
+          "lastPrice": "784.57",
+          "askPrice": "811.36",
+          "bidPrice": "811.16",
+          "markPrice": "810.395398867681",
+          "indexPrice": "807.661045301977",
+          "fundingRate": "0.000166",
+          "nextFundingRate": 1795654800000,
+          "openInterest": "6342736.029668",
+          "openInterestBase": "7803.702",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-437.4638"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.4745"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.3593"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "-0.0840"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-354160.0034"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.0997"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0004"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0238"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.01",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "300000",
+          "maxLimitOrderValue": "1500000",
+          "maxPositionValue": "3000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "6000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "6000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "7000000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "8000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "9000000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "10000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48594e49580000000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "kr_equity",
+        "createdAt": 1783503432074
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491973+00:00",
+      "key": [
+        "hyperliquid",
+        "xyz:RBLX",
+        "perpetual"
+      ],
+      "source": "https://api.hyperliquid.xyz/info",
+      "note": "Independent native DEX product, no global ticker-unit join.",
+      "official": {
+        "szDecimals": 1,
+        "name": "xyz:RBLX",
+        "maxLeverage": 10,
+        "marginTableId": 10,
+        "onlyIsolated": true,
+        "isDelisted": true,
+        "marginMode": "noCross",
+        "deployerFeeScale": "1.0"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491984+00:00",
+      "key": [
+        "hyperliquid",
+        "@1195",
+        "spot"
+      ],
+      "source": "https://api.hyperliquid.xyz/info",
+      "note": "Native XBTC - XORA.finance tokenId identity; not proof of native BTC backing, bridge or 1:1 redemption. Raw @ name preserved.",
+      "official": {
+        "market": {
+          "tokens": [
+            1340,
+            0
+          ],
+          "name": "@1195",
+          "index": 1195,
+          "isCanonical": false
+        },
+        "token": {
+          "name": "XBTC",
+          "szDecimals": 5,
+          "weiDecimals": 10,
+          "index": 1340,
+          "tokenId": "0x774a7426a39ffd5bb598f3b480d29126",
+          "isCanonical": false,
+          "evmContract": null,
+          "fullName": "XBTC - XORA.finance",
+          "deployerTradingFeeShare": "1.0"
+        }
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.491998+00:00",
+      "key": [
+        "binance",
+        "ARTYBUSDT",
+        "spot"
+      ],
+      "source": "https://www.binance.com/en/square/post/391923348209143",
+      "note": "Official Binance announcement Nov25 identifies bStocks tokenized securities. Separate wrapper product, no 1:1 redemption/share rights or cash ETF join assumed.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "product": "ARTYB",
+        "kind": "bStocks tokenized security",
+        "quote": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492009+00:00",
+      "key": [
+        "binance",
+        "FRHCBUSDT",
+        "spot"
+      ],
+      "source": "https://www.binance.com/en/square/post/391923348209143",
+      "note": "Official Binance announcement Nov25 identifies bStocks tokenized securities. Separate wrapper product, no 1:1 redemption/share rights or cash ETF join assumed.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "product": "FRHCB",
+        "kind": "bStocks tokenized security",
+        "quote": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492020+00:00",
+      "key": [
+        "binance",
+        "IBITBUSDT",
+        "spot"
+      ],
+      "source": "https://www.binance.com/en/square/post/391923348209143",
+      "note": "Official Binance announcement Nov25 identifies bStocks tokenized securities. Separate wrapper product, no 1:1 redemption/share rights or cash ETF join assumed.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "product": "IBITB",
+        "kind": "bStocks tokenized security",
+        "quote": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492031+00:00",
+      "key": [
+        "binance",
+        "IGVBUSDT",
+        "spot"
+      ],
+      "source": "https://www.binance.com/en/square/post/391923348209143",
+      "note": "Official Binance announcement Nov25 identifies bStocks tokenized securities. Separate wrapper product, no 1:1 redemption/share rights or cash ETF join assumed.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "product": "IGVB",
+        "kind": "bStocks tokenized security",
+        "quote": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492042+00:00",
+      "key": [
+        "binance",
+        "SOXXBUSDT",
+        "spot"
+      ],
+      "source": "https://www.binance.com/en/square/post/391923348209143",
+      "note": "Official Binance announcement Nov25 identifies bStocks tokenized securities. Separate wrapper product, no 1:1 redemption/share rights or cash ETF join assumed.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "product": "SOXXB",
+        "kind": "bStocks tokenized security",
+        "quote": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492053+00:00",
+      "key": [
+        "okx",
+        "JD-USDT-SWAP",
+        "perpetual"
+      ],
+      "source": "https://www.okx.com/en-us/help/okx-to-list-tradfi-perpetual-futures-for-tencent-meituan-kuaishou-and-jd",
+      "note": "Official Nov25 USDT-margined TradFi listing. Independent venue product; no HKD/USD share conversion, ADR/local share unit join inferred. Current native API directory remains unavailable.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "symbol": "JD",
+        "settlement": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492064+00:00",
+      "key": [
+        "okx",
+        "KUAISHOU-USDT-SWAP",
+        "perpetual"
+      ],
+      "source": "https://www.okx.com/en-us/help/okx-to-list-tradfi-perpetual-futures-for-tencent-meituan-kuaishou-and-jd",
+      "note": "Official Nov25 USDT-margined TradFi listing. Independent venue product; no HKD/USD share conversion, ADR/local share unit join inferred. Current native API directory remains unavailable.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "symbol": "KUAISHOU",
+        "settlement": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492075+00:00",
+      "key": [
+        "okx",
+        "MEITUAN-USDT-SWAP",
+        "perpetual"
+      ],
+      "source": "https://www.okx.com/en-us/help/okx-to-list-tradfi-perpetual-futures-for-tencent-meituan-kuaishou-and-jd",
+      "note": "Official Nov25 USDT-margined TradFi listing. Independent venue product; no HKD/USD share conversion, ADR/local share unit join inferred. Current native API directory remains unavailable.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "symbol": "MEITUAN",
+        "settlement": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492085+00:00",
+      "key": [
+        "okx",
+        "TENCENT-USDT-SWAP",
+        "perpetual"
+      ],
+      "source": "https://www.okx.com/en-us/help/okx-to-list-tradfi-perpetual-futures-for-tencent-meituan-kuaishou-and-jd",
+      "note": "Official Nov25 USDT-margined TradFi listing. Independent venue product; no HKD/USD share conversion, ADR/local share unit join inferred. Current native API directory remains unavailable.",
+      "official": {
+        "publicationDate": "2026-11-25",
+        "symbol": "TENCENT",
+        "settlement": "USDT"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-26T01:03:07.492099+00:00",
+      "key": [
+        "bitget",
+        "RSKHXUSDT",
+        "spot"
+      ],
+      "source": "https://api.bitget.com/api/v3/market/instruments?category=SPOT",
+      "note": "Native Reality wrapper, preserve ISIN and full name of leveraged ETP as evidence. Do not reuse global ISIN comparison key without wrapper redemption/units proof; not SKHY ADR or Korean common shares.",
+      "official": {
+        "symbol": "RSKHXUSDT",
+        "baseCoin": "rSKHX",
+        "quoteCoin": "USDT",
+        "fullName": "Leverage Shares 2x Long SK Hynix ETP",
+        "isin": "US88340C2632",
+        "symbolType": "stock",
+        "isReality": "yes"
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-25"
+  "lastUpdatedAt": "2026-11-26"
 }
