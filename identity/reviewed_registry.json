@@ -67999,6 +67999,21 @@
     },
     {
       "exchange": "variational",
+      "raw_symbol": "BABYL",
+      "market_type": "perpetual",
+      "canonical_symbol": "BABY/USDC",
+      "asset_class": "crypto",
+      "asset_id": "crypto:ticker:baby",
+      "underlying_id": "crypto:ticker:baby",
+      "comparison_key": "crypto:ticker:baby/USDC",
+      "comparison_status": "eligible",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDC",
+      "unit_alias": "BABYL",
+      "unit_multiplier": 1
+    },
+    {
+      "exchange": "variational",
       "raw_symbol": "BAC",
       "market_type": "perpetual",
       "canonical_symbol": "BAC/USDC",

@@ -113885,6 +113885,15 @@
         "symbolType": "stock",
         "isReality": "yes"
       }
+    },
+    {
+      "key": [
+        "variational",
+        "BABYL",
+        "perpetual"
+      ],
+      "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
+      "note": "2026-11-26: official ticker BABYL has name Babylon; user confirmed CEX BABY is the same asset. Exact VAR alias, 1:1 units; retain USDC settlement and native BABYL venue symbol."
     }
   ],
   "lastUpdatedAt": "2026-11-26"
