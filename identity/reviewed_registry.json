@@ -2344,6 +2344,20 @@
       "unit_multiplier": 1
     },
     {
+      "canonical_symbol": "HK1888/USDT",
+      "asset_class": "rwa_stock",
+      "instrument_kind": "equity_perpetual",
+      "settlement_asset": "USDT",
+      "exchange": "binance",
+      "raw_symbol": "HK1888USDT",
+      "market_type": "perpetual",
+      "asset_id": "equity:binance:pending:hk1888usdt",
+      "underlying_id": "equity:binance:pending:hk1888usdt",
+      "comparison_key": "equity:binance:pending:hk1888usdt/USDT",
+      "comparison_status": "prohibited",
+      "contract_type": "pending_trading_perpetual"
+    },
+    {
       "exchange": "binance",
       "raw_symbol": "HOOKUSDT",
       "market_type": "perpetual",
@@ -3719,6 +3733,20 @@
       "contract_type": "settling_perpetual",
       "settlement_asset": "USDT",
       "unit_multiplier": 1
+    },
+    {
+      "canonical_symbol": "XIAOMI/USDT",
+      "asset_class": "rwa_stock",
+      "instrument_kind": "equity_perpetual",
+      "settlement_asset": "USDT",
+      "exchange": "binance",
+      "raw_symbol": "XIAOMIUSDT",
+      "market_type": "perpetual",
+      "asset_id": "equity:binance:pending:xiaomiusdt",
+      "underlying_id": "equity:binance:pending:xiaomiusdt",
+      "comparison_key": "equity:binance:pending:xiaomiusdt/USDT",
+      "comparison_status": "prohibited",
+      "contract_type": "pending_trading_perpetual"
     },
     {
       "exchange": "binance",
@@ -55143,17 +55171,32 @@
       "settlement_asset": "USD"
     },
     {
+      "canonical_symbol": "SKHY/USD",
+      "asset_class": "rwa_stock",
+      "instrument_kind": "equity_perpetual",
+      "settlement_asset": "USD",
+      "exchange": "extended",
+      "raw_symbol": "SKHY-USD",
+      "market_type": "perpetual",
+      "asset_id": "equity:extended:reduce-only:skhy-usd",
+      "underlying_id": "equity:extended:reduce-only:skhy-usd",
+      "comparison_key": "equity:extended:reduce-only:skhy-usd/USD",
+      "comparison_status": "prohibited",
+      "contract_type": "reduce_only_perpetual"
+    },
+    {
       "exchange": "extended",
       "raw_symbol": "SKHY/USD",
       "market_type": "perpetual",
       "canonical_symbol": "SKHY/USD",
       "asset_class": "rwa_stock",
-      "asset_id": "equity:ticker:skhy",
-      "underlying_id": "equity:ticker:skhy",
-      "comparison_key": "equity:ticker:skhy/USD",
-      "comparison_status": "eligible",
+      "asset_id": "equity:extended:reduce-only:skhy-usd",
+      "underlying_id": "equity:extended:reduce-only:skhy-usd",
+      "comparison_key": "equity:extended:reduce-only:skhy-usd/USD",
+      "comparison_status": "prohibited",
       "instrument_kind": "equity_perpetual",
-      "settlement_asset": "USD"
+      "settlement_asset": "USD",
+      "contract_type": "reduce_only_perpetual"
     },
     {
       "canonical_symbol": "SKHYNIX/USD",
@@ -55163,11 +55206,11 @@
       "exchange": "extended",
       "raw_symbol": "SKHYNIX-USD",
       "market_type": "perpetual",
-      "asset_id": "equity:extended:reduce-only:skhynix-usd",
-      "underlying_id": "equity:extended:reduce-only:skhynix-usd",
-      "comparison_key": "equity:extended:reduce-only:skhynix-usd/USD",
-      "comparison_status": "prohibited",
-      "contract_type": "reduce_only_perpetual"
+      "asset_id": "equity:extended:unit-review:skhynix-usd",
+      "underlying_id": "equity:extended:unit-review:skhynix-usd",
+      "comparison_key": "equity:extended:unit-review:skhynix-usd/USD",
+      "comparison_status": "ambiguous",
+      "contract_type": "equity_perpetual"
     },
     {
       "canonical_symbol": "SKHYNIX/USD",
@@ -55177,11 +55220,11 @@
       "exchange": "extended",
       "raw_symbol": "SKHYNIX/USD",
       "market_type": "perpetual",
-      "asset_id": "equity:extended:reduce-only:skhynix-usd",
-      "underlying_id": "equity:extended:reduce-only:skhynix-usd",
-      "comparison_key": "equity:extended:reduce-only:skhynix-usd/USD",
-      "comparison_status": "prohibited",
-      "contract_type": "reduce_only_perpetual"
+      "asset_id": "equity:extended:unit-review:skhynix-usd",
+      "underlying_id": "equity:extended:unit-review:skhynix-usd",
+      "comparison_key": "equity:extended:unit-review:skhynix-usd/USD",
+      "comparison_status": "ambiguous",
+      "contract_type": "equity_perpetual"
     },
     {
       "exchange": "extended",

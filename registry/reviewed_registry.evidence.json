@@ -113894,7 +113894,707 @@
       ],
       "source": "https://omni-client-api.prod.ap-northeast-1.variational.io/metadata/stats",
       "note": "2026-11-26: official ticker BABYL has name Babylon; user confirmed CEX BABY is the same asset. Exact VAR alias, 1:1 units; retain USDC settlement and native BABYL venue symbol."
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425210+00:00",
+      "key": [
+        "binance",
+        "XIAOMIUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "note": "Native HK_EQUITY and PENDING_TRADING. Exact Hong Kong equity venue product; not crypto or active tradable contract. Do not infer company for HK1888 or HKD/USD/share ratio; perpetual sentinel deliveryDate is not expiry.",
+      "official": {
+        "symbol": "XIAOMIUSDT",
+        "baseAsset": "XIAOMI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "status": "PENDING_TRADING",
+        "underlyingType": "HK_EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "deliveryDate": 4133404800000
+      }
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425239+00:00",
+      "key": [
+        "binance",
+        "HK1888USDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "note": "Native HK_EQUITY and PENDING_TRADING. Exact Hong Kong equity venue product; not crypto or active tradable contract. Do not infer company for HK1888 or HKD/USD/share ratio; perpetual sentinel deliveryDate is not expiry.",
+      "official": {
+        "symbol": "HK1888USDT",
+        "baseAsset": "HK1888",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "status": "PENDING_TRADING",
+        "underlyingType": "HK_EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "deliveryDate": 4133404800000
+      }
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425256+00:00",
+      "key": [
+        "extended",
+        "SKHY-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native SK Hynix ADR REDUCE_ONLY_OI. Preserve ADR product independently from SKHYNIX ordinary equity and leveraged ETFs. Existing raw/UI aliases same product, no ADR ratio inferred.",
+      "official": {
+        "name": "SKHY-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHY-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHY",
+        "assetPrecision": 2,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix ADR",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "REDUCE_ONLY_OI",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "1028426.902000",
+          "dailyVolumeBase": "9210.14",
+          "dailyPriceChange": "-0.55",
+          "dailyPriceChangePercentage": "-0.0049",
+          "dailyLow": "110.79",
+          "dailyHigh": "112.15",
+          "lastPrice": "111.08",
+          "askPrice": "111.66",
+          "bidPrice": "111.65",
+          "markPrice": "111.622148639847",
+          "indexPrice": "111.569972727803",
+          "fundingRate": "0.000000",
+          "nextFundingRate": 1795744800000,
+          "openInterest": "1020141.271387",
+          "openInterestBase": "9122.54",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "0"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0005"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0011"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0028"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-2513.6620"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-14.8200"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.2004"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "-0.0199"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.1",
+          "minOrderSizeChange": "0.01",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "75000",
+          "maxLimitOrderValue": "375000",
+          "maxPositionValue": "500000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "1000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48590000000000000000000000",
+          "syntheticResolution": 1000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1787731349053
+      }
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425273+00:00",
+      "key": [
+        "extended",
+        "SKHY/USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native SK Hynix ADR REDUCE_ONLY_OI. Preserve ADR product independently from SKHYNIX ordinary equity and leveraged ETFs. Existing raw/UI aliases same product, no ADR ratio inferred.",
+      "official": {
+        "name": "SKHY-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHY-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHY",
+        "assetPrecision": 2,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix ADR",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "REDUCE_ONLY_OI",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "1028426.902000",
+          "dailyVolumeBase": "9210.14",
+          "dailyPriceChange": "-0.55",
+          "dailyPriceChangePercentage": "-0.0049",
+          "dailyLow": "110.79",
+          "dailyHigh": "112.15",
+          "lastPrice": "111.08",
+          "askPrice": "111.66",
+          "bidPrice": "111.65",
+          "markPrice": "111.622148639847",
+          "indexPrice": "111.569972727803",
+          "fundingRate": "0.000000",
+          "nextFundingRate": 1795744800000,
+          "openInterest": "1020141.271387",
+          "openInterestBase": "9122.54",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "0"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0005"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0011"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0028"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-2513.6620"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-14.8200"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.2004"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "-0.0199"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.1",
+          "minOrderSizeChange": "0.01",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "75000",
+          "maxLimitOrderValue": "375000",
+          "maxPositionValue": "500000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "1000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "500000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1500000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "2500000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "3500000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "4500000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48590000000000000000000000",
+          "syntheticResolution": 1000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "us_equity",
+        "createdAt": 1787731349053
+      }
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425289+00:00",
+      "key": [
+        "extended",
+        "SKHYNIX-USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native ACTIVE restored, remove outdated reduce-only phase. Separate SK Hynix product with cross-venue units still unverified; not SKHY ADR or leveraged ETF. No currency/unit conversion inferred.",
+      "official": {
+        "name": "SKHYNIX-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHYNIX-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHYNIX",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "ACTIVE",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "5808574.987380",
+          "dailyVolumeBase": "7460.742",
+          "dailyPriceChange": "-20.71",
+          "dailyPriceChangePercentage": "-0.0260",
+          "dailyLow": "764.23",
+          "dailyHigh": "796.23",
+          "lastPrice": "775.21",
+          "askPrice": "782.28",
+          "bidPrice": "782.07",
+          "markPrice": "781.615148899999",
+          "indexPrice": "779.721041972984",
+          "fundingRate": "-0.000031",
+          "nextFundingRate": 1795744800000,
+          "openInterest": "575785.287442",
+          "openInterestBase": "738.582",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-233.2466"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0001"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0011"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-396383.5777"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.7419"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.0075"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0003"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.01",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "300000",
+          "maxLimitOrderValue": "1500000",
+          "maxPositionValue": "3000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "6000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "6000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "7000000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "8000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "9000000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "10000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48594e49580000000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "kr_equity",
+        "createdAt": 1783503432074
+      }
+    },
+    {
+      "reviewedAt": "2026-11-27T01:04:36.425304+00:00",
+      "key": [
+        "extended",
+        "SKHYNIX/USD",
+        "perpetual"
+      ],
+      "source": "https://api.starknet.extended.exchange/api/v1/info/markets",
+      "note": "Native ACTIVE restored, remove outdated reduce-only phase. Separate SK Hynix product with cross-venue units still unverified; not SKHY ADR or leveraged ETF. No currency/unit conversion inferred.",
+      "official": {
+        "name": "SKHYNIX-USD",
+        "type": "PERPETUAL",
+        "uiName": "SKHYNIX-USD",
+        "category": "RWA",
+        "subCategory": "Equity",
+        "assetName": "SKHYNIX",
+        "assetPrecision": 3,
+        "collateralAssetName": "USD",
+        "collateralAssetPrecision": 6,
+        "description": "SK Hynix",
+        "active": true,
+        "isRfq": true,
+        "isOffHours": false,
+        "status": "ACTIVE",
+        "tradingHours": "CONTINUOUS",
+        "marketStats": {
+          "dailyVolume": "5808574.987380",
+          "dailyVolumeBase": "7460.742",
+          "dailyPriceChange": "-20.71",
+          "dailyPriceChangePercentage": "-0.0260",
+          "dailyLow": "764.23",
+          "dailyHigh": "796.23",
+          "lastPrice": "775.21",
+          "askPrice": "782.28",
+          "bidPrice": "782.07",
+          "markPrice": "781.615148899999",
+          "indexPrice": "779.721041972984",
+          "fundingRate": "-0.000031",
+          "nextFundingRate": 1795744800000,
+          "openInterest": "575785.287442",
+          "openInterestBase": "738.582",
+          "deleverageLevels": {
+            "shortPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-233.2466"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "0.0000"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "0.0001"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0011"
+              }
+            ],
+            "longPositions": [
+              {
+                "level": 1,
+                "rankingLowerBound": "-396383.5777"
+              },
+              {
+                "level": 2,
+                "rankingLowerBound": "-0.7419"
+              },
+              {
+                "level": 3,
+                "rankingLowerBound": "-0.0075"
+              },
+              {
+                "level": 4,
+                "rankingLowerBound": "0.0003"
+              }
+            ]
+          }
+        },
+        "tradingConfig": {
+          "minOrderSize": "0.01",
+          "minOrderSizeChange": "0.001",
+          "minPriceChange": "0.01",
+          "maxMarketOrderValue": "300000",
+          "maxLimitOrderValue": "1500000",
+          "maxPositionValue": "3000000",
+          "maxLeverage": "10.00",
+          "hourlyFundingRateCap": "1",
+          "openInterestLimit": "6000000",
+          "maxNumOrders": "200",
+          "limitPriceCap": "0.15",
+          "limitPriceFloor": "0.15",
+          "riskFactorConfig": [
+            {
+              "upperBound": "1000000",
+              "riskFactor": "0.1",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "2000000",
+              "riskFactor": "0.2",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "3000000",
+              "riskFactor": "0.3",
+              "isAvailableForUsers": true
+            },
+            {
+              "upperBound": "4000000",
+              "riskFactor": "0.4",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "5000000",
+              "riskFactor": "0.5",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "6000000",
+              "riskFactor": "0.6",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "7000000",
+              "riskFactor": "0.7",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "8000000",
+              "riskFactor": "0.8",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "9000000",
+              "riskFactor": "0.9",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "10000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            },
+            {
+              "upperBound": "1000000000",
+              "riskFactor": "1",
+              "isAvailableForUsers": false
+            }
+          ],
+          "uPnlWithdrawable": false,
+          "postWithdrawalMarginFactor": "0"
+        },
+        "l2Config": {
+          "type": "STARKX",
+          "collateralId": "0x1",
+          "syntheticId": "0x534b48594e49580000000000000000",
+          "syntheticResolution": 10000,
+          "collateralResolution": 1000000
+        },
+        "visibleOnUi": true,
+        "referenceMarket": "kr_equity",
+        "createdAt": 1783503432074
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-26"
+  "lastUpdatedAt": "2026-11-27"
 }
