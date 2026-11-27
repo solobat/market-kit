@@ -69520,6 +69520,19 @@
       "contract_type": "perpetual",
       "settlement_asset": "USDC",
       "unit_multiplier": 1
+    },
+    {
+      "exchange": "bybit",
+      "raw_symbol": "HEIUSDT",
+      "market_type": "perpetual",
+      "canonical_symbol": "HEI/USDT",
+      "asset_class": "crypto",
+      "asset_id": "crypto:ticker:hei",
+      "underlying_id": "crypto:ticker:hei",
+      "comparison_key": "crypto:ticker:hei/USDT",
+      "comparison_status": "eligible",
+      "instrument_kind": "perpetual",
+      "settlement_asset": "USDT"
     }
   ],
   "asset_collisions": []

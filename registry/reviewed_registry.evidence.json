@@ -114594,6 +114594,16 @@
         "referenceMarket": "kr_equity",
         "createdAt": 1783503432074
       }
+    },
+    {
+      "key": [
+        "bybit",
+        "HEIUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=HEIUSDT",
+      "observedAt": "2026-11-28",
+      "note": "Official fullName=Heima, LinearPerpetual, baseCoin HEI, settleCoin USDT, fundingInterval=240. Scope to exact Bybit crypto contract, consistent with reviewed Binance HEIUSDT; do not change stock ticker HEI or ambiguous spot products."
     }
   ],
   "lastUpdatedAt": "2026-11-27"
