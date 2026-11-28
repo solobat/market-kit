@@ -114604,7 +114604,1684 @@
       "source": "https://api.bybit.com/v5/market/instruments-info?category=linear&symbol=HEIUSDT",
       "observedAt": "2026-11-28",
       "note": "Official fullName=Heima, LinearPerpetual, baseCoin HEI, settleCoin USDT, fundingInterval=240. Scope to exact Bybit crypto contract, consistent with reviewed Binance HEIUSDT; do not change stock ticker HEI or ambiguous spot products."
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500358+00:00",
+      "key": [
+        "binance",
+        "XIAOMIUSDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "note": "Native HK_EQUITY now TRADING, prior pending phase obsolete. Retain independent product and unknown cross-venue units; no guessed HKD/USD conversion or cash-equity join.",
+      "official": {
+        "symbol": "XIAOMIUSDT",
+        "baseAsset": "XIAOMI",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "status": "TRADING",
+        "underlyingType": "HK_EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "deliveryDate": 4133404800000
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500381+00:00",
+      "key": [
+        "binance",
+        "HK1888USDT",
+        "perpetual"
+      ],
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "note": "Native HK_EQUITY now TRADING, prior pending phase obsolete. Retain independent product and unknown cross-venue units; no guessed HKD/USD conversion or cash-equity join.",
+      "official": {
+        "symbol": "HK1888USDT",
+        "baseAsset": "HK1888",
+        "quoteAsset": "USDT",
+        "marginAsset": "USDT",
+        "status": "TRADING",
+        "underlyingType": "HK_EQUITY",
+        "contractType": "TRADIFI_PERPETUAL",
+        "deliveryDate": 4133404800000
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500398+00:00",
+      "key": [
+        "bybit",
+        "BTCUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "BTCUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "BTC",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "1",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.1",
+          "maxPrice": "1999999.8",
+          "tickSize": "0.1"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "10.000",
+          "minOrderQty": "0.001",
+          "qtyStep": "0.001",
+          "postOnlyMaxOrderQty": "10.000",
+          "maxMktOrderQty": "10.000",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "BTCUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1571,
+        "fullName": "Bitcoin",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500412+00:00",
+      "key": [
+        "bybit",
+        "DISUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF. NVD/SNDQ independent inverse daily ETFs, not NVDA/SNDK shares; no daily leverage used as canonical unit multiplier. Venue unit review retained.",
+      "official": {
+        "symbol": "DISUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "DIS",
+        "quoteCoin": "USDT",
+        "launchTime": "1795767872000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1584.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "1584.00",
+          "maxMktOrderQty": "396.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "DISUSDT",
+        "symbolType": "stock",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3022,
+        "fullName": "Walt Disney Co",
+        "marketRegion": "US",
+        "underlyingTicker": "DIS",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500423+00:00",
+      "key": [
+        "bybit",
+        "DOGEUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "DOGEUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "DOGE",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "5",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.00001",
+          "maxPrice": "199.99998",
+          "tickSize": "0.00001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1000000",
+          "minOrderQty": "1",
+          "qtyStep": "1",
+          "postOnlyMaxOrderQty": "1000000",
+          "maxMktOrderQty": "200000",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "DOGEUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1576,
+        "fullName": "Dogecoin",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500434+00:00",
+      "key": [
+        "bybit",
+        "ETHUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "ETHUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "ETH",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "150.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "150.00",
+          "maxMktOrderQty": "150.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "ETHUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1572,
+        "fullName": "Ethereum",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500445+00:00",
+      "key": [
+        "bybit",
+        "HYPEUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "HYPEUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "HYPE",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "712.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "712.00",
+          "maxMktOrderQty": "356.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.1",
+          "priceLimitRatioY": "0.2"
+        },
+        "displayName": "HYPEUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1578,
+        "fullName": "Hyperliquid",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500456+00:00",
+      "key": [
+        "bybit",
+        "MNTUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "MNTUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "MNT",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "4",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.0001",
+          "maxPrice": "1999.9998",
+          "tickSize": "0.0001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "156000.0",
+          "minOrderQty": "0.1",
+          "qtyStep": "0.1",
+          "postOnlyMaxOrderQty": "156000.0",
+          "maxMktOrderQty": "31200.0",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "MNTUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1575,
+        "fullName": "Mantle",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500465+00:00",
+      "key": [
+        "bybit",
+        "NVDUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF. NVD/SNDQ independent inverse daily ETFs, not NVDA/SNDK shares; no daily leverage used as canonical unit multiplier. Venue unit review retained.",
+      "official": {
+        "symbol": "NVDUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "NVD",
+        "quoteCoin": "USDT",
+        "launchTime": "1795767913000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "3",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.001",
+          "maxPrice": "19999.998",
+          "tickSize": "0.001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "43840.0",
+          "minOrderQty": "0.1",
+          "qtyStep": "0.1",
+          "postOnlyMaxOrderQty": "43840.0",
+          "maxMktOrderQty": "10960.0",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "NVDUSDT",
+        "symbolType": "ETF",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3023,
+        "fullName": "GraniteShares 2x Short NVDA Daily ETF",
+        "marketRegion": "US",
+        "underlyingTicker": "NVD",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500477+00:00",
+      "key": [
+        "bybit",
+        "SNDQUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native stock/ETF. NVD/SNDQ independent inverse daily ETFs, not NVDA/SNDK shares; no daily leverage used as canonical unit multiplier. Venue unit review retained.",
+      "official": {
+        "symbol": "SNDQUSDT",
+        "contractType": "LinearPerpetual",
+        "status": "Trading",
+        "baseCoin": "SNDQ",
+        "quoteCoin": "USDT",
+        "launchTime": "1795767819000",
+        "deliveryTime": "0",
+        "deliveryFeeRate": "",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "25.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "3943.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "3943.00",
+          "maxMktOrderQty": "986.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 480,
+        "settleCoin": "USDT",
+        "copyTrading": "both",
+        "upperFundingRate": "0.02",
+        "lowerFundingRate": "-0.02",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.03",
+          "priceLimitRatioY": "0.05"
+        },
+        "displayName": "SNDQUSDT",
+        "symbolType": "ETF",
+        "forbidUplWithdrawal": false,
+        "symbolId": 3024,
+        "fullName": "Tradr 2X Short SNDK Daily ETF",
+        "marketRegion": "US",
+        "underlyingTicker": "SNDQ",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500488+00:00",
+      "key": [
+        "bybit",
+        "SOLUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "SOLUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "SOL",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "2",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.01",
+          "maxPrice": "199999.98",
+          "tickSize": "0.01"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "1000.00",
+          "minOrderQty": "0.01",
+          "qtyStep": "0.01",
+          "postOnlyMaxOrderQty": "1000.00",
+          "maxMktOrderQty": "200.00",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "SOLUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1573,
+        "fullName": "Solana",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500499+00:00",
+      "key": [
+        "bybit",
+        "XAUTUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "XAUTUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "XAUT",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "1",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.1",
+          "maxPrice": "1999999.8",
+          "tickSize": "0.1"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "25.000",
+          "minOrderQty": "0.001",
+          "qtyStep": "0.001",
+          "postOnlyMaxOrderQty": "25.000",
+          "maxMktOrderQty": "5.000",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "XAUTUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1577,
+        "fullName": "Tether Gold",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500509+00:00",
+      "key": [
+        "bybit",
+        "XRPUSDT-18DEC26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Native LinearFutures with explicit Dec18 expiry/USDT settle. Dated product independent of perpetual and other expiries; no date suffix-only inference.",
+      "official": {
+        "symbol": "XRPUSDT-18DEC26",
+        "contractType": "LinearFutures",
+        "status": "Trading",
+        "baseCoin": "XRP",
+        "quoteCoin": "USDT",
+        "launchTime": "1795766400000",
+        "deliveryTime": "1797580800000",
+        "deliveryFeeRate": "0",
+        "priceScale": "4",
+        "leverageFilter": {
+          "minLeverage": "1",
+          "maxLeverage": "50.00",
+          "leverageStep": "0.01"
+        },
+        "priceFilter": {
+          "minPrice": "0.0001",
+          "maxPrice": "1999.9998",
+          "tickSize": "0.0001"
+        },
+        "lotSizeFilter": {
+          "maxOrderQty": "83000.0",
+          "minOrderQty": "0.1",
+          "qtyStep": "0.1",
+          "postOnlyMaxOrderQty": "83000.0",
+          "maxMktOrderQty": "16600.0",
+          "minNotionalValue": "5"
+        },
+        "unifiedMarginTrade": true,
+        "fundingInterval": 0,
+        "settleCoin": "USDT",
+        "copyTrading": "none",
+        "upperFundingRate": "0",
+        "lowerFundingRate": "0",
+        "isPreListing": false,
+        "preListingInfo": null,
+        "riskParameters": {
+          "priceLimitRatioX": "0.05",
+          "priceLimitRatioY": "0.1"
+        },
+        "displayName": "XRPUSDT-18DEC26",
+        "symbolType": "",
+        "forbidUplWithdrawal": false,
+        "symbolId": 1574,
+        "fullName": "XRP",
+        "marketRegion": "",
+        "underlyingTicker": "",
+        "tags": []
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500525+00:00",
+      "key": [
+        "bybit",
+        "BTCUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "BTCUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "BTC",
+          "quoteCoin": "USDT",
+          "launchTime": "1788508800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "1",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.1",
+            "maxPrice": "1999999.8",
+            "tickSize": "0.1"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "10.000",
+            "minOrderQty": "0.001",
+            "qtyStep": "0.001",
+            "postOnlyMaxOrderQty": "10.000",
+            "maxMktOrderQty": "10.000",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "BTCUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1475,
+          "fullName": "Bitcoin",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500540+00:00",
+      "key": [
+        "bybit",
+        "DOGEUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "DOGEUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "DOGE",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "5",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.00001",
+            "maxPrice": "199.99998",
+            "tickSize": "0.00001"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "1000000",
+            "minOrderQty": "1",
+            "qtyStep": "1",
+            "postOnlyMaxOrderQty": "1000000",
+            "maxMktOrderQty": "200000",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "DOGEUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1520,
+          "fullName": "Dogecoin",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500555+00:00",
+      "key": [
+        "bybit",
+        "ETHUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "ETHUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "ETH",
+          "quoteCoin": "USDT",
+          "launchTime": "1788508800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "2",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.01",
+            "maxPrice": "199999.98",
+            "tickSize": "0.01"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "150.00",
+            "minOrderQty": "0.01",
+            "qtyStep": "0.01",
+            "postOnlyMaxOrderQty": "150.00",
+            "maxMktOrderQty": "150.00",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "ETHUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1476,
+          "fullName": "Ethereum",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500570+00:00",
+      "key": [
+        "bybit",
+        "HYPEUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "HYPEUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "HYPE",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "2",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.01",
+            "maxPrice": "199999.98",
+            "tickSize": "0.01"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "712.00",
+            "minOrderQty": "0.01",
+            "qtyStep": "0.01",
+            "postOnlyMaxOrderQty": "712.00",
+            "maxMktOrderQty": "356.00",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.1",
+            "priceLimitRatioY": "0.2"
+          },
+          "displayName": "HYPEUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1522,
+          "fullName": "Hyperliquid",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500587+00:00",
+      "key": [
+        "bybit",
+        "MNTUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "MNTUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "MNT",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "4",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "25.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.0001",
+            "maxPrice": "1999.9998",
+            "tickSize": "0.0001"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "156000.0",
+            "minOrderQty": "0.1",
+            "qtyStep": "0.1",
+            "postOnlyMaxOrderQty": "156000.0",
+            "maxMktOrderQty": "31200.0",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "MNTUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1519,
+          "fullName": "Mantle",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500602+00:00",
+      "key": [
+        "bybit",
+        "SOLUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "SOLUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "SOL",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "2",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.01",
+            "maxPrice": "199999.98",
+            "tickSize": "0.01"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "1000.00",
+            "minOrderQty": "0.01",
+            "qtyStep": "0.01",
+            "postOnlyMaxOrderQty": "1000.00",
+            "maxMktOrderQty": "200.00",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "SOLUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1517,
+          "fullName": "Solana",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500616+00:00",
+      "key": [
+        "bybit",
+        "XAUTUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "XAUTUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "XAUT",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "1",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.1",
+            "maxPrice": "1999999.8",
+            "tickSize": "0.1"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "25.000",
+            "minOrderQty": "0.001",
+            "qtyStep": "0.001",
+            "postOnlyMaxOrderQty": "25.000",
+            "maxMktOrderQty": "5.000",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "XAUTUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1521,
+          "fullName": "Tether Gold",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500631+00:00",
+      "key": [
+        "bybit",
+        "XRPUSDT-27NOV26",
+        "future"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior official positive expiry Nov27 08UTC now passed; current native catalog absent. Historical snapshot used only as positive expiry evidence, not current listing proof.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "XRPUSDT-27NOV26",
+          "contractType": "LinearFutures",
+          "status": "Trading",
+          "baseCoin": "XRP",
+          "quoteCoin": "USDT",
+          "launchTime": "1791532800000",
+          "deliveryTime": "1795766400000",
+          "deliveryFeeRate": "0",
+          "priceScale": "4",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "50.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.0001",
+            "maxPrice": "1999.9998",
+            "tickSize": "0.0001"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "83000.0",
+            "minOrderQty": "0.1",
+            "qtyStep": "0.1",
+            "postOnlyMaxOrderQty": "83000.0",
+            "maxMktOrderQty": "16600.0",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 0,
+          "settleCoin": "USDT",
+          "copyTrading": "none",
+          "upperFundingRate": "0",
+          "lowerFundingRate": "0",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.05",
+            "priceLimitRatioY": "0.1"
+          },
+          "displayName": "XRPUSDT-27NOV26",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 1518,
+          "fullName": "XRP",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": []
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500643+00:00",
+      "key": [
+        "bybit",
+        "STORJUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior explicit native scheduled close Nov27 09UTC has passed, now absent current directory. Perpetual kind retained, not dated future.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "STORJUSDT",
+          "contractType": "LinearPerpetual",
+          "status": "Trading",
+          "baseCoin": "STORJ",
+          "quoteCoin": "USDT",
+          "launchTime": "1637539200000",
+          "deliveryTime": "1795770000000",
+          "deliveryFeeRate": "",
+          "priceScale": "5",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "25.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.00001",
+            "maxPrice": "199.99998",
+            "tickSize": "0.00001"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "1200000.0",
+            "minOrderQty": "0.1",
+            "qtyStep": "0.1",
+            "postOnlyMaxOrderQty": "1200000.0",
+            "maxMktOrderQty": "240000.0",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 480,
+          "settleCoin": "USDT",
+          "copyTrading": "both",
+          "upperFundingRate": "0.02",
+          "lowerFundingRate": "-0.02",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.1",
+            "priceLimitRatioY": "0.2"
+          },
+          "displayName": "STORJUSDT",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 107,
+          "fullName": "Storj",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": [
+            "ST"
+          ]
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500654+00:00",
+      "key": [
+        "bybit",
+        "TOWNSUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.bybit.com/v5/market/instruments-info?category=linear",
+      "note": "Prior explicit native scheduled close Nov27 09UTC has passed, now absent current directory. Perpetual kind retained, not dated future.",
+      "official": {
+        "priorOfficial": {
+          "symbol": "TOWNSUSDT",
+          "contractType": "LinearPerpetual",
+          "status": "Trading",
+          "baseCoin": "TOWNS",
+          "quoteCoin": "USDT",
+          "launchTime": "1754404399000",
+          "deliveryTime": "1795770000000",
+          "deliveryFeeRate": "",
+          "priceScale": "6",
+          "leverageFilter": {
+            "minLeverage": "1",
+            "maxLeverage": "5.00",
+            "leverageStep": "0.01"
+          },
+          "priceFilter": {
+            "minPrice": "0.000001",
+            "maxPrice": "19.999998",
+            "tickSize": "0.000001"
+          },
+          "lotSizeFilter": {
+            "maxOrderQty": "5250000",
+            "minOrderQty": "10",
+            "qtyStep": "10",
+            "postOnlyMaxOrderQty": "5250000",
+            "maxMktOrderQty": "1050000",
+            "minNotionalValue": "5"
+          },
+          "unifiedMarginTrade": true,
+          "fundingInterval": 240,
+          "settleCoin": "USDT",
+          "copyTrading": "both",
+          "upperFundingRate": "0.05",
+          "lowerFundingRate": "-0.05",
+          "isPreListing": false,
+          "preListingInfo": null,
+          "riskParameters": {
+            "priceLimitRatioX": "0.15",
+            "priceLimitRatioY": "0.3"
+          },
+          "displayName": "TOWNSUSDT",
+          "symbolType": "",
+          "forbidUplWithdrawal": false,
+          "symbolId": 2398,
+          "fullName": "Towns Protocol",
+          "marketRegion": "",
+          "underlyingTicker": "",
+          "tags": [
+            "ST"
+          ]
+        },
+        "currentDirectoryAbsent": true
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500665+00:00",
+      "key": [
+        "bitget",
+        "XLFUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603901855",
+      "note": "Official Nov27 stock perps. KBHKD is Kingboard Laminates quanto contract: native USDT margin, do not equate HKD reference exposure or HK1888 units. YINN daily3x ETF distinct from FXI/underlying index and BIDU shares, no leverage/FX ratio as canonical units.",
+      "official": {
+        "symbol": "XLFUSDT",
+        "baseCoin": "XLF",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "2",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795759575444",
+        "maxMarketOrderQty": "2000",
+        "maxOrderQty": "5000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500675+00:00",
+      "key": [
+        "bitget",
+        "FXIUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603901855",
+      "note": "Official Nov27 stock perps. KBHKD is Kingboard Laminates quanto contract: native USDT margin, do not equate HKD reference exposure or HK1888 units. YINN daily3x ETF distinct from FXI/underlying index and BIDU shares, no leverage/FX ratio as canonical units.",
+      "official": {
+        "symbol": "FXIUSDT",
+        "baseCoin": "FXI",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "3",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795759577888",
+        "maxMarketOrderQty": "3000",
+        "maxOrderQty": "9000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500684+00:00",
+      "key": [
+        "bitget",
+        "BIDUUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603901855",
+      "note": "Official Nov27 stock perps. KBHKD is Kingboard Laminates quanto contract: native USDT margin, do not equate HKD reference exposure or HK1888 units. YINN daily3x ETF distinct from FXI/underlying index and BIDU shares, no leverage/FX ratio as canonical units.",
+      "official": {
+        "symbol": "BIDUUSDT",
+        "baseCoin": "BIDU",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "2",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795759572880",
+        "maxMarketOrderQty": "2000",
+        "maxOrderQty": "5000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500694+00:00",
+      "key": [
+        "bitget",
+        "YINNUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/support/articles/12560603901855",
+      "note": "Official Nov27 stock perps. KBHKD is Kingboard Laminates quanto contract: native USDT margin, do not equate HKD reference exposure or HK1888 units. YINN daily3x ETF distinct from FXI/underlying index and BIDU shares, no leverage/FX ratio as canonical units.",
+      "official": {
+        "symbol": "YINNUSDT",
+        "baseCoin": "YINN",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "3",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795759585116",
+        "maxMarketOrderQty": "5000",
+        "maxOrderQty": "20000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500703+00:00",
+      "key": [
+        "bitget",
+        "KBHKDUSDT",
+        "perpetual"
+      ],
+      "source": "https://www.bitget.com/support/sections/12508313405000",
+      "note": "Official Nov27 stock perps. KBHKD is Kingboard Laminates quanto contract: native USDT margin, do not equate HKD reference exposure or HK1888 units. YINN daily3x ETF distinct from FXI/underlying index and BIDU shares, no leverage/FX ratio as canonical units.",
+      "official": {
+        "symbol": "KBHKDUSDT",
+        "baseCoin": "KBHKD",
+        "quoteCoin": "USDT",
+        "buyLimitPriceRatio": "0.02",
+        "sellLimitPriceRatio": "0.02",
+        "feeRateUpRatio": "0.005",
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006",
+        "openCostUpRatio": "0.01",
+        "supportMarginCoins": [
+          "USDT"
+        ],
+        "minTradeNum": "0.01",
+        "priceEndStep": "1",
+        "volumePlace": "2",
+        "pricePlace": "3",
+        "sizeMultiplier": "0.01",
+        "symbolType": "perpetual",
+        "minTradeUSDT": "5",
+        "maxSymbolOrderNum": "200",
+        "maxProductOrderNum": "1000",
+        "maxPositionNum": "200",
+        "symbolStatus": "normal",
+        "offTime": "-1",
+        "limitOpenTime": "-1",
+        "deliveryTime": "",
+        "deliveryStartTime": "",
+        "deliveryPeriod": "",
+        "launchTime": "",
+        "fundInterval": "8",
+        "minLever": "1",
+        "maxLever": "20",
+        "posLimit": "0.15",
+        "maintainTime": "",
+        "openTime": "1795759582746",
+        "maxMarketOrderQty": "5000",
+        "maxOrderQty": "10000",
+        "isRwa": "YES"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500713+00:00",
+      "key": [
+        "popdex",
+        "TRXUSDT",
+        "perpetual"
+      ],
+      "source": "https://api.popdex.xyz/api/v1/config/symbols?category=Futures",
+      "note": "Native PreTrading not live executable comparison.",
+      "official": {
+        "symbolId": "20045",
+        "symbol": "TRXUSDT",
+        "baseToken": "TRX",
+        "baseTokenId": "0",
+        "quoteToken": "USDT",
+        "quoteTokenId": "1",
+        "category": "Futures",
+        "status": "PreTrading",
+        "settlementToken": "USDT",
+        "settlementTokenId": "1",
+        "tickSize": "0.00001",
+        "lotSize": "1",
+        "minQty": "10",
+        "maxQty": "1000000",
+        "minNotional": "10",
+        "maxNotional": "1000000",
+        "pricePrecision": "5",
+        "baseTokenPrecision": "0",
+        "quoteTokenPrecision": "6",
+        "buyLimitPriceRatio": "0.1",
+        "sellLimitPriceRatio": "0.1",
+        "feeAccount": "0x0000000000000000000000000000000000000000",
+        "insuranceFundAccount": "0x0000000000000000000000000000000000000000",
+        "pnlAccount": "0x0000000000000000000000000000000000000000",
+        "fundingInterval": "1",
+        "indexPriceId": "40045",
+        "defaultLeverage": "20",
+        "fundingBaseRate": "0.0001000000",
+        "fundingCap": "0.0075000000",
+        "fundingFloor": "-0.0075000000",
+        "fundingPriceClamp": "0.0005000000",
+        "markPriceId": "50045",
+        "tradingOpenTime": "1796025600000",
+        "settlementTime": null,
+        "delistTime": null,
+        "delistTwapPrice": null,
+        "assetClass": "Crypto"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500727+00:00",
+      "key": [
+        "lighter",
+        "ANTHROPIC",
+        "perpetual"
+      ],
+      "source": "https://mainnet.zklighter.elliot.ai/api/v1/orderBooks",
+      "note": "Native market193 inactive. Independent retired old Anthropic product; no merge with new ANT10902 or Entropy io:ANTH; no inferred rebase conversion.",
+      "official": {
+        "symbol": "ANTHROPIC",
+        "market_id": 193,
+        "market_type": "perp",
+        "base_asset_id": 0,
+        "quote_asset_id": 0,
+        "status": "inactive",
+        "taker_fee": "0.0000",
+        "is_taker_fee_enabled": true,
+        "maker_fee": "0.0000",
+        "is_maker_fee_enabled": true,
+        "liquidation_fee": "1.0000",
+        "min_base_amount": "0.00250",
+        "min_quote_amount": "10.000000",
+        "order_quote_limit": "10000000.000000",
+        "supported_size_decimals": 5,
+        "supported_price_decimals": 1,
+        "supported_quote_decimals": 6,
+        "created_at": "1780826545083",
+        "multiplier": "1.000000000000000000",
+        "start_timestamp": 0,
+        "end_timestamp": 0,
+        "open_interest": "0.000000",
+        "open_interest_limit": "12370.11380",
+        "open_interest_usd": "0.000000",
+        "outcome": 0,
+        "operator_account_index": 1,
+        "fee_collector_account_index": 0,
+        "settlement_cap": 0,
+        "settlement_type": 0,
+        "settlement_price": 0,
+        "default_price": 0,
+        "is_frozen": false,
+        "market_deployer": "lighter"
+      }
+    },
+    {
+      "reviewedAt": "2026-11-28T01:00:31.500737+00:00",
+      "key": [
+        "hyperliquid",
+        "para:VAR",
+        "perpetual"
+      ],
+      "source": "https://api.hyperliquid.xyz/info",
+      "note": "New exact native DEX product; no issuer/underlying inferred from VAR ticker. Keep ambiguous/unknown unless native delisted. No global crypto or company alias.",
+      "official": {
+        "szDecimals": 1,
+        "name": "para:VAR",
+        "maxLeverage": 5,
+        "marginTableId": 5,
+        "onlyIsolated": true,
+        "isDelisted": true,
+        "marginMode": "strictIsolated",
+        "deployerFeeScale": "1.0"
+      }
     }
   ],
-  "lastUpdatedAt": "2026-11-27"
+  "lastUpdatedAt": "2026-11-28"
 }
